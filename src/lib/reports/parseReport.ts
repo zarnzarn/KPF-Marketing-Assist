@@ -31,6 +31,15 @@ export function monthFromTitle(text: string): string {
   return `${match[2]}-${String(index + 1).padStart(2, "0")}`;
 }
 
+const SHORT_MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+/** Reads "Mar - 2026", "March 2026" or "Sep-2026" (a folder or file name) and returns "2026-03". */
+export function monthFromText(text: string): string {
+  const match = text.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?[\s_-]*(\d{4})\b/i);
+  if (!match) return "";
+  return `${match[2]}-${String(SHORT_MONTHS.indexOf(match[1].toLowerCase()) + 1).padStart(2, "0")}`;
+}
+
 function cellParagraphs(cell: HTMLElement): string[] {
   const paragraphs = cell.querySelectorAll("p").map((p) => clean(p.text)).filter(Boolean);
   if (paragraphs.length > 0) return paragraphs;

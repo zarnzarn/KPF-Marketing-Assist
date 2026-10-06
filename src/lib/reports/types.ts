@@ -36,4 +36,6 @@ export interface ReportLoadResult {
   reports: MonthlyReport[];
   /** Human-readable problems, e.g. a file that could not be read. */
   warnings: string[];
+  /** Harmless information, e.g. other Word files that were skipped. */
+  notes: string[];
 }

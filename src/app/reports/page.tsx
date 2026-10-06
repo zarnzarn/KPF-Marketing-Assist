@@ -32,7 +32,7 @@ function monthLabel(month: string) {
 
 export default async function ReportsPage({ searchParams }: { searchParams: Promise<{ month?: string }> }) {
   const { month } = await searchParams;
-  const { source, reports, warnings } = await loadReports();
+  const { source, reports, warnings, notes } = await loadReports();
   const report = pickReport(reports, month);
 
   const sales = salesSummary();
@@ -58,6 +58,14 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
           <ul role="alert" className="mb-4 space-y-1 rounded-2xl bg-clay-soft p-4 text-sm text-clay ring-1 ring-clay/30">
             {warnings.map((w) => (
               <li key={w}>{w}</li>
+            ))}
+          </ul>
+        )}
+
+        {notes.length > 0 && (
+          <ul className="mb-4 space-y-1 rounded-2xl bg-sky-soft/70 p-4 text-sm text-sky-ink ring-1 ring-sky-ink/20">
+            {notes.map((n) => (
+              <li key={n}>{n}</li>
             ))}
           </ul>
         )}
