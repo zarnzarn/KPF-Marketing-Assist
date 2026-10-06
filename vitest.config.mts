@@ -10,5 +10,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./tests/setup.ts"],
     include: ["tests/**/*.test.{ts,tsx}"],
+    // Unit and page tests never call the internet. Channel adapters are tested with injected responses.
+    env: { CHANNELS_DISABLED: "1" },
   },
 });

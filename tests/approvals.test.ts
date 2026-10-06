@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { approvals } from "@/data/mock";
+import { approvals } from "./fixtures";
 import { ApprovalError, decide, requiresApproval } from "@/lib/approvals";
 import type { ApprovalActionType } from "@/lib/types";
 

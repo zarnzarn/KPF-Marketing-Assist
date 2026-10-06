@@ -154,7 +154,6 @@ export async function parseReport(buffer: Buffer, fileName: string): Promise<Mon
     id: month || baseName.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
     title: clean(fullTitle),
     month,
-    isMock: false,
     intro: introBlocks,
     sections,
   };

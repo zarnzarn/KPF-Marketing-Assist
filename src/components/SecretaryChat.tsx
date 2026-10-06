@@ -3,32 +3,31 @@
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { Send } from "lucide-react";
-import { MOCK_TODAY, brandRules } from "@/data/mock";
+import { brandRules } from "@/data/brand";
+import { useAppData } from "@/components/AppDataProvider";
 import { AnswerBlocks } from "@/components/AnswerBlocks";
 import { Badge, Card } from "@/components/ui";
 import { answerQuestion, quickActions, suggestedQuestions, type SecretaryAnswer } from "@/lib/ai/secretary";
+import type { ChannelSnapshot } from "@/lib/channels/types";
 import { formatLongDate } from "@/lib/dates";
 import type { MonthlyReport } from "@/lib/reports/types";
+import { addItem, newId } from "@/lib/store/userData";
 
 type ChatMessage = { id: number; role: "user"; text: string } | { id: number; role: "ai"; answer: SecretaryAnswer };
 
-const seedQuestion = "What should I do first today?";
-
-export function SecretaryChat({ reports = [] }: { reports?: MonthlyReport[] }) {
-  const [messages, setMessages] = useState<ChatMessage[]>(() => [
-    { id: 1, role: "user", text: seedQuestion },
-    { id: 2, role: "ai", answer: answerQuestion(seedQuestion, { reports }) },
-  ]);
+export function SecretaryChat({ reports = [], channels = [] }: { reports?: MonthlyReport[]; channels?: ChannelSnapshot[] }) {
+  const { data, update } = useAppData();
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
   const [requested, setRequested] = useState<string[]>([]);
-  const nextId = useRef(3);
+  const nextId = useRef(1);
   const logRef = useRef<HTMLDivElement>(null);
   const inputId = useId();
 
   // Keep the newest answer in view when a question is asked.
   useEffect(() => {
     const log = logRef.current;
-    if (log && messages.length > 2) log.scrollTop = log.scrollHeight;
+    if (log && messages.length > 0) log.scrollTop = log.scrollHeight;
   }, [messages]);
 
   const lastAnswer = [...messages].reverse().find((m): m is Extract<ChatMessage, { role: "ai" }> => m.role === "ai")?.answer;
@@ -38,15 +37,20 @@ export function SecretaryChat({ reports = [] }: { reports?: MonthlyReport[] }) {
     if (!text) return;
     const userId = nextId.current++;
     const aiId = nextId.current++;
-    setMessages((prev) => [...prev, { id: userId, role: "user", text }, { id: aiId, role: "ai", answer: answerQuestion(text, { reports }) }]);
+    setMessages((prev) => [...prev, { id: userId, role: "user", text }, { id: aiId, role: "ai", answer: answerQuestion(text, { data, reports, channels }) }]);
     setDraft("");
   }
 
   return (
     <div className="grid gap-6 xl:grid-cols-3">
       <div className="min-w-0 xl:col-span-2">
-        <Card id="chat" title="Conversation" subtitle="Chat history (mock)">
+        <Card id="chat" title="Conversation" subtitle="This conversation is not saved">
           <div ref={logRef} className="relative max-h-[34rem] space-y-4 overflow-y-auto pr-1" role="log" aria-live="polite" aria-label="Chat history" tabIndex={0}>
+            {messages.length === 0 && (
+              <p className="rounded-2xl border border-dashed border-line bg-white/60 p-4 text-[15px] text-muted">
+                Ask a question below or pick a quick action. I answer only from your entries, your monthly reports and your connected channels, and I say &ldquo;Data not available.&rdquo; when I don&apos;t know.
+              </p>
+            )}
             {messages.map((m) =>
               m.role === "user" ? (
                 <div key={m.id} className="flex justify-end">
@@ -113,13 +117,14 @@ export function SecretaryChat({ reports = [] }: { reports?: MonthlyReport[] }) {
       <div className="min-w-0 space-y-6">
         <Card id="context" title="Context" subtitle="What the secretary can see">
           <dl className="space-y-2 text-sm">
-            <div className="flex justify-between gap-2"><dt className="text-muted">Source</dt><dd className="font-medium">{reports.some((r) => !r.isMock) ? "Mock data + your monthly reports" : "Mock data only"}</dd></div>
-            <div className="flex justify-between gap-2"><dt className="text-muted">Today (mock)</dt><dd className="font-medium">{formatLongDate(MOCK_TODAY)}</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-muted">Source</dt><dd className="font-medium">Your entries, reports, channels</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-muted">Today</dt><dd className="font-medium">{formatLongDate(data.today)}</dd></div>
             <div className="flex justify-between gap-2"><dt className="text-muted">Mode</dt><dd className="font-medium">Read &amp; draft only</dd></div>
-            <div className="flex justify-between gap-2"><dt className="text-muted">Monthly reports loaded</dt><dd className="font-medium">{reports.filter((r) => !r.isMock).length || "None (mock sample)"}</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-muted">Monthly reports loaded</dt><dd className="font-medium">{reports.length || "None"}</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-muted">Channels connected</dt><dd className="font-medium">{channels.filter((c) => c.status === "connected").length || "None"}</dd></div>
             <div className="flex justify-between gap-2"><dt className="text-muted">Brand rules loaded</dt><dd className="font-medium">{brandRules.length}</dd></div>
           </dl>
-          <p className="mt-3 text-sm text-muted">If something is not in the mock data, the secretary says “Data not available.”</p>
+          <p className="mt-3 text-sm text-muted">If something is not in your data, the secretary says “Data not available.”</p>
         </Card>
 
         <Card id="sources" title="Source records" subtitle="Records behind the latest answer">
@@ -155,13 +160,17 @@ export function SecretaryChat({ reports = [] }: { reports?: MonthlyReport[] }) {
               <button
                 type="button"
                 disabled={requested.includes(lastAnswer.actionPreview.title)}
-                onClick={() => setRequested((r) => [...r, lastAnswer.actionPreview!.title])}
+                onClick={() => {
+                  const preview = lastAnswer.actionPreview!;
+                  update((u) => addItem(u, "approvals", { id: newId("apr"), actionType: preview.actionType, title: preview.title, requestedAt: data.today, state: "Pending", relatedHref: "/content" }));
+                  setRequested((r) => [...r, preview.title]);
+                }}
                 className="rounded-lg bg-forest px-4 py-2 font-semibold text-white hover:bg-sage disabled:cursor-not-allowed disabled:bg-muted"
               >
-                {requested.includes(lastAnswer.actionPreview.title) ? "Approval request created (mock)" : "Create approval request (mock)"}
+                {requested.includes(lastAnswer.actionPreview.title) ? "Approval request created" : "Create approval request"}
               </button>
               <p role="status" className="text-muted">
-                {requested.includes(lastAnswer.actionPreview.title) ? "Added to pending approvals (mock). Nothing was sent." : ""}
+                {requested.includes(lastAnswer.actionPreview.title) ? "Added to pending approvals. Nothing was sent." : ""}
               </p>
             </div>
           ) : (

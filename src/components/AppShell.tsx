@@ -21,6 +21,7 @@ import {
   ClipboardList,
   Leaf,
   ExternalLink,
+  Plug,
 } from "lucide-react";
 
 export const navItems = [
@@ -37,6 +38,7 @@ export const navItems = [
   { href: "/content", label: "Content", icon: PenLine },
   { href: "/reports", label: "Reports", icon: ClipboardList },
   { href: "/documents", label: "Documents", icon: FileText },
+  { href: "/channels", label: "Channels", icon: Plug },
 ];
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
@@ -101,7 +103,7 @@ function BrandLinks() {
           </li>
         ))}
       </ul>
-      <p className="mt-4 text-xs leading-relaxed text-muted">Phase 1 prototype. Data is mock, except monthly reports marked “Real report”. These are plain links, nothing is connected.</p>
+      <p className="mt-4 text-xs leading-relaxed text-muted">Phase 1 prototype. Data comes from your own entries (this browser only), your report files and read-only channel connections.</p>
     </div>
   );
 }
@@ -150,7 +152,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         )}
 
         <div role="note" className="border-b border-yolk/40 bg-yolk-soft/80 px-4 py-2 text-center text-sm font-medium text-[#5b4004]">
-          PROTOTYPE · MOCK DATA, except items marked “Real report” · Nothing is sent, published, repriced or launched from this app.
+          PROTOTYPE · Read-only: nothing is sent, published, repriced or launched from this app.
         </div>
 
         <main id="main" className="mx-auto max-w-[1280px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">

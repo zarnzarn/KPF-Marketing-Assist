@@ -40,7 +40,7 @@ function TableBlock({ block, caption }: { block: Extract<ReportBlock, { type: "t
   return <DataTable caption={caption} columns={columns} rows={block.rows} rowKey={(row) => row.join("|")} />;
 }
 
-function Block({ block, caption }: { block: ReportBlock; caption: string }) {
+export function ReportBlockView({ block, caption }: { block: ReportBlock; caption: string }) {
   switch (block.type) {
     case "paragraph":
       return <p className="text-[15px] leading-relaxed text-muted">{block.text}</p>;
@@ -79,13 +79,13 @@ export function MonthlyReportView({ report }: { report: MonthlyReport }) {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
         <h2 className="text-2xl font-semibold text-forest">{report.title}</h2>
-        <Badge tone={report.isMock ? "gold" : "green"}>{report.isMock ? "MOCK sample" : "Real report (local file)"}</Badge>
+        <Badge tone="green">Real report (local file)</Badge>
       </div>
 
       {report.intro.length > 0 && (
         <div className="space-y-4">
           {report.intro.map((block, i) => (
-            <Block key={i} block={block} caption={`${report.title} summary`} />
+            <ReportBlockView key={i} block={block} caption={`${report.title} summary`} />
           ))}
         </div>
       )}
@@ -94,7 +94,7 @@ export function MonthlyReportView({ report }: { report: MonthlyReport }) {
         <Card key={`${section.number}-${section.title}`} id={`section-${section.number ?? section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} title={`${section.number ? `${section.number}. ` : ""}${section.title}`} tone={/bottom line|key observation/i.test(section.title) ? "butter" : undefined}>
           <div className="space-y-4">
             {section.blocks.map((block, i) => (
-              <Block key={i} block={block} caption={section.title} />
+              <ReportBlockView key={i} block={block} caption={section.title} />
             ))}
           </div>
         </Card>

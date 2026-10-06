@@ -8,7 +8,6 @@ describe("parseReport (synthetic report)", () => {
     expect(report.title).toBe("Marketing Report 1-30 September 2026");
     expect(report.month).toBe("2026-09");
     expect(report.id).toBe("2026-09");
-    expect(report.isMock).toBe(false);
   });
 
   it("finds the numbered sections in order", async () => {

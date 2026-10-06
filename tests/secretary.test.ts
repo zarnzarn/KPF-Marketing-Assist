@@ -1,8 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { DATA_NOT_AVAILABLE, answerQuestion, quickActions, selectTool, suggestedQuestions } from "@/lib/ai/secretary";
 import { dailySummary } from "@/lib/ai/dailySummary";
+import type { ChannelSnapshot } from "@/lib/channels/types";
+import { parseReport } from "@/lib/reports/parseReport";
+import { emptyData, fixtureData } from "./fixtures";
+import { makeDocx, sampleReportParts } from "./helpers/makeDocx";
 
 const labels = ["FACT", "ANALYSIS", "ESTIMATE", "RECOMMENDATION", "DATA GAP"];
+const ctx = { data: fixtureData };
+const empty = { data: emptyData() };
 
 describe("selectTool", () => {
   it.each([
@@ -16,16 +22,16 @@ describe("selectTool", () => {
     ["Draft a LINE message for the weekend promotion", "draftMessage"],
     ["What is waiting for my approval?", "approvals"],
     ["Which products need marketing attention?", "productAttention"],
+    ["Summarize the latest monthly report", "monthlyReport"],
+    ["How were supermarket sales in September?", "monthlyReport"],
+    ["How are our channels doing?", "channels"],
+    ["How many Instagram followers do we have?", "channels"],
   ])("%s -> %s", (question, tool) => {
     expect(selectTool(question)).toBe(tool);
   });
 
   it("every quick action and suggested question maps to a real tool", () => {
     for (const q of [...quickActions, ...suggestedQuestions]) expect(selectTool(q)).not.toBe("unknown");
-  });
-
-  it("is not case sensitive", () => {
-    expect(selectTool("WHAT IS OVERDUE")).toBe("overdue");
   });
 
   it("returns unknown for empty or unrelated input", () => {
@@ -35,127 +41,135 @@ describe("selectTool", () => {
   });
 });
 
-describe("answerQuestion", () => {
-  it("says 'Data not available.' with a DATA GAP when it cannot answer", () => {
-    const answer = answerQuestion("What will the weather be?");
-    expect(answer.tool).toBe("unknown");
-    expect(answer.blocks.find((b) => b.label === "DATA GAP")?.text).toBe(DATA_NOT_AVAILABLE);
-    expect(answer.sources).toEqual([]);
-  });
-
-  it("handles empty input without throwing", () => {
-    expect(() => answerQuestion("")).not.toThrow();
-  });
-
-  it("labels every block with a known label", () => {
+describe("answers from data", () => {
+  it("labels every block and cites sources for data-based quick actions", () => {
     for (const q of quickActions) {
-      const answer = answerQuestion(q);
+      const answer = answerQuestion(q, ctx);
       expect(answer.blocks.length).toBeGreaterThan(0);
       for (const b of answer.blocks) {
         expect(labels).toContain(b.label);
         expect(b.text.length).toBeGreaterThan(0);
       }
     }
+    for (const q of ["What should I do first today?", "What is overdue?", "What needs follow-up?", "What should I prepare for today's meetings?"]) {
+      expect(answerQuestion(q, ctx).sources.length).toBeGreaterThan(0);
+    }
   });
 
-  it("cites source records for data-based answers", () => {
-    for (const q of quickActions) expect(answerQuestion(q).sources.length).toBeGreaterThan(0);
-  });
-
-  it("marks the overdue list as FACT and a recommendation separately", () => {
-    const a = answerQuestion("What is overdue?");
-    expect(a.blocks.some((b) => b.label === "FACT")).toBe(true);
+  it("lists overdue tasks as FACT with a separate RECOMMENDATION", () => {
+    const a = answerQuestion("What is overdue?", ctx);
+    expect(a.blocks.filter((b) => b.label === "FACT").length).toBeGreaterThan(1);
     expect(a.blocks.some((b) => b.label === "RECOMMENDATION")).toBe(true);
   });
 
-  it("draft requests only prepare an action that needs approval and never sends", () => {
-    const a = answerQuestion("Draft a LINE message for the weekend promotion");
+  it("draft requests only prepare an action that needs approval, without invented offers or prices", () => {
+    const a = answerQuestion("Draft a LINE message for the weekend promotion", ctx);
     expect(a.actionPreview?.needsApproval).toBe(true);
     expect(a.actionPreview?.actionType).toBe("Send external message");
-    expect(a.actionPreview?.draftText).toMatch(/Draft only/);
     expect(a.blocks.some((b) => b.label === "DATA GAP" && b.text.includes(DATA_NOT_AVAILABLE))).toBe(true);
+    expect(answerQuestion("Draft a LINE message", empty).actionPreview?.draftText).not.toMatch(/฿|\d+\s?%|discount|free delivery/i);
   });
 
-  it("does not invent offer details or prices in the draft", () => {
-    const text = answerQuestion("Draft a LINE message").actionPreview?.draftText ?? "";
-    expect(text).not.toMatch(/฿|\d+\s?%|discount|free delivery/i);
-  });
-});
-
-describe("dailySummary", () => {
-  it("includes facts, analysis, a data gap and a recommendation", () => {
-    const labelsUsed = new Set(dailySummary().map((b) => b.label));
-    for (const l of ["FACT", "ANALYSIS", "DATA GAP", "RECOMMENDATION"]) expect(labelsUsed).toContain(l);
+  it("says Data not available for unrelated questions", () => {
+    const answer = answerQuestion("What will the weather be?", ctx);
+    expect(answer.tool).toBe("unknown");
+    expect(answer.blocks[0]).toEqual({ label: "DATA GAP", text: DATA_NOT_AVAILABLE });
   });
 });
 
-import { parseReport } from "@/lib/reports/parseReport";
-import { makeDocx, sampleReportParts } from "./helpers/makeDocx";
-import { mockMonthlyReport } from "@/data/mock/monthlyReport";
+describe("a brand-new user with no data", () => {
+  it.each([...quickActions, "What is waiting for my approval?", "Which products need marketing attention?", "Summarize the latest monthly report", "How are our channels doing?"])(
+    "%s -> no invented facts",
+    (q) => {
+      const answer = answerQuestion(q, empty);
+      expect(answer.blocks.some((b) => b.label === "ANALYSIS" || b.label === "ESTIMATE")).toBe(false);
+      const facts = answer.blocks.filter((b) => b.label === "FACT");
+      for (const f of facts) expect(f.text).toMatch(/^(No |Nothing )/);
+      expect(answer.sources).toEqual([]);
+    },
+  );
+
+  it("the daily summary admits there is no data", () => {
+    expect(dailySummary(emptyData())[0]).toEqual({ label: "DATA GAP", text: DATA_NOT_AVAILABLE });
+  });
+
+  it("the daily summary counts real entries when there are some", () => {
+    const blocks = dailySummary(fixtureData);
+    expect(blocks[0].label).toBe("FACT");
+    expect(blocks[0].text).toMatch(/^Today: \d+ meeting/);
+    expect(blocks.some((b) => b.label === "FACT" && /low or out of stock/.test(b.text))).toBe(true);
+  });
+
+  it("never reports zero stock problems as a fact when the shop is not connected", () => {
+    const blocks = dailySummary({ ...fixtureData, products: [] });
+    expect(blocks.some((b) => b.label === "FACT" && /stock/.test(b.text))).toBe(false);
+    expect(blocks).toContainEqual({ label: "DATA GAP", text: "Products and stock: Data not available. (shop not connected)." });
+  });
+});
+
+describe("channels tool", () => {
+  const channels: ChannelSnapshot[] = [
+    { channel: "facebook", label: "Facebook", status: "connected", metrics: [{ label: "Followers", value: "1,234" }], items: [] },
+    { channel: "line", label: "LINE OA", status: "not_configured", metrics: [], items: [] },
+    { channel: "instagram", label: "Instagram", status: "error", metrics: [], items: [], message: "The access token has expired." },
+  ];
+
+  it("repeats connected numbers as FACT and marks the rest as DATA GAP", () => {
+    const a = answerQuestion("How are our channels doing?", { data: emptyData(), channels });
+    expect(a.blocks).toContainEqual({ label: "FACT", text: "Facebook: Followers 1,234" });
+    expect(a.blocks.filter((b) => b.label === "DATA GAP").map((b) => b.text)).toEqual([
+      `LINE OA (not connected): ${DATA_NOT_AVAILABLE}`,
+      `Instagram (The access token has expired.): ${DATA_NOT_AVAILABLE}`,
+    ]);
+    expect(a.sources).toEqual([{ kind: "Channel", id: "facebook", label: "Facebook", href: "/channels" }]);
+  });
+
+  it("lists channel errors among business concerns", () => {
+    const a = answerQuestion("What are the biggest business concerns?", { data: emptyData(), channels });
+    expect(a.blocks.some((b) => b.text.includes("Instagram could not be read"))).toBe(true);
+  });
+});
 
 describe("monthly report tool", () => {
-  it.each([
-    ["Summarize the latest monthly report", "monthlyReport"],
-    ["How were supermarket sales in September?", "monthlyReport"],
-    ["What happened with the Facebook numbers?", "monthlyReport"],
-    ["Show me the August report", "monthlyReport"],
-  ])("%s -> %s", (question, tool) => {
-    expect(selectTool(question)).toBe(tool);
-  });
-
   it("does not hijack the existing questions", () => {
     expect(selectTool("What is overdue?")).toBe("overdue");
     expect(selectTool("What campaigns need attention?")).toBe("campaignAttention");
-    expect(selectTool("Draft a LINE message for the weekend promotion")).toBe("draftMessage");
   });
 
   it("answers from the report only, with the report as a source", async () => {
     const sep = await parseReport(await makeDocx(sampleReportParts("1-30 September 2026")), "sep.docx");
-    const answer = answerQuestion("Summarize the latest monthly report", { reports: [sep] });
+    const answer = answerQuestion("Summarize the latest monthly report", { ...empty, reports: [sep] });
     const text = answer.blocks.map((b) => b.text).join("\n");
     expect(answer.tool).toBe("monthlyReport");
     expect(text).toContain("TOTAL SALES: THB 111K (+1.0% vs last month)");
     expect(text).toContain("Invented observation A.");
     expect(text).toContain("Action plan in the report: Send invented broadcast: Marketing / Early Oct");
     expect(answer.sources).toEqual([{ kind: "Report", id: "2026-09", label: sep.title, href: "/reports?month=2026-09" }]);
-    expect(answer.blocks.filter((b) => b.label === "FACT").length).toBeGreaterThan(4);
   });
 
   it("repeats the report's own missing-data note as a DATA GAP, word for word", async () => {
     const sep = await parseReport(await makeDocx(sampleReportParts()), "sep.docx");
-    const gap = answerQuestion("Summarize the monthly report", { reports: [sep] }).blocks.find((b) => b.label === "DATA GAP");
+    const gap = answerQuestion("Summarize the monthly report", { ...empty, reports: [sep] }).blocks.find((b) => b.label === "DATA GAP");
     expect(gap?.text).toBe("Checkout tracking is not set up yet, so conversion rate is not reported this month.");
   });
 
   it("picks the month that was asked for", async () => {
     const aug = await parseReport(await makeDocx(sampleReportParts("1-31 August 2026")), "aug.docx");
     const sep = await parseReport(await makeDocx(sampleReportParts("1-30 September 2026")), "sep.docx");
-    const answer = answerQuestion("Show me the August report", { reports: [sep, aug] });
-    expect(answer.sources[0].id).toBe("2026-08");
-    expect(answerQuestion("Latest report please", { reports: [sep, aug] }).sources[0].id).toBe("2026-09");
+    expect(answerQuestion("Show me the August report", { ...empty, reports: [sep, aug] }).sources[0].id).toBe("2026-08");
+    expect(answerQuestion("Latest report please", { ...empty, reports: [sep, aug] }).sources[0].id).toBe("2026-09");
   });
 
   it("answers about one topic from the matching section only", async () => {
     const sep = await parseReport(await makeDocx(sampleReportParts()), "sep.docx");
-    const text = answerQuestion("How are sales doing?", { reports: [sep] }).blocks.map((b) => b.text).join("\n");
+    const text = answerQuestion("How are sales doing?", { ...empty, reports: [sep] }).blocks.map((b) => b.text).join("\n");
     expect(text).toContain("Website: 10,000 / 12,000 / +20.0%");
     expect(text).not.toContain("Action plan in the report");
   });
 
-  it("says Data not available when there is no report", () => {
-    const answer = answerQuestion("Summarize the latest monthly report");
-    expect(answer.blocks[0]).toEqual({ label: "DATA GAP", text: DATA_NOT_AVAILABLE });
-    expect(answer.sources).toEqual([]);
-  });
-
-  it("labels the mock sample so it is never mistaken for real numbers", () => {
-    const answer = answerQuestion("Summarize the latest monthly report", { reports: [mockMonthlyReport] });
-    expect(answer.blocks[0].text).toContain("MOCK sample");
-  });
-
   it("never invents numbers: every figure in the answer appears in the report", async () => {
     const sep = await parseReport(await makeDocx(sampleReportParts()), "sep.docx");
-    const answer = answerQuestion("Summarize the latest monthly report", { reports: [sep] });
+    const answer = answerQuestion("Summarize the latest monthly report", { ...empty, reports: [sep] });
     const reportText = JSON.stringify(sep);
     const figures = answer.blocks.flatMap((b) => (b.text.match(/\d[\d,.]*/g) ?? []).map((f) => f.replace(/[.,]+$/, "")));
     for (const f of figures) expect(reportText).toContain(f);

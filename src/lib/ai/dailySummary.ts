@@ -1,10 +1,9 @@
-// Mock "AI daily summary" for the Today page. Built only from mock data.
-import { MOCK_TODAY } from "@/data/mock";
+// "AI daily summary" for the Today page. Counts only what is recorded; never guesses.
 import { DATA_NOT_AVAILABLE } from "../constants";
 import {
   campaignAlerts,
-  decliningProducts,
   followUpsDue,
+  isEmpty,
   meetingsOn,
   openIssues,
   overdueTasks,
@@ -12,30 +11,32 @@ import {
   productAlerts,
   recommendedPriorities,
 } from "../queries";
+import type { AppData } from "../types";
 import type { AnswerBlock } from "./secretary";
 
-export function dailySummary(): AnswerBlock[] {
-  const overdue = overdueTasks();
-  const meetings = meetingsOn(MOCK_TODAY);
-  const issues = openIssues();
-  const stock = productAlerts();
-  const declining = decliningProducts();
-  const top = recommendedPriorities()[0];
+export function dailySummary(d: AppData): AnswerBlock[] {
+  if (isEmpty(d) && d.products.length === 0) {
+    return [
+      { label: "DATA GAP", text: DATA_NOT_AVAILABLE },
+      { label: "RECOMMENDATION", text: "Add your tasks, meetings and customers, and connect your channels. The summary is built only from what you record." },
+    ];
+  }
 
-  return [
+  const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
+  const blocks: AnswerBlock[] = [
     {
       label: "FACT",
-      text: `You have ${meetings.length} meetings today, ${overdue.length} overdue tasks, ${followUpsDue().length} follow-ups due, ${issues.length} open customer issues and ${pendingApprovals().length} approvals waiting.`,
+      text: `Today: ${plural(meetingsOn(d, d.today).length, "meeting")}, ${plural(overdueTasks(d).length, "overdue task")}, ${plural(followUpsDue(d).length, "follow-up")} due, ${plural(openIssues(d.issues).length, "open customer issue")} and ${plural(pendingApprovals(d).length, "approval")} waiting.`,
     },
-    {
-      label: "FACT",
-      text: `${stock.length} products have low stock and ${declining.length} product (${declining.map((d) => d.product.name).join(", ") || "none"}) has declining sales for 3 months. ${campaignAlerts().length} campaign alerts are open.`,
-    },
-    {
-      label: "ANALYSIS",
-      text: "Customer-facing replies and approvals are the bottleneck today. Several are waiting on you before marketing work can move forward.",
-    },
-    { label: "DATA GAP", text: `Why duck breast sales are falling and why wholesale orders dropped: ${DATA_NOT_AVAILABLE}` },
-    { label: "RECOMMENDATION", text: top ? `Start with “${top.title}”. Then clear the oldest approvals before the 14:00 hotel call.` : "No urgent items are recorded." },
   ];
+
+  const campaigns = campaignAlerts(d).length;
+  if (campaigns) blocks.push({ label: "FACT", text: `${plural(campaigns, "campaign alert")} open.` });
+  // Stock counts are facts only when the shop is connected; otherwise the number is unknown, not zero.
+  if (d.products.length > 0) blocks.push({ label: "FACT", text: `${plural(productAlerts(d).length, "product")} low or out of stock.` });
+  else blocks.push({ label: "DATA GAP", text: `Products and stock: ${DATA_NOT_AVAILABLE} (shop not connected).` });
+
+  const top = recommendedPriorities(d)[0];
+  blocks.push(top ? { label: "RECOMMENDATION", text: `Start with "${top.title}".` } : { label: "FACT", text: "Nothing urgent is recorded." });
+  return blocks;
 }

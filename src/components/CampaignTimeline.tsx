@@ -1,12 +1,7 @@
-import { MOCK_TODAY } from "@/data/mock";
 import { daysBetween, formatDate } from "@/lib/dates";
 import type { Campaign } from "@/lib/types";
 
-const RANGE_START = "2026-09-15";
-const RANGE_END = "2026-12-31";
-const total = daysBetween(RANGE_START, RANGE_END);
-
-const pct = (date: string) => Math.min(100, Math.max(0, (daysBetween(RANGE_START, date) / total) * 100));
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const barColor: Record<string, string> = {
   Active: "bg-[#8fbca0]",
@@ -17,12 +12,20 @@ const barColor: Record<string, string> = {
 };
 
 /** Simple Gantt-style campaign calendar. Each row also has a text description for screen readers. */
-export function CampaignTimeline({ campaigns }: { campaigns: Campaign[] }) {
-  const months = [
-    { label: "Oct 2026", start: "2026-10-01" },
-    { label: "Nov 2026", start: "2026-11-01" },
-    { label: "Dec 2026", start: "2026-12-01" },
-  ];
+export function CampaignTimeline({ campaigns, today }: { campaigns: Campaign[]; today: string }) {
+  // The timeline spans from the earliest start to the latest end (always including today).
+  const starts = [today, ...campaigns.map((c) => c.startDate)].sort();
+  const ends = [today, ...campaigns.map((c) => c.endDate)].sort();
+  const rangeStart = `${starts[0].slice(0, 7)}-01`;
+  const rangeEnd = ends[ends.length - 1];
+  const total = Math.max(daysBetween(rangeStart, rangeEnd), 1);
+  const pct = (date: string) => Math.min(100, Math.max(0, (daysBetween(rangeStart, date) / total) * 100));
+  const months: { label: string; start: string }[] = [];
+  for (let m = rangeStart; m <= rangeEnd && months.length < 24; ) {
+    months.push({ label: `${MONTH_NAMES[Number(m.slice(5, 7)) - 1]} ${m.slice(0, 4)}`, start: m });
+    const [y, mo] = [Number(m.slice(0, 4)), Number(m.slice(5, 7))];
+    m = mo === 12 ? `${y + 1}-01-01` : `${y}-${String(mo + 1).padStart(2, "0")}-01`;
+  }
   return (
     <div className="relative overflow-x-auto">
       <div className="min-w-[640px]">
@@ -42,7 +45,7 @@ export function CampaignTimeline({ campaigns }: { campaigns: Campaign[] }) {
                   className={`absolute top-0 h-6 rounded ${barColor[c.status]}`}
                   style={{ left: `${pct(c.startDate)}%`, width: `${Math.max(pct(c.endDate) - pct(c.startDate), 2)}%` }}
                 />
-                <div className="absolute top-[-2px] h-7 w-0.5 bg-clay" style={{ left: `${pct(MOCK_TODAY)}%` }} aria-hidden="true" />
+                <div className="absolute top-[-2px] h-7 w-0.5 bg-clay" style={{ left: `${pct(today)}%` }} aria-hidden="true" />
               </div>
               <span className="sr-only">
                 {c.status}, {formatDate(c.startDate)} to {formatDate(c.endDate)}
@@ -50,7 +53,7 @@ export function CampaignTimeline({ campaigns }: { campaigns: Campaign[] }) {
             </li>
           ))}
         </ul>
-        <p className="mt-2 ml-44 text-xs text-muted">Red line = today (mock). Green = active, gold = planned, grey = draft.</p>
+        <p className="mt-2 ml-44 text-xs text-muted">Red line = today. Green = active, gold = planned, grey = draft.</p>
       </div>
     </div>
   );

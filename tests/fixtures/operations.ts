@@ -1,13 +1,12 @@
+// TEST FIXTURE ONLY: fictional data used by tests. Never imported by the app.
 import type {
-  BusinessAlert,
   CustomerIssue,
   DocumentRecord,
-  InboxMessage,
   Meeting,
   Task,
 } from "@/lib/types";
 
-// MOCK tasks, meetings, issues, alerts, messages and documents.
+// Fictional tasks, meetings, issues and documents.
 
 export const tasks: Task[] = [
   { id: "tsk-promo-decision", title: "Decide weekend promotion for chicken breast (check stock first)", priority: "High", status: "To do", dueDate: "2026-10-06", owner: "Marketing Director", campaignId: "cmp-weekend-fresh", productId: "prd-chicken-breast" },
@@ -96,18 +95,7 @@ export const issues: CustomerIssue[] = [
   { id: "iss-packaging", title: "Packaging label misprint on bone broth", severity: "Low", productId: "prd-bone-broth", status: "Resolved", openedAt: "2026-09-12", summary: "Label misprint corrected for new batches." },
 ];
 
-export const businessAlerts: BusinessAlert[] = [
-  { id: "bal-packaging", area: "Business", severity: "Medium", message: "Packaging supplier lead time reported as longer; launch stock plan may be affected (details: Data not available).", href: "/documents" },
-  { id: "bal-b2b-orders", area: "Business", severity: "Medium", message: "Two B2B wholesale accounts have reduced order volume; reasons not recorded (data gap).", href: "/customers" },
-  { id: "bal-launch-docs", area: "Campaign", severity: "Medium", message: "Sausage launch needs approvals and content review before the 16 Oct go / no-go.", href: "/campaigns" },
-];
 
-export const messages: InboxMessage[] = [
-  { id: "msg-riverside", from: "Khun Ploy (Mock) – Riverside Grand Hotel", channel: "Email", subject: "Duck quote for banquet", receivedAt: "2026-10-05", preview: "Could you confirm duck quantities and delivery dates for the banquet menu?", href: "/customers" },
-  { id: "msg-cityfresh", from: "Khun Mali (Mock) – CityFresh", channel: "Email", subject: "November promotion calendar", receivedAt: "2026-10-04", preview: "Please share your promotion plan for November so we can plan shelf space.", href: "/customers" },
-  { id: "msg-line-feedback", from: "LINE OA customer (Mock)", channel: "LINE OA", subject: "Question about frozen breast availability", receivedAt: "2026-10-05", preview: "Is the frozen chicken breast available for the weekend?", href: "/products" },
-  { id: "msg-chef-arun", from: "Chef Arun (Mock)", channel: "Phone note", subject: "Tasting event RSVP", receivedAt: "2026-10-03", preview: "Happy to attend the tasting and bring two colleagues.", href: "/calendar" },
-];
 
 export const documents: DocumentRecord[] = [
   { id: "doc-sept-sales", name: "September sales summary.xlsx", kind: "Spreadsheet", uploadedAt: "2026-10-02", sizeKb: 184, summary: "Mock summary: monthly revenue by channel, with duck breast showing a decline.", tags: ["sales", "monthly"], productId: "prd-duck-breast" },

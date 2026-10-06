@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { MOCK_TODAY } from "@/data/mock";
+import { useAppData } from "@/components/AppDataProvider";
+import { calendarItems } from "@/lib/queries";
 import { Badge, Card, EmptyState } from "@/components/ui";
 import { addDays, formatDate, formatLongDate, formatWeekday, weekDays } from "@/lib/dates";
 import type { CalendarItem, CalendarItemType } from "@/lib/types";
@@ -12,7 +13,7 @@ type View = "day" | "week" | "marketing";
 
 const typeStyle: Record<CalendarItemType, string> = {
   Meeting: "border-l-forest bg-forest-soft",
-  Event: "border-l-clay bg-clay-soft",
+  Task: "border-l-clay bg-clay-soft",
   "Campaign milestone": "border-l-yolk bg-yolk-soft",
   "Content deadline": "border-l-sage bg-white",
   "Follow-up": "border-l-[#8a7f66] bg-white",
@@ -29,12 +30,17 @@ function Entry({ item }: { item: CalendarItem }) {
   );
 }
 
-export function CalendarView({ items }: { items: CalendarItem[] }) {
+export function CalendarView() {
+  const { data } = useAppData();
+  const items = calendarItems(data);
+  const today = data.today;
   const [view, setView] = useState<View>("day");
-  const [date, setDate] = useState(MOCK_TODAY);
+  const [picked, setPicked] = useState<string | null>(null);
+  const date = picked ?? today;
+  const setDate = (d: string) => setPicked(d);
   const step = view === "week" ? 7 : 1;
   const on = (d: string) => items.filter((i) => i.date === d);
-  const marketing = items.filter((i) => i.type !== "Meeting" && i.date >= MOCK_TODAY);
+  const marketing = items.filter((i) => i.type !== "Meeting" && i.date >= today);
 
   const tabs: { id: View; label: string }[] = [
     { id: "day", label: "Day" },
@@ -57,7 +63,7 @@ export function CalendarView({ items }: { items: CalendarItem[] }) {
             <button type="button" onClick={() => setDate(addDays(date, -step))} className="rounded-lg border border-line bg-white p-2 hover:border-yolk">
               <ChevronLeft className="h-4 w-4" aria-hidden="true" /><span className="sr-only">Previous {view}</span>
             </button>
-            <button type="button" onClick={() => setDate(MOCK_TODAY)} className="rounded-lg border border-line bg-white px-3 py-2 text-sm font-semibold hover:border-yolk">Today</button>
+            <button type="button" onClick={() => setDate(today)} className="rounded-lg border border-line bg-white px-3 py-2 text-sm font-semibold hover:border-yolk">Today</button>
             <button type="button" onClick={() => setDate(addDays(date, step))} className="rounded-lg border border-line bg-white p-2 hover:border-yolk">
               <ChevronRight className="h-4 w-4" aria-hidden="true" /><span className="sr-only">Next {view}</span>
             </button>
@@ -72,7 +78,7 @@ export function CalendarView({ items }: { items: CalendarItem[] }) {
       </ul>
 
       {view === "day" && (
-        <Card id="day" title={formatLongDate(date)} subtitle={date === MOCK_TODAY ? "Today (mock date)" : undefined}>
+        <Card id="day" title={formatLongDate(date)} subtitle={date === today ? "Today" : undefined}>
           {on(date).length === 0 ? <EmptyState>Nothing scheduled.</EmptyState> : <div className="space-y-2">{on(date).map((i) => <Entry key={i.id} item={i} />)}</div>}
         </Card>
       )}
@@ -81,9 +87,9 @@ export function CalendarView({ items }: { items: CalendarItem[] }) {
         <Card id="week" title={`Week of ${formatDate(weekDays(date)[0])}`}>
           <ol className="grid gap-3 md:grid-cols-4 xl:grid-cols-7">
             {weekDays(date).map((d) => (
-              <li key={d} className={`min-w-0 rounded-xl border p-2 ${d === MOCK_TODAY ? "border-yolk bg-yolk-soft/40" : "border-line bg-white"}`}>
+              <li key={d} className={`min-w-0 rounded-xl border p-2 ${d === today ? "border-yolk bg-yolk-soft/40" : "border-line bg-white"}`}>
                 <h3 className="mb-2 text-sm font-semibold text-forest">
-                  {formatWeekday(d)} {formatDate(d)} {d === MOCK_TODAY && <Badge tone="gold">Today</Badge>}
+                  {formatWeekday(d)} {formatDate(d)} {d === today && <Badge tone="gold">Today</Badge>}
                 </h3>
                 <div className="space-y-2">
                   {on(d).length === 0 ? <p className="text-xs text-muted">—</p> : on(d).map((i) => <Entry key={i.id} item={i} />)}
@@ -95,7 +101,8 @@ export function CalendarView({ items }: { items: CalendarItem[] }) {
       )}
 
       {view === "marketing" && (
-        <Card id="marketing" title="Marketing calendar" subtitle="Events, campaign milestones, content deadlines and follow-ups from today onwards">
+        <Card id="marketing" title="Marketing calendar" subtitle="Tasks, campaign milestones, content deadlines and follow-ups from today onwards">
+          {marketing.length === 0 ? <EmptyState>Nothing scheduled from today onwards.</EmptyState> : (
           <ul className="divide-y divide-line">
             {marketing.map((i) => (
               <li key={i.id} className="flex flex-wrap items-center gap-3 py-2.5">
@@ -105,6 +112,7 @@ export function CalendarView({ items }: { items: CalendarItem[] }) {
               </li>
             ))}
           </ul>
+          )}
         </Card>
       )}
     </div>

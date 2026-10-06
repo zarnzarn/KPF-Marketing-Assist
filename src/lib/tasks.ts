@@ -36,10 +36,14 @@ const clean = (input: TaskInput): TaskInput => ({
   productId: input.productId || undefined,
 });
 
-export function createTask(list: Task[], input: TaskInput): Task[] {
+export function createTask(list: Task[], input: TaskInput, id: string): Task[] {
   if (hasErrors(validateTask(input))) throw new Error("Invalid task.");
-  const id = `tsk-new-${list.length + 1}-${input.title.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 20)}`;
+  if (list.some((t) => t.id === id)) throw new Error(`Task ${id} already exists.`);
   return [{ id, ...clean(input) }, ...list];
+}
+
+export function deleteTask(list: Task[], id: string): Task[] {
+  return list.filter((t) => t.id !== id);
 }
 
 export function updateTask(list: Task[], id: string, input: TaskInput): Task[] {

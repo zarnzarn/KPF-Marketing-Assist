@@ -1,4 +1,5 @@
-// Shared types for the Phase 1 prototype. All data is MOCK data.
+// Shared types. The app holds no mock data: data comes from the user's own
+// entries (browser only), local monthly report files and read-only channel connections.
 
 export type Segment = "B2C" | "Retail" | "B2B";
 
@@ -23,7 +24,7 @@ export type StockStatus = "In stock" | "Low stock" | "Out of stock" | "Not stock
 export interface Product {
   id: string;
   name: string;
-  category: "Free-range chicken" | "Eggs" | "Duck" | "Specialty poultry" | "Premium frozen" | "B2B food-service";
+  category: string;
   status: ProductStatus;
   priceThb: number;
   priceUnit: string;
@@ -34,13 +35,6 @@ export interface Product {
   reorderLevel: number;
   isNew: boolean;
   attentionReason?: string; // set only when marketing attention is needed
-}
-
-export interface SalesRow {
-  month: string; // YYYY-MM
-  productId: string;
-  channel: Channel;
-  revenueThb: number;
 }
 
 export type CustomerType =
@@ -66,9 +60,7 @@ export interface Customer {
   name: string;
   type: CustomerType;
   segment: Segment;
-  contactName: string;
-  phone: string;
-  email: string;
+  /** No personal contact details (names, phones, emails) are stored, by design. */
   lastInteractionDate: string;
   lastInteractionNote: string;
   followUpDate: string | null;
@@ -114,7 +106,7 @@ export interface Meeting {
 
 export type CalendarItemType =
   | "Meeting"
-  | "Event"
+  | "Task"
   | "Campaign milestone"
   | "Content deadline"
   | "Follow-up";
@@ -215,33 +207,8 @@ export interface CustomerIssue {
   summary: string;
 }
 
-export interface BusinessAlert {
-  id: string;
-  area: "Business" | "Campaign" | "Product" | "Sales";
-  severity: Severity;
-  message: string;
-  href: string;
-}
 
-export interface InboxMessage {
-  id: string;
-  from: string;
-  channel: "LINE OA" | "Email" | "Phone note" | "Internal";
-  subject: string;
-  receivedAt: string;
-  preview: string;
-  href: string;
-}
 
-export interface MarketingActivity {
-  id: string;
-  title: string;
-  type: "PR" | "Event" | "Social" | "Partnership" | "Website";
-  date: string;
-  status: "Planned" | "In progress" | "Done";
-  owner: string;
-  location?: string;
-}
 
 export interface DocumentRecord {
   id: string;
@@ -262,8 +229,39 @@ export interface BrandRule {
 }
 
 export interface SourceRecord {
-  kind: "Product" | "Customer" | "Task" | "Campaign" | "Meeting" | "Content" | "Issue" | "Approval" | "Sales" | "Document" | "Report";
+  kind: "Product" | "Customer" | "Task" | "Campaign" | "Meeting" | "Content" | "Issue" | "Approval" | "Sales" | "Document" | "Report" | "Channel";
   id: string;
   label: string;
   href: string;
 }
+
+/** Everything the user has entered. Lives only in this browser (localStorage). */
+export interface UserData {
+  tasks: Task[];
+  meetings: Meeting[];
+  customers: Customer[];
+  campaigns: Campaign[];
+  content: ContentItem[];
+  issues: CustomerIssue[];
+  approvals: ApprovalRequest[];
+  documents: DocumentRecord[];
+}
+
+/** What pages and the AI secretary read: the user's entries plus real, read-only sources. */
+export interface AppData extends UserData {
+  /** Today's date (YYYY-MM-DD) in Thailand. */
+  today: string;
+  /** Products from the connected shop, if any. */
+  products: Product[];
+}
+
+export const EMPTY_USER_DATA: UserData = {
+  tasks: [],
+  meetings: [],
+  customers: [],
+  campaigns: [],
+  content: [],
+  issues: [],
+  approvals: [],
+  documents: [],
+};

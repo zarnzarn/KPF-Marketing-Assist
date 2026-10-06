@@ -49,3 +49,8 @@ next-env.d.ts
 /data/private/
 /private/
 *.docx
+
+# channel credentials must never be committed (keep key files OUTSIDE the project)
+*.pem
+*service-account*.json
+*-key.json

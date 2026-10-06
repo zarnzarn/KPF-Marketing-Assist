@@ -1,9 +1,8 @@
+// TEST FIXTURE ONLY: fictional data used by tests. Never imported by the app.
 import type {
   ApprovalRequest,
-  BrandRule,
   Campaign,
   ContentItem,
-  MarketingActivity,
 } from "@/lib/types";
 
 // MOCK campaigns, content, activities, approvals and brand rules.
@@ -215,14 +214,6 @@ export const contentItems: ContentItem[] = [
   },
 ];
 
-export const marketingActivities: MarketingActivity[] = [
-  { id: "act-tasting", title: "Chef tasting event", type: "Event", date: "2026-10-09", status: "Planned", owner: "Events team", location: "Test kitchen (Mock)" },
-  { id: "act-press", title: "Sausage launch press outreach plan", type: "PR", date: "2026-10-14", status: "In progress", owner: "PR lead" },
-  { id: "act-food-fair", title: "Premium food fair booth", type: "Event", date: "2026-11-07", status: "Planned", owner: "Events team", location: "Exhibition hall (Mock)" },
-  { id: "act-influencer", title: "Home-cook creator collaboration review", type: "Partnership", date: "2026-10-13", status: "Planned", owner: "Social media lead" },
-  { id: "act-web-refresh", title: "Website homepage seasonal refresh", type: "Website", date: "2026-10-17", status: "In progress", owner: "Web producer" },
-  { id: "act-social-week", title: "Weekly social posting plan", type: "Social", date: "2026-10-06", status: "In progress", owner: "Social media lead" },
-];
 
 export const approvals: ApprovalRequest[] = [
   { id: "apr-line-broadcast", actionType: "Send external message", title: "LINE OA weekend broadcast to loyal members", requestedAt: "2026-10-05", state: "Pending", relatedHref: "/content" },
@@ -235,13 +226,3 @@ export const approvals: ApprovalRequest[] = [
   { id: "apr-duck-fb", actionType: "Publish content", title: "Duck season Facebook post", requestedAt: "2026-09-27", state: "Approved", relatedHref: "/content" },
 ];
 
-// Mock company knowledge base: brand tone and marketing rules.
-export const brandRules: BrandRule[] = [
-  { id: "br-tone", rule: "Tone: warm, honest, premium and calm. Never pushy or hype-driven." },
-  { id: "br-claims", rule: "Only use product claims that are listed in the knowledge base. Do not invent claims." },
-  { id: "br-cert", rule: "Do not mention certifications or awards unless they are recorded in the knowledge base." },
-  { id: "br-price", rule: "Prices and promotions must come from the approved price list. Price changes need approval." },
-  { id: "br-stock", rule: "Do not promote a product as available when stock status is low or out of stock." },
-  { id: "br-thai", rule: "Customer-facing copy should be available in Thai and English." },
-  { id: "br-approval", rule: "Anything published or sent externally needs Marketing Director approval." },
-];

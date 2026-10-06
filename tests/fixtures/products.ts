@@ -1,3 +1,4 @@
+// TEST FIXTURE ONLY: fictional data used by tests. Never imported by the app.
 import type { Product } from "@/lib/types";
 
 // MOCK data. Prices, stock and availability are invented for the prototype.

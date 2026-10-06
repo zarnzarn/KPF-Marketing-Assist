@@ -1,19 +1,20 @@
 import { PageHeader } from "@/components/ui";
 import { SecretaryChat } from "@/components/SecretaryChat";
+import { loadChannels } from "@/lib/channels/loadChannels";
 import { loadReports } from "@/lib/reports/loadReports";
 
-export const metadata = { title: "AI Secretary · Klong Phai Farm (Prototype)" };
+export const metadata = { title: "AI Secretary · Klong Phai Farm" };
 export const dynamic = "force-dynamic"; // reads the report files on this computer
 
 export default async function SecretaryPage() {
-  const { source, reports } = await loadReports();
+  const [{ reports }, channels] = await Promise.all([loadReports(), loadChannels()]);
   return (
     <>
       <PageHeader
         title="AI Secretary"
-        subtitle="Ask about your day. Answers come from mock data and your monthly reports, with every statement labelled. No real AI is connected yet."
+        subtitle="Ask about your day. Answers come only from your entries, your monthly reports and your connected channels, with every statement labelled. No AI model is connected yet."
       />
-      <SecretaryChat reports={source === "local" ? reports : []} />
+      <SecretaryChat reports={reports} channels={channels} />
     </>
   );
 }

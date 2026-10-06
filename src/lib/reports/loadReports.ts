@@ -4,7 +4,6 @@
 
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
-import { mockMonthlyReport } from "@/data/mock/monthlyReport";
 import { monthFromText, parseReport } from "./parseReport";
 import type { MonthlyReport, ReportLoadResult } from "./types";
 
@@ -47,7 +46,7 @@ export async function loadReports(dir: string = reportsDir()): Promise<ReportLoa
   try {
     await readdir(dir);
   } catch {
-    return { source: "mock", reports: [mockMonthlyReport], warnings, notes };
+    return { source: "none", reports: [], warnings, notes };
   }
 
   const candidates: { report: MonthlyReport; mtime: number; rel: string }[] = [];
@@ -93,13 +92,13 @@ export async function loadReports(dir: string = reportsDir()): Promise<ReportLoa
   if (skipped > 0) notes.push(`${skipped} other Word file${skipped === 1 ? " was" : "s were"} skipped because ${skipped === 1 ? "it is" : "they are"} not a marketing report.`);
 
   const reports = Array.from(byId.values()).map((c) => c.report);
-  if (reports.length === 0) return { source: "mock", reports: [mockMonthlyReport], warnings, notes };
+  if (reports.length === 0) return { source: "none", reports: [], warnings, notes };
 
   // Newest month first; reports without a readable month go last.
   reports.sort((a, b) => (b.month || "").localeCompare(a.month || ""));
   return { source: "local", reports, warnings, notes };
 }
 
-export function pickReport(reports: MonthlyReport[], month?: string): MonthlyReport {
+export function pickReport(reports: MonthlyReport[], month?: string): MonthlyReport | undefined {
   return reports.find((r) => r.month === month) ?? reports[0];
 }

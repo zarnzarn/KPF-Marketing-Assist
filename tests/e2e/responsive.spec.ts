@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/secretary", "/marketing", "/sales", "/products", "/customers", "/tasks", "/calendar", "/meetings", "/campaigns", "/content", "/reports", "/documents"];
+const routes = ["/", "/secretary", "/marketing", "/sales", "/products", "/customers", "/tasks", "/calendar", "/meetings", "/campaigns", "/content", "/reports", "/documents", "/channels"];
 const sizes = [
   { name: "desktop", width: 1440, height: 900 },
   { name: "tablet", width: 820, height: 1180 },

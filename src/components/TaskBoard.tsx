@@ -2,17 +2,19 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { CheckCircle2, Pencil, Plus } from "lucide-react";
-import { MOCK_TODAY, campaigns, customers, products } from "@/data/mock";
-import { Badge, Card, DataTable } from "@/components/ui";
+import { useAppData } from "@/components/AppDataProvider";
+import { DeleteButton } from "@/components/EntityForm";
+import { Badge, Card, DataTable, EmptyState } from "@/components/ui";
 import { formatDate } from "@/lib/dates";
 import { getCampaign, getCustomer, getProduct } from "@/lib/queries";
-import { completeTask, createTask, hasErrors, updateTask, validateTask, type TaskErrors, type TaskInput } from "@/lib/tasks";
+import { completeTask, createTask, deleteTask, hasErrors, updateTask, validateTask, type TaskErrors, type TaskInput } from "@/lib/tasks";
+import { newId } from "@/lib/store/userData";
 import type { Priority, Task, TaskStatus } from "@/lib/types";
 
-const emptyInput: TaskInput = { title: "", priority: "Medium", status: "To do", dueDate: MOCK_TODAY, owner: "Marketing Director" };
-
-export function TaskBoard({ initialTasks }: { initialTasks: Task[] }) {
-  const [tasks, setTasks] = useState(initialTasks);
+export function TaskBoard() {
+  const { data, update } = useAppData();
+  const { tasks, campaigns, customers, products } = data;
+  const emptyInput: TaskInput = { title: "", priority: "Medium", status: "To do", dueDate: data.today, owner: "Marketing Director" };
   const [editing, setEditing] = useState<string | "new" | null>(null);
   const [input, setInput] = useState<TaskInput>(emptyInput);
   const [errors, setErrors] = useState<TaskErrors>({});
@@ -35,14 +37,19 @@ export function TaskBoard({ initialTasks }: { initialTasks: Task[] }) {
     const found = validateTask(input);
     setErrors(found);
     if (hasErrors(found)) return;
-    setTasks((list) => (editing === "new" ? createTask(list, input) : updateTask(list, editing as string, input)));
+    update((u) => ({ ...u, tasks: editing === "new" ? createTask(u.tasks, input, newId("tsk")) : updateTask(u.tasks, editing as string, input) }));
     setMessage(editing === "new" ? "Task created." : "Task updated.");
     setEditing(null);
   }
 
   function complete(id: string) {
-    setTasks((list) => completeTask(list, id));
+    update((u) => ({ ...u, tasks: completeTask(u.tasks, id) }));
     setMessage("Task marked as done.");
+  }
+
+  function remove(id: string) {
+    update((u) => ({ ...u, tasks: deleteTask(u.tasks, id) }));
+    setMessage("Task deleted.");
   }
 
   const field = (name: keyof TaskInput) => `${uid}-${name}`;
@@ -118,6 +125,9 @@ export function TaskBoard({ initialTasks }: { initialTasks: Task[] }) {
       )}
 
       <Card id="task-list" title="Task list" subtitle={`${tasks.filter((t) => t.status !== "Done").length} open · ${tasks.filter((t) => t.status === "Done").length} done`}>
+        {tasks.length === 0 ? (
+          <EmptyState>No tasks yet. Use &ldquo;Create task&rdquo; to add your first one. Tasks are saved in this browser only.</EmptyState>
+        ) : (
         <DataTable
           caption="Tasks"
           rows={tasks}
@@ -126,11 +136,11 @@ export function TaskBoard({ initialTasks }: { initialTasks: Task[] }) {
             { header: "Task", cell: (t) => <span className={t.status === "Done" ? "text-muted line-through" : "font-medium"}>{t.title}</span> },
             { header: "Priority", cell: (t) => <Badge>{t.priority}</Badge> },
             { header: "Status", cell: (t) => <Badge>{t.status}</Badge> },
-            { header: "Due", cell: (t) => <span className={t.status !== "Done" && t.dueDate < MOCK_TODAY ? "font-semibold text-clay" : ""}>{formatDate(t.dueDate)}{t.status !== "Done" && t.dueDate < MOCK_TODAY ? " (overdue)" : ""}</span> },
+            { header: "Due", cell: (t) => <span className={t.status !== "Done" && t.dueDate < data.today ? "font-semibold text-clay" : ""}>{formatDate(t.dueDate)}{t.status !== "Done" && t.dueDate < data.today ? " (overdue)" : ""}</span> },
             { header: "Owner", cell: (t) => t.owner },
-            { header: "Campaign", cell: (t) => getCampaign(t.campaignId)?.name ?? "—" },
-            { header: "Customer", cell: (t) => getCustomer(t.customerId)?.name ?? "—" },
-            { header: "Product", cell: (t) => getProduct(t.productId)?.name ?? "—" },
+            { header: "Campaign", cell: (t) => getCampaign(data, t.campaignId)?.name ?? "—" },
+            { header: "Customer", cell: (t) => getCustomer(data, t.customerId)?.name ?? "—" },
+            { header: "Product", cell: (t) => getProduct(data, t.productId)?.name ?? "—" },
             {
               header: "Actions",
               cell: (t) => (
@@ -141,11 +151,13 @@ export function TaskBoard({ initialTasks }: { initialTasks: Task[] }) {
                   <button type="button" disabled={t.status === "Done"} onClick={() => complete(t.id)} className="inline-flex items-center gap-1 rounded-lg bg-forest px-2.5 py-1.5 text-xs font-semibold text-white hover:bg-sage disabled:bg-muted/60">
                     <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" /> Complete<span className="sr-only"> {t.title}</span>
                   </button>
+                  <DeleteButton label={t.title} onClick={() => remove(t.id)} />
                 </div>
               ),
             },
           ]}
         />
+        )}
       </Card>
     </div>
   );

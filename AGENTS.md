@@ -30,34 +30,30 @@ Key areas: free-range chicken, eggs, duck, specialty poultry products, premium f
 
 ## Development rules
 
-- Prototype only. **Mock data only**, except for the narrow exception below.
-- No production integrations, no real customer data, no real personal information.
-- No database initially. No Supabase. No n8n. No external integrations (email, LINE OA, social, marketplaces, CRM, payments).
-- No production deployment.
-- Keep the architecture simple. Prefer simple solutions. Do not over-engineer.
-- Do not create unnecessary abstractions.
+- Prototype only. **No mock data in the app.** Data comes only from:
+  1. **The user's own entries** (tasks, meetings, customers, campaigns, content, issues, approvals, document names), stored **only in that browser** (`localStorage`).
+  2. **The user's monthly marketing report files** (`.docx`), read from a local folder (see "Real data rules").
+  3. **Read-only connections to the brand's own channels** (website, GA4, shop, Facebook, Instagram, LINE OA) through their official APIs, using credentials the user creates.
+- When a source is empty or not connected, show an empty state and say "Data not available." Never fill gaps with sample or invented data.
+- No real customer personal information: no private individuals' names, phone numbers or emails. Customer records are businesses or segments.
+- No database. No Supabase. No n8n. No CRM, email, marketplace or payment integrations. No production deployment.
+- Keep the architecture simple. Prefer simple solutions. Do not over-engineer. Do not create unnecessary abstractions.
 - Use maintainable TypeScript and reusable components.
-- Separation of concerns:
-  - Business logic is separate from UI.
-  - AI tools are separate from UI.
-  - Mock data is separate from business logic.
-- Make future integrations possible without rewriting the application (small interfaces at the data and AI boundaries, nothing more).
+- Separation of concerns: business logic separate from UI; AI tools separate from UI; data loading (store, reports, channels) separate from business logic. Queries are pure functions of `AppData`.
 - Before implementing a major feature: explain what will be changed. Keep implementations modular.
 
-## Real data exception (monthly marketing reports only)
+## Real data rules
 
-The user explicitly approved using the real figures from their own monthly marketing reports (Word `.docx` files). Strict conditions:
-
-- The files are read **at request time from a folder on the user's computer** (`REPORTS_DIR` in `.env.local`, default `data/private/reports`). They are never copied into the repository.
-- Real data must **never be committed or pushed**: `/data/private/`, `.env*` (except `.env.example`) and `*.docx` are git-ignored, and `tests/no-private-data.test.ts` fails if a `.docx` or private path is tracked.
-- Tests, fixtures and screenshots committed to the repo use mock or synthetic data only.
-- If the folder is missing, the app falls back to a mock sample report.
-- This exception covers the monthly report figures only. Still no real customer personal information (names of customers, contacts, phone numbers, emails), no real product or customer databases, no integrations.
-- AI answers from real reports must only repeat what the report says (FACT) and use "Data not available." for anything it does not say.
+- **Report files** are read at request time from `REPORTS_DIR` (in `.env.local`, default `data/private/reports`; sub-folders allowed). They are never copied into the repository.
+- **Channel credentials** (tokens, keys, service-account files) live only in `.env.local` or files outside the repository. They are used only on the server, never sent to the browser, never written to logs or error messages.
+- **Read-only:** all channel HTTP calls go through `src/lib/channels/readOnlyFetch.ts`. It allows GET, plus POST only to three read-only endpoints whose APIs require POST: Google sign-in (`oauth2.googleapis.com/token`), GA4 `runReport`, and Shopify GraphQL **queries** (bodies containing `mutation` are refused). Everything else is blocked before a request is made. Never add code that posts, publishes, sends messages, changes prices or launches anything, and never call `fetch` directly (a test enforces this).
+- Real data must **never be committed or pushed**: `/data/private/`, `/private/`, `.env*` (except `.env.example`), `*.docx`, `*.pem`, `*service-account*.json` and `*-key.json` are git-ignored, and `tests/no-private-data.test.ts` fails if a `.docx`, private path, `.env.local` or token-like secret is tracked.
+- Tests, fixtures and screenshots committed to the repo use synthetic data only (`tests/fixtures/` is fictional and never imported by the app).
+- AI answers from reports or channels only repeat what the source says (FACT) and use "Data not available." for anything it does not say.
 
 ## AI rules
 
-- **Never invent company information.** Mock data (including the mock company knowledge base) is the source of truth.
+- **Never invent company information.** The user's entries, report files, connected channels and the brand rules in `src/data/brand.ts` are the only sources of truth.
 - When information is unavailable, say exactly: **"Data not available."**
 - Label every statement as one of: **FACT**, **ANALYSIS**, **ESTIMATE**, **RECOMMENDATION**, **DATA GAP**.
 - Never present assumptions as facts.
@@ -75,7 +71,7 @@ The user explicitly approved using the real figures from their own monthly marke
 
 ## Content rules
 
-- Follow Klong Phai Farm's brand tone and marketing rules from the mock company knowledge base.
+- Follow Klong Phai Farm's brand tone and marketing rules in `src/data/brand.ts` (from the brand's own guide).
 - Do not invent: product claims, certifications, awards, prices, product availability, customer information, or campaign results.
 - If a needed fact is missing, state a DATA GAP instead of filling it in.
 
@@ -85,7 +81,7 @@ Test:
 
 - Core business logic
 - AI tool selection
-- Mock data retrieval
+- Data loading (browser store, report files, channel adapters with recorded responses)
 - Approval logic
 - Invalid inputs, missing data, and error states
 - Responsive layouts

@@ -1,51 +1,74 @@
 # KPF-Marketing-Assist
 
-**AI Marketing Director Secretary** for Klong Phai Farm — Phase 1 prototype.
+**AI Marketing Director Secretary** for Klong Phai Farm. Phase 1 prototype.
 
-> Prototype only. **Mock data only.** No real AI, no database, no external integrations.
-> Nothing is ever sent, published, repriced or launched from this app.
-> See [AGENTS.md](AGENTS.md) for the project rules.
+> **No sample data.** Everything on screen comes from one of three places:
+> 1. **What you type in** (tasks, meetings, customers, campaigns, content, issues). Saved **only in your browser**.
+> 2. **Your monthly marketing reports** (Word `.docx` files), read from a folder on your computer.
+> 3. **Read-only connections** to your own channels: website, Google Analytics 4, shop, Facebook, Instagram and LINE OA.
+>
+> When something is missing, the app says **"Data not available."** It never sends, publishes, changes prices or launches anything.
+> Project rules: [AGENTS.md](AGENTS.md).
 
 ## Run it
 
 ```bash
-pnpm install
-pnpm dev            # http://localhost:3000
+npm install
+npm run dev            # then open http://localhost:3000
 ```
+
+## Your settings (`.env.local`)
+
+1. Copy `.env.example` to a new file called `.env.local` in the project folder.
+   In PowerShell: `copy .env.example .env.local`
+2. Fill in only what you have. Empty lines simply show "Not connected".
+3. Use forward slashes in paths, even on Windows.
+4. Restart the app after any change (`Ctrl+C`, then `npm run dev`).
+
+`.env.local` is never committed to GitHub.
+
+### Monthly reports
+
+```
+REPORTS_DIR=D:/Report/2026
+```
+
+Month folders are fine (for example `D:/Report/2026/Sep - 2026/Marketing_Report_….docx`).
+Only Word files whose name or title contains "Marketing Report" are used. The files are read from your computer each time and are never copied into the project.
+
+### Channels (website, GA4, shop, Facebook, Instagram, LINE OA)
+
+Open the **Channels** page in the app. Each channel shows whether it is connected and has a **How to connect** section with step-by-step instructions and the exact lines to add to `.env.local`.
+
+- The **website** needs no setup (it reads your public pages).
+- **GA4** needs a read-only service-account key file. Keep it **outside** the project folder.
+- The **shop** needs to know your platform (Shopify or WooCommerce) and a read-only key.
+- **Facebook / Instagram** need a Meta Page access token. **LINE OA** needs a Messaging API channel access token (the `lin.ee` link alone is not enough).
+
+All channel calls are read-only and go through one guarded function (`src/lib/channels/readOnlyFetch.ts`).
+Numbers are refreshed at most every 15 minutes.
 
 ## Check it
 
 ```bash
-pnpm test           # unit + component + accessibility tests (vitest)
-pnpm typecheck      # TypeScript
-pnpm lint           # ESLint
-pnpm build          # production build
-pnpm build && pnpm start -p 3100   # then, in another terminal:
-pnpm test:e2e       # responsive layout + keyboard checks in a real browser
+npm test               # unit, page and accessibility tests (no internet needed)
+npm run typecheck      # TypeScript
+npm run lint           # ESLint
+npm run build          # production build
+npm run build && npm start -- -p 3100   # then, in another terminal:
+npm run test:e2e       # responsive layout + keyboard checks in a real browser
 ```
 
 ## Where things are
 
 | Folder | What it holds |
 | --- | --- |
-| `src/app/` | The 13 pages (Today, AI Secretary, Marketing, Sales, Products, Customers & B2B, Tasks, Calendar, Meetings, Campaigns, Content, Reports, Documents) |
-| `src/components/` | Reusable UI pieces |
-| `src/data/mock/` | All mock data (the only place data comes from) |
-| `src/lib/` | Business logic (queries, approvals, tasks, dates) — no UI code |
-| `src/lib/ai/` | The mock AI secretary: tool selection and labelled answers (FACT / ANALYSIS / ESTIMATE / RECOMMENDATION / DATA GAP) |
-| `tests/` | Tests |
-
-## Use your own monthly reports (stays on your computer)
-
-The Reports, Sales and AI Secretary pages can read your monthly marketing reports (Word `.docx` files).
-The files are read straight from a folder on your computer. They are **never copied into the project and never pushed to GitHub**.
-
-1. Copy `.env.example` to a new file called `.env.local` (same folder).
-2. Put your folder in it, using forward slashes, even on Windows:
-   ```
-   REPORTS_DIR=D:/Report/Monthly report
-   ```
-3. Restart the app (`Ctrl+C`, then `npm run dev`) and open **Reports**.
-
-If `REPORTS_DIR` is empty or the folder is missing, a mock sample report is shown instead.
-Rules for this exception are in [AGENTS.md](AGENTS.md).
+| `src/app/` | The pages (Today, AI Secretary, Marketing, Sales, Products, Customers & B2B, Tasks, Calendar, Meetings, Campaigns, Content, Reports, Documents, Channels) |
+| `src/components/` | Reusable UI pieces; `views/` holds each page's interactive part |
+| `src/lib/` | Business logic (pure functions over your data), forms, dates |
+| `src/lib/store/` | Your entries, saved in this browser only |
+| `src/lib/reports/` | Reads monthly report `.docx` files |
+| `src/lib/channels/` | Read-only channel connections |
+| `src/lib/ai/` | The rule-based AI secretary (labelled answers: FACT / ANALYSIS / ESTIMATE / RECOMMENDATION / DATA GAP) |
+| `src/data/brand.ts` | Brand tone and content rules |
+| `tests/` | Tests. `tests/fixtures/` is fictional data used only by tests |

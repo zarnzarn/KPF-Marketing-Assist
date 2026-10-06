@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { tasks } from "@/data/mock";
-import { completeTask, createTask, updateTask, validateTask, type TaskInput } from "@/lib/tasks";
+import { tasks } from "./fixtures";
+import { completeTask, createTask, deleteTask, updateTask, validateTask, type TaskInput } from "@/lib/tasks";
 
 const valid: TaskInput = { title: "  Call chef  ", priority: "High", status: "To do", dueDate: "2026-10-10", owner: " Me ", campaignId: "" };
 
@@ -22,7 +22,7 @@ describe("validateTask", () => {
 
 describe("createTask / updateTask / completeTask", () => {
   it("creates a trimmed task at the top without changing the original list", () => {
-    const next = createTask(tasks, valid);
+    const next = createTask(tasks, valid, "tsk-new-1");
     expect(next).toHaveLength(tasks.length + 1);
     expect(next[0].title).toBe("Call chef");
     expect(next[0].owner).toBe("Me");
@@ -30,7 +30,13 @@ describe("createTask / updateTask / completeTask", () => {
     expect(tasks).toHaveLength(next.length - 1);
   });
   it("throws on invalid input", () => {
-    expect(() => createTask(tasks, { ...valid, title: "" })).toThrow("Invalid task.");
+    expect(() => createTask(tasks, { ...valid, title: "" }, "tsk-x")).toThrow("Invalid task.");
+  });
+  it("refuses a duplicate id", () => {
+    expect(() => createTask(tasks, valid, tasks[0].id)).toThrow("already exists");
+  });
+  it("deletes a task", () => {
+    expect(deleteTask(tasks, tasks[0].id)).toHaveLength(tasks.length - 1);
   });
   it("updates only the chosen task", () => {
     const target = tasks[0];

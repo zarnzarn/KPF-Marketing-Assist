@@ -44,22 +44,22 @@ describe("loadReports", () => {
     expect(result.warnings[0]).toContain("broken.docx");
   });
 
-  it("falls back to the mock sample when the folder does not exist", async () => {
+  it("returns no reports (no sample data) when the folder does not exist", async () => {
     const result = await loadReports(path.join(dir, "does-not-exist"));
-    expect(result.source).toBe("mock");
-    expect(result.reports).toHaveLength(1);
-    expect(result.reports[0].isMock).toBe(true);
+    expect(result.source).toBe("none");
+    expect(result.reports).toEqual([]);
   });
 
-  it("falls back to the mock sample when the folder has no reports", async () => {
+  it("returns no reports when the folder has no reports", async () => {
     const result = await loadReports(dir);
-    expect(result.source).toBe("mock");
+    expect(result.source).toBe("none");
+    expect(result.reports).toEqual([]);
   });
 
-  it("falls back to the mock sample but keeps the warning when every file is broken", async () => {
+  it("returns no reports but keeps the warning when every file is broken", async () => {
     await writeFile(path.join(dir, "broken.docx"), "nope");
     const result = await loadReports(dir);
-    expect(result.source).toBe("mock");
+    expect(result.source).toBe("none");
     expect(result.warnings).toHaveLength(1);
   });
 
@@ -128,7 +128,7 @@ describe("monthly sub-folders (like D:/Report/2026/Sep - 2026)", () => {
     await put("a/b/c/d/Marketing_Report_too_deep.docx");
     await put(".hidden/Marketing_Report_hidden.docx");
     const result = await loadReports(dir);
-    expect(result.source).toBe("mock");
+    expect(result.source).toBe("none");
   });
 });
 
@@ -164,8 +164,9 @@ describe("pickReport", () => {
     await writeFile(path.join(dir, "a.docx"), await makeDocx(sampleReportParts("1-31 August 2026")));
     await writeFile(path.join(dir, "b.docx"), await makeDocx(sampleReportParts("1-30 September 2026")));
     const { reports } = await loadReports(dir);
-    expect(pickReport(reports, "2026-08").month).toBe("2026-08");
-    expect(pickReport(reports, undefined).month).toBe("2026-09");
-    expect(pickReport(reports, "1999-01").month).toBe("2026-09");
+    expect(pickReport(reports, "2026-08")?.month).toBe("2026-08");
+    expect(pickReport(reports, undefined)?.month).toBe("2026-09");
+    expect(pickReport(reports, "1999-01")?.month).toBe("2026-09");
+    expect(pickReport([], "2026-09")).toBeUndefined();
   });
 });
