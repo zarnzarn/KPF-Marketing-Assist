@@ -1,27 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Send } from "lucide-react";
 import { MOCK_TODAY, brandRules } from "@/data/mock";
 import { AnswerBlocks } from "@/components/AnswerBlocks";
 import { Badge, Card } from "@/components/ui";
 import { answerQuestion, quickActions, suggestedQuestions, type SecretaryAnswer } from "@/lib/ai/secretary";
 import { formatLongDate } from "@/lib/dates";
+import type { MonthlyReport } from "@/lib/reports/types";
 
 type ChatMessage = { id: number; role: "user"; text: string } | { id: number; role: "ai"; answer: SecretaryAnswer };
 
 const seedQuestion = "What should I do first today?";
 
-export function SecretaryChat() {
+export function SecretaryChat({ reports = [] }: { reports?: MonthlyReport[] }) {
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     { id: 1, role: "user", text: seedQuestion },
-    { id: 2, role: "ai", answer: answerQuestion(seedQuestion) },
+    { id: 2, role: "ai", answer: answerQuestion(seedQuestion, { reports }) },
   ]);
   const [draft, setDraft] = useState("");
   const [requested, setRequested] = useState<string[]>([]);
   const nextId = useRef(3);
+  const logRef = useRef<HTMLDivElement>(null);
   const inputId = useId();
+
+  // Keep the newest answer in view when a question is asked.
+  useEffect(() => {
+    const log = logRef.current;
+    if (log && messages.length > 2) log.scrollTop = log.scrollHeight;
+  }, [messages]);
 
   const lastAnswer = [...messages].reverse().find((m): m is Extract<ChatMessage, { role: "ai" }> => m.role === "ai")?.answer;
 
@@ -30,7 +38,7 @@ export function SecretaryChat() {
     if (!text) return;
     const userId = nextId.current++;
     const aiId = nextId.current++;
-    setMessages((prev) => [...prev, { id: userId, role: "user", text }, { id: aiId, role: "ai", answer: answerQuestion(text) }]);
+    setMessages((prev) => [...prev, { id: userId, role: "user", text }, { id: aiId, role: "ai", answer: answerQuestion(text, { reports }) }]);
     setDraft("");
   }
 
@@ -38,7 +46,7 @@ export function SecretaryChat() {
     <div className="grid gap-6 xl:grid-cols-3">
       <div className="min-w-0 xl:col-span-2">
         <Card id="chat" title="Conversation" subtitle="Chat history (mock)">
-          <div className="relative max-h-[34rem] space-y-4 overflow-y-auto pr-1" role="log" aria-live="polite" aria-label="Chat history" tabIndex={0}>
+          <div ref={logRef} className="relative max-h-[34rem] space-y-4 overflow-y-auto pr-1" role="log" aria-live="polite" aria-label="Chat history" tabIndex={0}>
             {messages.map((m) =>
               m.role === "user" ? (
                 <div key={m.id} className="flex justify-end">
@@ -105,9 +113,10 @@ export function SecretaryChat() {
       <div className="min-w-0 space-y-6">
         <Card id="context" title="Context" subtitle="What the secretary can see">
           <dl className="space-y-2 text-sm">
-            <div className="flex justify-between gap-2"><dt className="text-muted">Source</dt><dd className="font-medium">Mock data only</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-muted">Source</dt><dd className="font-medium">{reports.some((r) => !r.isMock) ? "Mock data + your monthly reports" : "Mock data only"}</dd></div>
             <div className="flex justify-between gap-2"><dt className="text-muted">Today (mock)</dt><dd className="font-medium">{formatLongDate(MOCK_TODAY)}</dd></div>
             <div className="flex justify-between gap-2"><dt className="text-muted">Mode</dt><dd className="font-medium">Read &amp; draft only</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-muted">Monthly reports loaded</dt><dd className="font-medium">{reports.filter((r) => !r.isMock).length || "None (mock sample)"}</dd></div>
             <div className="flex justify-between gap-2"><dt className="text-muted">Brand rules loaded</dt><dd className="font-medium">{brandRules.length}</dd></div>
           </dl>
           <p className="mt-3 text-sm text-muted">If something is not in the mock data, the secretary says “Data not available.”</p>

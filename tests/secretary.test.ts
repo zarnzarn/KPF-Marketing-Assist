@@ -88,3 +88,76 @@ describe("dailySummary", () => {
     for (const l of ["FACT", "ANALYSIS", "DATA GAP", "RECOMMENDATION"]) expect(labelsUsed).toContain(l);
   });
 });
+
+import { parseReport } from "@/lib/reports/parseReport";
+import { makeDocx, sampleReportParts } from "./helpers/makeDocx";
+import { mockMonthlyReport } from "@/data/mock/monthlyReport";
+
+describe("monthly report tool", () => {
+  it.each([
+    ["Summarize the latest monthly report", "monthlyReport"],
+    ["How were supermarket sales in September?", "monthlyReport"],
+    ["What happened with the Facebook numbers?", "monthlyReport"],
+    ["Show me the August report", "monthlyReport"],
+  ])("%s -> %s", (question, tool) => {
+    expect(selectTool(question)).toBe(tool);
+  });
+
+  it("does not hijack the existing questions", () => {
+    expect(selectTool("What is overdue?")).toBe("overdue");
+    expect(selectTool("What campaigns need attention?")).toBe("campaignAttention");
+    expect(selectTool("Draft a LINE message for the weekend promotion")).toBe("draftMessage");
+  });
+
+  it("answers from the report only, with the report as a source", async () => {
+    const sep = await parseReport(await makeDocx(sampleReportParts("1-30 September 2026")), "sep.docx");
+    const answer = answerQuestion("Summarize the latest monthly report", { reports: [sep] });
+    const text = answer.blocks.map((b) => b.text).join("\n");
+    expect(answer.tool).toBe("monthlyReport");
+    expect(text).toContain("TOTAL SALES: THB 111K (+1.0% vs last month)");
+    expect(text).toContain("Invented observation A.");
+    expect(text).toContain("Action plan in the report: Send invented broadcast: Marketing / Early Oct");
+    expect(answer.sources).toEqual([{ kind: "Report", id: "2026-09", label: sep.title, href: "/reports?month=2026-09" }]);
+    expect(answer.blocks.filter((b) => b.label === "FACT").length).toBeGreaterThan(4);
+  });
+
+  it("repeats the report's own missing-data note as a DATA GAP, word for word", async () => {
+    const sep = await parseReport(await makeDocx(sampleReportParts()), "sep.docx");
+    const gap = answerQuestion("Summarize the monthly report", { reports: [sep] }).blocks.find((b) => b.label === "DATA GAP");
+    expect(gap?.text).toBe("Checkout tracking is not set up yet, so conversion rate is not reported this month.");
+  });
+
+  it("picks the month that was asked for", async () => {
+    const aug = await parseReport(await makeDocx(sampleReportParts("1-31 August 2026")), "aug.docx");
+    const sep = await parseReport(await makeDocx(sampleReportParts("1-30 September 2026")), "sep.docx");
+    const answer = answerQuestion("Show me the August report", { reports: [sep, aug] });
+    expect(answer.sources[0].id).toBe("2026-08");
+    expect(answerQuestion("Latest report please", { reports: [sep, aug] }).sources[0].id).toBe("2026-09");
+  });
+
+  it("answers about one topic from the matching section only", async () => {
+    const sep = await parseReport(await makeDocx(sampleReportParts()), "sep.docx");
+    const text = answerQuestion("How are sales doing?", { reports: [sep] }).blocks.map((b) => b.text).join("\n");
+    expect(text).toContain("Website: 10,000 / 12,000 / +20.0%");
+    expect(text).not.toContain("Action plan in the report");
+  });
+
+  it("says Data not available when there is no report", () => {
+    const answer = answerQuestion("Summarize the latest monthly report");
+    expect(answer.blocks[0]).toEqual({ label: "DATA GAP", text: DATA_NOT_AVAILABLE });
+    expect(answer.sources).toEqual([]);
+  });
+
+  it("labels the mock sample so it is never mistaken for real numbers", () => {
+    const answer = answerQuestion("Summarize the latest monthly report", { reports: [mockMonthlyReport] });
+    expect(answer.blocks[0].text).toContain("MOCK sample");
+  });
+
+  it("never invents numbers: every figure in the answer appears in the report", async () => {
+    const sep = await parseReport(await makeDocx(sampleReportParts()), "sep.docx");
+    const answer = answerQuestion("Summarize the latest monthly report", { reports: [sep] });
+    const reportText = JSON.stringify(sep);
+    const figures = answer.blocks.flatMap((b) => (b.text.match(/\d[\d,.]*/g) ?? []).map((f) => f.replace(/[.,]+$/, "")));
+    for (const f of figures) expect(reportText).toContain(f);
+  });
+});

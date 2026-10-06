@@ -43,3 +43,8 @@ next-env.d.ts
 # test output
 /test-results/
 /playwright-report/
+
+# real company data must never be committed (see AGENTS.md "Real data exception")
+!.env.example
+/data/private/
+*.docx

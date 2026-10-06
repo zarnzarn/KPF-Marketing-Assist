@@ -262,7 +262,7 @@ export interface BrandRule {
 }
 
 export interface SourceRecord {
-  kind: "Product" | "Customer" | "Task" | "Campaign" | "Meeting" | "Content" | "Issue" | "Approval" | "Sales" | "Document";
+  kind: "Product" | "Customer" | "Task" | "Campaign" | "Meeting" | "Content" | "Issue" | "Approval" | "Sales" | "Document" | "Report";
   id: string;
   label: string;
   href: string;

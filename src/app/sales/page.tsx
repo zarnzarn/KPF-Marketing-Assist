@@ -1,4 +1,5 @@
 import { Badge, BarList, Card, ChangeText, DataTable, PageHeader, Stat, TrendBars } from "@/components/ui";
+import { loadReports } from "@/lib/reports/loadReports";
 import { formatCompactThb, formatMonth, formatThb } from "@/lib/dates";
 import {
   decliningProducts,
@@ -15,10 +16,14 @@ import {
 } from "@/lib/queries";
 
 export const metadata = { title: "Sales · Klong Phai Farm (Prototype)" };
+export const dynamic = "force-dynamic"; // reads the monthly report files on this computer
 
 const trendPoints = (points: { month: string; revenue: number }[]) => points.map((p) => ({ label: formatMonth(p.month), value: p.revenue }));
 
-export default function SalesPage() {
+export default async function SalesPage() {
+  const { source, reports } = await loadReports();
+  const latest = source === "local" ? reports[0] : undefined;
+  const kpiBlock = latest && [...latest.intro, ...latest.sections.flatMap((x) => x.blocks)].find((b) => b.type === "kpis");
   const summary = salesSummary();
   const segments = revenueBySegment();
   const byProduct = revenueByProduct();
@@ -29,11 +34,22 @@ export default function SalesPage() {
     <>
       <PageHeader title="Sales" subtitle="Mock sales figures for April–September 2026. Latest month is September." />
 
+      {latest && kpiBlock?.type === "kpis" && (
+        <Card id="latest-report" title="From your latest monthly report" subtitle={`${latest.title} · real figures read from your computer`} href={`/reports?month=${latest.month}`} hrefLabel="Open report" tone="butter" className="mb-6">
+          <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 xl:grid-cols-4">
+            {kpiBlock.items.map((item, i) => (
+              <Stat key={item.label} accent={(["sage", "butter", "sky", "blush"] as const)[i % 4]} label={item.label} value={item.value} note={item.note} tone="flat" />
+            ))}
+          </div>
+          <p className="mt-3 text-sm text-muted">The charts and tables below are <strong>mock data</strong> (product-level figures are not in the monthly reports).</p>
+        </Card>
+      )}
+
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat accent="sage" label="September revenue" value={formatCompactThb(summary.current)} note={summary.change === null ? "Data not available." : `${summary.change >= 0 ? "▲" : "▼"} ${Math.abs(summary.change).toFixed(1)}% vs August`} tone={summary.change !== null && summary.change < 0 ? "down" : "up"} />
+        <Stat accent="sage" label="September revenue (mock)" value={formatCompactThb(summary.current)} note={summary.change === null ? "Data not available." : `${summary.change >= 0 ? "▲" : "▼"} ${Math.abs(summary.change).toFixed(1)}% vs August`} tone={summary.change !== null && summary.change < 0 ? "down" : "up"} />
         <Stat accent="butter" label="Six-month revenue" value={formatCompactThb(summary.sixMonthTotal)} note="Apr–Sep 2026 (mock)" tone="flat" />
-        <Stat accent="sky" label="Website sales (Sep)" value={formatCompactThb(websiteNow)} note={`${(percentChange(websiteNow, websitePrev) ?? 0).toFixed(1)}% vs August`} tone="up" />
-        <Stat accent="blush" label="Sales alerts" value={String(salesAlerts().length)} note="Declining products" tone="down" />
+        <Stat accent="sky" label="Website sales, Sep (mock)" value={formatCompactThb(websiteNow)} note={`${(percentChange(websiteNow, websitePrev) ?? 0).toFixed(1)}% vs August`} tone="up" />
+        <Stat accent="blush" label="Sales alerts (mock)" value={String(salesAlerts().length)} note="Declining products" tone="down" />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">

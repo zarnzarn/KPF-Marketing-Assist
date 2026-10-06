@@ -30,7 +30,7 @@ Key areas: free-range chicken, eggs, duck, specialty poultry products, premium f
 
 ## Development rules
 
-- Prototype only. **Mock data only.**
+- Prototype only. **Mock data only**, except for the narrow exception below.
 - No production integrations, no real customer data, no real personal information.
 - No database initially. No Supabase. No n8n. No external integrations (email, LINE OA, social, marketplaces, CRM, payments).
 - No production deployment.
@@ -43,6 +43,17 @@ Key areas: free-range chicken, eggs, duck, specialty poultry products, premium f
   - Mock data is separate from business logic.
 - Make future integrations possible without rewriting the application (small interfaces at the data and AI boundaries, nothing more).
 - Before implementing a major feature: explain what will be changed. Keep implementations modular.
+
+## Real data exception (monthly marketing reports only)
+
+The user explicitly approved using the real figures from their own monthly marketing reports (Word `.docx` files). Strict conditions:
+
+- The files are read **at request time from a folder on the user's computer** (`REPORTS_DIR` in `.env.local`, default `data/private/reports`). They are never copied into the repository.
+- Real data must **never be committed or pushed**: `/data/private/`, `.env*` (except `.env.example`) and `*.docx` are git-ignored, and `tests/no-private-data.test.ts` fails if a `.docx` or private path is tracked.
+- Tests, fixtures and screenshots committed to the repo use mock or synthetic data only.
+- If the folder is missing, the app falls back to a mock sample report.
+- This exception covers the monthly report figures only. Still no real customer personal information (names of customers, contacts, phone numbers, emails), no real product or customer databases, no integrations.
+- AI answers from real reports must only repeat what the report says (FACT) and use "Data not available." for anything it does not say.
 
 ## AI rules
 

@@ -135,7 +135,7 @@ export function Stat({
         </span>
       )}
       <p className="text-sm font-medium text-muted">{label}</p>
-      <p className="font-display mt-1 text-4xl font-semibold text-forest">{value}</p>
+      <p className="font-display mt-1 text-3xl font-semibold text-forest [overflow-wrap:anywhere] sm:text-4xl">{value}</p>
       {note && <p className={`mt-1 text-sm font-medium ${noteColor}`}>{note}</p>}
     </div>
   );
@@ -178,8 +178,8 @@ export function DataTable<T>({ caption, columns, rows, rowKey }: { caption: stri
         <caption className="sr-only">{caption}</caption>
         <thead className="bg-forest-soft text-forest">
           <tr>
-            {columns.map((c) => (
-              <th key={c.header} scope="col" className={`px-3 py-2.5 text-xs font-semibold tracking-wide uppercase ${c.className ?? ""}`}>
+            {columns.map((c, i) => (
+              <th key={`${i}-${c.header}`} scope="col" className={`px-3 py-2.5 text-xs font-semibold tracking-wide uppercase ${c.className ?? ""}`}>
                 {c.header}
               </th>
             ))}
@@ -188,8 +188,8 @@ export function DataTable<T>({ caption, columns, rows, rowKey }: { caption: stri
         <tbody className="divide-y divide-line bg-card">
           {rows.map((row) => (
             <tr key={rowKey(row)} className="align-top">
-              {columns.map((c) => (
-                <td key={c.header} className={`px-3 py-2.5 ${c.className ?? ""}`}>
+              {columns.map((c, i) => (
+                <td key={`${i}-${c.header}`} className={`px-3 py-2.5 ${c.className ?? ""}`}>
                   {c.cell(row)}
                 </td>
               ))}

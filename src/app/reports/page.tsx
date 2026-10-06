@@ -1,7 +1,10 @@
+import Link from "next/link";
 import { campaigns, customers, products } from "@/data/mock";
-import { Badge, BarList, Card, DataTable, PageHeader } from "@/components/ui";
+import { Badge, BarList, Card, DataTable, PageHeader, TrendBars } from "@/components/ui";
+import { MonthlyReportView } from "@/components/MonthlyReportView";
 import { DATA_NOT_AVAILABLE } from "@/lib/constants";
 import { formatCompactThb, formatMonth, formatThb } from "@/lib/dates";
+import { loadReports, pickReport } from "@/lib/reports/loadReports";
 import {
   campaignAlerts,
   decliningProducts,
@@ -11,9 +14,9 @@ import {
   revenueBySegment,
   salesSummary,
 } from "@/lib/queries";
-import { TrendBars } from "@/components/ui";
 
 export const metadata = { title: "Reports · Klong Phai Farm (Prototype)" };
+export const dynamic = "force-dynamic"; // reads the report files on this computer on every visit
 
 function Report({ id, title, subtitle, children }: { id: string; title: string; subtitle: string; children: React.ReactNode }) {
   return (
@@ -23,14 +26,65 @@ function Report({ id, title, subtitle, children }: { id: string; title: string; 
   );
 }
 
-export default function ReportsPage() {
+function monthLabel(month: string) {
+  return month ? `${formatMonth(month)} ${month.slice(0, 4)}` : "Sample";
+}
+
+export default async function ReportsPage({ searchParams }: { searchParams: Promise<{ month?: string }> }) {
+  const { month } = await searchParams;
+  const { source, reports, warnings } = await loadReports();
+  const report = pickReport(reports, month);
+
   const sales = salesSummary();
   const b2b = customers.filter((c) => c.segment === "B2B");
   const withPerformance = campaigns.filter((c) => c.performance);
 
   return (
     <>
-      <PageHeader title="Reports" subtitle="Seven ready-made mock reports. Figures come from mock data and are for layout testing only." />
+      <PageHeader title="Reports" subtitle="Your monthly marketing reports, then ready-made mock reports for layout testing." />
+
+      <section aria-labelledby="monthly-heading" className="mb-10">
+        <div className="mb-4 flex flex-wrap items-center gap-3">
+          <h2 id="monthly-heading" className="text-3xl font-semibold text-forest">Monthly reports</h2>
+          <Badge tone={source === "local" ? "green" : "gold"}>{source === "local" ? "Read from your computer" : "MOCK sample (no report folder found)"}</Badge>
+        </div>
+
+        {source === "mock" && (
+          <p className="mb-4 rounded-2xl bg-yolk-soft/70 p-4 text-sm text-ink ring-1 ring-yolk/40">
+            No Word reports were found, so a mock sample is shown. To use your own reports, set <code className="font-semibold">REPORTS_DIR</code> in <code className="font-semibold">.env.local</code> (see the README) and restart the app. Your files stay on your computer and are never committed to GitHub.
+          </p>
+        )}
+        {warnings.length > 0 && (
+          <ul role="alert" className="mb-4 space-y-1 rounded-2xl bg-clay-soft p-4 text-sm text-clay ring-1 ring-clay/30">
+            {warnings.map((w) => (
+              <li key={w}>{w}</li>
+            ))}
+          </ul>
+        )}
+
+        {reports.length > 1 && (
+          <nav aria-label="Choose a month" className="mb-6 flex flex-wrap gap-2">
+            {reports.map((r) => {
+              const active = r.id === report.id;
+              return (
+                <Link
+                  key={r.id}
+                  href={`/reports?month=${r.month}`}
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-full px-4 py-2 text-sm font-semibold ring-1 ${active ? "bg-forest text-white ring-forest" : "bg-white/70 text-forest ring-line hover:bg-white"}`}
+                >
+                  {monthLabel(r.month)}
+                </Link>
+              );
+            })}
+          </nav>
+        )}
+
+        <MonthlyReportView report={report} />
+      </section>
+
+      <h2 className="mb-1 text-3xl font-semibold text-forest">Mock sample reports</h2>
+      <p className="mb-5 text-sm text-muted">Invented figures for layout testing (not from your real reports). Seven report types.</p>
       <div className="space-y-6">
         <Report id="sales" title="Sales report" subtitle="Apr–Sep 2026 (mock)">
           <p className="mb-4 text-[15px]">

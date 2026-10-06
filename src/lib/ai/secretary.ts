@@ -22,6 +22,7 @@ import {
   recommendedPriorities,
   salesAlerts,
 } from "../queries";
+import type { MonthlyReport, ReportBlock } from "../reports/types";
 import type { ApprovalActionType, SourceRecord } from "../types";
 
 export type AnswerLabel = "FACT" | "ANALYSIS" | "ESTIMATE" | "RECOMMENDATION" | "DATA GAP";
@@ -58,12 +59,14 @@ export type ToolName =
   | "draftMessage"
   | "approvals"
   | "productAttention"
+  | "monthlyReport"
   | "unknown";
 
 export { DATA_NOT_AVAILABLE };
 
 const toolRules: { tool: ToolName; pattern: RegExp }[] = [
   { tool: "draftMessage", pattern: /\b(draft|write|compose)\b.*\b(message|line|broadcast|caption|post)\b/i },
+  { tool: "monthlyReport", pattern: /\breports?\b|monthly|\b(september|august|sep|aug)\b|supermarket|branch|facebook|website traffic|sales/i },
   { tool: "overdue", pattern: /overdue|late task|past due|behind schedule/i },
   { tool: "followUps", pattern: /follow[\s-]?up/i },
   { tool: "approvals", pattern: /approv|waiting for me|sign[\s-]?off/i },
@@ -96,6 +99,7 @@ export const suggestedQuestions = [
   "Draft a LINE message for the weekend promotion",
   "Which products need marketing attention?",
   "What is waiting for my approval?",
+  "Summarize the latest monthly report",
 ];
 
 const src = {
@@ -110,7 +114,12 @@ function unique(sources: SourceRecord[]): SourceRecord[] {
   return sources.filter((s) => (seen.has(`${s.kind}:${s.id}`) ? false : (seen.add(`${s.kind}:${s.id}`), true)));
 }
 
-export function answerQuestion(question: string): SecretaryAnswer {
+/** Extra data the secretary may read. Real monthly reports are loaded on the server and passed in. */
+export interface SecretaryContext {
+  reports?: MonthlyReport[];
+}
+
+export function answerQuestion(question: string, context: SecretaryContext = {}): SecretaryAnswer {
   const tool = selectTool(question);
   switch (tool) {
     case "firstToday":
@@ -133,6 +142,8 @@ export function answerQuestion(question: string): SecretaryAnswer {
       return approvalsAnswer();
     case "productAttention":
       return productAttention();
+    case "monthlyReport":
+      return monthlyReportAnswer(question, context.reports ?? []);
     default:
       return {
         tool: "unknown",
@@ -316,5 +327,92 @@ function productAttention(): SecretaryAnswer {
       { label: "RECOMMENDATION", text: "Hold promotions on low-stock items and focus campaign effort on the sausage launch content." },
     ],
     sources: list.map((p) => src.product(p.id)),
+  };
+}
+
+// ---------- monthly reports ----------
+// Answers repeat only what the report says. Nothing is calculated or invented.
+
+const GAP_PATTERN = /not (yet )?(set up|available|included|reported|tracked)|was not|no data/i;
+
+const sectionTopics: { pattern: RegExp; section: RegExp }[] = [
+  { pattern: /supermarket|branch/i, section: /supermarket/i },
+  { pattern: /website|google/i, section: /website/i },
+  { pattern: /facebook|social/i, section: /social|facebook/i },
+  { pattern: /\bline\b/i, section: /line/i },
+  { pattern: /sales/i, section: /sales highlights/i },
+];
+
+function blockLines(blocks: ReportBlock[], maxRows = 8): string[] {
+  return blocks.flatMap((block) => {
+    if (block.type === "bullets") return block.items.slice(0, 4);
+    if (block.type === "table") return block.rows.slice(0, maxRows).map((row) => `${row[0]}: ${row.slice(1).filter(Boolean).join(" / ")}`);
+    return [];
+  });
+}
+
+function allText(report: MonthlyReport): string[] {
+  const blocks = [...report.intro, ...report.sections.flatMap((s) => s.blocks)];
+  return blocks.flatMap((b) => {
+    if (b.type === "paragraph") return [b.text];
+    if (b.type === "bullets") return b.items;
+    if (b.type === "callout") return b.paragraphs;
+    return [];
+  });
+}
+
+function chooseReport(question: string, reports: MonthlyReport[]): MonthlyReport {
+  const months = [["january", "jan"], ["february", "feb"], ["march", "mar"], ["april", "apr"], ["may"], ["june", "jun"], ["july", "jul"], ["august", "aug"], ["september", "sep"], ["october", "oct"], ["november", "nov"], ["december", "dec"]];
+  const asked = months.findIndex((names) => names.some((n) => new RegExp(`\\b${n}\\b`, "i").test(question)));
+  if (asked >= 0) {
+    const key = `-${String(asked + 1).padStart(2, "0")}`;
+    const match = reports.find((r) => r.month.endsWith(key));
+    if (match) return match;
+  }
+  return reports[0];
+}
+
+function monthlyReportAnswer(question: string, reports: MonthlyReport[]): SecretaryAnswer {
+  if (reports.length === 0) {
+    return {
+      tool: "monthlyReport",
+      title: "No monthly report available",
+      blocks: [
+        { label: "DATA GAP", text: DATA_NOT_AVAILABLE },
+        { label: "RECOMMENDATION", text: "Point REPORTS_DIR at your monthly report folder (see the README), then ask again." },
+      ],
+      sources: [],
+    };
+  }
+
+  const report = chooseReport(question, reports);
+  const mock = report.isMock ? " (MOCK sample, invented numbers)" : "";
+  const topic = sectionTopics.find((t) => t.pattern.test(question));
+  const topicSection = topic ? report.sections.find((s) => topic.section.test(s.title)) : undefined;
+  const blocks: AnswerBlock[] = [{ label: "FACT", text: `Source: ${report.title}${mock}.` }];
+
+  if (topicSection) {
+    for (const line of blockLines(topicSection.blocks)) blocks.push({ label: "FACT", text: line });
+  } else {
+    const kpis = [...report.intro, ...report.sections.flatMap((s) => s.blocks)].find((b) => b.type === "kpis");
+    if (kpis?.type === "kpis") {
+      for (const k of kpis.items) blocks.push({ label: "FACT", text: `${k.label}: ${k.value}${k.note ? ` (${k.note})` : ""}` });
+    }
+    const observation = report.sections.find((s) => /key observation/i.test(s.title)) ?? report.sections.find((s) => /executive summary/i.test(s.title));
+    for (const line of observation ? blockLines(observation.blocks) : []) blocks.push({ label: "FACT", text: line });
+    const plan = report.sections.find((s) => /action plan/i.test(s.title));
+    for (const line of plan ? blockLines(plan.blocks, 4) : []) blocks.push({ label: "FACT", text: `Action plan in the report: ${line}` });
+  }
+
+  // The report's own notes about missing data are repeated word for word.
+  const gaps = Array.from(new Set(allText(report).filter((t) => GAP_PATTERN.test(t)))).slice(0, 3);
+  for (const gap of gaps) blocks.push({ label: "DATA GAP", text: gap });
+  if (blocks.length === 1) blocks.push({ label: "DATA GAP", text: DATA_NOT_AVAILABLE });
+
+  return {
+    tool: "monthlyReport",
+    title: report.title,
+    blocks,
+    sources: [{ kind: "Report", id: report.id, label: report.title, href: report.month ? `/reports?month=${report.month}` : "/reports" }],
   };
 }

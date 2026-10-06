@@ -101,7 +101,7 @@ function BrandLinks() {
           </li>
         ))}
       </ul>
-      <p className="mt-4 text-xs leading-relaxed text-muted">Phase 1 prototype. All data on screen is mock data. These are plain links, nothing is connected.</p>
+      <p className="mt-4 text-xs leading-relaxed text-muted">Phase 1 prototype. Data is mock, except monthly reports marked “Real report”. These are plain links, nothing is connected.</p>
     </div>
   );
 }
@@ -150,7 +150,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         )}
 
         <div role="note" className="border-b border-yolk/40 bg-yolk-soft/80 px-4 py-2 text-center text-sm font-medium text-[#5b4004]">
-          PROTOTYPE · MOCK DATA ONLY · Nothing is sent, published, repriced or launched from this app.
+          PROTOTYPE · MOCK DATA, except items marked “Real report” · Nothing is sent, published, repriced or launched from this app.
         </div>
 
         <main id="main" className="mx-auto max-w-[1280px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
