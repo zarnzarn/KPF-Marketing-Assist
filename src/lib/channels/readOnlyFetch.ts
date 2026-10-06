@@ -39,9 +39,23 @@ const READ_ONLY_POST: RegExp[] = [
   /^https:\/\/[a-z0-9-]+\.myshopify\.com\/admin\/api\/[0-9-]+\/graphql\.json$/,
 ];
 
+/** A Shopify body is allowed only if it is JSON whose GraphQL document contains no mutation or subscription. */
+function isReadOnlyGraphql(body: string): boolean {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(body); // decodes escapes such as \u006d, so hidden words are seen
+  } catch {
+    return false;
+  }
+  const query = (parsed as { query?: unknown } | null)?.query;
+  if (typeof query !== "string") return false;
+  const withoutComments = query.replace(/#[^\n\r]*/g, " ");
+  return !/\b(mutation|subscription)\b/i.test(withoutComments) && !/\b(mutation|subscription)\b/i.test(JSON.stringify(parsed).replace(/\\[nrt]/g, " "));
+}
+
 export function isAllowedPost(url: string, body = ""): boolean {
   if (!READ_ONLY_POST.some((r) => r.test(url))) return false;
-  if (/myshopify\.com/.test(url) && /\bmutation\b/i.test(body)) return false;
+  if (/myshopify\.com/.test(url) && !isReadOnlyGraphql(body)) return false;
   return true;
 }
 
@@ -49,6 +63,15 @@ export function redact(text: string, secrets: string[] = []): string {
   let out = text;
   for (const s of secrets.filter((x) => x && x.length >= 4)) out = out.split(s).join("[redacted]");
   return out;
+}
+
+/** Error codes some APIs send with HTTP 400 (Meta Graph API: 190 = invalid/expired token, 10/200-299 = permission, 4/17/32/613 = rate limit). */
+function kindForApiCode(code: unknown): ChannelErrorKind | null {
+  if (typeof code !== "number") return null;
+  if (code === 190 || code === 102) return "auth";
+  if (code === 10 || (code >= 200 && code <= 299)) return "permission";
+  if ([4, 17, 32, 613].includes(code)) return "rate_limit";
+  return null;
 }
 
 function kindForStatus(status: number): ChannelErrorKind {
@@ -71,26 +94,37 @@ export async function readOnlyText(url: string, req: ReadOnlyRequest = {}): Prom
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), req.timeoutMs ?? 8000);
   const doFetch: FetchLike = req.fetchImpl ?? ((input, init) => fetch(input, init));
+  const failed = (error: unknown) => {
+    const aborted = (error instanceof Error && error.name === "AbortError") || controller.signal.aborted;
+    return new ChannelError(aborted ? "The service did not answer in time." : redact(`Could not reach the service: ${error instanceof Error ? error.message : String(error)}`, secrets), aborted ? "timeout" : "network");
+  };
+
   let response: Response;
+  let text: string;
   try {
     response = await doFetch(url, { method, headers: req.headers, body: req.body, signal: controller.signal, cache: "no-store" });
+    // The timeout also covers reading the body, so a service that stalls mid-answer is stopped.
+    text = await response.text();
   } catch (error) {
-    const aborted = error instanceof Error && error.name === "AbortError";
-    throw new ChannelError(aborted ? "The service did not answer in time." : redact(`Could not reach the service: ${error instanceof Error ? error.message : String(error)}`, secrets), aborted ? "timeout" : "network");
+    throw failed(error);
   } finally {
     clearTimeout(timer);
   }
 
-  const text = await response.text();
   if (!response.ok) {
     let detail = "";
+    let code: unknown;
     try {
       const body = JSON.parse(text);
       detail = body?.error?.message ?? body?.message ?? body?.error_description ?? "";
+      code = body?.error?.code;
     } catch {
       // not JSON
     }
-    throw new ChannelError(redact(`The service answered ${response.status}${detail ? `: ${String(detail).slice(0, 200)}` : ""}.`, secrets), kindForStatus(response.status));
+    // Hide secrets BEFORE shortening, so a secret cut in half can never leak its first part.
+    const safeDetail = redact(redact(String(detail), secrets).slice(0, 200), secrets).trim().replace(/[.\s]+$/, "");
+    const kind = kindForApiCode(code) ?? kindForStatus(response.status);
+    throw new ChannelError(redact(`The service answered ${response.status}${safeDetail ? `: ${safeDetail}` : ""}.`, secrets), kind);
   }
   return text;
 }

@@ -6,6 +6,12 @@ export const DEFAULT_WEBSITE_URL = "https://www.klongphaifarm.com";
 
 const v = (env: Record<string, string | undefined>, key: string) => (env[key] ?? "").trim().replace(/^["']|["']$/g, "");
 
+/** "Low stock" threshold: a whole number of 0 or more, otherwise the default of 5. */
+function lowStockSetting(raw: string): number {
+  const n = Number(raw);
+  return raw !== "" && Number.isInteger(n) && n >= 0 ? n : 5;
+}
+
 export function channelConfig(env: Record<string, string | undefined> = process.env) {
   return {
     website: { url: v(env, "WEBSITE_URL") || DEFAULT_WEBSITE_URL },
@@ -17,7 +23,7 @@ export function channelConfig(env: Record<string, string | undefined> = process.
       url: v(env, "SHOP_URL").replace(/\/+$/, ""),
       key: v(env, "SHOP_API_KEY"),
       secret: v(env, "SHOP_API_SECRET"),
-      lowStock: Number(v(env, "SHOP_LOW_STOCK") || 5),
+      lowStock: lowStockSetting(v(env, "SHOP_LOW_STOCK")),
     },
   };
 }

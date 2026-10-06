@@ -8,7 +8,10 @@ const decode = (s: string) => s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").rep
 
 export function pageInfo(html: string): { title?: string; description?: string } {
   const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1];
-  const description = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i)?.[1] ?? html.match(/<meta[^>]+content=["']([^"']*)["'][^>]+name=["']description["']/i)?.[1];
+  // Match the closing quote to the opening one, so an apostrophe inside "…" is kept.
+  const description =
+    html.match(/<meta[^>]+name=["']description["'][^>]+content=(["'])([\s\S]*?)\1/i)?.[2] ??
+    html.match(/<meta[^>]+content=(["'])([\s\S]*?)\1[^>]+name=["']description["']/i)?.[2];
   return { title: title ? decode(title) : undefined, description: description ? decode(description) : undefined };
 }
 
@@ -25,15 +28,35 @@ export function sitemapIndex(xml: string): string[] {
 
 /** True if robots.txt forbids all crawlers from the whole site. */
 export function blockedByRobots(robots: string): boolean {
+  // A group is one or more User-agent lines followed by rules (RFC 9309).
   let applies = false;
+  let readingAgents = false;
   for (const raw of robots.split(/\r?\n/)) {
     const line = raw.split("#")[0].trim();
+    if (!line) continue;
     const [key, ...rest] = line.split(":");
     const value = rest.join(":").trim();
-    if (/^user-agent$/i.test(key)) applies = value === "*";
-    else if (applies && /^disallow$/i.test(key) && value === "/") return true;
+    if (/^user-agent$/i.test(key.trim())) {
+      if (!readingAgents) applies = false; // a new group starts
+      readingAgents = true;
+      if (value === "*") applies = true;
+    } else {
+      readingAgents = false;
+      if (applies && /^disallow$/i.test(key.trim()) && value === "/") return true;
+    }
   }
   return false;
+}
+
+/** True when `url` is on exactly the same host as `root` (not just a look-alike prefix). */
+export function sameHost(url: string, root: string): boolean {
+  try {
+    const a = new URL(url);
+    const b = new URL(root);
+    return a.protocol === "https:" && a.host === b.host;
+  } catch {
+    return false;
+  }
 }
 
 export async function websiteSnapshot(deps: ChannelDeps): Promise<ChannelSnapshot> {
@@ -56,7 +79,7 @@ export async function websiteSnapshot(deps: ChannelDeps): Promise<ChannelSnapsho
     try {
       const xml = await readOnlyText(`${root}/sitemap.xml`, req);
       pages = sitemapEntries(xml);
-      const children = sitemapIndex(xml).filter((u) => u.startsWith(root)).slice(0, 5);
+      const children = sitemapIndex(xml).filter((u) => sameHost(u, root)).slice(0, 5);
       for (const child of children) pages.push(...sitemapEntries(await readOnlyText(child, req)));
     } catch {
       // sitemap missing: report what we have

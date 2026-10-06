@@ -32,7 +32,7 @@ let cached: { at: number; key: string; value: Promise<ChannelSnapshot[]> } | nul
 
 /** Channel snapshots for pages. Cached for 15 minutes per configuration. */
 export function loadChannels(env: Record<string, string | undefined> = process.env, now = Date.now()): Promise<ChannelSnapshot[]> {
-  const key = ["WEBSITE_URL", "META_PAGE_ID", "META_PAGE_ACCESS_TOKEN", "META_IG_USER_ID", "LINE_CHANNEL_ACCESS_TOKEN", "GA4_PROPERTY_ID", "GA4_SERVICE_ACCOUNT_JSON_PATH", "SHOP_PLATFORM", "SHOP_URL", "SHOP_API_KEY", "SHOP_API_SECRET", "CHANNELS_DISABLED"].map((k) => env[k] ?? "").join("|");
+  const key = ["WEBSITE_URL", "META_PAGE_ID", "META_PAGE_ACCESS_TOKEN", "META_IG_USER_ID", "LINE_CHANNEL_ACCESS_TOKEN", "GA4_PROPERTY_ID", "GA4_SERVICE_ACCOUNT_JSON_PATH", "SHOP_PLATFORM", "SHOP_URL", "SHOP_API_KEY", "SHOP_API_SECRET", "SHOP_LOW_STOCK", "CHANNELS_DISABLED"].map((k) => env[k] ?? "").join("|");
   if (cached && cached.key === key && now - cached.at < CACHE_MS) return cached.value;
   const value = env.CHANNELS_DISABLED === "1" ? Promise.resolve(disabledSnapshots()) : readChannels({ env, now: new Date(now) });
   cached = { at: now, key, value };

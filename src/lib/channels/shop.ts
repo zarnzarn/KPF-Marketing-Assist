@@ -1,11 +1,18 @@
 // Products, prices and stock from the shop, read-only.
 // Supports Shopify (Admin GraphQL query, no mutations) and WooCommerce (REST GET).
 import { channelConfig } from "./config";
-import { ChannelError, explain, readOnlyJson } from "./readOnlyFetch";
+import { ChannelError, explain, readOnlyJson, redact } from "./readOnlyFetch";
 import type { ChannelDeps, ChannelSnapshot } from "./types";
 import type { Availability, Product, StockStatus } from "../types";
 
 const SHOPIFY_API = "2025-01";
+
+/** A price as a number, or NaN when it is missing or empty (never an invented 0). */
+export function toPrice(value: unknown): number {
+  if (typeof value === "number") return value;
+  if (typeof value === "string" && value.trim() !== "") return Number(value);
+  return NaN;
+}
 
 export function stockFrom(quantity: number | null | undefined, inStockFlag: boolean | undefined, lowStock: number): { stockStatus: StockStatus; availability: Availability } {
   if (quantity === null || quantity === undefined) {
@@ -36,7 +43,7 @@ async function shopifyProducts(url: string, token: string, lowStock: number, dep
     secrets: [token],
     fetchImpl: deps.fetchImpl,
   });
-  if (res.errors?.length) throw new ChannelError(res.errors[0].message, "bad_response");
+  if (res.errors?.length) throw new ChannelError(redact(String(res.errors[0].message ?? "The shop refused the request."), [token]).slice(0, 200), "bad_response");
   return (res.data?.products?.nodes ?? []).map((p) => {
     const stock = p.tracksInventory === false ? stockFrom(undefined, true, lowStock) : stockFrom(p.totalInventory, undefined, lowStock);
     return {
@@ -44,7 +51,7 @@ async function shopifyProducts(url: string, token: string, lowStock: number, dep
       name: p.title,
       category: p.productType || "Uncategorised",
       status: p.status === "ACTIVE" ? "Active" : "Paused",
-      priceThb: Number(p.variants?.nodes?.[0]?.price ?? NaN),
+      priceThb: toPrice(p.variants?.nodes?.[0]?.price),
       priceUnit: "per item",
       channels: ["Website"],
       ...stock,
@@ -80,7 +87,7 @@ async function wooProducts(url: string, key: string, secret: string, lowStock: n
       name: p.name,
       category: p.categories?.[0]?.name ?? "Uncategorised",
       status: "Active",
-      priceThb: Number(p.price ?? NaN),
+      priceThb: toPrice(p.price),
       priceUnit: "per item",
       channels: ["Website"],
       ...stock,
@@ -109,6 +116,8 @@ export async function shopSnapshot(deps: ChannelDeps): Promise<ChannelSnapshot> 
         { label: "Products", value: String(products.length) },
         { label: "Low stock", value: String(products.filter((p) => p.stockStatus === "Low stock").length) },
         { label: "Out of stock", value: String(products.filter((p) => p.stockStatus === "Out of stock").length) },
+        // Products without a price are counted above but left out of the list, so say so.
+        ...(products.length > valid.length ? [{ label: "Without a price", value: String(products.length - valid.length), note: "not shown in the product list" }] : []),
       ],
       items: [],
       products: valid,

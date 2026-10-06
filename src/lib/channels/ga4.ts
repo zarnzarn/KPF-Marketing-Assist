@@ -32,17 +32,19 @@ export async function ga4Snapshot(deps: ChannelDeps): Promise<ChannelSnapshot> {
   if (!propertyId || !keyFile) return { ...base, status: "not_configured", message: "Add GA4_PROPERTY_ID and GA4_SERVICE_ACCOUNT_JSON_PATH (a key file outside the project folder) to .env.local." };
   const now = deps.now ?? new Date();
   const read = deps.readFile ?? ((p: string) => readFile(p, "utf8"));
-  let key: { client_email?: string; private_key?: string };
+  let key: { client_email?: unknown; private_key?: unknown } | null;
   try {
     key = JSON.parse(await read(keyFile));
   } catch {
     return { ...base, status: "error", fetchedAt: now.toISOString(), message: "The GA4 key file could not be read. Check GA4_SERVICE_ACCOUNT_JSON_PATH." };
   }
-  if (!key.client_email || !key.private_key) return { ...base, status: "error", fetchedAt: now.toISOString(), message: "The GA4 key file is not a service-account key (client_email or private_key is missing)." };
+  if (!key || typeof key !== "object" || typeof key.client_email !== "string" || typeof key.private_key !== "string" || !key.client_email || !key.private_key) return { ...base, status: "error", fetchedAt: now.toISOString(), message: "The GA4 key file is not a service-account key (client_email or private_key is missing)." };
 
-  const secrets = [key.private_key];
+  const clientEmail = key.client_email;
+  const privateKey = key.private_key;
+  const secrets = [privateKey];
   try {
-    const assertion = serviceAccountJwt(key.client_email, key.private_key, now);
+    const assertion = serviceAccountJwt(clientEmail, privateKey, now);
     const auth = await readOnlyJson<{ access_token?: string }>(TOKEN_URL, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -68,7 +70,7 @@ export async function ga4Snapshot(deps: ChannelDeps): Promise<ChannelSnapshot> {
     const sources = await run({ dateRanges: [{ startDate: "28daysAgo", endDate: "yesterday" }], dimensions: [{ name: "sessionSource" }], metrics: [{ name: "sessions" }], dimensionFilter: thailand, orderBys: [{ metric: { metricName: "sessions" }, desc: true }], limit: 5 });
 
     const m = totals.rows?.[0]?.metricValues?.map((x) => Number(x.value));
-    const seconds = m?.[3];
+    const seconds = m?.[3] !== undefined && Number.isFinite(m[3]) ? Math.round(m[3]) : undefined;
     return {
       ...base,
       status: "connected",
@@ -77,9 +79,13 @@ export async function ga4Snapshot(deps: ChannelDeps): Promise<ChannelSnapshot> {
         { label: "Active users", value: m ? num(m[0]) : "Data not available.", note: "Thailand, last 28 days" },
         { label: "New users", value: m ? num(m[1]) : "Data not available." },
         { label: "Sessions", value: m ? num(m[2]) : "Data not available." },
-        { label: "Avg. session", value: seconds !== undefined && Number.isFinite(seconds) ? `${Math.floor(seconds / 60)}m ${Math.round(seconds % 60)}s` : "Data not available." },
+        { label: "Avg. session", value: seconds !== undefined ? `${Math.floor(seconds / 60)}m ${seconds % 60}s` : "Data not available." },
       ],
-      items: (sources.rows ?? []).map((r, i) => ({ id: `src-${i}`, title: r.dimensionValues?.[0]?.value ?? "(unknown)", detail: `${num(Number(r.metricValues?.[0]?.value))} sessions` })),
+      items: (sources.rows ?? []).map((r, i) => {
+        const raw = r.metricValues?.[0]?.value;
+        const sessions = raw === undefined || raw === "" ? NaN : Number(raw);
+        return { id: `src-${i}`, title: r.dimensionValues?.[0]?.value ?? "(unknown)", detail: Number.isFinite(sessions) ? `${num(sessions)} sessions` : "Data not available." };
+      }),
     };
   } catch (error) {
     return { ...base, status: "error", fetchedAt: now.toISOString(), message: explain(error) };
