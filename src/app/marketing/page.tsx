@@ -25,10 +25,10 @@ export default function MarketingPage() {
       <PageHeader title="Marketing" subtitle="Campaigns, content, PR, events and approvals in one view." />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat label="Active campaigns" value={String(active.length)} note={`${upcoming.length} upcoming`} tone="flat" />
-        <Stat label="Pending approvals" value={String(pendingApprovals().length)} note="Waiting for the Director" tone="down" />
-        <Stat label="Content in review" value={String(contentItems.filter((c) => c.status === "In review").length)} note={`${contentItems.filter((c) => c.status === "Draft").length} drafts`} tone="flat" />
-        <Stat label="Upcoming events" value={String(marketingActivities.filter((a) => a.type === "Event" && a.date >= MOCK_TODAY).length)} note="Next 60 days" tone="flat" />
+        <Stat accent="sage" label="Active campaigns" value={String(active.length)} note={`${upcoming.length} upcoming`} tone="flat" />
+        <Stat accent="butter" label="Pending approvals" value={String(pendingApprovals().length)} note="Waiting for the Director" tone="down" />
+        <Stat accent="sky" label="Content in review" value={String(contentItems.filter((c) => c.status === "In review").length)} note={`${contentItems.filter((c) => c.status === "Draft").length} drafts`} tone="flat" />
+        <Stat accent="blush" label="Upcoming events" value={String(marketingActivities.filter((a) => a.type === "Event" && a.date >= MOCK_TODAY).length)} note="Next 60 days" tone="flat" />
       </div>
 
       <Card id="priorities" title="Marketing priorities" subtitle="What deserves attention first" className="mt-6">

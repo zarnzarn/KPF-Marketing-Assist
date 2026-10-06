@@ -13,12 +13,12 @@ export default function CustomersPage() {
       <PageHeader title="Customers & B2B" subtitle="Accounts, contacts and follow-ups. All names and contact details are fictional placeholders." />
 
       <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-6">
-        <Stat label="Hotels" value={String(count("Hotel"))} />
-        <Stat label="Restaurants" value={String(count("Restaurant"))} />
-        <Stat label="Chefs" value={String(count("Chef"))} />
-        <Stat label="Wholesale" value={String(count("Wholesale"))} />
-        <Stat label="Retail partners" value={String(count("Retail Partner"))} />
-        <Stat label="Corporate" value={String(count("Corporate"))} />
+        <Stat accent="sage" label="Hotels" value={String(count("Hotel"))} />
+        <Stat accent="butter" label="Restaurants" value={String(count("Restaurant"))} />
+        <Stat accent="sky" label="Chefs" value={String(count("Chef"))} />
+        <Stat accent="blush" label="Wholesale" value={String(count("Wholesale"))} />
+        <Stat accent="sage" label="Retail partners" value={String(count("Retail Partner"))} />
+        <Stat accent="butter" label="Corporate" value={String(count("Corporate"))} />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">

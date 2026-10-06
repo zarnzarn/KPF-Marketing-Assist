@@ -18,24 +18,32 @@ const ratio = (a: string, b: string) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
-const white = "#ffffff";
+const ivory = "#fdfbf5"; // the app's "white" (never pure white)
 const pairs: [string, string, string][] = [
-  ["body text", token("ink"), token("paper")],
+  ["body text on paper", token("ink"), token("paper")],
   ["body text on cards", token("ink"), token("card")],
+  ["body text on sidebar", token("ink"), token("sidebar")],
   ["muted text on paper", token("muted"), token("paper")],
   ["muted text on cards", token("muted"), token("card")],
-  ["muted text on white", token("muted"), white],
-  ["white on forest (sidebar, buttons)", white, token("forest")],
+  ["muted text on pastel sage", token("muted"), token("forest-soft")],
+  ["muted text on pastel butter", token("muted"), token("yolk-soft")],
+  ["muted text on pastel blush", token("muted"), token("clay-soft")],
+  ["muted text on pastel sky", token("muted"), token("sky-soft")],
+  ["ivory on forest (buttons)", ivory, token("forest")],
+  ["ivory on sage (button hover)", ivory, token("sage")],
   ["forest headings on paper", token("forest"), token("paper")],
-  ["forest on yolk (active nav)", token("forest"), token("yolk")],
-  ["forest on forest-soft (badges, table head)", token("forest"), token("forest-soft")],
-  ["clay on clay-soft (badges)", token("clay"), token("clay-soft")],
+  ["forest on pastel butter (active nav, hero)", token("forest"), token("yolk-soft")],
+  ["forest on pastel sage (badges, table head)", token("forest"), token("forest-soft")],
+  ["forest on pastel sky", token("forest"), token("sky-soft")],
+  ["forest on pastel blush", token("forest"), token("clay-soft")],
+  ["clay on pastel blush (badges)", token("clay"), token("clay-soft")],
   ["clay on cards (overdue text)", token("clay"), token("card")],
+  ["clay on pastel sage", token("clay"), token("forest-soft")],
   ["sage links on cards", token("sage"), token("card")],
-  ["white on sage (hover buttons)", white, token("sage")],
-  ["badge gold text on yolk-soft", "#6b4a05", token("yolk-soft")],
-  ["banner text on yolk-soft", "#5b4004", token("yolk-soft")],
-  ["yolk on forest (sidebar subtitle)", token("yolk"), token("forest")],
+  ["sage eyebrow text on paper", token("sage"), token("paper")],
+  ["sky-ink on pastel sky (ANALYSIS tag)", token("sky-ink"), token("sky-soft")],
+  ["badge gold text on pastel butter", "#6b4a05", token("yolk-soft")],
+  ["banner text on butter", "#5b4004", token("yolk-soft")],
 ];
 
 describe("WCAG AA contrast (4.5:1 for normal text)", () => {

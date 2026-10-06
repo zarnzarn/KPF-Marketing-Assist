@@ -9,11 +9,11 @@ const total = daysBetween(RANGE_START, RANGE_END);
 const pct = (date: string) => Math.min(100, Math.max(0, (daysBetween(RANGE_START, date) / total) * 100));
 
 const barColor: Record<string, string> = {
-  Active: "bg-sage",
-  Planned: "bg-yolk",
-  Draft: "bg-[#b9ae94]",
-  Completed: "bg-[#8aa597]",
-  Paused: "bg-clay",
+  Active: "bg-[#8fbca0]",
+  Planned: "bg-[#e6c97f]",
+  Draft: "bg-[#d9d0b8]",
+  Completed: "bg-[#b9cfc2]",
+  Paused: "bg-[#e3a58f]",
 };
 
 /** Simple Gantt-style campaign calendar. Each row also has a text description for screen readers. */

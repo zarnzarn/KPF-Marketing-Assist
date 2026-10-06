@@ -32,7 +32,7 @@ export default function ContentPage() {
 
       <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-7">
         {platforms.map((p) => (
-          <Stat key={p} label={p} value={String(contentItems.filter((c) => c.type === p).length)} />
+          <Stat accent="sage" key={p} label={p} value={String(contentItems.filter((c) => c.type === p).length)} />
         ))}
       </div>
 

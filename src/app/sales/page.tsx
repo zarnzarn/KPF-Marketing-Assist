@@ -30,10 +30,10 @@ export default function SalesPage() {
       <PageHeader title="Sales" subtitle="Mock sales figures for April–September 2026. Latest month is September." />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat label="September revenue" value={formatCompactThb(summary.current)} note={summary.change === null ? "Data not available." : `${summary.change >= 0 ? "▲" : "▼"} ${Math.abs(summary.change).toFixed(1)}% vs August`} tone={summary.change !== null && summary.change < 0 ? "down" : "up"} />
-        <Stat label="Six-month revenue" value={formatCompactThb(summary.sixMonthTotal)} note="Apr–Sep 2026 (mock)" tone="flat" />
-        <Stat label="Website sales (Sep)" value={formatCompactThb(websiteNow)} note={`${(percentChange(websiteNow, websitePrev) ?? 0).toFixed(1)}% vs August`} tone="up" />
-        <Stat label="Sales alerts" value={String(salesAlerts().length)} note="Declining products" tone="down" />
+        <Stat accent="sage" label="September revenue" value={formatCompactThb(summary.current)} note={summary.change === null ? "Data not available." : `${summary.change >= 0 ? "▲" : "▼"} ${Math.abs(summary.change).toFixed(1)}% vs August`} tone={summary.change !== null && summary.change < 0 ? "down" : "up"} />
+        <Stat accent="butter" label="Six-month revenue" value={formatCompactThb(summary.sixMonthTotal)} note="Apr–Sep 2026 (mock)" tone="flat" />
+        <Stat accent="sky" label="Website sales (Sep)" value={formatCompactThb(websiteNow)} note={`${(percentChange(websiteNow, websitePrev) ?? 0).toFixed(1)}% vs August`} tone="up" />
+        <Stat accent="blush" label="Sales alerts" value={String(salesAlerts().length)} note="Declining products" tone="down" />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">

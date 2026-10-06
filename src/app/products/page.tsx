@@ -13,10 +13,10 @@ export default function ProductsPage() {
       <PageHeader title="Products" subtitle="Mock product list with price, availability, stock and performance. Prices are mock values." />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat label="Products" value={String(products.length)} note={`${products.filter((p) => p.status === "Active").length} active`} tone="flat" />
-        <Stat label="New products" value={String(products.filter((p) => p.isNew).length)} note="Launching soon" tone="flat" />
-        <Stat label="Low or out of stock" value={String(products.filter((p) => p.stockStatus === "Low stock" || p.stockStatus === "Out of stock").length)} note="Check before promoting" tone="down" />
-        <Stat label="Need marketing attention" value={String(attention.length)} note="See list below" tone="down" />
+        <Stat accent="sage" label="Products" value={String(products.length)} note={`${products.filter((p) => p.status === "Active").length} active`} tone="flat" />
+        <Stat accent="butter" label="New products" value={String(products.filter((p) => p.isNew).length)} note="Launching soon" tone="flat" />
+        <Stat accent="sky" label="Low or out of stock" value={String(products.filter((p) => p.stockStatus === "Low stock" || p.stockStatus === "Out of stock").length)} note="Check before promoting" tone="down" />
+        <Stat accent="blush" label="Need marketing attention" value={String(attention.length)} note="See list below" tone="down" />
       </div>
 
       <Card id="attention" title="Products requiring marketing attention" className="mt-6">
