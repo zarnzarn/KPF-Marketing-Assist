@@ -47,4 +47,5 @@ next-env.d.ts
 # real company data must never be committed (see AGENTS.md "Real data exception")
 !.env.example
 /data/private/
+/private/
 *.docx
