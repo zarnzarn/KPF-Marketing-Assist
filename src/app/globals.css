@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* Klong Phai Farm prototype palette: warm cream paper, deep forest green,
+   egg-yolk gold and a terracotta accent. Contrast checked for body text. */
+:root {
+  --paper: #faf6ee;
+  --card: #fffdf8;
+  --ink: #23201a;
+  --muted: #5e584c;
+  --line: #e6dfcf;
+  --forest: #1f3a2e;
+  --forest-soft: #e3ece5;
+  --yolk: #c8962e;
+  --yolk-soft: #f8ecd0;
+  --clay: #a4482a;
+  --clay-soft: #f6e0d6;
+  --sage: #3d6b4f;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-forest: var(--forest);
+  --color-forest-soft: var(--forest-soft);
+  --color-yolk: var(--yolk);
+  --color-yolk-soft: var(--yolk-soft);
+  --color-clay: var(--clay);
+  --color-clay-soft: var(--clay-soft);
+  --color-sage: var(--sage);
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+  --font-display: ui-serif, "Iowan Old Style", Georgia, "Noto Serif Thai", serif;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+.font-display {
+  font-family: var(--font-display);
+}
+
+:focus-visible {
+  outline: 3px solid var(--yolk);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
