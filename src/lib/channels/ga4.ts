@@ -28,18 +28,18 @@ interface ReportRow {
 }
 
 export async function ga4Snapshot(deps: ChannelDeps): Promise<ChannelSnapshot> {
-  const { propertyId, keyFile } = channelConfig(deps.env).ga4;
+  const { propertyId, keyFile, keyJson } = channelConfig(deps.env).ga4;
   const base = { channel: "ga4" as const, label: "Website traffic (GA4)", metrics: [], items: [] };
-  if (!propertyId || !keyFile) return { ...base, status: "not_configured", message: "Add GA4_PROPERTY_ID and GA4_SERVICE_ACCOUNT_JSON_PATH (a key file outside the project folder) to .env.local." };
+  if (!propertyId || (!keyFile && !keyJson)) return { ...base, status: "not_configured", message: "Add GA4_PROPERTY_ID and the service-account key: GA4_SERVICE_ACCOUNT_JSON_PATH (a key file outside the project folder) on your computer, or GA4_SERVICE_ACCOUNT_JSON (the key file's contents) online." };
   const now = deps.now ?? new Date();
   // Checked before anything is read or sent, so a wrong id gets a clear message instead of "blocked".
   if (!/^\d+$/.test(propertyId)) return { ...base, status: "error", fetchedAt: now.toISOString(), message: "GA4_PROPERTY_ID must be the numeric Property ID (Google Analytics: Admin, Property details), not the G- Measurement ID or \"properties/…\"." };
   const read = deps.readFile ?? ((p: string) => readFile(p, "utf8"));
   let key: { client_email?: unknown; private_key?: unknown } | null;
   try {
-    key = JSON.parse(await read(keyFile));
+    key = JSON.parse(keyJson || (await read(keyFile)));
   } catch {
-    return { ...base, status: "error", fetchedAt: now.toISOString(), message: "The GA4 key file could not be read. Check GA4_SERVICE_ACCOUNT_JSON_PATH." };
+    return { ...base, status: "error", fetchedAt: now.toISOString(), message: keyJson ? "GA4_SERVICE_ACCOUNT_JSON is not valid JSON. Paste the whole key file's contents." : "The GA4 key file could not be read. Check GA4_SERVICE_ACCOUNT_JSON_PATH." };
   }
   if (!key || typeof key !== "object" || typeof key.client_email !== "string" || typeof key.private_key !== "string" || !key.client_email || !key.private_key) return { ...base, status: "error", fetchedAt: now.toISOString(), message: "The GA4 key file is not a service-account key (client_email or private_key is missing)." };
 

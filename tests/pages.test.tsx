@@ -15,20 +15,20 @@ import { makeDocx, sampleReportParts } from "./helpers/makeDocx";
 
 vi.mock("next/navigation", () => ({ usePathname: () => "/" }));
 
-import CalendarPage from "@/app/calendar/page";
-import ChannelsPage from "@/app/channels/page";
-import CampaignsPage from "@/app/campaigns/page";
-import ContentPage from "@/app/content/page";
-import CustomersPage from "@/app/customers/page";
-import DocumentsPage from "@/app/documents/page";
-import MarketingPage from "@/app/marketing/page";
-import MeetingsPage from "@/app/meetings/page";
-import ProductsPage from "@/app/products/page";
-import ReportsPage from "@/app/reports/page";
-import SalesPage from "@/app/sales/page";
-import SecretaryPage from "@/app/secretary/page";
-import TasksPage from "@/app/tasks/page";
-import TodayPage from "@/app/page";
+import CalendarPage from "@/app/(app)/calendar/page";
+import ChannelsPage from "@/app/(app)/channels/page";
+import CampaignsPage from "@/app/(app)/campaigns/page";
+import ContentPage from "@/app/(app)/content/page";
+import CustomersPage from "@/app/(app)/customers/page";
+import DocumentsPage from "@/app/(app)/documents/page";
+import MarketingPage from "@/app/(app)/marketing/page";
+import MeetingsPage from "@/app/(app)/meetings/page";
+import ProductsPage from "@/app/(app)/products/page";
+import ReportsPage from "@/app/(app)/reports/page";
+import SalesPage from "@/app/(app)/sales/page";
+import SecretaryPage from "@/app/(app)/secretary/page";
+import TasksPage from "@/app/(app)/tasks/page";
+import TodayPage from "@/app/(app)/page";
 
 type PageProps = { searchParams: Promise<{ month?: string }> };
 const noProps: PageProps = { searchParams: Promise.resolve({}) };

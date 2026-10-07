@@ -1,29 +1,21 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { AppDataProvider } from "@/components/AppDataProvider";
-import { AppShell } from "@/components/AppShell";
-import { loadChannels } from "@/lib/channels/loadChannels";
-import { todayInThailand } from "@/lib/today";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "AI Marketing Director Secretary · Klong Phai Farm",
   description: "Daily command center for the Marketing Director. Uses your own entries, monthly reports and read-only channel data.",
+  applicationName: "KPF Secretary",
+  robots: { index: false, follow: false }, // a private business tool: keep it out of search engines
 };
 
-// Every visit works out "today" in Thailand, so dates never freeze at build time.
-export const dynamic = "force-dynamic";
+export const viewport: Viewport = { themeColor: "#1f3d2a" };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  // Products come only from the connected shop (read-only). Empty when not connected.
-  const shop = (await loadChannels()).find((c) => c.channel === "shop");
+/** The outer page only. The protected app (login check, data, menu) is in app/(app)/layout.tsx. */
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <AppDataProvider today={todayInThailand()} products={shop?.products ?? []} shop={shop ? { status: shop.status, message: shop.message, note: shop.metrics.find((m) => m.label === "Products")?.note } : undefined}>
-          <AppShell>{children}</AppShell>
-        </AppDataProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

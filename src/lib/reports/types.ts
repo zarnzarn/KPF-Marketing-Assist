@@ -30,7 +30,8 @@ export interface MonthlyReport {
 }
 
 export interface ReportLoadResult {
-  source: "local" | "none";
+  /** "local": REPORTS_DIR on this computer; "online": files uploaded to the app; "none": nothing found. */
+  source: "local" | "online" | "none";
   reports: MonthlyReport[];
   /** Human-readable problems, e.g. a file that could not be read. */
   warnings: string[];

@@ -7,15 +7,16 @@ import { brandRules } from "@/data/brand";
 import { useAppData } from "@/components/AppDataProvider";
 import { AnswerBlocks } from "@/components/AnswerBlocks";
 import { Badge, Card } from "@/components/ui";
-import { answerQuestion, quickActions, suggestedQuestions, type SecretaryAnswer } from "@/lib/ai/secretary";
+import { askSecretary } from "@/app/(app)/secretary/actions";
+import { answerQuestion, quickActions, selectTool, suggestedQuestions, type SecretaryAnswer } from "@/lib/ai/secretary";
 import type { ChannelSnapshot } from "@/lib/channels/types";
 import { formatLongDate } from "@/lib/dates";
 import type { MonthlyReport } from "@/lib/reports/types";
 import { addItem, newId } from "@/lib/store/userData";
 
-type ChatMessage = { id: number; role: "user"; text: string } | { id: number; role: "ai"; answer: SecretaryAnswer };
+type ChatMessage = { id: number; role: "user"; text: string } | { id: number; role: "ai"; answer: SecretaryAnswer } | { id: number; role: "thinking" };
 
-export function SecretaryChat({ reports = [], channels = [] }: { reports?: MonthlyReport[]; channels?: ChannelSnapshot[] }) {
+export function SecretaryChat({ reports = [], channels = [], aiModel }: { reports?: MonthlyReport[]; channels?: ChannelSnapshot[]; aiModel?: string }) {
   const { data, update } = useAppData();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
@@ -32,13 +33,29 @@ export function SecretaryChat({ reports = [], channels = [] }: { reports?: Month
 
   const lastAnswer = [...messages].reverse().find((m): m is Extract<ChatMessage, { role: "ai" }> => m.role === "ai")?.answer;
 
+  const [waiting, setWaiting] = useState(false);
+
   function ask(question: string) {
     const text = question.trim();
-    if (!text) return;
+    if (!text || waiting) return;
     const userId = nextId.current++;
     const aiId = nextId.current++;
-    setMessages((prev) => [...prev, { id: userId, role: "user", text }, { id: aiId, role: "ai", answer: answerQuestion(text, { data, reports, channels }) }]);
     setDraft("");
+    // Known questions and quick actions: exact, instant answers from the rules. Anything else goes to the AI model if connected.
+    if (!aiModel || selectTool(text) !== "unknown") {
+      setMessages((prev) => [...prev, { id: userId, role: "user", text }, { id: aiId, role: "ai", answer: answerQuestion(text, { data, reports, channels }) }]);
+      return;
+    }
+    setMessages((prev) => [...prev, { id: userId, role: "user", text }, { id: aiId, role: "thinking" }]);
+    setWaiting(true);
+    const { tasks, meetings, customers, campaigns, content, issues, approvals, documents } = data;
+    askSecretary(text, { tasks, meetings, customers, campaigns, content, issues, approvals, documents }, data.today)
+      .catch(() => {
+        const answer = answerQuestion(text, { data, reports, channels });
+        return { ...answer, blocks: [...answer.blocks, { label: "DATA GAP" as const, text: "AI answer: Data not available. (the app could not reach the server)" }] };
+      })
+      .then((answer) => setMessages((prev) => prev.map((m) => (m.id === aiId ? { id: aiId, role: "ai", answer } : m))))
+      .finally(() => setWaiting(false));
   }
 
   return (
@@ -52,7 +69,11 @@ export function SecretaryChat({ reports = [], channels = [] }: { reports?: Month
               </p>
             )}
             {messages.map((m) =>
-              m.role === "user" ? (
+              m.role === "thinking" ? (
+                <p key={m.id} role="status" className="max-w-[95%] rounded-2xl rounded-bl-sm border border-line bg-white p-4 text-[15px] text-muted">
+                  Writing an answer from your data… (this can take up to a minute)
+                </p>
+              ) : m.role === "user" ? (
                 <div key={m.id} className="flex justify-end">
                   <p className="max-w-[85%] rounded-2xl rounded-br-sm bg-forest px-4 py-2.5 text-[15px] text-white">
                     <span className="sr-only">You: </span>
@@ -88,11 +109,16 @@ export function SecretaryChat({ reports = [], channels = [] }: { reports?: Month
               placeholder="Ask about tasks, follow-ups, campaigns, meetings…"
               className="min-w-0 flex-1 rounded-xl border border-line bg-white px-4 py-3 text-[15px] placeholder:text-muted"
             />
-            <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-forest px-5 py-3 font-semibold text-white hover:bg-sage">
+            <button type="submit" disabled={waiting} className="inline-flex items-center gap-2 rounded-xl bg-forest px-5 py-3 font-semibold text-white hover:bg-sage disabled:opacity-70">
               <Send className="h-4 w-4" aria-hidden="true" />
               Ask
             </button>
           </form>
+          <p className="mt-2 text-xs text-muted">
+            {aiModel
+              ? `Free-text questions are answered by the AI model (${aiModel} on Ollama). Your question and the related entries, report text and channel numbers are sent to Ollama to write the answer. Nothing is sent anywhere else.`
+              : "The AI model is not connected, so answers come from fixed rules. Add OLLAMA_API_KEY to connect it."}
+          </p>
         </Card>
 
         <Card id="quick" title="Quick actions" className="mt-6">

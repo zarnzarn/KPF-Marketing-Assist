@@ -1,6 +1,9 @@
 import { ExternalLink } from "lucide-react";
+import { OllamaTest } from "@/components/OllamaTest";
 import { Badge, Card, EmptyState, PageHeader } from "@/components/ui";
-import { loadChannels } from "@/lib/channels/loadChannels";
+import { DEFAULT_OLLAMA_MODEL, ollamaSettings } from "@/lib/ai/ollama";
+import { isOnline } from "@/lib/mode";
+import { viewerChannels } from "@/lib/data/server";
 import { setupSteps } from "@/lib/channels/setupSteps";
 import type { ChannelSnapshot } from "@/lib/channels/types";
 import { formatDate } from "@/lib/dates";
@@ -21,15 +24,18 @@ function readAt(iso?: string) {
 }
 
 export default async function ChannelsPage() {
-  const channels = await loadChannels();
+  const channels = await viewerChannels();
   const connected = channels.filter((c) => c.status === "connected").length;
+  const online = isOnline();
+  const ai = ollamaSettings();
+  const where = online ? "in Vercel (Project, Settings, Environment Variables), then redeploy" : "in .env.local on your computer, then restart the app";
 
   return (
     <>
       <PageHeader title="Channels" subtitle="Read-only connections to your own website, Google Analytics, shop, Facebook, Instagram and LINE OA. Nothing is ever posted, sent or changed." />
 
       <p className="mb-6 rounded-2xl bg-sky-soft/70 p-4 text-sm text-sky-ink ring-1 ring-sky-ink/20">
-        {connected} of {channels.length} channels connected. Settings live in <code className="font-semibold">.env.local</code> on your computer (never committed to GitHub). After changing it, restart the app. Numbers are refreshed at most every 15 minutes.
+        {connected} of {channels.length} channels connected. Add settings {where}. Settings are never committed to GitHub. Numbers are refreshed at most every 15 minutes.
       </p>
 
       <div className="grid gap-6 lg:grid-cols-2">
@@ -90,7 +96,7 @@ export default async function ChannelsPage() {
                     <li key={step}>{step}</li>
                   ))}
                 </ol>
-                <p className="mt-3 text-xs text-muted">Lines to add to .env.local:</p>
+                <p className="mt-3 text-xs text-muted">{online ? "Settings to add in Vercel (name=value):" : "Lines to add to .env.local:"}</p>
                 {/* Focusable so keyboard users can scroll long lines. */}
                 <pre tabIndex={0} role="region" aria-label={`${c.label} settings for .env.local`} className="mt-1 overflow-x-auto rounded-lg bg-forest-soft p-2 text-xs text-forest">
                   {help.env.join("\n")}
@@ -99,6 +105,26 @@ export default async function ChannelsPage() {
             </Card>
           );
         })}
+        <Card id="channel-ai" title="AI model (Ollama)" subtitle="Writes the AI Secretary's answers to free-text questions, from your own data only.">
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <Badge tone={ai ? "green" : "neutral"}>{ai ? "Key added" : "Not connected"}</Badge>
+            {ai && <span className="text-xs text-muted">Model: {ai.model}</span>}
+          </div>
+          {ai ? <OllamaTest /> : <p className="text-sm text-muted">Without it, the AI Secretary answers from fixed rules only.</p>}
+          <details className="mt-4 rounded-xl bg-white/60 p-3 ring-1 ring-line">
+            <summary className="cursor-pointer text-sm font-semibold text-sage">
+              How to connect<span className="sr-only"> AI model (Ollama)</span>
+            </summary>
+            <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm">
+              <li>Sign in at ollama.com and create an API key (Settings, Keys). The free plan includes {DEFAULT_OLLAMA_MODEL}.</li>
+              <li>Add the key {where}.</li>
+              <li>Your question and the related entries, report text and channel numbers are sent to Ollama to write each answer.</li>
+            </ol>
+            <pre tabIndex={0} role="region" aria-label="AI model (Ollama) settings for .env.local" className="mt-2 overflow-x-auto rounded-lg bg-forest-soft p-2 text-xs text-forest">
+              {`OLLAMA_API_KEY=...\nOLLAMA_MODEL=${DEFAULT_OLLAMA_MODEL}  (optional)`}
+            </pre>
+          </details>
+        </Card>
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AlertTriangle, ArrowRight, CalendarClock, ClipboardCheck, MessageCircleWarning } from "lucide-react";
 import { useAppData, WhenReady } from "@/components/AppDataProvider";
 import { AnswerBlocks } from "@/components/AnswerBlocks";
+import { ImportBrowserEntries } from "@/components/ImportBrowserEntries";
 import { ApprovalList } from "@/components/ApprovalList";
 import { Badge, Card, EmptyState, List, ListItem, PageHeader, Stat } from "@/components/ui";
 import { dailySummary } from "@/lib/ai/dailySummary";
@@ -42,8 +43,9 @@ export function TodayView({ channels = [] }: { channels?: ChannelSnapshot[] }) {
   return (
     <>
       <PageHeader title="Today" subtitle={`${formatLongDate(data.today)}. What you need to know and do today.`} />
-      {/* Nothing is concluded ("All clear", "Nothing urgent") until this browser's entries are read. */}
+      {/* Nothing is concluded ("All clear", "Nothing urgent") until the saved entries are read. */}
       <WhenReady>
+        <ImportBrowserEntries />
         <TodayContent channels={channels} />
       </WhenReady>
     </>

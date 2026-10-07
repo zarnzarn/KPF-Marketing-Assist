@@ -62,6 +62,7 @@ export type ToolName =
   | "productAttention"
   | "monthlyReport"
   | "channels"
+  | "ai"
   | "unknown";
 
 export { DATA_NOT_AVAILABLE };

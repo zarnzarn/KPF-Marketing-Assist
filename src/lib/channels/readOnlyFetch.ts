@@ -4,7 +4,9 @@
 //  - GET requests are allowed.
 //  - POST is allowed ONLY for a short list of endpoints that READ data but
 //    require POST by their API design (Google sign-in token, GA4 runReport,
-//    Shopify GraphQL queries). Shopify bodies containing "mutation" are refused.
+//    Shopify GraphQL queries), plus the AI Secretary's question to Ollama (it
+//    returns a written answer and changes nothing). Shopify bodies containing
+//    "mutation" are refused.
 //  - Any other method or POST target throws before a request is made.
 //  - Signed-in requests never follow redirects, so a token or body can never be
 //    carried to another address. Public GETs may follow, but must end on https.
@@ -39,6 +41,7 @@ const READ_ONLY_POST: RegExp[] = [
   /^https:\/\/oauth2\.googleapis\.com\/token$/,
   /^https:\/\/analyticsdata\.googleapis\.com\/v1beta\/properties\/\d+:runReport$/,
   /^https:\/\/[a-z0-9-]+\.myshopify\.com\/admin\/api\/[0-9-]+\/graphql\.json$/,
+  /^https:\/\/ollama\.com\/api\/chat$/,
 ];
 
 /** A Shopify body is allowed only if it is JSON whose GraphQL document contains no mutation or subscription. */
@@ -126,7 +129,7 @@ export async function readOnlyText(url: string, req: ReadOnlyRequest = {}): Prom
     let code: unknown;
     try {
       const body = JSON.parse(text);
-      detail = body?.error?.message ?? body?.message ?? body?.error_description ?? "";
+      detail = body?.error?.message ?? body?.message ?? body?.error_description ?? (typeof body?.error === "string" ? body.error : "");
       code = body?.error?.code;
     } catch {
       // not JSON

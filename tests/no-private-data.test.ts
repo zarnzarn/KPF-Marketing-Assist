@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 // Safety net for the "Real data rules" in AGENTS.md: real report files, local
 // settings and channel credentials must never be committed.
 const tracked = execFileSync("git", ["ls-files"], { encoding: "utf8" }).split("\n").filter(Boolean);
-const textFiles = tracked.filter((f) => /\.(ts|tsx|js|mjs|cjs|json|md|css|ya?ml|txt|example|env)$/i.test(f) || !f.includes("."));
+const textFiles = tracked.filter((f) => /\.(ts|tsx|js|mjs|cjs|json|md|css|ya?ml|txt|example|env|sql)$/i.test(f) || !f.includes("."));
 
 // Patterns for real-looking secrets. Test files use obviously fake values such as "test-token-…".
 const SECRET_PATTERNS: [string, RegExp][] = [
@@ -15,6 +15,9 @@ const SECRET_PATTERNS: [string, RegExp][] = [
   ["private key", /-----BEGIN (RSA |EC )?PRIVATE KEY-----/],
   ["Google API key", /\bAIza[0-9A-Za-z_-]{35}\b/],
   ["long bearer token", /Bearer\s+[A-Za-z0-9._~+/=-]{80,}/],
+  ["Supabase secret key", /\bsb_secret_[A-Za-z0-9_-]{20,}/],
+  ["JSON web token (e.g. a Supabase service-role key)", /\beyJ[A-Za-z0-9_-]{15,}\.eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{10,}/],
+  ["filled-in secret setting", /^\s*(OLLAMA_API_KEY|META_PAGE_ACCESS_TOKEN|LINE_CHANNEL_ACCESS_TOKEN|SHOP_API_KEY|SHOP_API_SECRET|GA4_SERVICE_ACCOUNT_JSON)=(?!\.\.\.)\S+/m],
 ];
 
 describe("real data and secrets are never tracked by git", () => {

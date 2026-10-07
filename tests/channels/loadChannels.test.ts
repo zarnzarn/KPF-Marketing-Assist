@@ -31,7 +31,7 @@ vi.mock("@/lib/channels/ga4", async (importOriginal) => {
   return { ...actual, ga4Snapshot: vi.fn(actual.ga4Snapshot) };
 });
 
-import ChannelsPage from "@/app/channels/page";
+import ChannelsPage from "@/app/(app)/channels/page";
 
 const META_TOKEN = "EAAfake-token-1234567890";
 const LINE_TOKEN = "test-token-1234567890";
@@ -315,7 +315,7 @@ describe("read-only source guards", () => {
   it("finds the source files to check", () => {
     const names = files.map((f) => f.file);
     expect(names).toContain("src/lib/channels/readOnlyFetch.ts");
-    expect(names).toContain("src/app/channels/page.tsx");
+    expect(names).toContain("src/app/(app)/channels/page.tsx");
     expect(names.length).toBeGreaterThan(20);
   });
 
@@ -430,7 +430,9 @@ describe("Channels page", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Channels" })).toBeInTheDocument();
     expect(screen.getByText(/1 of 3 channels connected/)).toBeInTheDocument();
     // One card (a <section> region) per channel; the focusable .env boxes are regions too.
-    expect(screen.getAllByRole("region").filter((r) => r.tagName === "SECTION")).toHaveLength(3);
+    expect(screen.getAllByRole("region").filter((r) => r.tagName === "SECTION" && r.id !== "channel-ai")).toHaveLength(3);
+    // Plus the AI model card, which is not a channel.
+    expect(screen.getByRole("region", { name: "AI model (Ollama)" })).toHaveTextContent("Not connected");
   });
 
   it("shows a status badge on every card", async () => {

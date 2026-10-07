@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import { useAppData } from "@/components/AppDataProvider";
+import { signOut } from "@/app/auth/actions";
+import { flushSave, loadRemote } from "@/lib/store/userData";
 import {
   BarChart3,
   Bot,
@@ -104,14 +106,69 @@ function BrandLinks() {
           </li>
         ))}
       </ul>
-      <p className="mt-4 text-xs leading-relaxed text-muted">Phase 1 prototype. Data comes from your own entries (this browser only), your report files and read-only channel connections.</p>
+      <p className="mt-4 text-xs leading-relaxed text-muted">Data comes from your own entries, your monthly report files and read-only channel connections.</p>
     </div>
   );
 }
 
-export function AppShell({ children }: { children: ReactNode }) {
+function SignOut({ email }: { email: string }) {
+  return (
+    <form action={signOut} className="flex flex-wrap items-center gap-2 px-6 text-xs text-muted">
+      <span className="break-all">Logged in as {email}</span>
+      <button type="submit" className="rounded-lg border border-line bg-white px-2.5 py-1 font-semibold text-forest hover:border-yolk">
+        Log out
+      </button>
+    </form>
+  );
+}
+
+/** Online mode: says whether the last change was saved, in words, so nothing is lost silently. */
+function SaveLine() {
+  const { saveStatus, online } = useAppData();
+  if (!online) return null;
+  const text = saveStatus === "saving" ? "Saving…" : saveStatus === "saved" ? "All changes saved" : "";
+  return (
+    <p role="status" className="px-4 pt-2 text-right text-xs text-muted sm:px-6 lg:px-8">
+      {text}
+    </p>
+  );
+}
+
+function SaveProblem() {
+  const { saveStatus } = useAppData();
+  const box = "border-b border-clay/40 bg-clay-soft px-4 py-2 text-center text-sm font-semibold text-clay";
+  if (saveStatus === "local-failed") {
+    return (
+      <div role="alert" className={box}>
+        Your entries could not be saved in this browser (storage is blocked or full). They will be lost when you close or reload this page.
+      </div>
+    );
+  }
+  if (saveStatus === "save-failed") {
+    return (
+      <div role="alert" className={box}>
+        Your last change is not saved yet (the database could not be reached).{" "}
+        <button type="button" onClick={() => void flushSave()} className="underline underline-offset-4">
+          Try again
+        </button>
+      </div>
+    );
+  }
+  if (saveStatus === "conflict") {
+    return (
+      <div role="alert" className={box}>
+        Your entries were changed on another device. The newest version is now shown; your last change on this device was not saved.{" "}
+        <button type="button" onClick={() => void loadRemote()} className="underline underline-offset-4">
+          OK
+        </button>
+      </div>
+    );
+  }
+  return null;
+}
+
+export function AppShell({ children, signedInAs }: { children: ReactNode; signedInAs?: string }) {
   const [open, setOpen] = useState(false);
-  const { storageOk } = useAppData();
 
   return (
     <div className="min-h-screen lg:flex">
@@ -127,8 +184,9 @@ export function AppShell({ children }: { children: ReactNode }) {
             <NavLinks />
           </div>
         </nav>
-        <div className="mt-auto">
+        <div className="mt-auto space-y-4">
           <BrandLinks />
+          {signedInAs && <SignOut email={signedInAs} />}
         </div>
       </aside>
 
@@ -150,17 +208,19 @@ export function AppShell({ children }: { children: ReactNode }) {
         {open && (
           <nav id="mobile-nav" aria-label="Main" className="border-b border-line bg-sidebar px-3 pb-4 lg:hidden">
             <NavLinks onNavigate={() => setOpen(false)} />
+            {signedInAs && (
+              <div className="mt-3">
+                <SignOut email={signedInAs} />
+              </div>
+            )}
           </nav>
         )}
 
         <div role="note" className="border-b border-yolk/40 bg-yolk-soft/80 px-4 py-2 text-center text-sm font-medium text-[#5b4004]">
-          PROTOTYPE · Read-only: nothing is sent, published, repriced or launched from this app.
+          Read-only: nothing is sent, published, repriced or launched from this app.
         </div>
-        {!storageOk && (
-          <div role="alert" className="border-b border-clay/40 bg-clay-soft px-4 py-2 text-center text-sm font-semibold text-clay">
-            Your entries could not be saved in this browser (storage is blocked or full). They will be lost when you close or reload this page.
-          </div>
-        )}
+        <SaveProblem />
+        <SaveLine />
 
         <main id="main" className="mx-auto max-w-[1280px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
           {children}

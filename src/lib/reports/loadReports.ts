@@ -4,12 +4,12 @@
 
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
+import { isMarketingReport, sortReports } from "./fileRules";
 import { monthFromText, parseReport } from "./parseReport";
 import type { MonthlyReport, ReportLoadResult } from "./types";
 
 export const DEFAULT_REPORTS_DIR = path.join("data", "private", "reports");
 const MAX_DEPTH = 3; // e.g. REPORTS_DIR/2026/Sep - 2026/report.docx
-const REPORT_NAME = /marketing[\s_-]*report/i;
 
 /** The folder to read, from REPORTS_DIR (in .env.local) or the private default. */
 export function reportsDir(env: Record<string, string | undefined> = process.env): string {
@@ -64,7 +64,7 @@ export async function loadReports(dir: string = reportsDir()): Promise<ReportLoa
       }
 
       // Only marketing reports count. Other Word files (sources, notes, drafts) are skipped quietly.
-      if (!REPORT_NAME.test(path.basename(file)) && !REPORT_NAME.test(report.title)) {
+      if (!isMarketingReport(path.basename(file), report.title)) {
         skipped++;
         continue;
       }
@@ -94,9 +94,7 @@ export async function loadReports(dir: string = reportsDir()): Promise<ReportLoa
   const reports = Array.from(byId.values()).map((c) => c.report);
   if (reports.length === 0) return { source: "none", reports: [], warnings, notes };
 
-  // Newest month first; reports without a readable month go last.
-  reports.sort((a, b) => (b.month || "").localeCompare(a.month || ""));
-  return { source: "local", reports, warnings, notes };
+  return { source: "local", reports: sortReports(reports), warnings, notes };
 }
 
 export function pickReport(reports: MonthlyReport[], month?: string): MonthlyReport | undefined {

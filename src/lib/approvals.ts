@@ -30,4 +30,4 @@ export function decide(request: ApprovalRequest, decision: Exclude<ApprovalState
 }
 
 export const PHASE1_NOTICE =
-  "Phase 1 prototype: approving only updates the status. Nothing is sent, published, repriced or launched.";
+  "Approving only records your decision. Nothing is sent, published, repriced or launched from this app.";

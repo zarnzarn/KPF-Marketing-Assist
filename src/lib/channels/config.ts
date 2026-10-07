@@ -18,7 +18,8 @@ export function channelConfig(env: Record<string, string | undefined> = process.
     website: { url: v(env, "WEBSITE_URL") || DEFAULT_WEBSITE_URL },
     meta: { pageId: v(env, "META_PAGE_ID"), token: v(env, "META_PAGE_ACCESS_TOKEN"), igUserId: v(env, "META_IG_USER_ID") },
     line: { token: v(env, "LINE_CHANNEL_ACCESS_TOKEN") },
-    ga4: { propertyId: v(env, "GA4_PROPERTY_ID"), keyFile: v(env, "GA4_SERVICE_ACCOUNT_JSON_PATH") },
+    // The key is either a file path (on your own computer) or the key file's contents (on a host such as Vercel).
+    ga4: { propertyId: v(env, "GA4_PROPERTY_ID"), keyFile: v(env, "GA4_SERVICE_ACCOUNT_JSON_PATH"), keyJson: (env.GA4_SERVICE_ACCOUNT_JSON ?? "").trim() },
     shop: {
       platform: v(env, "SHOP_PLATFORM").toLowerCase() as "" | "shopify" | "woocommerce",
       url: v(env, "SHOP_URL").replace(/\/+$/, ""),

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, EmptyState, PageHeader, Stat } from "@/components/ui";
 import { ReportBlockView } from "@/components/MonthlyReportView";
-import { loadReports } from "@/lib/reports/loadReports";
+import { viewerReports } from "@/lib/data/server";
 import type { ReportBlock } from "@/lib/reports/types";
 
 export const metadata = { title: "Sales · Klong Phai Farm" };
@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic"; // reads the monthly report files on thi
 const accents = ["sage", "butter", "sky", "blush"] as const;
 
 export default async function SalesPage() {
-  const { reports } = await loadReports();
+  const { reports } = await viewerReports();
   const latest = reports[0];
   const blocks: ReportBlock[] = latest ? [...latest.intro, ...latest.sections.flatMap((s) => s.blocks)] : [];
   const kpis = blocks.find((b) => b.type === "kpis");
