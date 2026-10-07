@@ -39,8 +39,11 @@ function renderWith(ui: ReactNode, { user = null, items = [], shop }: { user?: P
 beforeEach(() => {
   localStorage.clear();
   resetUserDataCache();
+  vi.useFakeTimers({ toFake: ["Date"] });
+  vi.setSystemTime(new Date(`${FIXTURE_TODAY}T05:00:00Z`));
 });
 afterEach(() => {
+  vi.useRealTimers();
   vi.restoreAllMocks();
   localStorage.clear();
   resetUserDataCache();
@@ -159,6 +162,17 @@ describe("forms and keyboard focus", () => {
     expect(add).toHaveFocus();
   });
 
+  it("gives focus back to the button that opened the open form when one form replaces another", async () => {
+    const user = userEvent.setup();
+    renderWith(<CustomersView />);
+    await user.click(screen.getByRole("button", { name: "Add customer or B2B account" }));
+    const issueButton = screen.getByRole("button", { name: "Record a customer issue" });
+    await user.click(issueButton);
+    expect(screen.getByLabelText(/^Issue/)).toHaveFocus();
+    await user.click(screen.getByRole("button", { name: "Cancel" }));
+    expect(issueButton).toHaveFocus();
+  });
+
   it("refuses a meeting that ends when it starts", async () => {
     const user = userEvent.setup();
     renderWith(<MeetingsView />);
@@ -269,6 +283,19 @@ describe("honest empty states", () => {
     const out = screen.getByText("Out of stock", { selector: "p" }).parentElement!;
     expect(out).toHaveTextContent("0");
     expect(screen.queryByRole("region", { name: "Products requiring marketing attention" })).not.toBeInTheDocument();
+  });
+
+  it("Products lists a product without a price, showing the price as Data not available", () => {
+    renderWith(<ProductsView />, { items: [{ ...products[0], id: "p-np", name: "Synthetic no price", priceThb: Number.NaN }] });
+    const row = screen.getByRole("cell", { name: "Synthetic no price" }).closest("tr")!;
+    expect(row).toHaveTextContent(DATA_NOT_AVAILABLE);
+    expect(row).not.toHaveTextContent("NaN");
+  });
+
+  it("Products says stock counts cover only the first 100 products when the shop list was cut off", () => {
+    renderWith(<ProductsView />, { items: [products[0]], shop: { status: "connected", note: "first 100 products only" } });
+    expect(screen.getByText("Check before promoting (first 100 products only)")).toBeInTheDocument();
+    expect(screen.getByText("Live products (first 100 products only)")).toBeInTheDocument();
   });
 
   it("Today names the reason in the stock alerts card", () => {

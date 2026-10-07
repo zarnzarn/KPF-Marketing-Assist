@@ -70,8 +70,14 @@ async function renderPage(Page: Page, user: Partial<UserData> | null, props: Pag
   return result;
 }
 
-beforeEach(() => vi.stubEnv("REPORTS_DIR", noReports));
+beforeEach(() => {
+  vi.stubEnv("REPORTS_DIR", noReports);
+  // The app follows the computer's date when it is later than the server's, so pin it to the fixture day.
+  vi.useFakeTimers({ toFake: ["Date"] });
+  vi.setSystemTime(new Date(`${FIXTURE_TODAY}T05:00:00Z`));
+});
 afterEach(() => {
+  vi.useRealTimers();
   vi.unstubAllEnvs();
   localStorage.clear();
   resetUserDataCache();

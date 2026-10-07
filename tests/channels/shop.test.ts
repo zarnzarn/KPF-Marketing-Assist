@@ -509,7 +509,7 @@ describe("shopSnapshot — Shopify products", () => {
     expect(snap.products?.[0].stockStatus).toBe("Low stock");
   });
 
-  it("leaves products without a price out of the product list", async () => {
+  it("keeps products without a price in the list, with the price as unknown (NaN), never 0", async () => {
     const priced = shopifyNode({ title: "Synthetic priced product" });
     const { snap } = await readShopify([
       priced,
@@ -520,19 +520,21 @@ describe("shopSnapshot — Shopify products", () => {
       shopifyNode({ variants: { nodes: [{ price: "not a price" }] } }),
     ]);
     expect(snap.status).toBe("connected");
-    expect(snap.products?.map((p) => p.name)).toEqual(["Synthetic priced product"]);
+    // Stock alerts need every product, so none is dropped; the screen shows "Data not available." for the price.
+    expect(snap.products).toHaveLength(6);
+    expect(snap.products?.filter((p) => Number.isFinite(p.priceThb)).map((p) => p.name)).toEqual(["Synthetic priced product"]);
+    expect(snap.products?.slice(1).every((p) => Number.isNaN(p.priceThb))).toBe(true);
+    expect(snap.metrics.find((m) => m.label === "Without a price")).toEqual({ label: "Without a price", value: "5", note: "price shown as Data not available." });
   });
 
-  // Actual behaviour: the metrics are counted from ALL products the shop sent, including the ones
-  // left out of snapshot.products because they have no price. (Reported as a suspected source bug:
-  // the Channels page and the Products page then disagree.)
-  it("still counts products without a price in the metrics", async () => {
+  // The Channels page and the Products page count the same products.
+  it("counts products without a price in the metrics too", async () => {
     const { snap } = await readShopify([
       shopifyNode({ totalInventory: 50 }),
       shopifyNode({ totalInventory: 2, variants: { nodes: [] } }),
       shopifyNode({ totalInventory: 0, variants: { nodes: [] } }),
     ]);
-    expect(snap.products).toHaveLength(1);
+    expect(snap.products).toHaveLength(3);
     expect(metric(snap, "Products")).toBe("3");
     expect(metric(snap, "Low stock")).toBe("1");
     expect(metric(snap, "Out of stock")).toBe("1");
@@ -824,19 +826,20 @@ describe("shopSnapshot — WooCommerce products", () => {
     expect(snap.products?.map((p) => p.priceThb)).toEqual([250, 79.75, 0]);
   });
 
-  it("leaves products without a price out of the product list", async () => {
+  it("keeps products without a price in the list, with the price as unknown (NaN)", async () => {
     const { snap } = await readWoo([wooItem({ name: "Synthetic priced item" }), wooItem({ price: undefined }), wooItem({ price: "n/a" })]);
-    expect(snap.products?.map((p) => p.name)).toEqual(["Synthetic priced item"]);
+    expect(snap.products?.map((p) => Number.isFinite(p.priceThb))).toEqual([true, false, false]);
   });
 
-  it("leaves out a product whose price is empty, instead of showing 0 baht", async () => {
+  it("never shows an empty price as 0 baht", async () => {
     const { snap } = await readWoo([wooItem({ name: "Synthetic priced item" }), wooItem({ name: "Synthetic unpriced item", price: "" })]);
-    expect(snap.products?.map((p) => p.name)).toEqual(["Synthetic priced item"]);
+    const unpriced = snap.products?.find((p) => p.name === "Synthetic unpriced item");
+    expect(unpriced?.priceThb).toBeNaN();
   });
 
-  it("still counts products without a price in the metrics", async () => {
+  it("counts products without a price in the metrics too", async () => {
     const { snap } = await readWoo([wooItem(), wooItem({ price: undefined, stock_quantity: 0, stock_status: "outofstock" })]);
-    expect(snap.products).toHaveLength(1);
+    expect(snap.products).toHaveLength(2);
     expect(metric(snap, "Products")).toBe("2");
     expect(metric(snap, "Out of stock")).toBe("1");
   });

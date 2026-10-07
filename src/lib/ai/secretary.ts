@@ -20,6 +20,7 @@ import {
   productAlerts,
   recommendedPriorities,
   shopGap,
+  stockScope,
 } from "../queries";
 import type { MonthlyReport, ReportBlock } from "../reports/types";
 import type { ChannelSnapshot } from "../channels/types";
@@ -262,6 +263,7 @@ function businessConcerns(d: AppData, channels: ChannelSnapshot[]): SecretaryAns
   const stock = shopGap(d);
   const missing: AnswerBlock[] = [
     ...(stock ? [gap(`Stock levels (${stock})`)] : []),
+    ...(d.shop?.note ? [gap("Stock for products beyond the first 100")] : []),
     ...channels.filter((c) => c.status === "not_configured" && c.channel !== "shop").map((c) => gap(`${c.label} (not connected)`)),
   ];
   if (blocks.length === 0) {
@@ -271,7 +273,7 @@ function businessConcerns(d: AppData, channels: ChannelSnapshot[]): SecretaryAns
     return {
       tool: "businessConcerns",
       title: "Business concerns",
-      blocks: [{ label: "FACT", text: "No high-severity customer issues, stock alerts, high-severity campaign alerts or channel errors are recorded." }, ...missing],
+      blocks: [{ label: "FACT", text: `No high-severity customer issues, stock alerts, high-severity campaign alerts or channel errors are recorded${stockScope(d)}.` }, ...missing],
       sources: [],
     };
   }
@@ -323,11 +325,13 @@ function productAttention(d: AppData): SecretaryAnswer {
     return { tool: "productAttention", title: "Products", blocks: [gap(`Products and stock (${shopGap(d)})`), { label: "RECOMMENDATION", text: "Check the shop on the Channels page to see products, prices and stock." }], sources: [] };
   }
   const alerts = productAlerts(d);
-  if (alerts.length === 0) return { tool: "productAttention", title: "Products", blocks: [{ label: "FACT", text: "No product is low or out of stock." }], sources: [] };
+  // A cut-off product list is said to be partial, never presented as the whole shop.
+  const partial: AnswerBlock[] = d.shop?.note ? [gap("Stock for products beyond the first 100")] : [];
+  if (alerts.length === 0) return { tool: "productAttention", title: "Products", blocks: [{ label: "FACT", text: `No product is low or out of stock${stockScope(d)}.` }, ...partial], sources: [] };
   return {
     tool: "productAttention",
     title: `${alerts.length} product${alerts.length === 1 ? "" : "s"} low or out of stock`,
-    blocks: [...alerts.map((a) => ({ label: "FACT" as const, text: a.message })), { label: "RECOMMENDATION", text: "Do not promote these products until stock is confirmed." }],
+    blocks: [...alerts.map((a) => ({ label: "FACT" as const, text: a.message })), ...partial, { label: "RECOMMENDATION", text: "Do not promote these products until stock is confirmed." }],
     sources: alerts.map((a) => {
       const p = getProduct(d, a.id.replace("pal-", ""));
       return { kind: "Product" as const, id: p?.id ?? a.id, label: p?.name ?? a.message, href: "/products" };
@@ -369,10 +373,27 @@ const sectionTopics: { pattern: RegExp; section: RegExp }[] = [
 function blockLines(blocks: ReportBlock[], maxRows = 8): string[] {
   return blocks.flatMap((block) => {
     if (block.type === "bullets") return block.items.slice(0, 4);
-    // Each value keeps its column heading; a blank cell is said to be missing, not dropped.
-    if (block.type === "table") return block.rows.slice(0, maxRows).map((row) => `${row[0]}: ${row.slice(1).map((v, i) => `${block.headers[i + 1] || `Column ${i + 2}`} ${v || DATA_NOT_AVAILABLE}`).join("; ")}`);
+    if (block.type === "table") return block.rows.slice(0, maxRows).map((row) => tableLine(block.headers, row));
     return [];
   });
+}
+
+/**
+ * One table row as text. With a real heading row (3+ columns, every heading filled in), each value keeps
+ * its heading and a blank cell is said to be missing. Otherwise (often a heading-less two-column table)
+ * the values are listed plainly, so another row's value is never shown as if it were a heading.
+ */
+function tableLine(headers: string[], row: string[]): string {
+  const label = row[0];
+  // A label merged across columns repeats itself; that copy is not a value.
+  let first = 1;
+  while (first < row.length && row[first] === label) first++;
+  const labelled = headers.length >= 3 && headers.every((h) => h.trim() !== "");
+  if (!labelled) return `${label}: ${row.slice(first).filter(Boolean).join(" / ")}`;
+  return `${label}: ${row
+    .slice(first)
+    .map((v, i) => `${headers[first + i]} ${v || DATA_NOT_AVAILABLE}`)
+    .join("; ")}`;
 }
 
 function allText(report: MonthlyReport): string[] {

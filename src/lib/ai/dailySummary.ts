@@ -11,6 +11,7 @@ import {
   productAlerts,
   recommendedPriorities,
   shopGap,
+  stockScope,
 } from "../queries";
 import type { AppData } from "../types";
 import type { AnswerBlock } from "./secretary";
@@ -34,7 +35,7 @@ export function dailySummary(d: AppData): AnswerBlock[] {
   const campaigns = campaignAlerts(d).length;
   if (campaigns) blocks.push({ label: "FACT", text: `${plural(campaigns, "campaign alert")} open.` });
   // Stock counts are facts only when the shop is connected; otherwise the number is unknown, not zero.
-  if (d.products.length > 0) blocks.push({ label: "FACT", text: `${plural(productAlerts(d).length, "product")} low or out of stock.` });
+  if (d.products.length > 0) blocks.push({ label: "FACT", text: `${plural(productAlerts(d).length, "product")} low or out of stock${stockScope(d)}.` });
   else blocks.push({ label: "DATA GAP", text: `Products and stock: ${DATA_NOT_AVAILABLE} (${shopGap(d)}).` });
 
   const top = recommendedPriorities(d)[0];

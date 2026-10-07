@@ -1,5 +1,5 @@
 // "Today" must move on when the tab is left open past midnight in Thailand.
-// Own file, so the provider's first-seen date starts fresh under fake time.
+// The later of the server's date and this computer's date is used.
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { AppDataProvider, useAppData } from "@/components/AppDataProvider";
@@ -33,5 +33,27 @@ describe("live today", () => {
       vi.advanceTimersByTime(60_000);
     });
     expect(screen.getByTestId("today")).toHaveTextContent("2026-10-08");
+  });
+
+  it("uses the new day at once when the page was served just before midnight and opened just after", () => {
+    vi.useFakeTimers({ toFake: ["Date", "setInterval", "clearInterval"] });
+    vi.setSystemTime(new Date("2026-10-06T17:01:00Z")); // 00:01 on 7 Oct in Thailand
+    render(
+      <AppDataProvider today="2026-10-06">
+        <ShowToday />
+      </AppDataProvider>,
+    );
+    expect(screen.getByTestId("today")).toHaveTextContent("2026-10-07");
+  });
+
+  it("keeps the server's date when this computer's clock is behind", () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-10-04T05:00:00Z"));
+    render(
+      <AppDataProvider today="2026-10-06">
+        <ShowToday />
+      </AppDataProvider>,
+    );
+    expect(screen.getByTestId("today")).toHaveTextContent("2026-10-06");
   });
 });

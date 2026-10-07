@@ -177,6 +177,38 @@ describe("monthly report tool", () => {
     expect(text).toContain(`Website: Prev 10,000; Now ${DATA_NOT_AVAILABLE}; Change +20.0%`);
   });
 
+  it("keeps values under the right heading when report cells are merged down or across", async () => {
+    const parts = [
+      { p: "2  Sales Highlights", bold: true },
+      {
+        merged: [
+          [{ text: "Region" }, { text: "Store" }, { text: "Sales" }],
+          [{ text: "North", down: "start" as const }, { text: "Store A" }, { text: "100" }],
+          [{ text: "", down: "continue" as const }, { text: "Store B" }, { text: "200" }],
+          [{ text: "Total", span: 2 }, { text: "300" }],
+        ],
+      },
+    ];
+    const report = await parseReport(await makeDocx(parts), "synthetic.docx");
+    const text = answerQuestion("How were sales?", { ...empty, reports: [report] }).blocks.map((b) => b.text).join("\n");
+    expect(text).toContain("North: Store Store A; Sales 100");
+    expect(text).toContain("North: Store Store B; Sales 200");
+    expect(text).toContain("Total: Sales 300");
+    expect(text).not.toContain(`Sales ${DATA_NOT_AVAILABLE}`);
+  });
+
+  it("never shows another row's value as a heading in a two-column table without headings", async () => {
+    const parts = [
+      { p: "2  Sales Highlights", bold: true },
+      { table: [["Website sales", "THB 10,000"], ["LINE sales", "THB 5,000"], ["Supermarket sales", "THB 89,000"]] },
+    ];
+    const report = await parseReport(await makeDocx(parts), "synthetic.docx");
+    const text = answerQuestion("How were sales?", { ...empty, reports: [report] }).blocks.map((b) => b.text).join("\n");
+    expect(text).toContain("LINE sales: THB 5,000");
+    expect(text).toContain("Supermarket sales: THB 89,000");
+    expect(text).not.toContain("THB 10,000 THB");
+  });
+
   it("keeps report sentences that merely contain 'was not' as facts, not data gaps", async () => {
     const parts = [...sampleReportParts(), { p: "The invented promotion was not renewed in September." }];
     const sep = await parseReport(await makeDocx(parts), "sep.docx");
@@ -229,6 +261,14 @@ describe("labels that match the source", () => {
     expect(a.blocks).toContainEqual({ label: "DATA GAP", text: `Stock levels (shop not connected): ${DATA_NOT_AVAILABLE}` });
     expect(a.blocks).toContainEqual({ label: "DATA GAP", text: `LINE OA (not connected): ${DATA_NOT_AVAILABLE}` });
     expect(a.blocks.some((b) => /nothing worrying/i.test(b.text))).toBe(false);
+  });
+
+  it("says stock facts cover only the first 100 products when the shop list was cut off", () => {
+    const data = { ...emptyData(), products: fixtureData.products.filter((p) => p.stockStatus === "In stock").slice(0, 1), shop: { status: "connected" as const, note: "first 100 products only" } };
+    const a = answerQuestion("Which products need marketing attention?", { data });
+    expect(a.blocks).toContainEqual({ label: "FACT", text: "No product is low or out of stock (first 100 products only)." });
+    expect(a.blocks).toContainEqual({ label: "DATA GAP", text: `Stock for products beyond the first 100: ${DATA_NOT_AVAILABLE}` });
+    expect(dailySummary(data).some((b) => b.label === "FACT" && b.text.endsWith("low or out of stock (first 100 products only)."))).toBe(true);
   });
 
   it("the daily summary says the shop could not be read, not that it is not connected", () => {

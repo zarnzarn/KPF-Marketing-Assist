@@ -17,16 +17,14 @@ interface AppDataContextValue {
 const AppDataContext = createContext<AppDataContextValue | null>(null);
 const noop = () => () => {};
 
-let firstSeenToday: string | null = null;
-
 /**
- * The server's date stays in use until the real date in Thailand moves on (for example past midnight
- * with the tab left open). Layouts do not re-render on navigation, so the server value alone would freeze.
+ * The later of the server's date and this computer's date in Thailand, so "today" moves on past midnight
+ * even with the tab left open (layouts do not re-render on navigation, so the server value alone would freeze).
+ * YYYY-MM-DD strings compare correctly as text.
  */
 function clientToday(serverToday: string): string {
   const now = todayInThailand();
-  firstSeenToday ??= now;
-  return now === firstSeenToday ? serverToday : now;
+  return now > serverToday ? now : serverToday;
 }
 
 /** Re-checks the date every minute and whenever the tab comes back, so "today" moves on after midnight in Thailand. */

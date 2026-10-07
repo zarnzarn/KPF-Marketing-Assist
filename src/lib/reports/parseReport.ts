@@ -63,11 +63,32 @@ function tableToBlock(table: HTMLElement): ReportBlock | null {
     return { type: "callout", paragraphs: cells.flat().map((line) => line.replace(BULLET, "")) };
   }
 
-  const grid = rows.map((row) => row.querySelectorAll("td, th").map((cell) => clean(cell.text)));
+  const grid = tableGrid(rows);
   const width = Math.max(...grid.map((r) => r.length));
   const pad = (r: string[]) => [...r, ...Array(width - r.length).fill("")];
   const [headers, ...body] = grid.map(pad);
   return { type: "table", headers, rows: body };
+}
+
+/**
+ * One entry per column for every row. Word leaves out the cells covered by a merged cell
+ * (rowspan / colspan), so the merged text is repeated into each slot it covers; otherwise
+ * later values would slide under the wrong heading.
+ */
+function tableGrid(rows: HTMLElement[]): string[][] {
+  const grid: string[][] = rows.map(() => []);
+  rows.forEach((row, r) => {
+    let c = 0;
+    for (const cell of row.querySelectorAll("td, th")) {
+      while (grid[r][c] !== undefined) c++; // skip slots filled by a cell merged down from above
+      const text = clean(cell.text);
+      const colspan = Math.min(Math.max(Number(cell.getAttribute("colspan")) || 1, 1), 50);
+      const rowspan = Math.min(Math.max(Number(cell.getAttribute("rowspan")) || 1, 1), rows.length - r);
+      for (let dr = 0; dr < rowspan; dr++) for (let dc = 0; dc < colspan; dc++) grid[r + dr][c + dc] = text;
+      c += colspan;
+    }
+  });
+  return grid.map((row) => Array.from(row, (v) => v ?? ""));
 }
 
 /** Parses one .docx file. Throws ReportParseError if the file is not a readable Word document. */

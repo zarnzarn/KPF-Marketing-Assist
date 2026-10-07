@@ -144,7 +144,7 @@ export async function shopSnapshot(deps: ChannelDeps): Promise<ChannelSnapshot> 
   if ("problem" in checked) return { ...base, status: "error", fetchedAt: now.toISOString(), message: checked.problem };
   try {
     const { products, cutOff } = platform === "shopify" ? await shopifyProducts(checked.host, key, lowStock, deps) : await wooProducts(checked.url, key, secret, lowStock, deps);
-    const valid = products.filter((p) => Number.isFinite(p.priceThb));
+    const unpriced = products.filter((p) => !Number.isFinite(p.priceThb)).length;
     // Drafts are listed, but only live products count towards stock alerts.
     const live = products.filter((p) => p.status === "Active");
     const note = cutOff ? { note: `first ${PAGE_SIZE} products only` } : {};
@@ -156,11 +156,11 @@ export async function shopSnapshot(deps: ChannelDeps): Promise<ChannelSnapshot> 
         { label: "Products", value: String(products.length), ...note },
         { label: "Low stock", value: String(live.filter((p) => p.stockStatus === "Low stock").length), ...note },
         { label: "Out of stock", value: String(live.filter((p) => p.stockStatus === "Out of stock").length), ...note },
-        // Products without a price are counted above but left out of the list, so say so.
-        ...(products.length > valid.length ? [{ label: "Without a price", value: String(products.length - valid.length), note: "not shown in the product list" }] : []),
+        // Every product is listed (stock alerts need them all); a missing price is shown as "Data not available.".
+        ...(unpriced ? [{ label: "Without a price", value: String(unpriced), note: "price shown as Data not available." }] : []),
       ],
       items: [],
-      products: valid,
+      products,
     };
   } catch (error) {
     return { ...base, status: "error", fetchedAt: now.toISOString(), message: explain(error) };

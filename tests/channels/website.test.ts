@@ -544,6 +544,12 @@ describe("websiteSnapshot — sitemap index", () => {
     expect(metric(snap, "Pages in sitemap")).toBe("at least 1");
   });
 
+  it("shows a sitemap entry on another site with its full address, so the link never looks like it stays on the site", async () => {
+    const { fetchImpl } = routedFetch(healthySite(SITE, { [`${SITE}/sitemap.xml`]: xml(urlset([{ loc: "https://other-host.example.net/products/eggs", lastmod: "2026-09-10" }, { loc: `${SITE}/products/duck`, lastmod: "2026-09-01" }])) }));
+    const snap = await websiteSnapshot({ env: { WEBSITE_URL: SITE }, fetchImpl, now: NOW });
+    expect(snap.items.slice(1).map((i) => i.title)).toEqual(["https://other-host.example.net/products/eggs", "/products/duck"]);
+  });
+
   it("gives the plain count, with no note, when every child sitemap was read", async () => {
     const routes = healthySite(SITE, {
       [`${SITE}/sitemap.xml`]: xml(sitemapIndexXml([`${SITE}/sitemap-1.xml`])),

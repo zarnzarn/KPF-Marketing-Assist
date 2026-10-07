@@ -31,12 +31,18 @@ export function EntityForm({
   const firstRef = useRef<HTMLInputElement>(null);
   const id = (name: string) => `${uid}-${name}`;
 
+  const openerRef = useRef<HTMLElement | null>(null);
   useEffect(() => {
-    // Remember the button that opened the form, and give focus back to it when the form closes.
-    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    // Remember the button that opened the form (once, even when React runs this twice in development)
+    // and give focus back to it when the form closes.
+    const active = document.activeElement;
+    if (!openerRef.current && active instanceof HTMLElement && active !== document.body) openerRef.current = active;
     firstRef.current?.focus();
     return () => {
-      if (opener?.isConnected) opener.focus();
+      // Only when focus was lost with the form; if another button (for example one opening a different form) has focus, leave it there.
+      const opener = openerRef.current;
+      const lost = !document.activeElement || document.activeElement === document.body;
+      if (opener?.isConnected && lost) opener.focus();
     };
   }, []);
 

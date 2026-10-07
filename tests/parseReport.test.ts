@@ -49,6 +49,33 @@ describe("parseReport (synthetic report)", () => {
     expect(table?.type === "table" && table.rows[2]).toEqual(["Grand total", "100,000", "101,000", "+1.0%"]);
   });
 
+  it("repeats merged cells into every column and row they cover, so values stay under their heading", async () => {
+    const report = await parseReport(
+      await makeDocx([
+        { p: "2  Sales Highlights", bold: true },
+        {
+          merged: [
+            [{ text: "Region" }, { text: "Store" }, { text: "Sales" }],
+            [{ text: "North", down: "start" }, { text: "Store A" }, { text: "100" }],
+            [{ text: "", down: "continue" }, { text: "Store B" }, { text: "200" }],
+            [{ text: "Total", span: 2 }, { text: "300" }],
+          ],
+        },
+      ]),
+      "merged.docx",
+    );
+    const table = report.sections[0].blocks.find((b) => b.type === "table");
+    expect(table).toEqual({
+      type: "table",
+      headers: ["Region", "Store", "Sales"],
+      rows: [
+        ["North", "Store A", "100"],
+        ["North", "Store B", "200"],
+        ["Total", "Total", "300"],
+      ],
+    });
+  });
+
   it("keeps a numbered-looking sentence as text, not a heading", async () => {
     const report = await parseReport(await makeDocx(sampleReportParts()), "sample.docx");
     const paragraphs = report.sections[1].blocks.filter((b) => b.type === "paragraph");

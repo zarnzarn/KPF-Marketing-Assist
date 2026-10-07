@@ -5,7 +5,7 @@ import { useAppData } from "@/components/AppDataProvider";
 import { Badge, Card, DataTable, EmptyState, Stat } from "@/components/ui";
 import { DATA_NOT_AVAILABLE } from "@/lib/constants";
 import { formatThb } from "@/lib/dates";
-import { productAlerts, shopNote } from "@/lib/queries";
+import { productAlerts, shopNote, stockScope } from "@/lib/queries";
 
 export function ProductsView() {
   const { data } = useAppData();
@@ -28,8 +28,8 @@ export function ProductsView() {
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
         <Stat accent="sage" label="Products" value={String(products.length)} note={[data.shop?.note ?? "From your shop", drafts ? `${drafts} draft${drafts === 1 ? "" : "s"}` : ""].filter(Boolean).join(", ")} tone="flat" />
         <Stat accent="butter" label="In stock" value={String(live.filter((p) => p.stockStatus === "In stock").length)} note="Live products" tone="flat" />
-        <Stat accent="sky" label="Low stock" value={String(live.filter((p) => p.stockStatus === "Low stock").length)} note="Check before promoting" tone="flat" />
-        <Stat accent="blush" label="Out of stock" value={String(live.filter((p) => p.stockStatus === "Out of stock").length)} note="Live products" tone="flat" />
+        <Stat accent="sky" label="Low stock" value={String(live.filter((p) => p.stockStatus === "Low stock").length)} note={`Check before promoting${stockScope(data)}`} tone="flat" />
+        <Stat accent="blush" label="Out of stock" value={String(live.filter((p) => p.stockStatus === "Out of stock").length)} note={`Live products${stockScope(data)}`} tone="flat" />
       </div>
 
       {productAlerts(data).length > 0 && (
@@ -51,7 +51,7 @@ export function ProductsView() {
             { header: "Product", cell: (p) => <span className="font-semibold">{p.name}</span> },
             { header: "Category", cell: (p) => p.category },
             { header: "Status", cell: (p) => <Badge>{p.status}</Badge> },
-            { header: "Price", cell: (p) => <span>{formatThb(p.priceThb)}{p.priceUnit && <span className="block text-xs text-muted">{p.priceUnit}</span>}</span>, className: "text-right" },
+            { header: "Price", cell: (p) => <span>{Number.isFinite(p.priceThb) ? formatThb(p.priceThb) : DATA_NOT_AVAILABLE}{p.priceUnit && <span className="block text-xs text-muted">{p.priceUnit}</span>}</span>, className: "text-right" },
             { header: "Availability", cell: (p) => <Badge>{p.availability}</Badge> },
             { header: "Stock", cell: (p) => <span><Badge>{p.stockStatus}</Badge><span className="mt-1 block text-xs text-muted">{p.stockUnits === null ? `Units: ${DATA_NOT_AVAILABLE}` : `${p.stockUnits} units`}</span></span> },
           ]}

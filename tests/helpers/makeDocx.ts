@@ -1,7 +1,8 @@
 import JSZip from "jszip";
 
 // Builds a tiny SYNTHETIC Word file for tests. No real report is ever used in tests.
-export type DocxPart = { p: string; bold?: boolean } | { table: string[][] } | { cellsOf: string[][] };
+export type MergedCell = { text: string; span?: number; down?: "start" | "continue" };
+export type DocxPart = { p: string; bold?: boolean } | { table: string[][] } | { cellsOf: string[][] } | { merged: MergedCell[][] };
 
 const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const para = (text: string, bold = false) => `<w:p><w:r>${bold ? "<w:rPr><w:b/></w:rPr>" : ""}<w:t xml:space="preserve">${esc(text)}</w:t></w:r></w:p>`;
@@ -13,6 +14,14 @@ export async function makeDocx(parts: DocxPart[]): Promise<Buffer> {
       if ("table" in part) {
         // each row is a list of single-line cells
         return `<w:tbl><w:tblPr/>${part.table.map((row) => `<w:tr>${row.map((c) => `<w:tc>${para(c)}</w:tc>`).join("")}</w:tr>`).join("")}</w:tbl>`;
+      }
+      if ("merged" in part) {
+        // cells merged across (gridSpan) or down (vMerge), the way Word stores them
+        const cell = (c: MergedCell) => {
+          const props = `${c.span ? `<w:gridSpan w:val="${c.span}"/>` : ""}${c.down === "start" ? '<w:vMerge w:val="restart"/>' : c.down === "continue" ? "<w:vMerge/>" : ""}`;
+          return `<w:tc>${props ? `<w:tcPr>${props}</w:tcPr>` : ""}${para(c.down === "continue" ? "" : c.text)}</w:tc>`;
+        };
+        return `<w:tbl><w:tblPr/>${part.merged.map((row) => `<w:tr>${row.map(cell).join("")}</w:tr>`).join("")}</w:tbl>`;
       }
       // one row; each cell holds several paragraphs (used for KPI tiles and callouts)
       return `<w:tbl><w:tblPr/><w:tr>${part.cellsOf.map((lines) => `<w:tc>${lines.map((l) => para(l)).join("")}</w:tc>`).join("")}</w:tr></w:tbl>`;

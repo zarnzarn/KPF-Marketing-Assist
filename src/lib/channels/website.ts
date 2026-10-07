@@ -73,7 +73,7 @@ function websiteProblem(error: unknown): string {
 
 const MAX_CHILD_SITEMAPS = 5;
 
-/** "/products/eggs?x=1" from a full address (works for www and non-www pages alike). */
+/** "/products/eggs?x=1" from a full address on the site itself. Other addresses are shown in full, so a link never looks like it stays on the site when it does not. */
 function pathOf(url: string): string {
   try {
     const u = new URL(url);
@@ -132,7 +132,7 @@ export async function websiteSnapshot(deps: ChannelDeps): Promise<ChannelSnapsho
       ],
       items: [
         ...(home.description ? [{ id: "description", title: "Home page description", detail: home.description }] : []),
-        ...pages.slice(0, 8).map((p) => ({ id: p.loc, title: pathOf(p.loc), url: /^https:\/\//.test(p.loc) ? p.loc : undefined, date: thaiDate(p.lastmod) })),
+        ...pages.slice(0, 8).map((p) => ({ id: p.loc, title: sameHost(p.loc, root) ? pathOf(p.loc) : p.loc, url: /^https:\/\//.test(p.loc) ? p.loc : undefined, date: thaiDate(p.lastmod) })),
       ],
     };
   } catch (error) {

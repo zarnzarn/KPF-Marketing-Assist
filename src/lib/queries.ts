@@ -124,6 +124,11 @@ export function shopGap(d: AppData): string | null {
   return "shop not connected";
 }
 
+/** " (first 100 products only)" when the shop list was cut off, so a stock count is never read as covering the whole shop. */
+export function stockScope(d: AppData): string {
+  return d.shop?.note ? ` (${d.shop.note})` : "";
+}
+
 /** shopGap as a sentence for the screen, with the shop's own error message when there is one. */
 export function shopNote(d: AppData): string | null {
   const reason = shopGap(d);
