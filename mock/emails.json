@@ -1,0 +1,195 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Inbox sample. Addresses use example domains.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "emails": [
+    {
+      "id": "EML-001",
+      "receivedAt": "2026-09-30T16:20:00+07:00",
+      "from": "CON-003",
+      "to": [
+        "CON-001"
+      ],
+      "subject": "Protein Week: breast fillet capacity",
+      "body": "Khun Ploy, for the 1-15 Oct promo we can supply about 900 extra packs on 12 Oct. If demand doubles we will run short before that batch. Please share the ad budget plan so we can plan the line. (MOCK)",
+      "related": {
+        "productId": "PRD-002",
+        "campaignId": "CMP-001"
+      },
+      "needsReply": false,
+      "repliedAt": "2026-10-01T09:05:00+07:00",
+      "mock": true
+    },
+    {
+      "id": "EML-002",
+      "receivedAt": "2026-10-06T17:45:00+07:00",
+      "from": "CON-003",
+      "to": [
+        "CON-001",
+        "CON-002"
+      ],
+      "subject": "URGENT: breast fillet stock 260 packs",
+      "body": "Breast fillet stock is down to 260 packs (180 free after reservations). At this week's pace we are out by Thursday or Friday. I can move the 19 Oct slaughter slot to 10 Oct for +600 packs, but then we have fewer whole birds for hotels next week. Need a decision by tomorrow noon. (MOCK)",
+      "related": {
+        "productId": "PRD-002",
+        "campaignId": "CMP-001",
+        "taskId": "TSK-001"
+      },
+      "needsReply": true,
+      "priority": "High",
+      "mock": true
+    },
+    {
+      "id": "EML-003",
+      "receivedAt": "2026-10-05T11:10:00+07:00",
+      "from": "CON-111",
+      "to": [
+        "CON-005"
+      ],
+      "subject": "Duck breast again out of stock?",
+      "body": "This is the second week without duck breast. It is our signature dish. When can you deliver, and what can you offer meanwhile? (MOCK)",
+      "related": {
+        "customerId": "CUS-111",
+        "complaintId": "CPL-001",
+        "productId": "PRD-009"
+      },
+      "needsReply": true,
+      "priority": "High",
+      "mock": true
+    },
+    {
+      "id": "EML-004",
+      "receivedAt": "2026-09-22T10:30:00+07:00",
+      "from": "CON-101",
+      "to": [
+        "CON-002"
+      ],
+      "subject": "Q4 prices for whole duck and native chicken",
+      "body": "Hello, we are planning December banquets. Please send your Q4 hotel prices for whole duck and native chicken, and confirm you can supply about 60 ducks per week in December. (MOCK)",
+      "related": {
+        "customerId": "CUS-101",
+        "productIds": [
+          "PRD-008",
+          "PRD-012"
+        ],
+        "taskId": "TSK-002"
+      },
+      "needsReply": true,
+      "priority": "High",
+      "note": "Unanswered for 15 days.",
+      "mock": true
+    },
+    {
+      "id": "EML-005",
+      "receivedAt": "2026-10-04T14:00:00+07:00",
+      "from": "CON-131",
+      "to": [
+        "CON-001",
+        "CON-004"
+      ],
+      "subject": "Cracked eggs in 3 branches",
+      "body": "We removed 46 cartons of free-range eggs this week because of cracks. Customers complain the new carton feels thinner. We have reduced the order until this is fixed. (MOCK)",
+      "related": {
+        "customerId": "CUS-131",
+        "complaintId": "CPL-003",
+        "productId": "PRD-004"
+      },
+      "needsReply": true,
+      "priority": "High",
+      "mock": true
+    },
+    {
+      "id": "EML-006",
+      "receivedAt": "2026-10-03T09:15:00+07:00",
+      "from": "CON-202",
+      "to": [
+        "CON-003",
+        "CON-001"
+      ],
+      "subject": "Gift box delivery delayed to 30 Oct",
+      "body": "Due to a paper shortage, your 1,500 gift boxes will arrive on 30 Oct instead of 10 Oct. (MOCK)",
+      "related": {
+        "purchaseId": "PO-2026-0415",
+        "productId": "PRD-015"
+      },
+      "needsReply": true,
+      "mock": true
+    },
+    {
+      "id": "EML-007",
+      "receivedAt": "2026-10-02T16:40:00+07:00",
+      "from": "CON-201",
+      "to": [
+        "CON-003"
+      ],
+      "subject": "November duck supply reduced",
+      "body": "Because of flooding at two member farms, we can supply only 70% of the agreed November volume of whole ducks. Duck breast lot moves from 2 Oct to 15 Oct. (MOCK)",
+      "related": {
+        "purchaseIds": [
+          "PO-2026-0409",
+          "PO-2026-0412"
+        ],
+        "productIds": [
+          "PRD-008",
+          "PRD-009"
+        ]
+      },
+      "needsReply": false,
+      "mock": true
+    },
+    {
+      "id": "EML-008",
+      "receivedAt": "2026-10-01T13:00:00+07:00",
+      "from": "CON-142",
+      "to": [
+        "CON-002"
+      ],
+      "subject": "Wings price for Q4",
+      "body": "A competitor offers wings at 115 baht per kg. Can you match? Otherwise we will reduce our order. (MOCK)",
+      "related": {
+        "customerId": "CUS-142",
+        "productId": "PRD-013",
+        "taskId": "TSK-012"
+      },
+      "needsReply": true,
+      "mock": true
+    },
+    {
+      "id": "EML-009",
+      "receivedAt": "2026-10-06T10:05:00+07:00",
+      "from": "CON-205",
+      "to": [
+        "CON-001"
+      ],
+      "subject": "Feature on farm-to-table dinner",
+      "body": "We would like to feature your dinner with Chef's Table in our November issue. Can you send photos and the menu by 12 Oct? (MOCK)",
+      "related": {
+        "eventId": "EVT-004",
+        "customerId": "CUS-121"
+      },
+      "needsReply": true,
+      "mock": true
+    },
+    {
+      "id": "EML-010",
+      "receivedAt": "2026-10-06T08:30:00+07:00",
+      "from": "CON-152",
+      "to": [
+        "CON-002"
+      ],
+      "subject": "Possible 200 more gift boxes",
+      "body": "Our board may add 200 boxes to the order. Please confirm price and delivery by 15 Oct. (MOCK)",
+      "related": {
+        "customerId": "CUS-152",
+        "productId": "PRD-015"
+      },
+      "needsReply": true,
+      "mock": true
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Content plan and drafts. Drafts follow the brand rules (no em dashes, practice not health claims).",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "content": [
+    {
+      "id": "CNT-001",
+      "title": "Protein Week launch carousel",
+      "platform": "Instagram",
+      "campaignId": "CMP-001",
+      "productId": "PRD-002",
+      "status": "Published",
+      "approvalStatus": "Approved",
+      "publishDate": "2026-10-01",
+      "results": {
+        "reach": 28400,
+        "saves": 1210
+      },
+      "mock": true
+    },
+    {
+      "id": "CNT-002",
+      "title": "Protein Week LINE broadcast 1",
+      "platform": "LINE OA",
+      "campaignId": "CMP-001",
+      "productId": "PRD-002",
+      "status": "Published",
+      "approvalStatus": "Approved",
+      "publishDate": "2026-10-01",
+      "results": {
+        "opens": 11200,
+        "clicks": 2310
+      },
+      "mock": true
+    },
+    {
+      "id": "CNT-003",
+      "title": "Protein Week LINE broadcast 2 (last days)",
+      "platform": "LINE OA",
+      "campaignId": "CMP-001",
+      "productId": "PRD-002",
+      "status": "In review",
+      "approvalStatus": "Pending approval",
+      "dueDate": "2026-10-08",
+      "draftText": "Protein Week ends 15 Oct. Free-range breast fillet, raised slowly on open pasture, now 189 baht. Order on LINE today. (MOCK draft)",
+      "note": "May need to change or pause if stock runs out (TSK-001).",
+      "mock": true
+    },
+    {
+      "id": "CNT-004",
+      "title": "5 quick breast fillet dinners (blog)",
+      "platform": "Website",
+      "campaignId": "CMP-001",
+      "productId": "PRD-002",
+      "status": "Published",
+      "approvalStatus": "Not required",
+      "publishDate": "2026-10-02",
+      "mock": true
+    },
+    {
+      "id": "CNT-005",
+      "title": "Bone broth launch video",
+      "platform": "Instagram",
+      "campaignId": "CMP-003",
+      "productId": "PRD-010",
+      "status": "In review",
+      "approvalStatus": "Pending approval",
+      "dueDate": "2026-10-10",
+      "draftText": "Twelve hours of slow simmering, bones from our own free-range chickens. Warm, simple, ready in five minutes. (MOCK draft)",
+      "mock": true
+    },
+    {
+      "id": "CNT-006",
+      "title": "Bone broth launch LINE broadcast",
+      "platform": "LINE OA",
+      "campaignId": "CMP-003",
+      "productId": "PRD-010",
+      "status": "Draft",
+      "approvalStatus": "Pending approval",
+      "dueDate": "2026-10-18",
+      "draftText": "New: chicken bone broth from Rai Thong Farm. Launch price 129 baht until 10 Nov. (MOCK draft)",
+      "mock": true
+    },
+    {
+      "id": "CNT-007",
+      "title": "Why our eggs come in a new carton",
+      "platform": "Facebook",
+      "campaignId": null,
+      "productId": "PRD-004",
+      "status": "Idea",
+      "approvalStatus": "Not required",
+      "dueDate": "2026-10-12",
+      "note": "Wait for QA answer on CPL-003 before posting.",
+      "mock": true
+    },
+    {
+      "id": "CNT-008",
+      "title": "New Year gift box product photos",
+      "platform": "Website",
+      "campaignId": "CMP-004",
+      "productId": "PRD-015",
+      "status": "Idea",
+      "approvalStatus": "Not required",
+      "dueDate": "2026-10-25",
+      "mock": true
+    },
+    {
+      "id": "CNT-009",
+      "title": "Salted egg fried rice recipe",
+      "platform": "Facebook",
+      "campaignId": null,
+      "productIds": [
+        "PRD-006",
+        "PRD-007"
+      ],
+      "status": "Idea",
+      "approvalStatus": "Not required",
+      "dueDate": "2026-10-18",
+      "taskId": "TSK-015",
+      "mock": true
+    },
+    {
+      "id": "CNT-010",
+      "title": "Press release: farm-to-table dinner",
+      "platform": "PR",
+      "campaignId": "CMP-006",
+      "productIds": [
+        "PRD-008",
+        "PRD-009"
+      ],
+      "status": "In review",
+      "approvalStatus": "Pending approval",
+      "dueDate": "2026-10-11",
+      "note": "Menu lists duck breast; check stock first.",
+      "mock": true
+    },
+    {
+      "id": "CNT-011",
+      "title": "Herb sausage breakfast reel",
+      "platform": "Instagram",
+      "campaignId": null,
+      "productId": "PRD-011",
+      "status": "Scheduled",
+      "approvalStatus": "Approved",
+      "publishDate": "2026-10-09",
+      "mock": true
+    }
+  ]
+}

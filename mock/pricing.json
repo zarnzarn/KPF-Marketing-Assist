@@ -1,0 +1,310 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Price lists per channel and promotion prices. 0 or null = not sold in that channel.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information.",
+    "priceKeys": {
+      "website": "consumer price on website and LINE OA",
+      "retail": "price to retail partners",
+      "retailShelf": "recommended shelf price at retail partners",
+      "restaurant": "restaurant and chef price list",
+      "hotel": "hotel price list",
+      "b2b": "wholesale and corporate price",
+      "cost": "production cost (internal)"
+    }
+  },
+  "prices": [
+    {
+      "productId": "PRD-001",
+      "name": "Free-Range Whole Chicken 1.6 kg (MOCK)",
+      "unit": "per bird",
+      "cost": 205,
+      "website": 389,
+      "retail": 300,
+      "retailShelf": 369,
+      "restaurant": 315,
+      "hotel": 305,
+      "b2b": 285,
+      "mock": true
+    },
+    {
+      "productId": "PRD-002",
+      "name": "Free-Range Chicken Breast Fillet 500 g (MOCK)",
+      "unit": "per 500 g pack",
+      "cost": 112,
+      "website": 219,
+      "retail": 165,
+      "retailShelf": 199,
+      "restaurant": 175,
+      "hotel": 170,
+      "b2b": 158,
+      "mock": true
+    },
+    {
+      "productId": "PRD-003",
+      "name": "Free-Range Boneless Thigh 500 g (MOCK)",
+      "unit": "per 500 g pack",
+      "cost": 96,
+      "website": 189,
+      "retail": 142,
+      "retailShelf": 175,
+      "restaurant": 150,
+      "hotel": 146,
+      "b2b": 136,
+      "mock": true
+    },
+    {
+      "productId": "PRD-004",
+      "name": "Free-Range Eggs 10 pcs (size 1) (MOCK)",
+      "unit": "per 10-egg carton",
+      "cost": 58,
+      "website": 119,
+      "retail": 84,
+      "retailShelf": 109,
+      "restaurant": 88,
+      "hotel": 86,
+      "b2b": 80,
+      "mock": true
+    },
+    {
+      "productId": "PRD-005",
+      "name": "Organic-Feed Eggs 10 pcs (MOCK)",
+      "unit": "per 10-egg carton",
+      "cost": 82,
+      "website": 169,
+      "retail": 120,
+      "retailShelf": 155,
+      "restaurant": 126,
+      "hotel": 124,
+      "b2b": 115,
+      "mock": true
+    },
+    {
+      "productId": "PRD-006",
+      "name": "Duck Eggs 6 pcs (MOCK)",
+      "unit": "per 6-egg pack",
+      "cost": 40,
+      "website": 85,
+      "retail": 58,
+      "retailShelf": 75,
+      "restaurant": 62,
+      "hotel": 60,
+      "b2b": 55,
+      "mock": true
+    },
+    {
+      "productId": "PRD-007",
+      "name": "Salted Duck Eggs 4 pcs (MOCK)",
+      "unit": "per 4-egg pack",
+      "cost": 38,
+      "website": 79,
+      "retail": 55,
+      "retailShelf": 69,
+      "restaurant": 58,
+      "hotel": 56,
+      "b2b": 52,
+      "mock": true
+    },
+    {
+      "productId": "PRD-008",
+      "name": "Whole Cherry Valley Duck 2.4 kg (MOCK)",
+      "unit": "per bird",
+      "cost": 330,
+      "website": 590,
+      "retail": 455,
+      "retailShelf": 549,
+      "restaurant": 480,
+      "hotel": 465,
+      "b2b": 440,
+      "mock": true
+    },
+    {
+      "productId": "PRD-009",
+      "name": "Duck Breast 2 pcs (about 600 g) (MOCK)",
+      "unit": "per 2-piece pack",
+      "cost": 210,
+      "website": 399,
+      "retail": 299,
+      "retailShelf": 369,
+      "restaurant": 315,
+      "hotel": 305,
+      "b2b": 290,
+      "mock": true
+    },
+    {
+      "productId": "PRD-010",
+      "name": "Chicken Bone Broth 500 ml (frozen) (MOCK)",
+      "unit": "per 500 ml pouch",
+      "cost": 52,
+      "website": 149,
+      "retail": 105,
+      "retailShelf": 135,
+      "restaurant": 110,
+      "hotel": 108,
+      "b2b": 98,
+      "mock": true
+    },
+    {
+      "productId": "PRD-011",
+      "name": "Herb Chicken Sausage 300 g (frozen) (MOCK)",
+      "unit": "per 300 g pack",
+      "cost": 74,
+      "website": 159,
+      "retail": 112,
+      "retailShelf": 145,
+      "restaurant": 118,
+      "hotel": 115,
+      "b2b": 105,
+      "mock": true
+    },
+    {
+      "productId": "PRD-012",
+      "name": "Native Thai Chicken (Gai Baan) whole 1.2 kg (MOCK)",
+      "unit": "per bird",
+      "cost": 190,
+      "website": 349,
+      "retail": 270,
+      "retailShelf": 329,
+      "restaurant": 285,
+      "hotel": 275,
+      "b2b": 260,
+      "mock": true
+    },
+    {
+      "productId": "PRD-013",
+      "name": "Chicken Wings 1 kg (food-service) (MOCK)",
+      "unit": "per 1 kg bag",
+      "cost": 98,
+      "website": 189,
+      "retail": 140,
+      "retailShelf": 175,
+      "restaurant": 135,
+      "hotel": 132,
+      "b2b": 125,
+      "mock": true
+    },
+    {
+      "productId": "PRD-014",
+      "name": "Liquid Egg Yolk 1 kg (food-service) (MOCK)",
+      "unit": "per 1 kg pouch",
+      "cost": 140,
+      "website": null,
+      "retail": null,
+      "retailShelf": null,
+      "restaurant": 230,
+      "hotel": 225,
+      "b2b": 210,
+      "mock": true
+    },
+    {
+      "productId": "PRD-015",
+      "name": "Egg Gift Box 30 pcs (festive) (MOCK)",
+      "unit": "per gift box",
+      "cost": 260,
+      "website": 590,
+      "retail": 430,
+      "retailShelf": 549,
+      "restaurant": null,
+      "hotel": null,
+      "b2b": 470,
+      "mock": true
+    },
+    {
+      "productId": "PRD-016",
+      "name": "Smoked Chicken Breast 200 g (MOCK)",
+      "unit": "per 200 g pack",
+      "cost": 62,
+      "website": 129,
+      "retail": 92,
+      "retailShelf": 119,
+      "restaurant": 98,
+      "hotel": 96,
+      "b2b": 88,
+      "mock": true
+    }
+  ],
+  "promotions": [
+    {
+      "id": "PROMO-001",
+      "productId": "PRD-002",
+      "campaignId": "CMP-001",
+      "channels": [
+        "Website",
+        "LINE OA"
+      ],
+      "promotionPrice": 189,
+      "from": "2026-10-01",
+      "to": "2026-10-15",
+      "type": "Price discount",
+      "approvalStatus": "Approved",
+      "note": "Protein Week: 219 to 189 baht.",
+      "mock": true
+    },
+    {
+      "id": "PROMO-002",
+      "productId": "PRD-010",
+      "campaignId": "CMP-003",
+      "channels": [
+        "Website",
+        "LINE OA"
+      ],
+      "promotionPrice": 129,
+      "from": "2026-10-20",
+      "to": "2026-11-10",
+      "type": "Launch price",
+      "approvalStatus": "Pending approval",
+      "note": "Launch price for bone broth; waiting for Marketing Director approval (APR in TSK-007).",
+      "mock": true
+    },
+    {
+      "id": "PROMO-003",
+      "productId": "PRD-015",
+      "campaignId": "CMP-004",
+      "channels": [
+        "Corporate",
+        "Website"
+      ],
+      "promotionPrice": 520,
+      "from": "2026-11-01",
+      "to": "2026-12-20",
+      "type": "Early-bird corporate price (50+ boxes)",
+      "approvalStatus": "Pending approval",
+      "note": "Corporate early-bird gift box price; needs approval before quoting (TSK-009).",
+      "mock": true
+    },
+    {
+      "id": "PROMO-004",
+      "productId": "PRD-005",
+      "campaignId": null,
+      "channels": [
+        "Retail"
+      ],
+      "promotionPrice": 139,
+      "from": "2026-11-01",
+      "to": "2026-11-30",
+      "type": "Proposed shelf price cut",
+      "approvalStatus": "Draft",
+      "note": "Proposed answer to declining organic eggs (TSK-011). Not approved.",
+      "mock": true
+    },
+    {
+      "id": "PROMO-005",
+      "productId": "PRD-016",
+      "campaignId": "CMP-005",
+      "channels": [
+        "Website",
+        "LINE OA"
+      ],
+      "promotionPrice": 109,
+      "from": "2026-10-16",
+      "to": "2026-10-31",
+      "type": "Bundle with bone broth",
+      "approvalStatus": "Draft",
+      "note": "Idea: smoked breast + bone broth lunch bundle.",
+      "mock": true
+    }
+  ]
+}

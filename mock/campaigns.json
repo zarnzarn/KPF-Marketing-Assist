@@ -1,0 +1,190 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Marketing campaigns with products, budgets, status and results.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "campaigns": [
+    {
+      "id": "CMP-001",
+      "name": "Protein Week (MOCK)",
+      "objective": "Grow breast fillet sales with health-focused home cooks",
+      "productIds": [
+        "PRD-002"
+      ],
+      "channels": [
+        "Website",
+        "LINE OA",
+        "Facebook",
+        "Instagram"
+      ],
+      "targetAudience": "Health-focused home cooks in Bangkok (CUS-003)",
+      "startDate": "2026-10-01",
+      "endDate": "2026-10-15",
+      "status": "Active",
+      "budgetThb": 120000,
+      "spentThb": 52000,
+      "approvalStatus": "Approved",
+      "contentStatus": "Published",
+      "promotionId": "PROMO-001",
+      "kpis": {
+        "target": "2,400 packs on website + LINE OA in 15 days",
+        "actualSoFar": "650 packs in 6 days",
+        "websiteConversionRate": "3.1% (September: 2.2%)",
+        "lineClickRate": "11.4%"
+      },
+      "issue": "Demand is ahead of supply: stock runs out before the 12 Oct batch (INV PRD-002, TSK-001).",
+      "milestones": [
+        {
+          "date": "2026-10-08",
+          "label": "Second-wave LINE broadcast (needs approval TSK-004)"
+        },
+        {
+          "date": "2026-10-15",
+          "label": "Campaign ends"
+        }
+      ],
+      "mock": true
+    },
+    {
+      "id": "CMP-002",
+      "name": "Farm Fresh Eggs Every Morning (MOCK)",
+      "objective": "Keep egg subscribers buying weekly",
+      "productIds": [
+        "PRD-004",
+        "PRD-005"
+      ],
+      "channels": [
+        "LINE OA",
+        "Website"
+      ],
+      "targetAudience": "Families",
+      "startDate": "2026-08-01",
+      "endDate": "2026-09-30",
+      "status": "Completed",
+      "budgetThb": 60000,
+      "spentThb": 58500,
+      "approvalStatus": "Approved",
+      "contentStatus": "Published",
+      "kpis": {
+        "target": "+10% egg units",
+        "result": "Free-range eggs website+LINE: 4.8% Jul to Sep; organic eggs: -25.9%"
+      },
+      "learning": "Free-range eggs held up; organic eggs kept falling despite the campaign.",
+      "mock": true
+    },
+    {
+      "id": "CMP-003",
+      "name": "Bone Broth Launch (MOCK)",
+      "objective": "Reach 1,500 pouches a month for the new bone broth",
+      "productIds": [
+        "PRD-010"
+      ],
+      "channels": [
+        "Website",
+        "LINE OA",
+        "Instagram",
+        "Retail tasting"
+      ],
+      "targetAudience": "Busy home cooks, health-focused families",
+      "startDate": "2026-10-20",
+      "endDate": "2026-11-20",
+      "status": "Planned",
+      "budgetThb": 150000,
+      "spentThb": 0,
+      "approvalStatus": "Pending approval",
+      "contentStatus": "In progress",
+      "promotionId": "PROMO-002",
+      "kpis": {
+        "target": "1,500 pouches per month",
+        "currentRunRate": "265 pouches per 30 days (October pace)"
+      },
+      "milestones": [
+        {
+          "date": "2026-10-10",
+          "label": "Approve price and posts (TSK-007)"
+        },
+        {
+          "date": "2026-10-25",
+          "label": "Sampling at Bangkok Gourmet Expo (EVT-001)"
+        }
+      ],
+      "mock": true
+    },
+    {
+      "id": "CMP-004",
+      "name": "New Year Gift Box (MOCK)",
+      "objective": "Sell 1,500 egg gift boxes to companies and families",
+      "productIds": [
+        "PRD-015"
+      ],
+      "channels": [
+        "Corporate sales",
+        "Website",
+        "LINE OA"
+      ],
+      "targetAudience": "Corporate HR and admin teams, families",
+      "startDate": "2026-11-01",
+      "endDate": "2026-12-20",
+      "status": "Planned",
+      "budgetThb": 90000,
+      "spentThb": 0,
+      "approvalStatus": "Not required",
+      "contentStatus": "Not started",
+      "promotionId": "PROMO-003",
+      "issue": "Gift box packaging arrives 30 Oct, not 10 Oct (PO-2026-0415). 320 boxes already pre-ordered by CUS-152.",
+      "mock": true
+    },
+    {
+      "id": "CMP-005",
+      "name": "Smart Lunch Bundle (MOCK)",
+      "objective": "Give smoked breast a new reason to buy by pairing it with bone broth",
+      "productIds": [
+        "PRD-016",
+        "PRD-010"
+      ],
+      "channels": [
+        "Website",
+        "LINE OA"
+      ],
+      "targetAudience": "Office workers",
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-31",
+      "status": "Draft",
+      "budgetThb": 40000,
+      "spentThb": 0,
+      "approvalStatus": "Not required",
+      "contentStatus": "Not started",
+      "promotionId": "PROMO-005",
+      "mock": true
+    },
+    {
+      "id": "CMP-006",
+      "name": "Chef Partnership: Farm-to-Table Dinner (MOCK)",
+      "objective": "PR and B2B credibility with chefs",
+      "productIds": [
+        "PRD-008",
+        "PRD-009",
+        "PRD-012"
+      ],
+      "channels": [
+        "PR",
+        "Instagram",
+        "Event"
+      ],
+      "targetAudience": "Food media, chefs, hotel F&B",
+      "startDate": "2026-10-18",
+      "endDate": "2026-11-15",
+      "status": "Planned",
+      "budgetThb": 70000,
+      "spentThb": 12000,
+      "approvalStatus": "Pending approval",
+      "contentStatus": "In progress",
+      "issue": "Duck breast is on the menu but out of stock until 15 Oct (PRD-009).",
+      "mock": true
+    }
+  ]
+}

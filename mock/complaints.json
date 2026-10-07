@@ -1,0 +1,140 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Customer complaints with follow-up and resolution status.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "complaints": [
+    {
+      "id": "CPL-001",
+      "date": "2026-10-05",
+      "customerId": "CUS-111",
+      "contactId": "CON-111",
+      "channel": "Email",
+      "type": "Product availability",
+      "productId": "PRD-009",
+      "orderId": "ORD-0051",
+      "severity": "High",
+      "summary": "Duck breast missing from two deliveries; signature dish off the menu.",
+      "status": "Open",
+      "followUp": {
+        "taskId": "TSK-003",
+        "due": "2026-10-07",
+        "owner": "CON-005"
+      },
+      "resolution": null,
+      "rootCause": "Partner duck farm delay (PO-2026-0409).",
+      "mock": true
+    },
+    {
+      "id": "CPL-002",
+      "date": "2026-10-03",
+      "customerId": "CUS-001",
+      "channel": "Website",
+      "type": "Delivery",
+      "productId": "PRD-002",
+      "severity": "Medium",
+      "summary": "Website order delivered a day late in Bang Kapi; ice packs melted.",
+      "status": "In progress",
+      "followUp": {
+        "taskId": "TSK-019",
+        "due": "2026-10-09",
+        "owner": "CON-005"
+      },
+      "resolution": "Refund of delivery fee offered.",
+      "rootCause": "Extra Protein Week orders on one route.",
+      "mock": true
+    },
+    {
+      "id": "CPL-003",
+      "date": "2026-10-04",
+      "customerId": "CUS-131",
+      "contactId": "CON-131",
+      "channel": "Email",
+      "type": "Packaging",
+      "productId": "PRD-004",
+      "severity": "High",
+      "summary": "46 cartons of eggs removed for cracks in 3 branches; new carton feels thinner.",
+      "status": "In progress",
+      "followUp": {
+        "taskId": "TSK-010",
+        "due": "2026-10-06",
+        "owner": "CON-004",
+        "meetingId": "MTG-004"
+      },
+      "resolution": null,
+      "rootCause": "Suspected: lighter carton introduced 1 Sep to save cost (expenses, Packaging). Reinforced carton proposed (PO-2026-0418).",
+      "impact": "Partner cut egg orders about 20% (sales: Retail, PRD-004).",
+      "mock": true
+    },
+    {
+      "id": "CPL-004",
+      "date": "2026-09-21",
+      "customerId": "CUS-002",
+      "channel": "LINE OA",
+      "type": "Product quality",
+      "productId": "PRD-016",
+      "severity": "Low",
+      "summary": "Smoked breast too salty for a customer's child.",
+      "status": "Resolved",
+      "resolution": "Explained the recipe; 1 pack replaced. Shared with product team.",
+      "resolvedAt": "2026-09-23",
+      "mock": true
+    },
+    {
+      "id": "CPL-005",
+      "date": "2026-09-12",
+      "customerId": "CUS-103",
+      "contactId": "CON-103",
+      "channel": "Phone",
+      "type": "Delivery",
+      "productId": "PRD-001",
+      "severity": "Medium",
+      "summary": "Delivery to Hua Hin arrived after kitchen closing time.",
+      "status": "Resolved",
+      "resolution": "Moved Hua Hin deliveries to the 06:00 truck.",
+      "resolvedAt": "2026-09-14",
+      "mock": true
+    },
+    {
+      "id": "CPL-006",
+      "date": "2026-10-06",
+      "customerId": "CUS-001",
+      "channel": "Website",
+      "type": "Delivery",
+      "productId": "PRD-002",
+      "severity": "Medium",
+      "summary": "Second late Protein Week order (Lat Phrao).",
+      "status": "Open",
+      "followUp": {
+        "taskId": "TSK-019",
+        "due": "2026-10-09",
+        "owner": "CON-005"
+      },
+      "resolution": null,
+      "mock": true
+    },
+    {
+      "id": "CPL-007",
+      "date": "2026-08-28",
+      "customerId": "CUS-132",
+      "contactId": "CON-132",
+      "channel": "Email",
+      "type": "Pricing",
+      "productId": "PRD-005",
+      "severity": "Low",
+      "summary": "Buyer reports shoppers choosing a cheaper organic egg brand.",
+      "status": "Open",
+      "followUp": {
+        "taskId": "TSK-011",
+        "due": "2026-10-12",
+        "owner": "CON-001"
+      },
+      "resolution": null,
+      "mock": true
+    }
+  ]
+}

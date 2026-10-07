@@ -38,6 +38,7 @@ Key areas: free-range chicken, eggs, duck, specialty poultry products, premium f
   2. **The user's monthly marketing report files** (`.docx`): uploaded in the online app, or read from a local folder.
   3. **Read-only connections to the brand's own channels** (website, GA4, shop, Facebook, Instagram, LINE OA) through their official APIs, using credentials the user creates.
 - When a source is empty or not connected, show an empty state and say "Data not available." Never fill gaps with sample or invented data.
+- `/mock/` holds clearly labelled MOCK DATA about a fictional company (Rai Thong Heritage Farm), for demos and AI testing only. The app never imports it (a test enforces this); regenerate it with `node mock/generate.mjs`.
 - No real customer personal information: no private individuals' names, phone numbers or emails. Customer records are businesses or segments.
 - The only database is the user's own Supabase project (tables in `supabase/schema.sql`). No n8n. No CRM, email, marketplace or payment integrations.
 - Every page, server action and data loader checks the login on the server (`requireViewer()` in `src/lib/auth/session.ts`); the proxy is only a first, quick check.

@@ -1,0 +1,88 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Events, tastings and fairs.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "events": [
+    {
+      "id": "EVT-001",
+      "name": "Bangkok Gourmet Expo 2026 (MOCK)",
+      "type": "Trade and consumer fair",
+      "startDate": "2026-10-25",
+      "endDate": "2026-10-27",
+      "location": "Exhibition hall, Bangkok (MOCK)",
+      "contact": "CON-204",
+      "budgetThb": 85000,
+      "status": "Booked",
+      "productIds": [
+        "PRD-010",
+        "PRD-011",
+        "PRD-012"
+      ],
+      "goals": [
+        "Sample bone broth to 2,000 visitors",
+        "Collect 300 LINE OA friends",
+        "Meet 15 hotel and restaurant buyers"
+      ],
+      "taskId": "TSK-008",
+      "campaignId": "CMP-003",
+      "mock": true
+    },
+    {
+      "id": "EVT-002",
+      "name": "Farm visit for Green Basket shoppers (MOCK)",
+      "type": "Customer event",
+      "startDate": "2026-11-08",
+      "endDate": "2026-11-08",
+      "location": "FARM-02 Kanchanaburi (MOCK)",
+      "budgetThb": 30000,
+      "status": "Idea",
+      "productIds": [
+        "PRD-005"
+      ],
+      "customerId": "CUS-132",
+      "note": "Could help explain the organic egg price.",
+      "mock": true
+    },
+    {
+      "id": "EVT-003",
+      "name": "Christmas duck menu tasting (MOCK)",
+      "type": "B2B tasting",
+      "startDate": "2026-10-21",
+      "endDate": "2026-10-21",
+      "location": "Sukhumvit Garden Residence Hotel kitchen (MOCK)",
+      "customerId": "CUS-102",
+      "budgetThb": 8000,
+      "status": "Confirmed",
+      "productIds": [
+        "PRD-008",
+        "PRD-012"
+      ],
+      "note": "Whole duck supply is reduced in November (PO-2026-0412): agree volumes carefully.",
+      "mock": true
+    },
+    {
+      "id": "EVT-004",
+      "name": "Farm-to-table dinner with Chef's Table (MOCK)",
+      "type": "PR dinner",
+      "startDate": "2026-10-18",
+      "endDate": "2026-10-18",
+      "location": "Chef's Table Private Dining, Bangkok (MOCK)",
+      "customerId": "CUS-121",
+      "budgetThb": 45000,
+      "status": "Confirmed",
+      "productIds": [
+        "PRD-008",
+        "PRD-009",
+        "PRD-012"
+      ],
+      "campaignId": "CMP-006",
+      "note": "Duck breast needed (PRD-009, out of stock until 15 Oct). Magazine wants a feature (EML-009).",
+      "mock": true
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Fictional internal team and business contacts. Names, emails (example domains) and phone numbers are invented.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "contacts": [
+    {
+      "id": "CON-001",
+      "name": "Nattaya Srisuk (MOCK)",
+      "nickname": "Khun Ploy",
+      "role": "Marketing Director",
+      "organization": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+      "internal": true,
+      "email": "marketing.director@raithongfarm.example",
+      "phone": "+66-00-000-0001 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-002",
+      "name": "Krit Wongsa (MOCK)",
+      "nickname": "Khun Krit",
+      "role": "B2B Sales Manager",
+      "organization": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+      "internal": true,
+      "email": "b2b.sales@raithongfarm.example",
+      "phone": "+66-00-000-0002 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-003",
+      "name": "Somchai Boonmee (MOCK)",
+      "nickname": "Khun Chai",
+      "role": "Production Manager",
+      "organization": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+      "internal": true,
+      "email": "production@raithongfarm.example",
+      "phone": "+66-00-000-0003 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-004",
+      "name": "Pimchanok Rattana (MOCK)",
+      "nickname": "Khun Pim",
+      "role": "QA and Packaging Manager",
+      "organization": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+      "internal": true,
+      "email": "qa@raithongfarm.example",
+      "phone": "+66-00-000-0004 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-005",
+      "name": "Waraporn Chaiyo (MOCK)",
+      "nickname": "Khun Wan",
+      "role": "Customer Service Lead",
+      "organization": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+      "internal": true,
+      "email": "care@raithongfarm.example",
+      "phone": "+66-00-000-0005 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-006",
+      "name": "Thanakorn Mee (MOCK)",
+      "nickname": "Khun Ton",
+      "role": "Content and Social Media Lead",
+      "organization": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+      "internal": true,
+      "email": "content@raithongfarm.example",
+      "phone": "+66-00-000-0006 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-007",
+      "name": "Sirilak Phan (MOCK)",
+      "nickname": "Khun Lak",
+      "role": "Finance Manager",
+      "organization": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+      "internal": true,
+      "email": "finance@raithongfarm.example",
+      "phone": "+66-00-000-0007 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-101",
+      "name": "F&B Purchasing Manager (MOCK contact)",
+      "role": "F&B Purchasing",
+      "organization": "Chao Phraya Lantern Hotel (MOCK)",
+      "customerId": "CUS-101",
+      "internal": false,
+      "email": "purchasing@lantern-hotel.example",
+      "phone": "+66-00-000-0101 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-102",
+      "name": "Executive Chef (MOCK contact)",
+      "role": "Executive Chef",
+      "organization": "Sukhumvit Garden Residence Hotel (MOCK)",
+      "customerId": "CUS-102",
+      "internal": false,
+      "email": "chef@sgr-hotel.example",
+      "phone": "+66-00-000-0102 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-103",
+      "name": "Purchasing Officer (MOCK contact)",
+      "role": "Purchasing",
+      "organization": "Hua Hin Seabreeze Resort (MOCK)",
+      "customerId": "CUS-103",
+      "internal": false,
+      "email": "buying@seabreeze.example",
+      "phone": "+66-00-000-0103 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-111",
+      "name": "Head Chef (MOCK contact)",
+      "role": "Head Chef",
+      "organization": "Baan Krua Siam Restaurant (MOCK)",
+      "customerId": "CUS-111",
+      "internal": false,
+      "email": "kitchen@baankruasiam.example",
+      "phone": "+66-00-000-0111 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-112",
+      "name": "Owner (MOCK contact)",
+      "role": "Owner",
+      "organization": "Ember & Rice Grill (MOCK)",
+      "customerId": "CUS-112",
+      "internal": false,
+      "email": "hello@emberandrice.example",
+      "phone": "+66-00-000-0112 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-113",
+      "name": "Central Kitchen Manager (MOCK contact)",
+      "role": "Central Kitchen",
+      "organization": "Nong Lek Noodle Group (MOCK)",
+      "customerId": "CUS-113",
+      "internal": false,
+      "email": "ck@nonglek.example",
+      "phone": "+66-00-000-0113 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-121",
+      "name": "Chef-Owner (MOCK contact)",
+      "role": "Chef-Owner",
+      "organization": "Chef's Table Private Dining (MOCK)",
+      "customerId": "CUS-121",
+      "internal": false,
+      "email": "table@chefstable.example",
+      "phone": "+66-00-000-0121 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-122",
+      "name": "Studio Manager (MOCK contact)",
+      "role": "Studio Manager",
+      "organization": "Saffron & Lemongrass Cooking Studio (MOCK)",
+      "customerId": "CUS-122",
+      "internal": false,
+      "email": "studio@saffronlemongrass.example",
+      "phone": "+66-00-000-0122 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-131",
+      "name": "Category Buyer, Fresh (MOCK contact)",
+      "role": "Category Buyer",
+      "organization": "Siam Fresh Gourmet (MOCK)",
+      "customerId": "CUS-131",
+      "internal": false,
+      "email": "fresh.buyer@siamfresh.example",
+      "phone": "+66-00-000-0131 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-132",
+      "name": "Buyer (MOCK contact)",
+      "role": "Buyer",
+      "organization": "Green Basket Organic Market (MOCK)",
+      "customerId": "CUS-132",
+      "internal": false,
+      "email": "buyer@greenbasket.example",
+      "phone": "+66-00-000-0132 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-133",
+      "name": "Store Manager (MOCK contact)",
+      "role": "Store Manager",
+      "organization": "Urban Pantry Delicatessen (MOCK)",
+      "customerId": "CUS-133",
+      "internal": false,
+      "email": "store@urbanpantry.example",
+      "phone": "+66-00-000-0133 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-141",
+      "name": "Purchasing Manager (MOCK contact)",
+      "role": "Purchasing",
+      "organization": "Pathum Fresh Wholesale (MOCK)",
+      "customerId": "CUS-141",
+      "internal": false,
+      "email": "po@pathumfresh.example",
+      "phone": "+66-00-000-0141 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-142",
+      "name": "Procurement Lead (MOCK contact)",
+      "role": "Procurement",
+      "organization": "Eastern Seaboard Food Supply (MOCK)",
+      "customerId": "CUS-142",
+      "internal": false,
+      "email": "procurement@esfs.example",
+      "phone": "+66-00-000-0142 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-151",
+      "name": "Catering Manager (MOCK contact)",
+      "role": "Catering",
+      "organization": "Bangna Tech Park Canteen Services (MOCK)",
+      "customerId": "CUS-151",
+      "internal": false,
+      "email": "catering@bangnatech.example",
+      "phone": "+66-00-000-0151 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-152",
+      "name": "Corporate Affairs Officer (MOCK contact)",
+      "role": "Corporate gifts",
+      "organization": "Lumpini Finance Group (MOCK)",
+      "customerId": "CUS-152",
+      "internal": false,
+      "email": "gifts@lumpinifinance.example",
+      "phone": "+66-00-000-0152 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-201",
+      "name": "Supply Coordinator (MOCK contact)",
+      "role": "Duck supply",
+      "organization": "Suphan Duck Cooperative (MOCK)",
+      "supplier": true,
+      "internal": false,
+      "email": "supply@suphanduck.example",
+      "phone": "+66-00-000-0201 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-202",
+      "name": "Account Manager (MOCK contact)",
+      "role": "Packaging sales",
+      "organization": "Bangkok Box & Print (MOCK)",
+      "supplier": true,
+      "internal": false,
+      "email": "sales@bkkboxprint.example",
+      "phone": "+66-00-000-0202 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-203",
+      "name": "Production Planner (MOCK contact)",
+      "role": "Co-packing",
+      "organization": "Western Kitchen Foods (MOCK)",
+      "supplier": true,
+      "internal": false,
+      "email": "planning@westernkitchen.example",
+      "phone": "+66-00-000-0203 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-204",
+      "name": "Event Coordinator (MOCK contact)",
+      "role": "Exhibitor services",
+      "organization": "Bangkok Gourmet Expo (MOCK)",
+      "internal": false,
+      "email": "exhibitors@bkkgourmetexpo.example",
+      "phone": "+66-00-000-0204 (MOCK)",
+      "mock": true
+    },
+    {
+      "id": "CON-205",
+      "name": "Food Editor (MOCK contact)",
+      "role": "Editor",
+      "organization": "Krua Living Magazine (MOCK)",
+      "internal": false,
+      "email": "editor@krualiving.example",
+      "phone": "+66-00-000-0205 (MOCK)",
+      "mock": true
+    }
+  ]
+}

@@ -1,0 +1,471 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "B2B account details. lastOrderDate, revenue and top products are calculated from sales.json orders.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "accounts": [
+    {
+      "customerId": "CUS-101",
+      "name": "Chao Phraya Lantern Hotel (MOCK)",
+      "type": "Hotel",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-101",
+      "lastOrderDate": "2026-07-28",
+      "daysSinceLastOrder": 71,
+      "ordersSince1Jul": 3,
+      "revenueLast90DaysThb": 47426,
+      "topProducts": [
+        {
+          "productId": "PRD-004",
+          "units": 166
+        },
+        {
+          "productId": "PRD-008",
+          "units": 50
+        },
+        {
+          "productId": "PRD-012",
+          "units": 36
+        }
+      ],
+      "status": "At risk",
+      "paymentTerms": "Credit 30 days",
+      "priceList": "hotel",
+      "orderFrequency": "Every 10 days until 28 Jul, none since",
+      "opportunity": "Win back before December banquet season; previously bought whole duck (PRD-008) and native chicken (PRD-012).",
+      "nextStep": "Overdue follow-up call (TSK-002, due 25 Sep). They emailed asking for Q4 hotel prices on 22 Sep (EML-004), still unanswered.",
+      "followUpDate": "2026-09-25",
+      "risk": "Whole duck supply is tight in November (PRD-008), so any offer must check stock first.",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-102",
+      "name": "Sukhumvit Garden Residence Hotel (MOCK)",
+      "type": "Hotel",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-102",
+      "lastOrderDate": "2026-10-02",
+      "daysSinceLastOrder": 5,
+      "ordersSince1Jul": 14,
+      "revenueLast90DaysThb": 92197,
+      "topProducts": [
+        {
+          "productId": "PRD-004",
+          "units": 509
+        },
+        {
+          "productId": "PRD-012",
+          "units": 137
+        },
+        {
+          "productId": "PRD-014",
+          "units": 76
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Credit 30 days",
+      "priceList": "hotel",
+      "orderFrequency": "Weekly",
+      "opportunity": "Growing: +25% since July. Executive chef wants a Christmas duck menu tasting (EVT-003).",
+      "nextStep": "Tasting on 21 Oct.",
+      "followUpDate": "2026-10-21",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-103",
+      "name": "Hua Hin Seabreeze Resort (MOCK)",
+      "type": "Hotel",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-103",
+      "lastOrderDate": "2026-10-05",
+      "daysSinceLastOrder": 2,
+      "ordersSince1Jul": 14,
+      "revenueLast90DaysThb": 149274,
+      "topProducts": [
+        {
+          "productId": "PRD-004",
+          "units": 652
+        },
+        {
+          "productId": "PRD-002",
+          "units": 237
+        },
+        {
+          "productId": "PRD-001",
+          "units": 204
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Credit 30 days",
+      "priceList": "hotel",
+      "orderFrequency": "Weekly",
+      "opportunity": "High season from November; orders already up in October.",
+      "nextStep": "Confirm November volumes (TSK-014).",
+      "followUpDate": "2026-10-10",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-111",
+      "name": "Baan Krua Siam Restaurant (MOCK)",
+      "type": "Restaurant",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-111",
+      "lastOrderDate": "2026-10-04",
+      "daysSinceLastOrder": 3,
+      "ordersSince1Jul": 20,
+      "revenueLast90DaysThb": 138820,
+      "topProducts": [
+        {
+          "productId": "PRD-002",
+          "units": 237
+        },
+        {
+          "productId": "PRD-009",
+          "units": 230
+        },
+        {
+          "productId": "PRD-008",
+          "units": 85
+        }
+      ],
+      "status": "At risk",
+      "paymentTerms": "Credit 15 days",
+      "priceList": "restaurant",
+      "orderFrequency": "Every 5 days",
+      "opportunity": "Loyal restaurant; duck breast is their signature dish.",
+      "nextStep": "Complaint CPL-001 about duck breast out of stock. Offer whole duck (PRD-008) as a bridge until 15 Oct.",
+      "followUpDate": "2026-10-08",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-112",
+      "name": "Ember & Rice Grill (MOCK)",
+      "type": "Restaurant",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-112",
+      "lastOrderDate": null,
+      "daysSinceLastOrder": null,
+      "ordersSince1Jul": 0,
+      "revenueLast90DaysThb": 0,
+      "topProducts": [],
+      "status": "Proposal sent",
+      "paymentTerms": "To be agreed",
+      "priceList": "restaurant",
+      "orderFrequency": "No orders yet",
+      "opportunity": "New grill restaurant: wings, thigh and native chicken. Proposal sent 26 Sep.",
+      "nextStep": "Follow up on the proposal (TSK-006, due 3 Oct, overdue).",
+      "followUpDate": "2026-10-03",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-113",
+      "name": "Nong Lek Noodle Group, 6 branches (MOCK)",
+      "type": "Restaurant",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-113",
+      "lastOrderDate": "2026-10-06",
+      "daysSinceLastOrder": 1,
+      "ordersSince1Jul": 25,
+      "revenueLast90DaysThb": 165375,
+      "topProducts": [
+        {
+          "productId": "PRD-013",
+          "units": 799
+        },
+        {
+          "productId": "PRD-003",
+          "units": 465
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Credit 30 days",
+      "priceList": "restaurant",
+      "orderFrequency": "Every 4 days",
+      "opportunity": "Opening 2 more branches in November; wings volume +40%.",
+      "nextStep": "Annual supply agreement draft (DOC-008).",
+      "followUpDate": "2026-10-15",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-121",
+      "name": "Chef's Table Private Dining (MOCK)",
+      "type": "Chef",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-121",
+      "lastOrderDate": "2026-09-30",
+      "daysSinceLastOrder": 7,
+      "ordersSince1Jul": 7,
+      "revenueLast90DaysThb": 38205,
+      "topProducts": [
+        {
+          "productId": "PRD-008",
+          "units": 38
+        },
+        {
+          "productId": "PRD-012",
+          "units": 38
+        },
+        {
+          "productId": "PRD-009",
+          "units": 29
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Cash on delivery",
+      "priceList": "restaurant",
+      "orderFrequency": "Every 2 weeks",
+      "opportunity": "Chef collaboration for a farm-to-table dinner (EVT-004).",
+      "nextStep": "Duck breast missing for the 18 Oct dinner unless PO-2026-0409 arrives on time.",
+      "followUpDate": "2026-10-09",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-122",
+      "name": "Saffron & Lemongrass Cooking Studio (MOCK)",
+      "type": "Chef",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-122",
+      "lastOrderDate": "2026-10-02",
+      "daysSinceLastOrder": 5,
+      "ordersSince1Jul": 5,
+      "revenueLast90DaysThb": 17324,
+      "topProducts": [
+        {
+          "productId": "PRD-004",
+          "units": 68
+        },
+        {
+          "productId": "PRD-001",
+          "units": 36
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Transfer before delivery",
+      "priceList": "restaurant",
+      "orderFrequency": "Every 3 weeks",
+      "opportunity": "Cooking classes could feature bone broth (PRD-010).",
+      "nextStep": "Send bone broth samples (TSK-016).",
+      "followUpDate": "2026-10-14",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-131",
+      "name": "Siam Fresh Gourmet, 8 branches (MOCK)",
+      "type": "Retail Partner",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-131",
+      "lastOrderDate": "2026-10-05",
+      "daysSinceLastOrder": 2,
+      "ordersSince1Jul": 33,
+      "revenueLast90DaysThb": 780125,
+      "topProducts": [
+        {
+          "productId": "PRD-004",
+          "units": 4007
+        },
+        {
+          "productId": "PRD-002",
+          "units": 1359
+        },
+        {
+          "productId": "PRD-001",
+          "units": 819
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Credit 45 days",
+      "priceList": "retail",
+      "orderFrequency": "Every 3 days",
+      "opportunity": "Largest retail partner, but egg orders down about 20% since the cracked-egg issue.",
+      "nextStep": "Joint quality review on 9 Oct (MTG-004); answer complaint CPL-003.",
+      "followUpDate": "2026-10-09",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-132",
+      "name": "Green Basket Organic Market (MOCK)",
+      "type": "Retail Partner",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-132",
+      "lastOrderDate": "2026-10-05",
+      "daysSinceLastOrder": 2,
+      "ordersSince1Jul": 25,
+      "revenueLast90DaysThb": 211286,
+      "topProducts": [
+        {
+          "productId": "PRD-005",
+          "units": 1334
+        },
+        {
+          "productId": "PRD-006",
+          "units": 385
+        },
+        {
+          "productId": "PRD-003",
+          "units": 350
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Credit 30 days",
+      "priceList": "retail",
+      "orderFrequency": "Every 4 days",
+      "opportunity": "Organic eggs falling; buyer says shoppers switch to a cheaper organic brand.",
+      "nextStep": "Pricing review for PRD-005 (TSK-011).",
+      "followUpDate": "2026-10-12",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-133",
+      "name": "Urban Pantry Delicatessen (MOCK)",
+      "type": "Retail Partner",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-133",
+      "lastOrderDate": "2026-10-03",
+      "daysSinceLastOrder": 4,
+      "ordersSince1Jul": 14,
+      "revenueLast90DaysThb": 28264,
+      "topProducts": [
+        {
+          "productId": "PRD-016",
+          "units": 143
+        },
+        {
+          "productId": "PRD-011",
+          "units": 126
+        },
+        {
+          "productId": "PRD-010",
+          "units": 20
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Credit 30 days",
+      "priceList": "retail",
+      "orderFrequency": "Weekly",
+      "opportunity": "Good shelf for new ready-to-cook items (PRD-010, PRD-011).",
+      "nextStep": "Tasting stand for bone broth on weekends (CMP-003).",
+      "followUpDate": "2026-10-17",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-141",
+      "name": "Pathum Fresh Wholesale (MOCK)",
+      "type": "Wholesale",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-141",
+      "lastOrderDate": "2026-10-02",
+      "daysSinceLastOrder": 5,
+      "ordersSince1Jul": 14,
+      "revenueLast90DaysThb": 443349,
+      "topProducts": [
+        {
+          "productId": "PRD-004",
+          "units": 2548
+        },
+        {
+          "productId": "PRD-013",
+          "units": 1402
+        },
+        {
+          "productId": "PRD-003",
+          "units": 691
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Credit 30 days",
+      "priceList": "b2b",
+      "orderFrequency": "Weekly",
+      "opportunity": "Volume up 30% since July.",
+      "nextStep": "Quarterly review in November.",
+      "followUpDate": "2026-11-05",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-142",
+      "name": "Eastern Seaboard Food Supply (MOCK)",
+      "type": "Wholesale",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-142",
+      "lastOrderDate": "2026-10-03",
+      "daysSinceLastOrder": 4,
+      "ordersSince1Jul": 10,
+      "revenueLast90DaysThb": 136595,
+      "topProducts": [
+        {
+          "productId": "PRD-013",
+          "units": 554
+        },
+        {
+          "productId": "PRD-001",
+          "units": 299
+        }
+      ],
+      "status": "At risk",
+      "paymentTerms": "Credit 30 days",
+      "priceList": "b2b",
+      "orderFrequency": "Every 10 days",
+      "opportunity": "Orders down 35% since July; they asked for a lower wings price.",
+      "nextStep": "Decide on price request (TSK-012) and call back.",
+      "followUpDate": "2026-10-06",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-151",
+      "name": "Bangna Tech Park Canteen Services (MOCK)",
+      "type": "Corporate",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-151",
+      "lastOrderDate": "2026-10-06",
+      "daysSinceLastOrder": 1,
+      "ordersSince1Jul": 14,
+      "revenueLast90DaysThb": 109688,
+      "topProducts": [
+        {
+          "productId": "PRD-004",
+          "units": 627
+        },
+        {
+          "productId": "PRD-003",
+          "units": 498
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "Credit 30 days",
+      "priceList": "b2b",
+      "orderFrequency": "Weekly",
+      "opportunity": "Stable canteen supply.",
+      "nextStep": "Contract renewal in January.",
+      "followUpDate": "2026-12-01",
+      "mock": true
+    },
+    {
+      "customerId": "CUS-152",
+      "name": "Lumpini Finance Group, corporate gifts (MOCK)",
+      "type": "Corporate",
+      "accountManager": "CON-002",
+      "primaryContact": "CON-152",
+      "lastOrderDate": null,
+      "daysSinceLastOrder": null,
+      "ordersSince1Jul": 1,
+      "revenueLast90DaysThb": 0,
+      "topProducts": [
+        {
+          "productId": "PRD-015",
+          "units": 320
+        }
+      ],
+      "status": "Active account",
+      "paymentTerms": "50% deposit, balance on delivery",
+      "priceList": "b2b",
+      "orderFrequency": "Seasonal (New Year gifts)",
+      "opportunity": "Pre-ordered 320 egg gift boxes for 15 Dec; may add 200 more.",
+      "nextStep": "Confirm gift box supply before accepting more (PO-2026-0415, TSK-009).",
+      "followUpDate": "2026-10-13",
+      "mock": true
+    }
+  ]
+}

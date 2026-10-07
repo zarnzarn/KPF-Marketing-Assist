@@ -1,0 +1,365 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Tasks, follow-ups and approval requests. 'Today' is 2026-10-07; dueDate before today and not Done = overdue.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "tasks": [
+    {
+      "id": "TSK-001",
+      "title": "Coordinate with production: breast fillet stock will run out before the 12 Oct batch",
+      "priority": "High",
+      "status": "In progress",
+      "dueDate": "2026-10-08",
+      "owner": "CON-001",
+      "type": "Task",
+      "related": {
+        "productId": "PRD-002",
+        "campaignId": "CMP-001",
+        "emailId": "EML-002",
+        "meetingId": "MTG-002"
+      },
+      "urgent": true,
+      "note": "Decide: pull the 19 Oct slot forward, or limit the promo to LINE OA / pause ads.",
+      "mock": true
+    },
+    {
+      "id": "TSK-002",
+      "title": "Follow up Chao Phraya Lantern Hotel: no orders since 28 Jul",
+      "priority": "High",
+      "status": "To do",
+      "dueDate": "2026-09-25",
+      "owner": "CON-002",
+      "type": "Follow-up",
+      "related": {
+        "customerId": "CUS-101",
+        "emailId": "EML-004",
+        "productIds": [
+          "PRD-008",
+          "PRD-012"
+        ]
+      },
+      "note": "They asked for Q4 hotel prices on 22 Sep. Previously bought whole duck and native chicken.",
+      "mock": true
+    },
+    {
+      "id": "TSK-003",
+      "title": "Reply to Baan Krua Siam about duck breast out of stock",
+      "priority": "High",
+      "status": "To do",
+      "dueDate": "2026-10-07",
+      "owner": "CON-005",
+      "type": "Follow-up",
+      "related": {
+        "customerId": "CUS-111",
+        "complaintId": "CPL-001",
+        "productId": "PRD-009"
+      },
+      "urgent": true,
+      "mock": true
+    },
+    {
+      "id": "TSK-004",
+      "title": "Approve LINE OA broadcast: Protein Week second wave",
+      "priority": "High",
+      "status": "Waiting for approval",
+      "dueDate": "2026-10-08",
+      "owner": "CON-001",
+      "type": "Approval",
+      "related": {
+        "campaignId": "CMP-001",
+        "contentId": "CNT-003"
+      },
+      "approval": {
+        "actionType": "Send external message",
+        "requestedBy": "CON-006",
+        "requestedAt": "2026-10-06",
+        "state": "Pending"
+      },
+      "note": "Check stock first: the broadcast could push breast fillet demand higher (TSK-001).",
+      "mock": true
+    },
+    {
+      "id": "TSK-005",
+      "title": "Prepare Q4 hotel price list",
+      "priority": "Medium",
+      "status": "In progress",
+      "dueDate": "2026-10-03",
+      "owner": "CON-002",
+      "type": "Task",
+      "related": {
+        "documentId": "DOC-002",
+        "customerIds": [
+          "CUS-101",
+          "CUS-102",
+          "CUS-103"
+        ]
+      },
+      "note": "Overdue; needed to answer CUS-101.",
+      "mock": true
+    },
+    {
+      "id": "TSK-006",
+      "title": "Follow up Ember & Rice Grill proposal",
+      "priority": "Medium",
+      "status": "To do",
+      "dueDate": "2026-10-03",
+      "owner": "CON-002",
+      "type": "Follow-up",
+      "related": {
+        "customerId": "CUS-112",
+        "documentId": "DOC-007"
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-007",
+      "title": "Approve bone broth launch price and launch posts",
+      "priority": "High",
+      "status": "Waiting for approval",
+      "dueDate": "2026-10-10",
+      "owner": "CON-001",
+      "type": "Approval",
+      "related": {
+        "productId": "PRD-010",
+        "campaignId": "CMP-003",
+        "promotionId": "PROMO-002",
+        "contentIds": [
+          "CNT-005",
+          "CNT-006"
+        ]
+      },
+      "approval": {
+        "actionType": "Change promotion",
+        "requestedBy": "CON-006",
+        "requestedAt": "2026-10-03",
+        "state": "Pending"
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-008",
+      "title": "Book booth design and samples for Bangkok Gourmet Expo",
+      "priority": "Medium",
+      "status": "In progress",
+      "dueDate": "2026-10-15",
+      "owner": "CON-006",
+      "type": "Task",
+      "related": {
+        "eventId": "EVT-001",
+        "productIds": [
+          "PRD-010",
+          "PRD-011",
+          "PRD-012"
+        ]
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-009",
+      "title": "Approve corporate gift box early-bird price",
+      "priority": "High",
+      "status": "Waiting for approval",
+      "dueDate": "2026-10-13",
+      "owner": "CON-001",
+      "type": "Approval",
+      "related": {
+        "productId": "PRD-015",
+        "promotionId": "PROMO-003",
+        "customerId": "CUS-152",
+        "purchaseId": "PO-2026-0415"
+      },
+      "approval": {
+        "actionType": "Change product price",
+        "requestedBy": "CON-002",
+        "requestedAt": "2026-10-05",
+        "state": "Pending"
+      },
+      "note": "Gift box packaging is delayed; confirm supply before quoting more boxes.",
+      "mock": true
+    },
+    {
+      "id": "TSK-010",
+      "title": "Answer cracked-egg complaint from Siam Fresh Gourmet",
+      "priority": "High",
+      "status": "In progress",
+      "dueDate": "2026-10-06",
+      "owner": "CON-004",
+      "type": "Follow-up",
+      "related": {
+        "customerId": "CUS-131",
+        "complaintId": "CPL-003",
+        "productId": "PRD-004"
+      },
+      "note": "Overdue. QA test of the new carton due 8 Oct.",
+      "mock": true
+    },
+    {
+      "id": "TSK-011",
+      "title": "Pricing review: organic-feed eggs losing to cheaper brand",
+      "priority": "Medium",
+      "status": "To do",
+      "dueDate": "2026-10-12",
+      "owner": "CON-001",
+      "type": "Task",
+      "related": {
+        "productId": "PRD-005",
+        "customerId": "CUS-132",
+        "promotionId": "PROMO-004",
+        "documentId": "DOC-010"
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-012",
+      "title": "Decide on Eastern Seaboard wings price request",
+      "priority": "Medium",
+      "status": "To do",
+      "dueDate": "2026-10-06",
+      "owner": "CON-002",
+      "type": "Approval",
+      "related": {
+        "customerId": "CUS-142",
+        "productId": "PRD-013"
+      },
+      "approval": {
+        "actionType": "Confirm commercial commitment",
+        "requestedBy": "CON-002",
+        "requestedAt": "2026-10-01",
+        "state": "Pending"
+      },
+      "note": "Asked for 115 instead of 125 baht per kg. Overdue.",
+      "mock": true
+    },
+    {
+      "id": "TSK-013",
+      "title": "Monthly marketing report for September",
+      "priority": "Medium",
+      "status": "Done",
+      "dueDate": "2026-10-05",
+      "owner": "CON-001",
+      "type": "Task",
+      "related": {
+        "documentId": "DOC-001"
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-014",
+      "title": "Confirm November volumes with Hua Hin Seabreeze Resort",
+      "priority": "Medium",
+      "status": "To do",
+      "dueDate": "2026-10-10",
+      "owner": "CON-002",
+      "type": "Follow-up",
+      "related": {
+        "customerId": "CUS-103"
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-015",
+      "title": "Move slow duck eggs: idea for a salted-egg recipe post",
+      "priority": "Low",
+      "status": "To do",
+      "dueDate": "2026-10-18",
+      "owner": "CON-006",
+      "type": "Task",
+      "related": {
+        "productIds": [
+          "PRD-006",
+          "PRD-007"
+        ],
+        "contentId": "CNT-009"
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-016",
+      "title": "Send bone broth samples to cooking studio",
+      "priority": "Low",
+      "status": "To do",
+      "dueDate": "2026-10-14",
+      "owner": "CON-002",
+      "type": "Follow-up",
+      "related": {
+        "customerId": "CUS-122",
+        "productId": "PRD-010"
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-017",
+      "title": "Approve press release: farm-to-table dinner",
+      "priority": "Medium",
+      "status": "Waiting for approval",
+      "dueDate": "2026-10-11",
+      "owner": "CON-001",
+      "type": "Approval",
+      "related": {
+        "eventId": "EVT-004",
+        "contentId": "CNT-010",
+        "customerId": "CUS-121"
+      },
+      "approval": {
+        "actionType": "Publish content",
+        "requestedBy": "CON-006",
+        "requestedAt": "2026-10-06",
+        "state": "Pending"
+      },
+      "note": "Mentions duck breast on the menu, which is out of stock until 15 Oct.",
+      "mock": true
+    },
+    {
+      "id": "TSK-018",
+      "title": "Use or discount liquid yolk expiring 18 Oct",
+      "priority": "Medium",
+      "status": "To do",
+      "dueDate": "2026-10-12",
+      "owner": "CON-002",
+      "type": "Task",
+      "related": {
+        "productId": "PRD-014",
+        "customerIds": [
+          "CUS-102",
+          "CUS-113"
+        ]
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-019",
+      "title": "Check website delivery delays (two late Bangkok orders)",
+      "priority": "Medium",
+      "status": "In progress",
+      "dueDate": "2026-10-09",
+      "owner": "CON-005",
+      "type": "Task",
+      "related": {
+        "complaintIds": [
+          "CPL-002",
+          "CPL-006"
+        ]
+      },
+      "mock": true
+    },
+    {
+      "id": "TSK-020",
+      "title": "Plan New Year gift box campaign with stock limits",
+      "priority": "Medium",
+      "status": "To do",
+      "dueDate": "2026-10-20",
+      "owner": "CON-001",
+      "type": "Task",
+      "related": {
+        "campaignId": "CMP-004",
+        "productId": "PRD-015",
+        "purchaseId": "PO-2026-0415"
+      },
+      "mock": true
+    }
+  ]
+}
