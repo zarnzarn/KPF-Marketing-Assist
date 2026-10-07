@@ -2,6 +2,7 @@
 // Uses a read-only service account whose key file lives OUTSIDE the project.
 import { createSign } from "node:crypto";
 import { readFile } from "node:fs/promises";
+import { DATA_NOT_AVAILABLE } from "../constants";
 import { channelConfig, num } from "./config";
 import { ChannelError, explain, readOnlyJson } from "./readOnlyFetch";
 import type { ChannelDeps, ChannelSnapshot } from "./types";
@@ -31,6 +32,8 @@ export async function ga4Snapshot(deps: ChannelDeps): Promise<ChannelSnapshot> {
   const base = { channel: "ga4" as const, label: "Website traffic (GA4)", metrics: [], items: [] };
   if (!propertyId || !keyFile) return { ...base, status: "not_configured", message: "Add GA4_PROPERTY_ID and GA4_SERVICE_ACCOUNT_JSON_PATH (a key file outside the project folder) to .env.local." };
   const now = deps.now ?? new Date();
+  // Checked before anything is read or sent, so a wrong id gets a clear message instead of "blocked".
+  if (!/^\d+$/.test(propertyId)) return { ...base, status: "error", fetchedAt: now.toISOString(), message: "GA4_PROPERTY_ID must be the numeric Property ID (Google Analytics: Admin, Property details), not the G- Measurement ID or \"properties/…\"." };
   const read = deps.readFile ?? ((p: string) => readFile(p, "utf8"));
   let key: { client_email?: unknown; private_key?: unknown } | null;
   try {
@@ -76,15 +79,15 @@ export async function ga4Snapshot(deps: ChannelDeps): Promise<ChannelSnapshot> {
       status: "connected",
       fetchedAt: now.toISOString(),
       metrics: [
-        { label: "Active users", value: m ? num(m[0]) : "Data not available.", note: "Thailand, last 28 days" },
-        { label: "New users", value: m ? num(m[1]) : "Data not available." },
-        { label: "Sessions", value: m ? num(m[2]) : "Data not available." },
-        { label: "Avg. session", value: seconds !== undefined ? `${Math.floor(seconds / 60)}m ${seconds % 60}s` : "Data not available." },
+        { label: "Active users", value: m ? num(m[0]) : DATA_NOT_AVAILABLE, note: "Thailand, last 28 days" },
+        { label: "New users", value: m ? num(m[1]) : DATA_NOT_AVAILABLE },
+        { label: "Sessions", value: m ? num(m[2]) : DATA_NOT_AVAILABLE },
+        { label: "Avg. session", value: seconds !== undefined ? `${Math.floor(seconds / 60)}m ${seconds % 60}s` : DATA_NOT_AVAILABLE },
       ],
       items: (sources.rows ?? []).map((r, i) => {
         const raw = r.metricValues?.[0]?.value;
         const sessions = raw === undefined || raw === "" ? NaN : Number(raw);
-        return { id: `src-${i}`, title: r.dimensionValues?.[0]?.value ?? "(unknown)", detail: Number.isFinite(sessions) ? `${num(sessions)} sessions` : "Data not available." };
+        return { id: `src-${i}`, title: r.dimensionValues?.[0]?.value ?? "(unknown)", detail: Number.isFinite(sessions) ? `${num(sessions)} sessions` : DATA_NOT_AVAILABLE };
       }),
     };
   } catch (error) {

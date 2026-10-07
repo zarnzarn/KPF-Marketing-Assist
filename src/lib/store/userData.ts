@@ -50,6 +50,8 @@ export function newId(prefix: string): string {
 // ---------- external store (browser only) ----------
 
 let current: UserData | null = null;
+/** False when this browser will not save (storage blocked, full or unavailable). The UI warns instead of claiming "saved". */
+let storageOk = true;
 const listeners = new Set<() => void>();
 
 function storage(): Storage | null {
@@ -62,23 +64,34 @@ function storage(): Storage | null {
 
 export function getUserData(): UserData {
   if (current === null) {
+    const store = storage();
+    if (typeof window !== "undefined" && !store) storageOk = false;
     try {
-      current = parseUserData(storage()?.getItem(STORAGE_KEY) ?? null);
+      current = parseUserData(store?.getItem(STORAGE_KEY) ?? null);
     } catch {
       current = EMPTY_USER_DATA;
+      storageOk = false;
     }
   }
   return current;
+}
+
+export function isStorageOk(): boolean {
+  getUserData();
+  return storageOk;
 }
 
 export const getServerUserData = () => EMPTY_USER_DATA;
 
 export function setUserData(update: (data: UserData) => UserData): void {
   current = update(getUserData());
+  const store = storage();
   try {
-    storage()?.setItem(STORAGE_KEY, JSON.stringify(current));
+    if (!store) throw new Error("no storage");
+    store.setItem(STORAGE_KEY, JSON.stringify(current));
+    storageOk = true;
   } catch {
-    // storage full or blocked: keep the change in memory for this visit
+    storageOk = false; // storage full or blocked: the change lasts only for this visit, and the app says so
   }
   listeners.forEach((l) => l());
 }
@@ -86,8 +99,13 @@ export function setUserData(update: (data: UserData) => UserData): void {
 export function subscribe(listener: () => void): () => void {
   listeners.add(listener);
   const onStorage = (e: StorageEvent) => {
-    if (e.key === STORAGE_KEY) {
-      current = parseUserData(e.newValue);
+    // key === null means another tab cleared all storage; re-read so the next edit cannot bring old data back.
+    if (e.key === null || e.key === STORAGE_KEY) {
+      try {
+        current = parseUserData(storage()?.getItem(STORAGE_KEY) ?? null);
+      } catch {
+        current = EMPTY_USER_DATA;
+      }
       listener();
     }
   };
@@ -101,4 +119,5 @@ export function subscribe(listener: () => void): () => void {
 /** For tests: forget the in-memory copy so the next read comes from storage again. */
 export function resetUserDataCache(): void {
   current = null;
+  storageOk = true;
 }

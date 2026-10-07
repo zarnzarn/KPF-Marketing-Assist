@@ -1,4 +1,5 @@
 // Task rules (create / edit / complete). Pure functions, in memory only.
+import { isIsoDate } from "./dates";
 import type { Priority, Task, TaskStatus } from "./types";
 
 export interface TaskInput {
@@ -18,7 +19,7 @@ export function validateTask(input: TaskInput): TaskErrors {
   const errors: TaskErrors = {};
   if (!input.title.trim()) errors.title = "Title is required.";
   else if (input.title.trim().length > 140) errors.title = "Title must be 140 characters or fewer.";
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(input.dueDate) || Number.isNaN(Date.parse(`${input.dueDate}T00:00:00Z`))) {
+  if (!isIsoDate(input.dueDate)) {
     errors.dueDate = "Enter a valid due date.";
   }
   if (!input.owner.trim()) errors.owner = "Owner is required.";

@@ -31,13 +31,30 @@ export function EntityForm({
   const firstRef = useRef<HTMLInputElement>(null);
   const id = (name: string) => `${uid}-${name}`;
 
-  useEffect(() => firstRef.current?.focus(), []);
+  useEffect(() => {
+    // Remember the button that opened the form, and give focus back to it when the form closes.
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    firstRef.current?.focus();
+    return () => {
+      if (opener?.isConnected) opener.focus();
+    };
+  }, []);
 
-  function submit(e: React.FormEvent) {
+  function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const found = { ...validateFields(fields, values), ...(extraValidate?.(values) ?? {}) };
+    // A number box the browser could not read reports "" as its value; say so instead of treating it as blank.
+    for (const f of fields.filter((x) => x.type === "number")) {
+      const el = e.currentTarget.elements.namedItem(f.name);
+      if (el instanceof HTMLInputElement && el.validity.badInput) found[f.name] = `${f.label} must be a number.`;
+    }
     setErrors(found);
-    if (Object.keys(found).length === 0) onSubmit(values);
+    const firstInvalid = fields.find((f) => found[f.name]);
+    if (firstInvalid) {
+      document.getElementById(id(firstInvalid.name))?.focus(); // the error is read out with the field
+      return;
+    }
+    onSubmit(values);
   }
 
   return (

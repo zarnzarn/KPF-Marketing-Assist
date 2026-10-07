@@ -5,6 +5,10 @@ import { completeTask, createTask, deleteTask, updateTask, validateTask, type Ta
 const valid: TaskInput = { title: "  Call chef  ", priority: "High", status: "To do", dueDate: "2026-10-10", owner: " Me ", campaignId: "" };
 
 describe("validateTask", () => {
+  it.each(["2026-02-30", "2026-02-29", "2026-11-31"])("refuses the impossible due date %s", (dueDate) => {
+    expect(validateTask({ ...valid, dueDate }).dueDate).toBe("Enter a valid due date.");
+  });
+
   it("accepts a valid task", () => {
     expect(validateTask(valid)).toEqual({});
   });

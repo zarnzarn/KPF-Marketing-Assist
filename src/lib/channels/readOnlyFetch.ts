@@ -6,6 +6,8 @@
 //    require POST by their API design (Google sign-in token, GA4 runReport,
 //    Shopify GraphQL queries). Shopify bodies containing "mutation" are refused.
 //  - Any other method or POST target throws before a request is made.
+//  - Signed-in requests never follow redirects, so a token or body can never be
+//    carried to another address. Public GETs may follow, but must end on https.
 // Secrets (tokens, keys) are redacted from every error message.
 
 export type ChannelErrorKind = "auth" | "permission" | "not_found" | "rate_limit" | "timeout" | "network" | "bad_response" | "blocked";
@@ -99,10 +101,13 @@ export async function readOnlyText(url: string, req: ReadOnlyRequest = {}): Prom
     return new ChannelError(aborted ? "The service did not answer in time." : redact(`Could not reach the service: ${error instanceof Error ? error.message : String(error)}`, secrets), aborted ? "timeout" : "network");
   };
 
+  // Anything that carries a key (POST body, secrets, auth headers) is "signed in".
+  const signedIn = method === "POST" || secrets.length > 0 || Object.keys(req.headers ?? {}).some((h) => /authorization|token|key|secret/i.test(h));
+
   let response: Response;
   let text: string;
   try {
-    response = await doFetch(url, { method, headers: req.headers, body: req.body, signal: controller.signal, cache: "no-store" });
+    response = await doFetch(url, { method, headers: req.headers, body: req.body, signal: controller.signal, cache: "no-store", redirect: signedIn ? "manual" : "follow" });
     // The timeout also covers reading the body, so a service that stalls mid-answer is stopped.
     text = await response.text();
   } catch (error) {
@@ -110,6 +115,11 @@ export async function readOnlyText(url: string, req: ReadOnlyRequest = {}): Prom
   } finally {
     clearTimeout(timer);
   }
+
+  if (signedIn && (response.type === "opaqueredirect" || (response.status >= 300 && response.status < 400))) {
+    throw new ChannelError("The service tried to send this signed-in request to another address. It was stopped for safety.", "blocked");
+  }
+  if (response.url && !/^https:\/\//.test(response.url)) throw new ChannelError("The service redirected to a non-secure (http) address, so it was not read.", "blocked");
 
   if (!response.ok) {
     let detail = "";

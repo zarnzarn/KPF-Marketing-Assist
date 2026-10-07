@@ -15,7 +15,7 @@ const BASIC = btoa(`${KEY}:${SECRET}`);
 const NOW = new Date("2026-10-06T03:00:00.000Z");
 
 const SHOPIFY_URL = "https://synthetic-farm.myshopify.com";
-const SHOPIFY_GRAPHQL = "https://synthetic-farm.myshopify.com/admin/api/2025-01/graphql.json";
+const SHOPIFY_GRAPHQL = "https://synthetic-farm.myshopify.com/admin/api/2026-07/graphql.json";
 const WOO_URL = "https://shop.example.com";
 const WOO_PRODUCTS = "https://shop.example.com/wp-json/wc/v3/products?per_page=100&status=publish";
 
@@ -305,7 +305,8 @@ describe("shopSnapshot — unsafe or wrong addresses", () => {
     expect(calls).toHaveLength(0);
     for (const snap of [shopify, woo]) {
       expect(snap.status).toBe("error");
-      expect(snap.message).toBe("SHOP_URL must start with https://");
+      // A bare host name is not a web address at all; the message shows the right form.
+      expect(snap.message).toMatch(/^SHOP_URL is not a web address\. Use the form https:\/\//);
       expectNoSecret(snap);
     }
   });
@@ -315,14 +316,22 @@ describe("shopSnapshot — unsafe or wrong addresses", () => {
     const snap = await shopSnapshot({ env: shopifyEnv({ SHOP_URL: "https://shop.example.com" }), fetchImpl, now: NOW });
     expect(calls).toHaveLength(0);
     expect(snap.status).toBe("error");
-    expect(snap.message).toBe("This request is not on the read-only list and was blocked.");
+    // Refused before any request, with a message that says which address to use instead.
+    expect(snap.message).toMatch(/^For Shopify, SHOP_URL must be the shop's own …myshopify\.com address/);
     expect(snap.products).toBeUndefined();
     expectNoSecret(snap);
+  });
+
+  it("accepts a myshopify.com address written in capital letters and reads it in lower case", async () => {
+    const { fetchImpl, calls } = recordingFetch([ok(shopifyAnswer([]))]);
+    const snap = await shopSnapshot({ env: shopifyEnv({ SHOP_URL: "https://Synthetic-Farm.MyShopify.com" }), fetchImpl, now: NOW });
+    expect(snap.status).toBe("connected");
+    expect(calls[0].url).toBe(SHOPIFY_GRAPHQL);
   });
 });
 
 describe("shopSnapshot — Shopify request", () => {
-  it("makes exactly one POST to the Admin GraphQL address for API version 2025-01", async () => {
+  it("makes exactly one POST to the Admin GraphQL address for API version 2026-07", async () => {
     const { calls } = await readShopify([]);
     expect(calls).toHaveLength(1);
     expect(calls[0].url).toBe(SHOPIFY_GRAPHQL);
@@ -382,7 +391,7 @@ describe("shopSnapshot — Shopify products", () => {
         category: "Synthetic chicken",
         status: "Active",
         priceThb: 320,
-        priceUnit: "per item",
+        priceUnit: "price of the first variant",
         channels: ["Website"],
         stockStatus: "In stock",
         availability: "Available",
@@ -393,14 +402,33 @@ describe("shopSnapshot — Shopify products", () => {
     ]);
   });
 
-  it("shows a DRAFT product as Paused", async () => {
+  it("shows a DRAFT product as Draft", async () => {
     const { snap } = await readShopify([shopifyNode({ status: "DRAFT" })]);
-    expect(snap.products?.[0].status).toBe("Paused");
+    expect(snap.products?.[0].status).toBe("Draft");
   });
 
-  it("shows any status other than ACTIVE as Paused", async () => {
+  it("shows any other status than ACTIVE or DRAFT as Paused", async () => {
     const { snap } = await readShopify([shopifyNode({ status: "ARCHIVED" }), shopifyNode({ status: "active" })]);
     expect(snap.products?.map((p) => p.status)).toEqual(["Paused", "Paused"]);
+  });
+
+  it("lists drafts but leaves them out of the Low stock and Out of stock counts", async () => {
+    const { snap } = await readShopify([
+      shopifyNode({ status: "DRAFT", totalInventory: 0 }),
+      shopifyNode({ status: "DRAFT", totalInventory: 2 }),
+      shopifyNode({ status: "ACTIVE", totalInventory: 0 }),
+    ]);
+    expect(snap.metrics).toEqual([
+      { label: "Products", value: "3" },
+      { label: "Low stock", value: "0" },
+      { label: "Out of stock", value: "1" },
+    ]);
+  });
+
+  it('says "first 100 products only" when Shopify has more products than one page', async () => {
+    const { fetchImpl } = recordingFetch([ok({ data: { products: { nodes: [shopifyNode({})], pageInfo: { hasNextPage: true } } } })]);
+    const snap = await shopSnapshot({ env: shopifyEnv(), fetchImpl, now: NOW });
+    expect(snap.metrics.slice(0, 3).map((m) => m.note)).toEqual(["first 100 products only", "first 100 products only", "first 100 products only"]);
   });
 
   it('uses "Uncategorised" when the product type is empty or missing', async () => {
@@ -434,7 +462,7 @@ describe("shopSnapshot — Shopify products", () => {
     ]);
   });
 
-  it("shows a product that does not track inventory as in stock, whatever totalInventory says", async () => {
+  it('shows a product that does not track inventory as "Not tracked" with no unit count, whatever totalInventory says', async () => {
     const { snap } = await readShopify([
       shopifyNode({ tracksInventory: false, totalInventory: 0 }),
       shopifyNode({ tracksInventory: false, totalInventory: -4 }),
@@ -442,19 +470,20 @@ describe("shopSnapshot — Shopify products", () => {
       shopifyNode({ tracksInventory: false, totalInventory: null }),
     ]);
     expect(snap.products?.map((p) => [p.stockStatus, p.availability])).toEqual([
-      ["In stock", "Available"],
-      ["In stock", "Available"],
-      ["In stock", "Available"],
-      ["In stock", "Available"],
+      ["Not tracked", "Available"],
+      ["Not tracked", "Available"],
+      ["Not tracked", "Available"],
+      ["Not tracked", "Available"],
     ]);
-    expect(snap.products?.map((p) => p.stockUnits)).toEqual([0, -4, 2, 0]);
+    // The count is unknown, so it is null (shown as "Data not available."), never an invented number.
+    expect(snap.products?.map((p) => p.stockUnits)).toEqual([null, null, null, null]);
   });
 
-  it("shows 0 stock units when totalInventory is not sent", async () => {
+  it("never invents 0 stock units when totalInventory is not sent", async () => {
     const { snap } = await readShopify([shopifyNode({ totalInventory: null }), shopifyNode({ totalInventory: undefined, tracksInventory: undefined })]);
     expect(snap.products?.map((p) => [p.stockStatus, p.stockUnits])).toEqual([
-      ["In stock", 0],
-      ["In stock", 0],
+      ["Not tracked", null],
+      ["Not tracked", null],
     ]);
   });
 
@@ -708,7 +737,7 @@ describe("shopSnapshot — WooCommerce products", () => {
         category: "Synthetic eggs",
         status: "Active",
         priceThb: 95.5,
-        priceUnit: "per item",
+        priceUnit: "",
         channels: ["Website"],
         stockStatus: "In stock",
         availability: "Available",
@@ -729,22 +758,40 @@ describe("shopSnapshot — WooCommerce products", () => {
     expect(snap.products?.map((p) => p.category)).toEqual(["Uncategorised", "Uncategorised"]);
   });
 
-  it("shows an unmanaged product marked outofstock as out of stock", async () => {
+  it("shows an unmanaged product marked outofstock as out of stock, with no invented unit count", async () => {
     const { snap } = await readWoo([wooItem({ manage_stock: false, stock_quantity: null, stock_status: "outofstock" })]);
-    expect(snap.products?.[0]).toMatchObject({ stockStatus: "Out of stock", availability: "Unavailable", stockUnits: 0 });
+    expect(snap.products?.[0]).toMatchObject({ stockStatus: "Out of stock", availability: "Unavailable", stockUnits: null });
   });
 
-  it("shows an unmanaged product marked instock or onbackorder as in stock", async () => {
+  it("never shows a back-ordered product as in stock, and claims nothing when the shop sends no stock data", async () => {
     const { snap } = await readWoo([
       wooItem({ manage_stock: false, stock_quantity: null, stock_status: "instock" }),
       wooItem({ manage_stock: false, stock_quantity: null, stock_status: "onbackorder" }),
       wooItem({ manage_stock: false, stock_quantity: undefined, stock_status: undefined }),
     ]);
     expect(snap.products?.map((p) => [p.stockStatus, p.availability, p.stockUnits])).toEqual([
-      ["In stock", "Available", 0],
-      ["In stock", "Available", 0],
-      ["In stock", "Available", 0],
+      ["In stock", "Available", null],
+      ["Out of stock", "Limited", null],
+      ["Not tracked", "Available", null],
     ]);
+  });
+
+  it("lets WooCommerce's own outofstock status win over a positive quantity", async () => {
+    const { snap } = await readWoo([wooItem({ stock_quantity: 12, stock_status: "outofstock" }), wooItem({ stock_quantity: 40, stock_status: "onbackorder" })]);
+    expect(snap.products?.map((p) => [p.stockStatus, p.availability, p.stockUnits])).toEqual([
+      ["Out of stock", "Unavailable", 12],
+      ["Out of stock", "Limited", 40],
+    ]);
+  });
+
+  it("decodes HTML-escaped product and category names from WordPress", async () => {
+    const { snap } = await readWoo([wooItem({ name: "Synthetic Eggs &amp; Chicken &#8211; Box", categories: [{ id: 1, name: "Synthetic &amp; Co", slug: "x" }] })]);
+    expect(snap.products?.[0]).toMatchObject({ name: "Synthetic Eggs & Chicken – Box", category: "Synthetic & Co" });
+  });
+
+  it('says "first 100 products only" when WooCommerce returns a full page of 100', async () => {
+    const { snap } = await readWoo(Array.from({ length: 100 }, (_, i) => wooItem({ id: i + 1 })));
+    expect(snap.metrics.find((m) => m.label === "Products")).toEqual({ label: "Products", value: "100", note: "first 100 products only" });
   });
 
   it("works out stock from stock_quantity with the default low-stock level of 5", async () => {
@@ -760,7 +807,7 @@ describe("shopSnapshot — WooCommerce products", () => {
       ["Low stock", "Limited", 5, 5],
       ["Low stock", "Limited", 3, 5],
       ["Out of stock", "Unavailable", 0, 5],
-      ["Out of stock", "Unavailable", -2, 5],
+      ["Out of stock", "Limited", -2, 5],
     ]);
   });
 

@@ -13,10 +13,12 @@ import {
   priorityTasksToday,
   productAlerts,
   recommendedPriorities,
+  shopGap,
+  shopNote,
   upcomingFollowUps,
   upcomingMeetings,
 } from "@/lib/queries";
-import { FIXTURE_TODAY, emptyData, fixtureData as d } from "./fixtures";
+import { FIXTURE_TODAY, campaigns, emptyData, fixtureData as d, products } from "./fixtures";
 
 describe("tasks", () => {
   it("finds overdue tasks and never includes done or future tasks", () => {
@@ -126,5 +128,40 @@ describe("lookups with missing data", () => {
     expect(getCustomer(d, "nope")).toBeUndefined();
     expect(getCustomer(d, undefined)).toBeUndefined();
     expect(getProduct(emptyData(), "anything")).toBeUndefined();
+  });
+});
+
+describe("honest stock and shop state", () => {
+  const product = products[0];
+
+  it("raises stock alerts only for live products, and never invents a unit count", () => {
+    const data = {
+      ...emptyData(),
+      products: [
+        { ...product, id: "p-draft", status: "Draft" as const, stockStatus: "Out of stock" as const, stockUnits: 0 },
+        { ...product, id: "p-live", name: "Live item", status: "Active" as const, stockStatus: "Out of stock" as const, stockUnits: null },
+        { ...product, id: "p-low", name: "Low item", status: "Active" as const, stockStatus: "Low stock" as const, stockUnits: 3 },
+      ],
+    };
+    expect(productAlerts(data).map((a) => [a.id, a.message])).toEqual([
+      ["pal-p-live", "Live item: out of stock."],
+      ["pal-p-low", "Low item: low stock (3 units)."],
+    ]);
+  });
+
+  it("says why there are no products: not connected, could not be read, or connected but empty", () => {
+    expect(shopGap(emptyData())).toBe("shop not connected");
+    expect(shopNote(emptyData())).toBe("Shop not connected.");
+    expect(shopNote({ ...emptyData(), shop: { status: "error", message: "The service answered 500." } })).toBe("Shop could not be read. The service answered 500.");
+    expect(shopGap({ ...emptyData(), shop: { status: "error" } })).toBe("shop could not be read");
+    expect(shopNote({ ...emptyData(), shop: { status: "connected" } })).toBe("Shop connected but returned no products.");
+    expect(shopNote({ ...emptyData(), products: [product], shop: { status: "connected" } })).toBeNull();
+  });
+
+  it("gives identical milestone lines different ids", () => {
+    const twin = { ...campaigns[0], id: "cmp-twin", milestones: [{ date: "2026-10-10", label: "Brief" }, { date: "2026-10-10", label: "Brief" }] };
+    const ids = calendarItems({ ...emptyData(), campaigns: [twin] }).map((i) => i.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(ids).toEqual(["cmp-twin-ms-0", "cmp-twin-ms-1"]);
   });
 });

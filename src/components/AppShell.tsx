@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
+import { useAppData } from "@/components/AppDataProvider";
 import {
   BarChart3,
   Bot,
@@ -110,6 +111,7 @@ function BrandLinks() {
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const { storageOk } = useAppData();
 
   return (
     <div className="min-h-screen lg:flex">
@@ -154,6 +156,11 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div role="note" className="border-b border-yolk/40 bg-yolk-soft/80 px-4 py-2 text-center text-sm font-medium text-[#5b4004]">
           PROTOTYPE · Read-only: nothing is sent, published, repriced or launched from this app.
         </div>
+        {!storageOk && (
+          <div role="alert" className="border-b border-clay/40 bg-clay-soft px-4 py-2 text-center text-sm font-semibold text-clay">
+            Your entries could not be saved in this browser (storage is blocked or full). They will be lost when you close or reload this page.
+          </div>
+        )}
 
         <main id="main" className="mx-auto max-w-[1280px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
           {children}

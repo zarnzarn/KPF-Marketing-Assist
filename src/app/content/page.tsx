@@ -1,3 +1,4 @@
+import { WhenReady } from "@/components/AppDataProvider";
 import { PageHeader } from "@/components/ui";
 import { ContentView } from "@/components/views/ContentView";
 import { loadChannels } from "@/lib/channels/loadChannels";
@@ -9,7 +10,9 @@ export default async function ContentPage() {
   return (
     <>
       <PageHeader title="Content" subtitle="Plan posts, articles and messages. Drafts are saved in this browser only and are never published from this app." />
-      <ContentView channels={channels} />
+      <WhenReady>
+        <ContentView channels={channels} />
+      </WhenReady>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { fixtureUserData } from "../fixtures";
 
 const routes = ["/", "/secretary", "/marketing", "/sales", "/products", "/customers", "/tasks", "/calendar", "/meetings", "/campaigns", "/content", "/reports", "/documents", "/channels"];
 const sizes = [
@@ -22,6 +23,32 @@ for (const size of sizes) {
     });
   }
 }
+
+// The same pages again, with synthetic saved entries in this browser (tests/fixtures is fictional).
+// Long names, tables and badges must still fit small screens.
+for (const size of sizes.filter((x) => x.name !== "desktop")) {
+  for (const route of routes) {
+    test(`${route} with saved entries fits the ${size.name} screen`, async ({ page }) => {
+      const errors: string[] = [];
+      page.on("pageerror", (e) => errors.push(e.message));
+      page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+      await page.addInitScript((saved) => window.localStorage.setItem("kpf-user-data-v1", saved), JSON.stringify(fixtureUserData));
+      await page.setViewportSize({ width: size.width, height: size.height });
+      await page.goto(route);
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expect(page.getByText("Loading your saved entries…")).toHaveCount(0);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      expect(overflow, "page scrolls sideways").toBeLessThanOrEqual(0);
+      expect(errors).toEqual([]);
+    });
+  }
+}
+
+test("saved entries show up after loading (tasks page)", async ({ page }) => {
+  await page.addInitScript((saved) => window.localStorage.setItem("kpf-user-data-v1", saved), JSON.stringify(fixtureUserData));
+  await page.goto("/tasks");
+  await expect(page.getByRole("cell", { name: fixtureUserData.tasks[0].title, exact: true })).toBeVisible();
+});
 
 test("keyboard: skip link is the first tab stop and reaches main content", async ({ page }) => {
   await page.goto("/");

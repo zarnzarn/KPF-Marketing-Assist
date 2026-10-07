@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { DeleteButton } from "@/components/EntityForm";
 import { Badge, DataTable } from "@/components/ui";
+import { DATA_NOT_AVAILABLE } from "@/lib/constants";
 import { formatDate } from "@/lib/dates";
 import type { Customer, CustomerType } from "@/lib/types";
 
@@ -30,7 +31,7 @@ export function CustomerTable({ customers, onDelete }: { customers: Customer[]; 
         columns={[
           { header: "Customer", cell: (c) => <span><span className="font-semibold">{c.name}</span><span className="block text-xs text-muted">{c.segment}</span></span> },
           { header: "Type", cell: (c) => c.type },
-          { header: "Last interaction", cell: (c) => <span className="block max-w-[14rem]"><span className="text-xs text-muted">{formatDate(c.lastInteractionDate)}</span><br />{c.lastInteractionNote || "—"}</span> },
+          { header: "Last interaction", cell: (c) => <span className="block max-w-[14rem]"><span className="text-xs text-muted">{c.lastInteractionDate ? formatDate(c.lastInteractionDate) : `Date: ${DATA_NOT_AVAILABLE}`}</span><br />{c.lastInteractionNote || "—"}</span> },
           { header: "Follow-up", cell: (c) => (c.followUpDate ? formatDate(c.followUpDate) : <span className="text-muted">Not set</span>) },
           { header: "Opportunity", cell: (c) => <Badge>{c.opportunity}</Badge> },
           { header: "Notes", cell: (c) => <span className="block max-w-[16rem] text-xs">{c.notes || "—"}</span> },

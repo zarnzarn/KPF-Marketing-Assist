@@ -1,4 +1,5 @@
 // Facebook Page and Instagram (Business) via the official Graph API. Read-only GET requests.
+import { DATA_NOT_AVAILABLE } from "../constants";
 import { GRAPH_VERSION, channelConfig, num, thaiDate } from "./config";
 import { explain, readOnlyJson } from "./readOnlyFetch";
 import type { ChannelDeps, ChannelSnapshot } from "./types";
@@ -22,7 +23,7 @@ export async function facebookSnapshot(deps: ChannelDeps): Promise<ChannelSnapsh
       status: "connected",
       fetchedAt,
       metrics: [
-        { label: "Page", value: page.name ?? "Data not available." },
+        { label: "Page", value: page.name ?? DATA_NOT_AVAILABLE },
         { label: "Followers", value: num(page.followers_count) },
         { label: "Page likes", value: num(page.fan_count) },
       ],
@@ -50,7 +51,7 @@ export async function instagramSnapshot(deps: ChannelDeps): Promise<ChannelSnaps
       status: "connected",
       fetchedAt,
       metrics: [
-        { label: "Account", value: user.username ? `@${user.username}` : "Data not available." },
+        { label: "Account", value: user.username ? `@${user.username}` : DATA_NOT_AVAILABLE },
         { label: "Followers", value: num(user.followers_count) },
         { label: "Posts", value: num(user.media_count) },
       ],
@@ -59,7 +60,8 @@ export async function instagramSnapshot(deps: ChannelDeps): Promise<ChannelSnaps
         title: (m.caption ?? "(post without caption)").slice(0, 160),
         date: thaiDate(m.timestamp),
         url: m.permalink,
-        detail: `${num(m.like_count)} likes · ${num(m.comments_count)} comments`,
+        // Each number has its own label, so a missing one reads "Likes: Data not available." in full.
+        detail: `Likes: ${num(m.like_count)} · Comments: ${num(m.comments_count)}`,
       })),
     };
   } catch (error) {

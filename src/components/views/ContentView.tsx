@@ -20,13 +20,15 @@ export function ContentView({ channels = [] }: { channels?: ChannelSnapshot[] })
   const sorted = [...data.content].sort((a, b) => a.dueDate.localeCompare(b.dueDate));
   const drafts = sorted.filter((c) => c.status !== "Published");
   const posts = channels.filter((c) => (c.channel === "facebook" || c.channel === "instagram") && c.status === "connected");
+  const postItems = posts.flatMap((ch) => ch.items.map((item) => ({ ch, item })));
 
   const columns: Column<ContentItem>[] = [
     { header: "Content", cell: (c) => <span className="font-medium">{c.title}</span> },
     { header: "Platform", cell: (c) => <Badge tone="neutral">{c.type}</Badge> },
     { header: "Status", cell: (c) => <Badge>{c.status}</Badge> },
     { header: "Approval", cell: (c) => <Badge>{c.approvalStatus}</Badge> },
-    { header: "Due / publish date", cell: (c) => formatDate(c.publishDate ?? c.dueDate) },
+    { header: "Due", cell: (c) => formatDate(c.dueDate) },
+    { header: "Publish date", cell: (c) => (c.publishDate ? formatDate(c.publishDate) : "Not set") },
     {
       header: "Actions",
       cell: (c) => (
@@ -80,7 +82,7 @@ export function ContentView({ channels = [] }: { channels?: ChannelSnapshot[] })
               <li key={c.id} className="rounded-xl border border-line bg-white p-3.5">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <p className="font-semibold">{c.title}</p>
-                  <span className="flex gap-2"><Badge tone="neutral">{c.type}</Badge><Badge>{c.status}</Badge><Badge>{c.approvalStatus}</Badge></span>
+                  <span className="flex flex-wrap gap-2"><Badge tone="neutral">{c.type}</Badge><Badge>{c.status}</Badge><Badge>{c.approvalStatus}</Badge></span>
                 </div>
                 <p className="mt-2 text-sm text-muted">{c.draftText ?? "Draft text: Data not available."}</p>
               </li>
@@ -92,20 +94,20 @@ export function ContentView({ channels = [] }: { channels?: ChannelSnapshot[] })
       <Card id="channel-posts" title="Recent posts from your channels" subtitle="Read-only, from connected Facebook and Instagram">
         {posts.length === 0 ? (
           <EmptyState>Facebook and Instagram are not connected. Connect them on the Channels page.</EmptyState>
+        ) : postItems.length === 0 ? (
+          <EmptyState>No recent posts were found on the connected channels. Data not available.</EmptyState>
         ) : (
           <ul className="space-y-3">
-            {posts.flatMap((ch) =>
-              ch.items.map((item) => (
-                <li key={`${ch.channel}-${item.id}`} className="rounded-xl border border-line bg-white p-3.5 text-sm">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge tone="neutral">{ch.label}</Badge>
-                    {item.date && <span className="text-muted">{formatDate(item.date)}</span>}
-                  </div>
-                  <p className="mt-1.5">{item.title}</p>
-                  {item.detail && <p className="mt-1 text-muted">{item.detail}</p>}
-                </li>
-              )),
-            )}
+            {postItems.map(({ ch, item }) => (
+              <li key={`${ch.channel}-${item.id}`} className="rounded-xl border border-line bg-white p-3.5 text-sm">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge tone="neutral">{ch.label}</Badge>
+                  {item.date && <span className="text-muted">{formatDate(item.date)}</span>}
+                </div>
+                <p className="mt-1.5 break-words">{item.title}</p>
+                {item.detail && <p className="mt-1 text-muted">{item.detail}</p>}
+              </li>
+            ))}
           </ul>
         )}
       </Card>

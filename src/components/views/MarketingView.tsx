@@ -1,21 +1,23 @@
 "use client";
 
+import Link from "next/link";
 import { useAppData } from "@/components/AppDataProvider";
 import { ApprovalList } from "@/components/ApprovalList";
 import { CampaignTimeline } from "@/components/CampaignTimeline";
 import { Badge, Card, EmptyState, List, ListItem, Stat } from "@/components/ui";
 import { PHASE1_NOTICE } from "@/lib/approvals";
 import type { ChannelSnapshot } from "@/lib/channels/types";
+import { DATA_NOT_AVAILABLE } from "@/lib/constants";
 import { formatDate } from "@/lib/dates";
-import { campaignAlerts, pendingApprovals, productAlerts } from "@/lib/queries";
-
+import { campaignAlerts, pendingApprovals, productAlerts, shopNote } from "@/lib/queries";
 
 export function MarketingView({ channels = [] }: { channels?: ChannelSnapshot[] }) {
   const { data } = useAppData();
   const active = data.campaigns.filter((c) => c.status === "Active");
   const upcoming = data.campaigns.filter((c) => c.status === "Planned" || c.status === "Draft");
   const contentCounts = ["Idea", "Draft", "In review", "Scheduled", "Published"].map((s) => ({ status: s, count: data.content.filter((c) => c.status === s).length }));
-  const priorities = [...campaignAlerts(data).filter((a) => a.severity !== "Low"), ...productAlerts(data)].map((a) => a.message).slice(0, 5);
+  const priorities = [...campaignAlerts(data).filter((a) => a.severity !== "Low"), ...productAlerts(data)].slice(0, 5);
+  const stockGap = shopNote(data);
   const social = channels.filter((c) => ["facebook", "instagram", "line"].includes(c.channel));
 
   return (
@@ -45,10 +47,21 @@ export function MarketingView({ channels = [] }: { channels?: ChannelSnapshot[] 
       )}
 
       <Card id="priorities" title="Marketing priorities" subtitle="From campaign status and stock levels">
-        {priorities.length === 0 ? <EmptyState>Nothing needs attention. Priorities appear when campaigns wait for approval, start soon or products run low.</EmptyState> : (
+        {priorities.length > 0 ? (
           <ol className="list-decimal space-y-2 pl-5 text-[15px]">
-            {priorities.map((p) => <li key={p}>{p}</li>)}
+            {priorities.map((a) => <li key={a.id}>{a.message}</li>)}
           </ol>
+        ) : data.campaigns.length === 0 ? (
+          <EmptyState>{DATA_NOT_AVAILABLE} No campaigns are recorded yet. Add them on the Campaigns page; priorities appear when a campaign waits for approval or starts soon.</EmptyState>
+        ) : (
+          <EmptyState>{stockGap ? "No campaign needs attention." : "No campaign or stock alerts."}</EmptyState>
+        )}
+        {/* Unknown stock is never reported as "fine". */}
+        {stockGap && (
+          <p className="mt-3 text-sm text-muted">
+            Stock levels: {DATA_NOT_AVAILABLE} {stockGap}{" "}
+            <Link href="/channels" className="font-semibold text-sage underline">Channels page</Link>
+          </p>
         )}
       </Card>
 

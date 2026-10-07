@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { AlertTriangle, ArrowRight, CalendarClock, ClipboardCheck, MessageCircleWarning } from "lucide-react";
-import { useAppData } from "@/components/AppDataProvider";
+import { useAppData, WhenReady } from "@/components/AppDataProvider";
 import { AnswerBlocks } from "@/components/AnswerBlocks";
 import { ApprovalList } from "@/components/ApprovalList";
 import { Badge, Card, EmptyState, List, ListItem, PageHeader, Stat } from "@/components/ui";
 import { dailySummary } from "@/lib/ai/dailySummary";
 import { PHASE1_NOTICE } from "@/lib/approvals";
 import type { ChannelSnapshot } from "@/lib/channels/types";
+import { DATA_NOT_AVAILABLE } from "@/lib/constants";
 import { formatDate, formatLongDate } from "@/lib/dates";
 import {
   calendarItemsOn,
@@ -23,6 +24,7 @@ import {
   priorityTasksToday,
   productAlerts,
   recommendedPriorities,
+  shopNote,
   upcomingMeetings,
 } from "@/lib/queries";
 
@@ -36,7 +38,20 @@ const gettingStarted = [
 ];
 
 export function TodayView({ channels = [] }: { channels?: ChannelSnapshot[] }) {
-  const { data, ready } = useAppData();
+  const { data } = useAppData();
+  return (
+    <>
+      <PageHeader title="Today" subtitle={`${formatLongDate(data.today)}. What you need to know and do today.`} />
+      {/* Nothing is concluded ("All clear", "Nothing urgent") until this browser's entries are read. */}
+      <WhenReady>
+        <TodayContent channels={channels} />
+      </WhenReady>
+    </>
+  );
+}
+
+function TodayContent({ channels }: { channels: ChannelSnapshot[] }) {
+  const { data } = useAppData();
   const overdue = overdueTasks(data);
   const followUps = followUpsDue(data);
   const issues = openIssues(data.issues);
@@ -48,12 +63,11 @@ export function TodayView({ channels = [] }: { channels?: ChannelSnapshot[] }) {
   const channelProblems = channels
     .filter((c) => c.status === "error")
     .map((c) => ({ id: `ch-${c.channel}`, severity: "Medium", message: `${c.label}: ${c.message ?? "could not be read."}`, href: "/channels" }));
-  const empty = ready && isEmpty(data);
+  const empty = isEmpty(data);
+  const stockGap = shopNote(data);
 
   return (
     <>
-      <PageHeader title="Today" subtitle={`${formatLongDate(data.today)}. What you need to know and do today.`} />
-
       {empty && (
         <Card id="getting-started" title="Getting started" subtitle="This app has no sample data. Everything you see comes from you, your reports and your channels." tone="butter" className="mb-6">
           <ol className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -236,7 +250,7 @@ export function TodayView({ channels = [] }: { channels?: ChannelSnapshot[] }) {
       <h2 className="font-display mt-10 mb-3 text-2xl font-semibold text-forest">Alerts</h2>
       <div className="grid gap-6 md:grid-cols-3">
         <AlertCard title="Campaign alerts" tone="sky" alerts={campaignAlerts(data)} />
-        <AlertCard title="Product and stock alerts" tone="butter" alerts={productAlerts(data)} empty={data.products.length === 0 ? "Shop not connected. Data not available." : "No alerts."} />
+        <AlertCard title="Product and stock alerts" tone="butter" alerts={productAlerts(data)} empty={stockGap ? `${stockGap} ${DATA_NOT_AVAILABLE}` : "No alerts."} />
         <AlertCard title="Channel alerts" tone="blush" alerts={channelProblems} empty={channels.some((c) => c.status === "connected") ? "No alerts." : "No channels connected yet."} />
       </div>
 

@@ -83,7 +83,7 @@ describe("navigation", () => {
   });
 
   it("marks the current page and shows the read-only banner", () => {
-    render(<AppShell><p>hi</p></AppShell>);
+    render(<AppDataProvider today={FIXTURE_TODAY}><AppShell><p>hi</p></AppShell></AppDataProvider>);
     const nav = screen.getAllByRole("navigation", { name: "Main" })[0];
     expect(within(nav).getByRole("link", { name: "Today" })).toHaveAttribute("aria-current", "page");
     expect(screen.getByText(/nothing is sent, published, repriced or launched/i)).toBeInTheDocument();
@@ -91,7 +91,7 @@ describe("navigation", () => {
   });
 
   it("opens the mobile menu with the keyboard-accessible button", async () => {
-    render(<AppShell><p>hi</p></AppShell>);
+    render(<AppDataProvider today={FIXTURE_TODAY}><AppShell><p>hi</p></AppShell></AppDataProvider>);
     const button = screen.getByRole("button", { name: "Open menu" });
     await userEvent.click(button);
     expect(screen.getByRole("button", { name: "Close menu" })).toHaveAttribute("aria-expanded", "true");

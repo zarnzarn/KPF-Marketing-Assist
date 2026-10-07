@@ -11,13 +11,15 @@ import { getCampaign, getCustomer, getProduct } from "@/lib/queries";
 import { addItem, newId, removeItem } from "@/lib/store/userData";
 import type { DocumentRecord } from "@/lib/types";
 
+/** The type from the file extension. Anything not recognised is "Other", never a guess. */
 export function kindFromName(name: string): DocumentRecord["kind"] {
-  const ext = name.toLowerCase().split(".").pop() ?? "";
+  const ext = name.includes(".") ? (name.toLowerCase().split(".").pop() ?? "") : "";
+  if (ext === "pdf") return "PDF";
   if (["xls", "xlsx", "csv"].includes(ext)) return "Spreadsheet";
   if (["ppt", "pptx", "key"].includes(ext)) return "Slides";
-  if (["doc", "docx", "txt", "rtf"].includes(ext)) return "Word";
+  if (["doc", "docx", "rtf"].includes(ext)) return "Word";
   if (["png", "jpg", "jpeg", "gif", "webp", "heic"].includes(ext)) return "Image";
-  return "PDF";
+  return "Other";
 }
 
 export function DocumentsBoard() {
@@ -50,13 +52,14 @@ export function DocumentsBoard() {
   return (
     <div className="space-y-6">
       <Card id="upload" title="Add a document" subtitle="Only the name and size are listed. Files stay on your computer.">
-        <label htmlFor={fileId} className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-forest/30 bg-forest-soft/40 p-8 text-center hover:border-yolk">
+        {/* The input comes first so its keyboard focus can light up the label (peer-focus-visible). */}
+        <input id={fileId} type="file" className="peer sr-only" onChange={onFile} />
+        <label htmlFor={fileId} className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-forest/30 bg-forest-soft/40 p-8 text-center peer-focus-visible:border-forest peer-focus-visible:ring-2 peer-focus-visible:ring-forest peer-focus-visible:ring-offset-2 hover:border-yolk">
           <UploadCloud className="h-8 w-8 text-sage" aria-hidden="true" />
           <span className="font-semibold text-forest">Choose a file to add to the list</span>
           <span className="text-sm text-muted">PDF, Word, Excel, slides or images. Nothing is sent anywhere.</span>
         </label>
-        <input id={fileId} type="file" className="sr-only" onChange={onFile} />
-        <p role="status" className="mt-3 text-sm font-medium text-sage">{message}</p>
+        <p role="status" className="mt-3 text-sm font-medium break-all text-sage">{message}</p>
       </Card>
 
       {docs.length === 0 ? (
@@ -69,7 +72,7 @@ export function DocumentsBoard() {
               rows={docs}
               rowKey={(d) => d.id}
               columns={[
-                { header: "Name", cell: (d) => <button type="button" onClick={() => setSelectedId(d.id)} aria-pressed={d.id === selected?.id} className="text-left font-semibold text-forest underline-offset-4 hover:underline">{d.name}</button> },
+                { header: "Name", cell: (d) => <button type="button" onClick={() => setSelectedId(d.id)} aria-pressed={d.id === selected?.id} className="max-w-[16rem] text-left font-semibold break-all text-forest underline-offset-4 hover:underline">{d.name}</button> },
                 { header: "Type", cell: (d) => d.kind },
                 { header: "Added", cell: (d) => formatDate(d.uploadedAt) },
                 { header: "Size", cell: (d) => `${d.sizeKb} KB` },
@@ -92,7 +95,7 @@ export function DocumentsBoard() {
           <Card id="detail" title="Document detail">
             {selected ? (
               <dl className="space-y-3 text-sm">
-                <div><dt className="text-muted">Name</dt><dd className="font-semibold">{selected.name}</dd></div>
+                <div><dt className="text-muted">Name</dt><dd className="font-semibold break-all">{selected.name}</dd></div>
                 <div><dt className="text-muted">Summary</dt><dd>{selected.summary}</dd></div>
                 <div><dt className="text-muted">Tags</dt><dd className="flex flex-wrap gap-1">{selected.tags.length ? selected.tags.map((t) => <Badge key={t} tone="neutral">{t}</Badge>) : "None"}</dd></div>
                 <div><dt className="text-muted">Related campaign</dt><dd>{getCampaign(data, selected.campaignId)?.name ?? "None linked"}</dd></div>

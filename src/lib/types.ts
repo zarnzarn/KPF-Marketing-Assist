@@ -17,9 +17,9 @@ export type Channel =
 export type Priority = "High" | "Medium" | "Low";
 export type Severity = "High" | "Medium" | "Low";
 
-export type ProductStatus = "Active" | "Launching" | "Paused";
+export type ProductStatus = "Active" | "Launching" | "Paused" | "Draft";
 export type Availability = "Available" | "Limited" | "Unavailable" | "Coming soon";
-export type StockStatus = "In stock" | "Low stock" | "Out of stock" | "Not stocked yet";
+export type StockStatus = "In stock" | "Low stock" | "Out of stock" | "Not stocked yet" | "Not tracked";
 
 export interface Product {
   id: string;
@@ -31,7 +31,8 @@ export interface Product {
   channels: Channel[];
   availability: Availability;
   stockStatus: StockStatus;
-  stockUnits: number;
+  /** null when the shop does not track or send a quantity (never an invented 0). */
+  stockUnits: number | null;
   reorderLevel: number;
   isNew: boolean;
   attentionReason?: string; // set only when marketing attention is needed
@@ -61,7 +62,8 @@ export interface Customer {
   type: CustomerType;
   segment: Segment;
   /** No personal contact details (names, phones, emails) are stored, by design. */
-  lastInteractionDate: string;
+  /** null when the user did not enter one (never filled in with today). */
+  lastInteractionDate: string | null;
   lastInteractionNote: string;
   followUpDate: string | null;
   opportunity: OpportunityStatus;
@@ -133,7 +135,8 @@ export interface Campaign {
   targetAudience: string;
   startDate: string;
   endDate: string;
-  budgetThb: number;
+  /** null when no budget was entered (never an invented ฿0). */
+  budgetThb: number | null;
   spentThb: number | null;
   status: CampaignStatus;
   contentStatus: ContentProgress;
@@ -213,7 +216,7 @@ export interface CustomerIssue {
 export interface DocumentRecord {
   id: string;
   name: string;
-  kind: "PDF" | "Spreadsheet" | "Slides" | "Word" | "Image";
+  kind: "PDF" | "Spreadsheet" | "Slides" | "Word" | "Image" | "Other";
   uploadedAt: string;
   sizeKb: number;
   summary: string;
@@ -253,6 +256,15 @@ export interface AppData extends UserData {
   today: string;
   /** Products from the connected shop, if any. */
   products: Product[];
+  /** How the shop connection went, so "no products" is never mistaken for "not connected". */
+  shop?: ShopState;
+}
+
+export interface ShopState {
+  status: "connected" | "not_configured" | "error";
+  message?: string;
+  /** For example "first 100 products only" when the shop has more than one page. */
+  note?: string;
 }
 
 export const EMPTY_USER_DATA: UserData = {

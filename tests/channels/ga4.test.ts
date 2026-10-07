@@ -576,13 +576,13 @@ describe("ga4Snapshot: errors", () => {
   });
 
   it.each([["abc"], ["G-ABC123XYZ"], ["properties/123456789"], ["123456789/../987654321"], ["123456789:batchRunReports"], ["123456789?alt=media"]])(
-    "blocks a non-numeric property id %j before any request to the Analytics Data API",
+    "refuses a non-numeric property id %j before any request at all, and says what to fix",
     async (propertyId) => {
       const { snapshot, calls } = await run([tokenReply], { env: ga4Env({ GA4_PROPERTY_ID: propertyId }) });
       expect(snapshot.status).toBe("error");
-      expect(snapshot.message).toBe("This request is not on the read-only list and was blocked.");
-      expect(calls.some((c) => c.url.startsWith("https://analyticsdata.googleapis.com"))).toBe(false);
-      expect(calls.map((c) => c.url)).toEqual([TOKEN_URL]);
+      expect(snapshot.message).toMatch(/^GA4_PROPERTY_ID must be the numeric Property ID .*not the G- Measurement ID/);
+      // Not even the Google sign-in is attempted with a wrong id.
+      expect(calls).toEqual([]);
       expectNoSecrets(snapshot);
     },
   );

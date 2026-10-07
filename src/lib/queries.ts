@@ -71,8 +71,9 @@ export function calendarItems(d: AppData): CalendarItem[] {
     items.push({ id: m.id, title: m.title, date: m.date, start: m.start, end: m.end, type: "Meeting", href: "/meetings" });
   }
   for (const c of d.campaigns) {
-    for (const ms of c.milestones) {
-      items.push({ id: `${c.id}-${ms.date}-${ms.label}`, title: `${c.name}: ${ms.label}`, date: ms.date, type: "Campaign milestone", href: "/campaigns" });
+    // The position keeps ids unique even when two milestone lines are identical.
+    for (const [i, ms] of c.milestones.entries()) {
+      items.push({ id: `${c.id}-ms-${i}`, title: `${c.name}: ${ms.label}`, date: ms.date, type: "Campaign milestone", href: "/campaigns" });
     }
   }
   for (const c of d.content.filter((x) => x.status !== "Published")) {
@@ -99,16 +100,36 @@ export interface Alert {
   href: string;
 }
 
+/** Stock alerts for live products only: an unpublished draft is not a stock problem. */
 export function productAlerts(d: AppData): Alert[] {
   return d.products
-    .filter((p) => p.stockStatus === "Low stock" || p.stockStatus === "Out of stock")
+    .filter((p) => p.status === "Active" && (p.stockStatus === "Low stock" || p.stockStatus === "Out of stock"))
     .map((p) => ({
       id: `pal-${p.id}`,
       area: "Product" as const,
       severity: p.stockStatus === "Out of stock" ? ("High" as const) : ("Medium" as const),
-      message: `${p.name}: ${p.stockStatus.toLowerCase()} (${p.stockUnits} units).`,
+      message: `${p.name}: ${p.stockStatus.toLowerCase()}${p.stockUnits === null ? "" : ` (${p.stockUnits} units)`}.`,
       href: "/products",
     }));
+}
+
+/**
+ * Why there are no products, in a few words: not connected, could not be read, or connected but empty.
+ * Null when products exist. Keeps "no data" from ever reading as "nothing wrong".
+ */
+export function shopGap(d: AppData): string | null {
+  if (d.products.length > 0) return null;
+  if (d.shop?.status === "error") return "shop could not be read";
+  if (d.shop?.status === "connected") return "shop connected but returned no products";
+  return "shop not connected";
+}
+
+/** shopGap as a sentence for the screen, with the shop's own error message when there is one. */
+export function shopNote(d: AppData): string | null {
+  const reason = shopGap(d);
+  if (!reason) return null;
+  const sentence = `${reason[0].toUpperCase()}${reason.slice(1)}.`;
+  return d.shop?.status === "error" && d.shop.message ? `${sentence} ${d.shop.message}` : sentence;
 }
 
 export function campaignAlerts(d: AppData): Alert[] {

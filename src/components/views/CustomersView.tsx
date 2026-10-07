@@ -33,7 +33,13 @@ export function CustomersView() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
         <AddButton label="Add customer or B2B account" onClick={() => setForm("customer")} />
-        <AddButton label="Record a customer issue" onClick={() => setForm("issue")} />
+        <AddButton
+          label="Record a customer issue"
+          onClick={() => {
+            setIssueCustomer("");
+            setForm("issue");
+          }}
+        />
         <StatusMessage text={message} />
       </div>
 
@@ -44,7 +50,7 @@ export function CustomersView() {
           submitLabel="Save customer"
           onCancel={() => setForm(null)}
           onSubmit={(v) => {
-            update((u) => addItem(u, "customers", toCustomer(newId("cus"), v, data.today)));
+            update((u) => addItem(u, "customers", toCustomer(newId("cus"), v)));
             setForm(null);
             setMessage("Customer added.");
           }}
@@ -67,7 +73,10 @@ export function CustomersView() {
             fields={issueFields}
             defaults={{ openedAt: data.today, severity: "Medium" }}
             submitLabel="Save issue"
-            onCancel={() => setForm(null)}
+            onCancel={() => {
+              setForm(null);
+              setIssueCustomer("");
+            }}
             onSubmit={(v) => {
               update((u) => addItem(u, "issues", toIssue(newId("iss"), v, issueCustomer)));
               setForm(null);

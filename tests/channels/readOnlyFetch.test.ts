@@ -18,6 +18,7 @@ interface RecordedCall {
   headers?: Record<string, string>;
   body?: unknown;
   cache?: RequestCache;
+  redirect?: RequestRedirect;
   signal?: AbortSignal | null;
 }
 
@@ -25,7 +26,7 @@ interface RecordedCall {
 function recordingFetch(respond: (url: string, init?: RequestInit) => Response | Promise<Response>) {
   const calls: RecordedCall[] = [];
   const fetchImpl: FetchLike = async (url, init) => {
-    calls.push({ url, method: init?.method, headers: init?.headers as Record<string, string> | undefined, body: init?.body, cache: init?.cache, signal: init?.signal });
+    calls.push({ url, method: init?.method, headers: init?.headers as Record<string, string> | undefined, body: init?.body, cache: init?.cache, redirect: init?.redirect, signal: init?.signal });
     return respond(url, init);
   };
   return { fetchImpl, calls };
@@ -251,6 +252,61 @@ mutation {
     const error = await caught(readOnlyText(SHOPIFY_URL, { method: "POST", body, fetchImpl }));
     expect(error.kind).toBe("blocked");
     expect(fetchImpl).not.toHaveBeenCalled();
+  });
+});
+
+describe("readOnlyText: redirects", () => {
+  const PUBLIC_URL = "https://www.example.com/";
+  const redirectTo = (status: number, location: string) => new Response(null, { status, headers: { Location: location } });
+
+  it.each<[string, string, ReadOnlyRequest]>([
+    ["a GET with secrets", GET_URL, { secrets: [TOKEN] }],
+    ["a GET with an Authorization header", GET_URL, { headers: { Authorization: `Bearer ${TOKEN}` } }],
+    ["a GET with a token header", GET_URL, { headers: { "X-Shopify-Access-Token": TOKEN } }],
+    ["the Google sign-in POST", TOKEN_URL, { method: "POST", body: "grant_type=x&assertion=y" }],
+    ["a Shopify GraphQL query", SHOPIFY_URL, { method: "POST", body: SHOPIFY_QUERY, headers: { "X-Shopify-Access-Token": TOKEN } }],
+  ])("never follows redirects for %s, so a key or body cannot be carried to another address", async (_name, url, req) => {
+    const { fetchImpl, calls } = recordingFetch(() => jsonResponse({}));
+    await readOnlyText(url, { ...req, fetchImpl });
+    expect(calls[0].redirect).toBe("manual");
+  });
+
+  it("lets a public GET with no key follow redirects (for example www to non-www)", async () => {
+    const { fetchImpl, calls } = recordingFetch(() => new Response("ok"));
+    await readOnlyText(PUBLIC_URL, { headers: { "User-Agent": "KPF-Marketing-Assist (read-only)" }, fetchImpl });
+    expect(calls[0].redirect).toBe("follow");
+  });
+
+  it.each([301, 302, 303, 307, 308])("stops a signed-in request that is answered with a %i redirect, makes no second request, and hides the token", async (status) => {
+    const { fetchImpl, calls } = recordingFetch(() => redirectTo(status, `https://evil.example.com/collect?t=${TOKEN}`));
+    const error = await caught(readOnlyText(SHOPIFY_URL, { method: "POST", body: SHOPIFY_QUERY, headers: { "X-Shopify-Access-Token": TOKEN }, secrets: [TOKEN], fetchImpl }));
+    expect(error.kind).toBe("blocked");
+    expect(error.message).toBe("The service tried to send this signed-in request to another address. It was stopped for safety.");
+    expect(calls).toHaveLength(1);
+    expectSecretHidden(error, TOKEN);
+  });
+
+  it("stops a signed-in request when the browser-style answer is an opaque redirect", async () => {
+    const opaque = { type: "opaqueredirect", status: 0, ok: false, url: "", text: async () => "" } as unknown as Response;
+    const { fetchImpl } = recordingFetch(() => opaque);
+    const error = await caught(readOnlyText(GET_URL, { secrets: [TOKEN], fetchImpl }));
+    expect(error.kind).toBe("blocked");
+  });
+
+  it("refuses a public GET that was redirected to a plain http address", async () => {
+    const res = new Response("<html>insecure</html>");
+    Object.defineProperty(res, "url", { value: "http://www.example.com/" });
+    const { fetchImpl } = recordingFetch(() => res);
+    const error = await caught(readOnlyText(PUBLIC_URL, { fetchImpl }));
+    expect(error.kind).toBe("blocked");
+    expect(error.message).toBe("The service redirected to a non-secure (http) address, so it was not read.");
+  });
+
+  it("reads a public GET that was redirected to another https address", async () => {
+    const res = new Response("hello");
+    Object.defineProperty(res, "url", { value: "https://example.com/" });
+    const { fetchImpl } = recordingFetch(() => res);
+    await expect(readOnlyText(PUBLIC_URL, { fetchImpl })).resolves.toBe("hello");
   });
 });
 

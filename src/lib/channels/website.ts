@@ -1,10 +1,9 @@
 // The brand's own public website: title, description and the page list from sitemap.xml.
 // Public GET requests only; respects robots.txt.
-import { channelConfig, thaiDate } from "./config";
-import { explain, readOnlyText } from "./readOnlyFetch";
+import { DATA_NOT_AVAILABLE } from "../constants";
+import { channelConfig, decodeEntities as decode, thaiDate } from "./config";
+import { ChannelError, explain, readOnlyText } from "./readOnlyFetch";
 import type { ChannelDeps, ChannelSnapshot } from "./types";
-
-const decode = (s: string) => s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
 
 export function pageInfo(html: string): { title?: string; description?: string } {
   const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1];
@@ -48,14 +47,39 @@ export function blockedByRobots(robots: string): boolean {
   return false;
 }
 
-/** True when `url` is on exactly the same host as `root` (not just a look-alike prefix). */
+/** True when `url` is on the same host as `root` (not just a look-alike prefix). "www." is ignored on both sides. */
 export function sameHost(url: string, root: string): boolean {
+  const bare = (host: string) => host.toLowerCase().replace(/^www\./, "");
   try {
     const a = new URL(url);
     const b = new URL(root);
-    return a.protocol === "https:" && a.host === b.host;
+    return a.protocol === "https:" && bare(a.host) === bare(b.host);
   } catch {
     return false;
+  }
+}
+
+/** The website needs no token, so "refused" means the site (or the network) blocked the reader, not a permission problem. */
+function websiteProblem(error: unknown): string {
+  if (error instanceof ChannelError && (error.kind === "auth" || error.kind === "permission" || error.kind === "not_found")) {
+    const status = error.message.match(/answered (\d{3})/)?.[1];
+    const http = status ? ` (HTTP ${status})` : "";
+    return error.kind === "not_found"
+      ? `The website home page was not found${http}. Check WEBSITE_URL in .env.local.`
+      : `The website refused the request${http}. It may block automated readers or this network. Open the site in a browser to check it is up.`;
+  }
+  return explain(error);
+}
+
+const MAX_CHILD_SITEMAPS = 5;
+
+/** "/products/eggs?x=1" from a full address (works for www and non-www pages alike). */
+function pathOf(url: string): string {
+  try {
+    const u = new URL(url);
+    return `${u.pathname}${u.search}` || "/";
+  } catch {
+    return url;
   }
 }
 
@@ -76,29 +100,42 @@ export async function websiteSnapshot(deps: ChannelDeps): Promise<ChannelSnapsho
 
     const home = pageInfo(await readOnlyText(root, req));
     let pages: { loc: string; lastmod?: string }[] = [];
+    let childTotal = 0;
+    let childNotRead = 0;
     try {
       const xml = await readOnlyText(`${root}/sitemap.xml`, req);
       pages = sitemapEntries(xml);
-      const children = sitemapIndex(xml).filter((u) => sameHost(u, root)).slice(0, 5);
-      for (const child of children) pages.push(...sitemapEntries(await readOnlyText(child, req)));
+      const children = sitemapIndex(xml);
+      const toRead = children.filter((u) => sameHost(u, root)).slice(0, MAX_CHILD_SITEMAPS);
+      childTotal = children.length;
+      childNotRead = children.length - toRead.length; // other hosts, or over the limit
+      for (const child of toRead) {
+        try {
+          pages.push(...sitemapEntries(await readOnlyText(child, req)));
+        } catch {
+          childNotRead++; // one broken sitemap file must not hide the others
+        }
+      }
     } catch {
       // sitemap missing: report what we have
     }
+    // A partial count is labelled as such, so it is never repeated as the full number.
+    const pageCount = pages.length ? (childNotRead ? `at least ${pages.length}` : String(pages.length)) : DATA_NOT_AVAILABLE;
     pages.sort((a, b) => (b.lastmod ?? "").localeCompare(a.lastmod ?? ""));
     return {
       ...base,
       status: "connected",
       fetchedAt: now.toISOString(),
       metrics: [
-        { label: "Site title", value: home.title ?? "Data not available." },
-        { label: "Pages in sitemap", value: pages.length ? String(pages.length) : "Data not available." },
+        { label: "Site title", value: home.title ?? DATA_NOT_AVAILABLE },
+        { label: "Pages in sitemap", value: pageCount, ...(childNotRead ? { note: `${childNotRead} of ${childTotal} sitemap files not read` } : {}) },
       ],
       items: [
         ...(home.description ? [{ id: "description", title: "Home page description", detail: home.description }] : []),
-        ...pages.slice(0, 8).map((p) => ({ id: p.loc, title: p.loc.replace(root, "") || "/", url: p.loc, date: thaiDate(p.lastmod) })),
+        ...pages.slice(0, 8).map((p) => ({ id: p.loc, title: pathOf(p.loc), url: /^https:\/\//.test(p.loc) ? p.loc : undefined, date: thaiDate(p.lastmod) })),
       ],
     };
   } catch (error) {
-    return { ...base, status: "error", fetchedAt: now.toISOString(), message: explain(error) };
+    return { ...base, status: "error", fetchedAt: now.toISOString(), message: websiteProblem(error) };
   }
 }

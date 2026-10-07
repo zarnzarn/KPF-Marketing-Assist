@@ -12,12 +12,14 @@ import {
   campaignAlerts,
   followUpsDue,
   getProduct,
+  isEmpty,
   meetingsOn,
   openIssues,
   overdueTasks,
   pendingApprovals,
   productAlerts,
   recommendedPriorities,
+  shopGap,
 } from "../queries";
 import type { MonthlyReport, ReportBlock } from "../reports/types";
 import type { ChannelSnapshot } from "../channels/types";
@@ -256,12 +258,30 @@ function businessConcerns(d: AppData, channels: ChannelSnapshot[]): SecretaryAns
     ...campaignAlerts(d).filter((a) => a.severity === "High").map((a) => ({ label: "FACT" as const, text: a.message })),
     ...channels.filter((c) => c.status === "error").map((c) => ({ label: "FACT" as const, text: `${c.label} could not be read: ${c.message ?? DATA_NOT_AVAILABLE}` })),
   ];
-  if (blocks.length === 0) return nothingYet("businessConcerns", "Business concerns", "Nothing worrying is recorded. Concerns come from customer issues, stock levels, campaigns and channel connections.");
-  return { tool: "businessConcerns", title: "Biggest business concerns", blocks: [...blocks, gap("Root causes")], sources: [] };
+  // Missing sources are named, so "nothing recorded" is never read as "nothing wrong".
+  const stock = shopGap(d);
+  const missing: AnswerBlock[] = [
+    ...(stock ? [gap(`Stock levels (${stock})`)] : []),
+    ...channels.filter((c) => c.status === "not_configured" && c.channel !== "shop").map((c) => gap(`${c.label} (not connected)`)),
+  ];
+  if (blocks.length === 0) {
+    if (isEmpty(d) && d.products.length === 0 && !channels.some((c) => c.status === "connected")) {
+      return nothingYet("businessConcerns", "Business concerns", "Concerns come from customer issues, stock levels, campaigns and channel connections. Add your entries and connect your channels.");
+    }
+    return {
+      tool: "businessConcerns",
+      title: "Business concerns",
+      blocks: [{ label: "FACT", text: "No high-severity customer issues, stock alerts, high-severity campaign alerts or channel errors are recorded." }, ...missing],
+      sources: [],
+    };
+  }
+  return { tool: "businessConcerns", title: "Biggest business concerns", blocks: [...blocks, ...missing, gap("Root causes")], sources: [] };
 }
 
 function draftMessage(d: AppData): SecretaryAnswer {
-  const existing = d.content.find((c) => c.type === "LINE OA" && c.status !== "Published");
+  // Prefer a draft that has text; a titled draft with no text is a gap, not something to "use".
+  const lineDrafts = d.content.filter((c) => c.type === "LINE OA" && c.status !== "Published");
+  const existing = lineDrafts.find((c) => c.draftText) ?? lineDrafts[0];
   const draftText =
     existing?.draftText ??
     "Draft only (not sent): [Write the LINE message here in the brand voice.] Offer details and prices: Data not available until the promotion is decided.";
@@ -269,7 +289,7 @@ function draftMessage(d: AppData): SecretaryAnswer {
     tool: "draftMessage",
     title: "Draft LINE message (not sent)",
     blocks: [
-      existing ? { label: "FACT", text: `Using your saved draft "${existing.title}".` } : gap("A saved LINE OA draft"),
+      existing?.draftText ? { label: "FACT", text: `Using your saved draft "${existing.title}".` } : existing ? gap(`Draft text for "${existing.title}"`) : gap("A saved LINE OA draft"),
       gap("Offer details and prices"),
       { label: "RECOMMENDATION", text: "Fill in the offer after it is decided, check the brand rules, then create an approval request." },
     ],
@@ -299,7 +319,9 @@ function approvalsAnswer(d: AppData): SecretaryAnswer {
 }
 
 function productAttention(d: AppData): SecretaryAnswer {
-  if (d.products.length === 0) return nothingYet("productAttention", "Products", "Connect your shop on the Channels page to see products, prices and stock.");
+  if (d.products.length === 0) {
+    return { tool: "productAttention", title: "Products", blocks: [gap(`Products and stock (${shopGap(d)})`), { label: "RECOMMENDATION", text: "Check the shop on the Channels page to see products, prices and stock." }], sources: [] };
+  }
   const alerts = productAlerts(d);
   if (alerts.length === 0) return { tool: "productAttention", title: "Products", blocks: [{ label: "FACT", text: "No product is low or out of stock." }], sources: [] };
   return {
@@ -316,7 +338,10 @@ function productAttention(d: AppData): SecretaryAnswer {
 function channelsAnswer(channels: ChannelSnapshot[]): SecretaryAnswer {
   const connected = channels.filter((c) => c.status === "connected");
   if (connected.length === 0) return nothingYet("channels", "Channels", "Connect your channels on the Channels page (read-only).");
-  const blocks: AnswerBlock[] = connected.flatMap((c) => c.metrics.map((m) => ({ label: "FACT" as const, text: `${c.label}: ${m.label} ${m.value}${m.note ? ` (${m.note})` : ""}` })));
+  // A metric the channel did not send is a DATA GAP, even on a connected channel.
+  const blocks: AnswerBlock[] = connected.flatMap((c) =>
+    c.metrics.map((m): AnswerBlock => (m.value === DATA_NOT_AVAILABLE ? gap(`${c.label}: ${m.label}${m.note ? ` (${m.note})` : ""}`) : { label: "FACT", text: `${c.label}: ${m.label} ${m.value}${m.note ? ` (${m.note})` : ""}` })),
+  );
   for (const c of channels.filter((x) => x.status !== "connected")) blocks.push(gap(`${c.label} (${c.status === "error" ? c.message ?? "error" : "not connected"})`));
   return {
     tool: "channels",
@@ -330,7 +355,8 @@ function channelsAnswer(channels: ChannelSnapshot[]): SecretaryAnswer {
 // ---------- monthly reports ----------
 // Answers repeat only what the report says. Nothing is calculated or invented.
 
-const GAP_PATTERN = /not (yet )?(set up|available|included|reported|tracked)|was not|no data/i;
+// Only sentences about missing data; "The promotion was not renewed" is a fact, not a gap.
+const GAP_PATTERN = /not (yet )?(set up|available|included|reported|tracked|provided|collected)|data (was|is) not|no data\b/i;
 
 const sectionTopics: { pattern: RegExp; section: RegExp }[] = [
   { pattern: /supermarket|branch/i, section: /supermarket/i },
@@ -343,7 +369,8 @@ const sectionTopics: { pattern: RegExp; section: RegExp }[] = [
 function blockLines(blocks: ReportBlock[], maxRows = 8): string[] {
   return blocks.flatMap((block) => {
     if (block.type === "bullets") return block.items.slice(0, 4);
-    if (block.type === "table") return block.rows.slice(0, maxRows).map((row) => `${row[0]}: ${row.slice(1).filter(Boolean).join(" / ")}`);
+    // Each value keeps its column heading; a blank cell is said to be missing, not dropped.
+    if (block.type === "table") return block.rows.slice(0, maxRows).map((row) => `${row[0]}: ${row.slice(1).map((v, i) => `${block.headers[i + 1] || `Column ${i + 2}`} ${v || DATA_NOT_AVAILABLE}`).join("; ")}`);
     return [];
   });
 }

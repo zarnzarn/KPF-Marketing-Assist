@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { addDays, daysBetween, formatCompactThb, formatDate, formatLongDate, formatMonth, formatThb, formatWeekday, startOfWeek, weekDays } from "@/lib/dates";
+import { addDays, daysBetween, formatCompactThb, formatDate, formatDateRange, formatLongDate, formatMonth, formatThb, formatWeekday, isIsoDate, startOfWeek, weekDays } from "@/lib/dates";
 import { todayInThailand } from "@/lib/today";
 
 describe("date helpers", () => {
@@ -37,5 +37,19 @@ describe("todayInThailand", () => {
   it("uses Thailand time (UTC+7), so late evening UTC is already tomorrow", () => {
     expect(todayInThailand(new Date("2026-10-06T16:59:00Z"))).toBe("2026-10-06");
     expect(todayInThailand(new Date("2026-10-06T17:00:00Z"))).toBe("2026-10-07");
+  });
+});
+
+describe("isIsoDate (real calendar dates only)", () => {
+  it.each(["2026-02-28", "2028-02-29", "2026-12-31", "2026-01-01"])("accepts %s", (d) => expect(isIsoDate(d)).toBe(true));
+  it.each(["2026-02-29", "2026-02-30", "2026-02-31", "2026-04-31", "2026-13-01", "2026-00-10", "2026-1-5", "06/10/2026", "", "2026-10-06T00:00"])("refuses %j", (d) => expect(isIsoDate(d)).toBe(false));
+});
+
+describe("formatDateRange", () => {
+  it("always shows the year, once when both dates share it", () => {
+    expect(formatDateRange("2026-10-01", "2026-10-31")).toBe("1 Oct - 31 Oct 2026");
+  });
+  it("shows both years when a range crosses into the next year", () => {
+    expect(formatDateRange("2026-12-15", "2027-01-10")).toBe("15 Dec 2026 - 10 Jan 2027");
   });
 });

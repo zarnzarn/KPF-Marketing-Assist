@@ -16,11 +16,11 @@ export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // Products come only from the connected shop (read-only). Empty when not connected.
-  const products = (await loadChannels()).find((c) => c.channel === "shop")?.products ?? [];
+  const shop = (await loadChannels()).find((c) => c.channel === "shop");
   return (
     <html lang="en">
       <body>
-        <AppDataProvider today={todayInThailand()} products={products}>
+        <AppDataProvider today={todayInThailand()} products={shop?.products ?? []} shop={shop ? { status: shop.status, message: shop.message, note: shop.metrics.find((m) => m.label === "Products")?.note } : undefined}>
           <AppShell>{children}</AppShell>
         </AppDataProvider>
       </body>

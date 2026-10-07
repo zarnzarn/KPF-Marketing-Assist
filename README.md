@@ -17,6 +17,12 @@ npm install
 npm run dev            # then open http://localhost:3000
 ```
 
+### Good to know
+
+- Pages first show **"Loading your saved entries…"** for a moment while your browser's entries are read.
+- If your browser blocks saving (for example a private window or full storage), a **red warning** appears at the top. Entries then last only until you close the page.
+- Anything not entered or not sent by a channel is shown as **"Data not available."** (for example a blank budget or a stock count the shop does not track). It is never filled in with 0 or today's date.
+
 ## Your settings (`.env.local`)
 
 1. Copy `.env.example` to a new file called `.env.local` in the project folder.
@@ -42,7 +48,7 @@ Open the **Channels** page in the app. Each channel shows whether it is connecte
 
 - The **website** needs no setup (it reads your public pages).
 - **GA4** needs a read-only service-account key file. Keep it **outside** the project folder.
-- The **shop** needs to know your platform (Shopify or WooCommerce) and a read-only key.
+- The **shop** needs to know your platform (Shopify or WooCommerce) and a read-only key. For Shopify, `SHOP_URL` is the `…myshopify.com` address, not your public domain.
 - **Facebook / Instagram** need a Meta Page access token. **LINE OA** needs a Messaging API channel access token (the `lin.ee` link alone is not enough).
 
 All channel calls are read-only and go through one guarded function (`src/lib/channels/readOnlyFetch.ts`).

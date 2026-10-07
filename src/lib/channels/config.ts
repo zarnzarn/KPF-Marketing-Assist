@@ -1,5 +1,6 @@
 // Reads channel settings from environment variables (.env.local on the user's computer).
 // Nothing here is ever sent to the browser.
+import { DATA_NOT_AVAILABLE } from "../constants";
 
 export const GRAPH_VERSION = "v21.0";
 export const DEFAULT_WEBSITE_URL = "https://www.klongphaifarm.com";
@@ -29,7 +30,30 @@ export function channelConfig(env: Record<string, string | undefined> = process.
 }
 
 /** Formats a whole number with thousands separators. */
-export const num = (n: unknown) => (typeof n === "number" && Number.isFinite(n) ? new Intl.NumberFormat("en-US").format(n) : "Data not available.");
+export const num = (n: unknown) => (typeof n === "number" && Number.isFinite(n) ? new Intl.NumberFormat("en-US").format(n) : DATA_NOT_AVAILABLE);
+
+const fromCode = (n: number) => {
+  try {
+    return String.fromCodePoint(n);
+  } catch {
+    return "";
+  }
+};
+
+/** Turns HTML text such as "Farm &#8211; Eggs &amp; Chicken" back into plain text. "&amp;" goes last so "&amp;lt;" stays "&lt;". */
+export function decodeEntities(text: string): string {
+  return text
+    .replace(/^\s*<!\[CDATA\[([\s\S]*?)\]\]>\s*$/, "$1")
+    .replace(/&#(\d+);/g, (_, d: string) => fromCode(Number(d)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, h: string) => fromCode(parseInt(h, 16)))
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .trim();
+}
 
 /** ISO timestamp -> YYYY-MM-DD in Thailand time. */
 export function thaiDate(iso: string | undefined): string | undefined {

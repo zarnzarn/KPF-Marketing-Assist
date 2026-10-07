@@ -82,6 +82,11 @@ describe("pageInfo", () => {
     expect(info.title).toBe(`Synthetic Farm & Eggs "Fresh" 'Daily'`);
   });
 
+  it("decodes numeric entities such as &#8211; and &#039;, and &amp; last so &amp;lt; stays &lt;", () => {
+    const info = pageInfo("<title>Farm &#8211; Eggs &#039;Fresh&#039; &#x2014; &amp;lt;tag&amp;gt; &#99999999;</title>");
+    expect(info.title).toBe("Farm – Eggs 'Fresh' — &lt;tag&gt;");
+  });
+
   it("decodes &lt; and &gt; and trims spaces and line breaks around the title", () => {
     const info = pageInfo("<title data-x=\"1\">\n   Eggs &lt;Grade A&gt;  \n</title>");
     expect(info.title).toBe("Eggs <Grade A>");
@@ -493,7 +498,8 @@ describe("websiteSnapshot — sitemap index", () => {
     for (const call of calls) expect(call.headers["User-Agent"]).toContain("read-only");
 
     expect(snap.status).toBe("connected");
-    expect(metric(snap, "Pages in sitemap")).toBe("4");
+    // One child sitemap (on another host) was not read, so the count is a minimum and says why.
+    expect(snap.metrics.find((m) => m.label === "Pages in sitemap")).toEqual({ label: "Pages in sitemap", value: "at least 4", note: "1 of 3 sitemap files not read" });
     expect(snap.items.slice(1).map((i) => i.title)).toEqual(["/products/duck", "/blog/recipe-1", "/products/eggs", "/blog/recipe-2"]);
   });
 
@@ -509,7 +515,7 @@ describe("websiteSnapshot — sitemap index", () => {
     expect(calls.map((c) => c.url).slice(3)).toEqual(children.slice(0, 5));
     expect(calls.map((c) => c.url)).not.toContain(children[5]);
     expect(calls.map((c) => c.url)).not.toContain(children[6]);
-    expect(metric(snap, "Pages in sitemap")).toBe("5");
+    expect(snap.metrics.find((m) => m.label === "Pages in sitemap")).toEqual({ label: "Pages in sitemap", value: "at least 5", note: "2 of 7 sitemap files not read" });
   });
 
   it("keeps the pages already read when a later child sitemap fails", async () => {
@@ -521,7 +527,7 @@ describe("websiteSnapshot — sitemap index", () => {
     const { fetchImpl } = routedFetch(routes);
     const snap = await websiteSnapshot({ env: { WEBSITE_URL: SITE }, fetchImpl, now: NOW });
     expect(snap.status).toBe("connected");
-    expect(metric(snap, "Pages in sitemap")).toBe("1");
+    expect(snap.metrics.find((m) => m.label === "Pages in sitemap")).toEqual({ label: "Pages in sitemap", value: "at least 1", note: "1 of 2 sitemap files not read" });
     expect(snap.items.slice(1).map((i) => i.title)).toEqual(["/products/eggs"]);
   });
 
@@ -535,7 +541,31 @@ describe("websiteSnapshot — sitemap index", () => {
     const { fetchImpl, calls } = routedFetch(routes);
     const snap = await websiteSnapshot({ env: { WEBSITE_URL: SITE }, fetchImpl, now: NOW });
     expect(calls.map((c) => c.url)).not.toContain(lookAlike);
+    expect(metric(snap, "Pages in sitemap")).toBe("at least 1");
+  });
+
+  it("gives the plain count, with no note, when every child sitemap was read", async () => {
+    const routes = healthySite(SITE, {
+      [`${SITE}/sitemap.xml`]: xml(sitemapIndexXml([`${SITE}/sitemap-1.xml`])),
+      [`${SITE}/sitemap-1.xml`]: xml(urlset([{ loc: `${SITE}/products/eggs`, lastmod: "2026-09-10" }])),
+    });
+    const { fetchImpl } = routedFetch(routes);
+    const snap = await websiteSnapshot({ env: { WEBSITE_URL: SITE }, fetchImpl, now: NOW });
+    expect(snap.metrics.find((m) => m.label === "Pages in sitemap")).toEqual({ label: "Pages in sitemap", value: "1" });
+  });
+
+  it("reads child sitemaps on the same site with or without www, and CDATA addresses", async () => {
+    const www = "https://www.shop.example.com";
+    const routes = healthySite(SITE, {
+      [`${SITE}/sitemap.xml`]: xml(sitemapIndexXml([`${www}/sitemap-1.xml`])),
+      [`${www}/sitemap-1.xml`]: xml(urlset([{ loc: `<![CDATA[${www}/products/eggs?size=10&amp;pack=2]]>`, lastmod: "2026-09-10" }])),
+    });
+    const { fetchImpl, calls } = routedFetch(routes);
+    const snap = await websiteSnapshot({ env: { WEBSITE_URL: SITE }, fetchImpl, now: NOW });
+    expect(calls.map((c) => c.url)).toContain(`${www}/sitemap-1.xml`);
     expect(metric(snap, "Pages in sitemap")).toBe("1");
+    const page = snap.items.find((i) => i.id !== "description" && i.title.startsWith("/products"));
+    expect(page).toMatchObject({ title: "/products/eggs?size=10&pack=2", url: `${www}/products/eggs?size=10&pack=2` });
   });
 });
 
@@ -578,6 +608,20 @@ describe("websiteSnapshot — missing sitemap and errors", () => {
     expect(snap.message).not.toContain("<html>");
     expect(snap.metrics).toEqual([]);
     expect(snap.items).toEqual([]);
+  });
+
+  it.each([[401], [403]])("explains an HTTP %i from the website as the site refusing the reader, not as a token problem", async (status) => {
+    const { fetchImpl } = routedFetch(healthySite(SITE, { [SITE]: html("<html>Forbidden</html>", status) }));
+    const snap = await websiteSnapshot({ env: { WEBSITE_URL: SITE }, fetchImpl, now: NOW });
+    expect(snap.status).toBe("error");
+    expect(snap.message).toBe(`The website refused the request (HTTP ${status}). It may block automated readers or this network. Open the site in a browser to check it is up.`);
+    expect(snap.message).not.toMatch(/token/i);
+  });
+
+  it("says to check WEBSITE_URL when the home page is not found", async () => {
+    const { fetchImpl } = routedFetch(healthySite(SITE, { [SITE]: notFound() }));
+    const snap = await websiteSnapshot({ env: { WEBSITE_URL: SITE }, fetchImpl, now: NOW });
+    expect(snap.message).toBe("The website home page was not found (HTTP 404). Check WEBSITE_URL in .env.local.");
   });
 
   it("returns an error with a plain message when the home page cannot be reached", async () => {

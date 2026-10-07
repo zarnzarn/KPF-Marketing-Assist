@@ -143,7 +143,8 @@ describe("monthly report tool", () => {
     expect(answer.tool).toBe("monthlyReport");
     expect(text).toContain("TOTAL SALES: THB 111K (+1.0% vs last month)");
     expect(text).toContain("Invented observation A.");
-    expect(text).toContain("Action plan in the report: Send invented broadcast: Marketing / Early Oct");
+    // Each value keeps its column heading from the report table.
+    expect(text).toContain("Action plan in the report: Send invented broadcast: Owner Marketing; Target Early Oct");
     expect(answer.sources).toEqual([{ kind: "Report", id: "2026-09", label: sep.title, href: "/reports?month=2026-09" }]);
   });
 
@@ -163,8 +164,25 @@ describe("monthly report tool", () => {
   it("answers about one topic from the matching section only", async () => {
     const sep = await parseReport(await makeDocx(sampleReportParts()), "sep.docx");
     const text = answerQuestion("How are sales doing?", { ...empty, reports: [sep] }).blocks.map((b) => b.text).join("\n");
-    expect(text).toContain("Website: 10,000 / 12,000 / +20.0%");
+    expect(text).toContain("Website: Prev 10,000; Now 12,000; Change +20.0%");
     expect(text).not.toContain("Action plan in the report");
+  });
+
+  it("says a blank report table cell is missing instead of dropping it, so columns never shift", async () => {
+    const parts = sampleReportParts().map((part) =>
+      "table" in part && part.table[0][0] === "Channel" ? { table: [part.table[0], ["Website", "10,000", "", "+20.0%"]] } : part,
+    );
+    const sep = await parseReport(await makeDocx(parts), "sep.docx");
+    const text = answerQuestion("How are sales doing?", { ...empty, reports: [sep] }).blocks.map((b) => b.text).join("\n");
+    expect(text).toContain(`Website: Prev 10,000; Now ${DATA_NOT_AVAILABLE}; Change +20.0%`);
+  });
+
+  it("keeps report sentences that merely contain 'was not' as facts, not data gaps", async () => {
+    const parts = [...sampleReportParts(), { p: "The invented promotion was not renewed in September." }];
+    const sep = await parseReport(await makeDocx(parts), "sep.docx");
+    const gaps = answerQuestion("Summarize the monthly report", { ...empty, reports: [sep] }).blocks.filter((b) => b.label === "DATA GAP").map((b) => b.text);
+    expect(gaps).not.toContain("The invented promotion was not renewed in September.");
+    expect(gaps).toContain("Checkout tracking is not set up yet, so conversion rate is not reported this month.");
   });
 
   it("never invents numbers: every figure in the answer appears in the report", async () => {
@@ -173,5 +191,48 @@ describe("monthly report tool", () => {
     const reportText = JSON.stringify(sep);
     const figures = answer.blocks.flatMap((b) => (b.text.match(/\d[\d,.]*/g) ?? []).map((f) => f.replace(/[.,]+$/, "")));
     for (const f of figures) expect(reportText).toContain(f);
+  });
+});
+
+describe("labels that match the source", () => {
+  it("labels a connected channel's missing number as DATA GAP, not FACT", () => {
+    const channels: ChannelSnapshot[] = [
+      { channel: "line", label: "LINE OA", status: "connected", metrics: [{ label: "Friends", value: DATA_NOT_AVAILABLE, note: "LINE has not prepared statistics for this day" }, { label: "Account", value: "Synthetic OA" }], items: [] },
+    ];
+    const a = answerQuestion("How are our channels doing?", { data: emptyData(), channels });
+    expect(a.blocks).toContainEqual({ label: "DATA GAP", text: `LINE OA: Friends (LINE has not prepared statistics for this day): ${DATA_NOT_AVAILABLE}` });
+    expect(a.blocks).toContainEqual({ label: "FACT", text: "LINE OA: Account Synthetic OA" });
+    expect(a.blocks.some((b) => b.label === "FACT" && b.text.includes(DATA_NOT_AVAILABLE))).toBe(false);
+  });
+
+  it("does not claim to use a saved LINE draft that has no text", () => {
+    const base = emptyData();
+    const draft = { id: "cnt-1", title: "Synthetic LINE idea", type: "LINE OA" as const, status: "Idea" as const, approvalStatus: "Not required" as const, dueDate: "2026-10-10" };
+    const a = answerQuestion("Draft a LINE message", { data: { ...base, content: [draft] } });
+    expect(a.blocks).toContainEqual({ label: "DATA GAP", text: `Draft text for "Synthetic LINE idea": ${DATA_NOT_AVAILABLE}` });
+    expect(a.blocks.some((b) => b.text.startsWith("Using your saved draft"))).toBe(false);
+
+    const withText = { ...draft, id: "cnt-2", title: "Synthetic LINE draft", draftText: "Synthetic text." };
+    const b = answerQuestion("Draft a LINE message", { data: { ...base, content: [draft, withText] } });
+    expect(b.blocks).toContainEqual({ label: "FACT", text: 'Using your saved draft "Synthetic LINE draft".' });
+    expect(b.actionPreview?.draftText).toBe("Synthetic text.");
+  });
+
+  it("business concerns: says nothing is recorded as a FACT and names each missing source as a DATA GAP", () => {
+    const channels: ChannelSnapshot[] = [
+      { channel: "facebook", label: "Facebook", status: "connected", metrics: [], items: [] },
+      { channel: "line", label: "LINE OA", status: "not_configured", metrics: [], items: [] },
+      { channel: "shop", label: "Shop (products & stock)", status: "not_configured", metrics: [], items: [] },
+    ];
+    const a = answerQuestion("What are the biggest business concerns?", { data: emptyData(), channels });
+    expect(a.blocks[0]).toEqual({ label: "FACT", text: "No high-severity customer issues, stock alerts, high-severity campaign alerts or channel errors are recorded." });
+    expect(a.blocks).toContainEqual({ label: "DATA GAP", text: `Stock levels (shop not connected): ${DATA_NOT_AVAILABLE}` });
+    expect(a.blocks).toContainEqual({ label: "DATA GAP", text: `LINE OA (not connected): ${DATA_NOT_AVAILABLE}` });
+    expect(a.blocks.some((b) => /nothing worrying/i.test(b.text))).toBe(false);
+  });
+
+  it("the daily summary says the shop could not be read, not that it is not connected", () => {
+    const blocks = dailySummary({ ...fixtureData, products: [], shop: { status: "error", message: "The service answered 500." } });
+    expect(blocks).toContainEqual({ label: "DATA GAP", text: "Products and stock: Data not available. (shop could not be read)." });
   });
 });

@@ -31,7 +31,7 @@ export function MeetingsView() {
           fields={meetingFields}
           defaults={{ date: data.today, start: "09:00", end: "10:00" }}
           submitLabel="Save meeting"
-          extraValidate={(v) => validateRange(v, "start", "end", "End time must be after the start time.")}
+          extraValidate={(v) => validateRange(v, "start", "end", "End time must be after the start time.", true)}
           onCancel={() => setAdding(false)}
           onSubmit={(v) => {
             update((u) => addItem(u, "meetings", toMeeting(newId("mtg"), v)));
@@ -58,9 +58,9 @@ export function MeetingsView() {
           <div className="grid gap-6 md:grid-cols-2">
             <div>
               <H>Participants</H>
-              {m.participants.length ? <ul className="mb-4 list-disc pl-5 text-[15px]">{m.participants.map((p) => <li key={p}>{p}</li>)}</ul> : <p className="mb-4 text-sm text-muted">Data not available.</p>}
+              {m.participants.length ? <ul className="mb-4 list-disc pl-5 text-[15px]">{m.participants.map((p, i) => <li key={`${i}-${p}`}>{p}</li>)}</ul> : <p className="mb-4 text-sm text-muted">Data not available.</p>}
               <H>Agenda</H>
-              {m.agenda.length ? <ol className="list-decimal pl-5 text-[15px]">{m.agenda.map((a) => <li key={a}>{a}</li>)}</ol> : <p className="text-sm text-muted">Data not available.</p>}
+              {m.agenda.length ? <ol className="list-decimal pl-5 text-[15px]">{m.agenda.map((a, i) => <li key={`${i}-${a}`}>{a}</li>)}</ol> : <p className="text-sm text-muted">Data not available.</p>}
             </div>
             <div>
               <H>Notes</H>
@@ -81,7 +81,13 @@ export function MeetingsView() {
                   <span className="block font-medium">{m.title}</span>
                   <span className="text-sm text-muted">{formatLongDate(m.date)}</span>
                 </span>
-                <DeleteButton label={m.title} onClick={() => update((u) => removeItem(u, "meetings", m.id))} />
+                <DeleteButton
+                  label={m.title}
+                  onClick={() => {
+                    update((u) => removeItem(u, "meetings", m.id));
+                    setMessage("Meeting deleted.");
+                  }}
+                />
               </li>
             ))}
           </ul>

@@ -20,13 +20,22 @@ export function TaskBoard() {
   const [errors, setErrors] = useState<TaskErrors>({});
   const [message, setMessage] = useState("");
   const titleRef = useRef<HTMLInputElement>(null);
+  const createRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
   const uid = useId();
 
   useEffect(() => {
-    if (editing) titleRef.current?.focus();
+    if (editing) {
+      titleRef.current?.focus();
+    } else if (openerRef.current) {
+      // Back to the button that opened the form (or "Create task" if that row is gone).
+      (openerRef.current.isConnected ? openerRef.current : createRef.current)?.focus();
+      openerRef.current = null;
+    }
   }, [editing]);
 
   function open(task?: Task) {
+    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setErrors({});
     setInput(task ? { title: task.title, priority: task.priority, status: task.status, dueDate: task.dueDate, owner: task.owner, campaignId: task.campaignId, customerId: task.customerId, productId: task.productId } : emptyInput);
     setEditing(task ? task.id : "new");
@@ -37,19 +46,28 @@ export function TaskBoard() {
     const found = validateTask(input);
     setErrors(found);
     if (hasErrors(found)) return;
-    update((u) => ({ ...u, tasks: editing === "new" ? createTask(u.tasks, input, newId("tsk")) : updateTask(u.tasks, editing as string, input) }));
+    if (editing !== "new" && !tasks.some((t) => t.id === editing)) {
+      setMessage("This task was deleted, so the changes were not saved.");
+      setEditing(null);
+      return;
+    }
+    // The check inside the update also covers a delete made in another tab a moment ago.
+    update((u) => ({ ...u, tasks: editing === "new" ? createTask(u.tasks, input, newId("tsk")) : u.tasks.some((t) => t.id === editing) ? updateTask(u.tasks, editing as string, input) : u.tasks }));
     setMessage(editing === "new" ? "Task created." : "Task updated.");
     setEditing(null);
   }
 
   function complete(id: string) {
-    update((u) => ({ ...u, tasks: completeTask(u.tasks, id) }));
-    setMessage("Task marked as done.");
+    update((u) => ({ ...u, tasks: u.tasks.some((t) => t.id === id) ? completeTask(u.tasks, id) : u.tasks }));
+    // An open edit form for this task would undo the change on Save, so it closes.
+    if (editing === id) setEditing(null);
+    setMessage(editing === id ? "Task marked as done. The edit form was closed." : "Task marked as done.");
   }
 
   function remove(id: string) {
     update((u) => ({ ...u, tasks: deleteTask(u.tasks, id) }));
-    setMessage("Task deleted.");
+    if (editing === id) setEditing(null);
+    setMessage(editing === id ? "Task deleted. The edit form was closed." : "Task deleted.");
   }
 
   const field = (name: keyof TaskInput) => `${uid}-${name}`;
@@ -59,7 +77,7 @@ export function TaskBoard() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
-        <button type="button" onClick={() => open()} className="inline-flex items-center gap-2 rounded-xl bg-forest px-4 py-2.5 font-semibold text-white hover:bg-sage">
+        <button ref={createRef} type="button" onClick={() => open()} className="inline-flex items-center gap-2 rounded-xl bg-forest px-4 py-2.5 font-semibold text-white hover:bg-sage">
           <Plus className="h-4 w-4" aria-hidden="true" /> Create task
         </button>
         <p role="status" className="text-sm font-medium text-sage">{message}</p>

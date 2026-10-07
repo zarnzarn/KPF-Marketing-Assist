@@ -1,3 +1,4 @@
+import { WhenReady } from "@/components/AppDataProvider";
 import { PageHeader } from "@/components/ui";
 import { DocumentsBoard } from "@/components/DocumentsBoard";
 
@@ -7,7 +8,9 @@ export default function DocumentsPage() {
   return (
     <>
       <PageHeader title="Documents" subtitle="A list of your documents. Files are never uploaded or stored; only their names are kept in this browser." />
-      <DocumentsBoard />
+      <WhenReady>
+        <DocumentsBoard />
+      </WhenReady>
     </>
   );
 }

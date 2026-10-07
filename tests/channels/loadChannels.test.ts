@@ -143,7 +143,7 @@ describe("readChannels", () => {
 
     // Read-only: GET everywhere, except the allow-listed Shopify GraphQL query.
     const posts = calls.filter((c) => c.method === "POST");
-    expect(posts.map((c) => c.url)).toEqual(["https://fake-shop.myshopify.com/admin/api/2025-01/graphql.json"]);
+    expect(posts.map((c) => c.url)).toEqual(["https://fake-shop.myshopify.com/admin/api/2026-07/graphql.json"]);
     expect(String(posts[0].body)).not.toMatch(/\bmutation\b/i);
     for (const call of calls.filter((c) => c.method !== "POST")) {
       expect(call.method).toBe("GET");
@@ -429,7 +429,8 @@ describe("Channels page", () => {
     expect(loadChannels).toHaveBeenCalled();
     expect(screen.getByRole("heading", { level: 1, name: "Channels" })).toBeInTheDocument();
     expect(screen.getByText(/1 of 3 channels connected/)).toBeInTheDocument();
-    expect(screen.getAllByRole("region")).toHaveLength(3);
+    // One card (a <section> region) per channel; the focusable .env boxes are regions too.
+    expect(screen.getAllByRole("region").filter((r) => r.tagName === "SECTION")).toHaveLength(3);
   });
 
   it("shows a status badge on every card", async () => {
@@ -491,10 +492,15 @@ describe("Channels page", () => {
 
   it("gives every card a 'How to connect' section", async () => {
     await renderChannelsPage(snapshots);
-    for (const region of screen.getAllByRole("region")) {
-      const summary = within(region).getByText("How to connect");
-      expect(summary.tagName).toBe("SUMMARY");
-      expect(summary.parentElement?.tagName).toBe("DETAILS");
+    for (const region of screen.getAllByRole("region").filter((r) => r.tagName === "SECTION")) {
+      const summary = region.querySelector("summary");
+      expect(summary?.parentElement?.tagName).toBe("DETAILS");
+      // Each one names its channel for screen readers, so the six are not identical.
+      expect(summary).toHaveTextContent(`How to connect ${region.querySelector("h2, h3")?.textContent}`);
+      // The settings box can be reached and scrolled with the keyboard.
+      const pre = region.querySelector("pre");
+      expect(pre).toHaveAttribute("tabindex", "0");
+      expect(pre).toHaveAccessibleName(/settings for \.env\.local/);
     }
     expect(within(screen.getByRole("region", { name: "LINE OA" })).getByText(/LINE_CHANNEL_ACCESS_TOKEN=\.\.\./)).toBeInTheDocument();
   });

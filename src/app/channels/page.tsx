@@ -82,14 +82,19 @@ export default async function ChannelsPage() {
               )}
 
               <details className="mt-4 rounded-xl bg-white/60 p-3 ring-1 ring-line">
-                <summary className="cursor-pointer text-sm font-semibold text-sage">How to connect</summary>
+                <summary className="cursor-pointer text-sm font-semibold text-sage">
+                  How to connect<span className="sr-only"> {c.label}</span>
+                </summary>
                 <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm">
                   {help.steps.map((step) => (
                     <li key={step}>{step}</li>
                   ))}
                 </ol>
                 <p className="mt-3 text-xs text-muted">Lines to add to .env.local:</p>
-                <pre className="mt-1 overflow-x-auto rounded-lg bg-forest-soft p-2 text-xs text-forest">{help.env.join("\n")}</pre>
+                {/* Focusable so keyboard users can scroll long lines. */}
+                <pre tabIndex={0} role="region" aria-label={`${c.label} settings for .env.local`} className="mt-1 overflow-x-auto rounded-lg bg-forest-soft p-2 text-xs text-forest">
+                  {help.env.join("\n")}
+                </pre>
               </details>
             </Card>
           );

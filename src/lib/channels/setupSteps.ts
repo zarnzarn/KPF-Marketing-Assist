@@ -24,6 +24,8 @@ export const setupSteps: Record<ChannelId, { summary: string; steps: string[]; e
     steps: [
       "Tell us which platform the shop runs on (Shopify or WooCommerce). Other platforms are not supported yet.",
       "Shopify: Settings, Apps and sales channels, Develop apps, create an app with ONLY the read_products and read_inventory scopes, install it, then copy the Admin API access token.",
+      "Shopify note (not yet checked against your shop): newer Shopify stores may only allow apps made in the Dev Dashboard, which use short-lived tokens. If you cannot get an Admin API access token this way, tell us; the app needs a small change.",
+      "SHOP_URL for Shopify is the …myshopify.com address (Settings, Domains), not www.klongphaifarm.com.",
       "WooCommerce: WooCommerce, Settings, Advanced, REST API, Add key with Permissions set to Read, then copy the consumer key and secret.",
     ],
     env: ["SHOP_PLATFORM=shopify  (or woocommerce)", "SHOP_URL=https://your-shop.myshopify.com  (or https://www.klongphaifarm.com)", "SHOP_API_KEY=...", "SHOP_API_SECRET=...  (WooCommerce only)", "SHOP_LOW_STOCK=5  (optional)"],
@@ -33,7 +35,8 @@ export const setupSteps: Record<ChannelId, { summary: string; steps: string[]; e
     steps: [
       "Go to developers.facebook.com, create an app (type: Business).",
       "In Graph API Explorer, choose your app and the Klong Phai Farm Page, and request pages_show_list and pages_read_engagement only.",
-      "Create a Page access token and turn it into a long-lived token (Access Token Debugger, Extend).",
+      "Generate a User access token, then extend it in the Access Token Debugger (Extend Access Token). Short tokens stop working after about an hour.",
+      "In Graph API Explorer, with the extended user token, run me/accounts and copy the access_token shown for the Klong Phai Farm Page. A Page token made this way does not expire.",
       "Copy the Page ID (Page, About, Page transparency).",
     ],
     env: ["META_PAGE_ID=...", "META_PAGE_ACCESS_TOKEN=..."],

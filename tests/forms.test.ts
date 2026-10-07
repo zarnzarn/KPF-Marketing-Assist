@@ -6,6 +6,7 @@ import {
   initialValues,
   issueFields,
   meetingFields,
+  milestoneError,
   parseMilestones,
   toCampaign,
   toContent,
@@ -57,10 +58,11 @@ describe("builders", () => {
   });
 
   it("customers get a segment from their type and never store personal contact fields", () => {
-    const c = toCustomer("c1", { name: "Hotel A", type: "Retail Partner", opportunity: "Qualified", followUpDate: "" }, "2026-10-06");
+    const c = toCustomer("c1", { name: "Hotel A", type: "Retail Partner", opportunity: "Qualified", followUpDate: "" });
     expect(c.segment).toBe("Retail");
     expect(c.followUpDate).toBeNull();
-    expect(c.lastInteractionDate).toBe("2026-10-06");
+    // A blank date stays blank: the app never fills in an interaction the user did not record.
+    expect(c.lastInteractionDate).toBeNull();
     expect(Object.keys(c)).not.toEqual(expect.arrayContaining(["phone"]));
     expect(Object.keys(c).some((k) => /phone|email|contact/i.test(k))).toBe(false);
   });
@@ -86,5 +88,45 @@ describe("builders", () => {
     for (const fields of [meetingFields, customerFields, campaignFields, contentFields, issueFields]) {
       expect(new Set(fields.map((f) => f.name)).size).toBe(fields.length);
     }
+  });
+});
+
+describe("no invented values and no impossible dates", () => {
+  const campaign = (extra: Record<string, string>) => ({ name: "N", objective: "O", startDate: "2026-10-01", endDate: "2026-10-31", status: "Planned", contentStatus: "Not started", approvalStatus: "Not required", ...extra });
+
+  it("stores a blank campaign budget as unknown (null), never as 0", () => {
+    expect(toCampaign("x", campaign({ budgetThb: "", spentThb: "" })).budgetThb).toBeNull();
+    expect(toCampaign("x", campaign({ budgetThb: "  ", spentThb: "" })).budgetThb).toBeNull();
+    expect(toCampaign("x", campaign({ budgetThb: "0", spentThb: "" })).budgetThb).toBe(0);
+    expect(toCampaign("x", campaign({ budgetThb: "1500", spentThb: "200" }))).toMatchObject({ budgetThb: 1500, spentThb: 200 });
+  });
+
+  it("keeps a typed last interaction date", () => {
+    expect(toCustomer("c1", { name: "Hotel A", type: "Hotel", opportunity: "Qualified", lastInteractionDate: "2026-09-30" }).lastInteractionDate).toBe("2026-09-30");
+  });
+
+  it.each(["2026-02-30", "2026-02-29", "2026-04-31"])("refuses the impossible date %s in every date field", (date) => {
+    expect(validateFields(meetingFields, { title: "x", date, start: "09:00", end: "10:00" }).date).toContain("valid date");
+    expect(validateFields(campaignFields, { ...initialValues(campaignFields), ...campaign({ startDate: date }) }).startDate).toContain("valid date");
+  });
+
+  it("refuses numbers that are not finite", () => {
+    expect(validateFields(campaignFields, { ...initialValues(campaignFields), ...campaign({ budgetThb: "Infinity" }) }).budgetThb).toContain("0 or more");
+  });
+
+  it("names milestone lines that cannot be read instead of dropping them silently", () => {
+    const text = "2026-10-10 Brief\nnot a milestone\n2026-02-30 Impossible";
+    const message = milestoneError(text);
+    expect(message).toContain('"not a milestone"');
+    expect(message).toContain('"2026-02-30 Impossible"');
+    expect(validateFields(campaignFields, { ...initialValues(campaignFields), ...campaign({ milestones: text }) }).milestones).toBe(message);
+    expect(milestoneError("2026-10-10 Brief\n\n 2026-10-20 Launch ")).toBeUndefined();
+    expect(parseMilestones("2026-10-10 Brief\n2026-02-30 Impossible")).toEqual([{ date: "2026-10-10", label: "Brief" }]);
+  });
+
+  it("can require an end strictly after the start (meetings)", () => {
+    expect(validateRange({ start: "10:00", end: "10:00" }, "start", "end", "bad")).toEqual({});
+    expect(validateRange({ start: "10:00", end: "10:00" }, "start", "end", "bad", true)).toEqual({ end: "bad" });
+    expect(validateRange({ start: "10:00", end: "10:30" }, "start", "end", "bad", true)).toEqual({});
   });
 });

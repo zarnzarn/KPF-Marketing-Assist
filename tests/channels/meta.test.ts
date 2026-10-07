@@ -480,14 +480,14 @@ describe("instagramSnapshot — connected", () => {
         title: "Synthetic caption",
         date: "2026-10-05",
         url: "https://www.instagram.com/p/SYNTHETIC1/",
-        detail: "1,520 likes · 34 comments",
+        detail: "Likes: 1,520 · Comments: 34",
       },
       {
         id: "18000000000000002",
         title: "(post without caption)",
         date: "2026-10-02",
         url: "https://www.instagram.com/p/SYNTHETIC2/",
-        detail: "7 likes · 0 comments",
+        detail: "Likes: 7 · Comments: 0",
       },
     ]);
   });
@@ -509,7 +509,7 @@ describe("instagramSnapshot — connected", () => {
       { label: "Followers", value: "Data not available." },
       { label: "Posts", value: "Data not available." },
     ]);
-    expect(snap.items[0].detail).toBe("Data not available. likes · Data not available. comments");
+    expect(snap.items[0].detail).toBe("Likes: Data not available. · Comments: Data not available.");
     expect(snap.items[0].detail).not.toMatch(/\b0 likes/);
     expect(snap.items[0].date).toBeUndefined();
   });

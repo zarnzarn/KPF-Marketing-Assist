@@ -1,5 +1,6 @@
 // LINE Official Account via the official Messaging API. Read-only GET requests.
 // Note: the lin.ee invite link is not an API. This needs a channel access token.
+import { DATA_NOT_AVAILABLE } from "../constants";
 import { channelConfig, num } from "./config";
 import { explain, readOnlyJson } from "./readOnlyFetch";
 import type { ChannelDeps, ChannelSnapshot } from "./types";
@@ -26,10 +27,10 @@ export async function lineSnapshot(deps: ChannelDeps): Promise<ChannelSnapshot> 
       status: "connected",
       fetchedAt: now.toISOString(),
       metrics: [
-        { label: "Account", value: info.displayName ?? info.basicId ?? "Data not available." },
-        { label: "Friends", value: ready ? num(stats.followers) : "Data not available.", note: ready ? `as of ${asOf}` : "LINE has not prepared statistics for this day" },
-        { label: "Targeted reach", value: ready ? num(stats.targetedReaches) : "Data not available." },
-        { label: "Blocked", value: ready ? num(stats.blocks) : "Data not available." },
+        { label: "Account", value: info.displayName ?? info.basicId ?? DATA_NOT_AVAILABLE },
+        { label: "Friends", value: ready ? num(stats.followers) : DATA_NOT_AVAILABLE, note: ready ? `as of ${asOf}` : "LINE has not prepared statistics for this day" },
+        { label: "Targeted reach", value: ready ? num(stats.targetedReaches) : DATA_NOT_AVAILABLE },
+        { label: "Blocked", value: ready ? num(stats.blocks) : DATA_NOT_AVAILABLE },
       ],
       items: [],
     };

@@ -7,6 +7,14 @@ function toUtc(date: string): Date {
   return new Date(`${date}T00:00:00Z`);
 }
 
+/** True only for a real calendar date: "2026-02-28" yes; "2026-02-30", "2026-02-29" (not a leap year) and "2026-13-01" no. */
+export function isIsoDate(date: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+  const time = Date.parse(`${date}T00:00:00Z`);
+  // Some engines roll 30 Feb forward to 2 Mar, so the date must come back unchanged.
+  return !Number.isNaN(time) && new Date(time).toISOString().slice(0, 10) === date;
+}
+
 export function addDays(date: string, days: number): string {
   return new Date(toUtc(date).getTime() + days * MS_PER_DAY).toISOString().slice(0, 10);
 }
@@ -40,6 +48,13 @@ function parts(date: string) {
 export function formatDate(date: string): string {
   const { day, month } = parts(date);
   return `${day} ${month.slice(0, 3)}`;
+}
+
+/** "1 - 15 Dec 2026" style ranges always carry the year, so ranges across years are clear. */
+export function formatDateRange(from: string, to: string): string {
+  const a = parts(from);
+  const b = parts(to);
+  return a.year === b.year ? `${formatDate(from)} - ${formatDate(to)} ${b.year}` : `${formatDate(from)} ${a.year} - ${formatDate(to)} ${b.year}`;
 }
 
 export function formatLongDate(date: string): string {

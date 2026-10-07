@@ -10,6 +10,8 @@ const barColor: Record<string, string> = {
   Completed: "bg-[#b9cfc2]",
   Paused: "bg-[#e3a58f]",
 };
+/** Show at most this many month labels, so they never run into each other. */
+const MAX_LABELS = 8;
 
 /** Simple Gantt-style campaign calendar. Each row also has a text description for screen readers. */
 export function CampaignTimeline({ campaigns, today }: { campaigns: Campaign[]; today: string }) {
@@ -30,11 +32,13 @@ export function CampaignTimeline({ campaigns, today }: { campaigns: Campaign[]; 
     <div className="relative overflow-x-auto">
       <div className="min-w-[640px]">
         <div className="relative ml-44 h-6 border-b border-line text-xs font-semibold text-muted" aria-hidden="true">
-          {months.map((m) => (
-            <span key={m.label} className="absolute -translate-x-0" style={{ left: `${pct(m.start)}%` }}>
-              {m.label}
-            </span>
-          ))}
+          {months
+            .filter((_, i) => i % Math.ceil(months.length / MAX_LABELS) === 0)
+            .map((m) => (
+              <span key={m.label} className="absolute whitespace-nowrap" style={{ left: `${pct(m.start)}%` }}>
+                {m.label}
+              </span>
+            ))}
         </div>
         <ul className="relative">
           {campaigns.map((c) => (
@@ -53,7 +57,16 @@ export function CampaignTimeline({ campaigns, today }: { campaigns: Campaign[]; 
             </li>
           ))}
         </ul>
-        <p className="mt-2 ml-44 text-xs text-muted">Red line = today. Green = active, gold = planned, grey = draft.</p>
+        <ul className="mt-2 ml-44 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted" aria-label="Legend">
+          <li className="flex items-center gap-1.5">
+            <span className="inline-block h-3 w-0.5 bg-clay" aria-hidden="true" /> Today
+          </li>
+          {Object.entries(barColor).map(([status, color]) => (
+            <li key={status} className="flex items-center gap-1.5">
+              <span className={`inline-block h-3 w-3 rounded-sm ${color}`} aria-hidden="true" /> {status}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 // Field definitions, validation and entity builders for the "add your own" forms.
 // Pure functions (no UI), so they are easy to test.
 
+import { isIsoDate } from "./dates";
 import type {
   ApprovalStatus,
   Campaign,
@@ -26,12 +27,13 @@ export interface FieldConfig {
   options?: readonly string[];
   hint?: string;
   maxLength?: number;
+  /** Extra check for one field; returns an error message, or nothing when the value is fine. */
+  validate?: (value: string) => string | undefined;
 }
 
 export type FormValues = Record<string, string>;
 export type FormErrors = Record<string, string>;
 
-const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
 
 export function initialValues(fields: FieldConfig[], defaults: FormValues = {}): FormValues {
@@ -48,19 +50,23 @@ export function validateFields(fields: FieldConfig[], values: FormValues): FormE
     }
     const max = f.maxLength ?? (f.type === "textarea" ? 2000 : 140);
     if (value.length > max) errors[f.name] = `${f.label} must be ${max} characters or fewer.`;
-    else if (f.type === "date" && (!DATE.test(value) || Number.isNaN(Date.parse(`${value}T00:00:00Z`)))) errors[f.name] = `Enter a valid date for ${f.label.toLowerCase()}.`;
+    else if (f.type === "date" && !isIsoDate(value)) errors[f.name] = `Enter a valid date for ${f.label.toLowerCase()}.`;
     else if (f.type === "time" && !TIME.test(value)) errors[f.name] = `Enter a time like 09:30 for ${f.label.toLowerCase()}.`;
-    else if (f.type === "number" && !(Number(value) >= 0)) errors[f.name] = `${f.label} must be a number of 0 or more.`;
+    else if (f.type === "number" && !(Number.isFinite(Number(value)) && Number(value) >= 0)) errors[f.name] = `${f.label} must be a number of 0 or more.`;
     else if (f.type === "select" && f.options && !f.options.includes(value)) errors[f.name] = `Choose a value for ${f.label.toLowerCase()}.`;
+    else {
+      const custom = f.validate?.(value);
+      if (custom) errors[f.name] = custom;
+    }
   }
   return errors;
 }
 
-/** Cross-field checks that a single field cannot express. */
-export function validateRange(values: FormValues, start: string, end: string, message: string): FormErrors {
+/** Cross-field checks that a single field cannot express. `strict` means the end must be after the start, not equal to it. */
+export function validateRange(values: FormValues, start: string, end: string, message: string, strict = false): FormErrors {
   const a = (values[start] ?? "").trim();
   const b = (values[end] ?? "").trim();
-  return a && b && b < a ? { [end]: message } : {};
+  return a && b && (strict ? b <= a : b < a) ? { [end]: message } : {};
 }
 
 const lines = (text: string) => text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
@@ -109,7 +115,7 @@ export const campaignFields: FieldConfig[] = [
   { name: "status", label: "Status", type: "select", required: true, options: campaignStatuses },
   { name: "contentStatus", label: "Content status", type: "select", required: true, options: contentProgress },
   { name: "approvalStatus", label: "Approval status", type: "select", required: true, options: approvalStatuses },
-  { name: "milestones", label: "Milestones (one per line: YYYY-MM-DD label)", type: "textarea" },
+  { name: "milestones", label: "Milestones (one per line: YYYY-MM-DD label)", type: "textarea", validate: (text) => milestoneError(text) },
 ];
 
 const contentTypes: readonly ContentType[] = ["Facebook", "Instagram", "Website", "LINE OA", "PR", "Email", "B2B materials"];
@@ -163,14 +169,14 @@ export function toMeeting(id: string, v: FormValues): Meeting {
   };
 }
 
-export function toCustomer(id: string, v: FormValues, today: string): Customer {
+export function toCustomer(id: string, v: FormValues): Customer {
   const type = t(v.type) as CustomerType;
   return {
     id,
     name: t(v.name),
     type,
     segment: segmentOf[type] ?? "B2B",
-    lastInteractionDate: t(v.lastInteractionDate) || today,
+    lastInteractionDate: t(v.lastInteractionDate) || null, // blank stays blank, never "today"
     lastInteractionNote: t(v.lastInteractionNote),
     followUpDate: t(v.followUpDate) || null,
     opportunity: t(v.opportunity) as OpportunityStatus,
@@ -178,15 +184,30 @@ export function toCustomer(id: string, v: FormValues, today: string): Customer {
   };
 }
 
-/** "2026-10-12 Content ready" lines -> milestones. Lines without a valid date are ignored. */
+const MILESTONE = /^(\d{4}-\d{2}-\d{2})\s+(.+)$/;
+const isMilestone = (line: string) => {
+  const m = line.match(MILESTONE);
+  return !!m && isIsoDate(m[1]);
+};
+
+/** "2026-10-12 Content ready" lines -> milestones. The form refuses unreadable lines first (see milestoneError). */
 export function parseMilestones(text: string): { date: string; label: string }[] {
   return lines(text)
-    .map((line) => line.match(/^(\d{4}-\d{2}-\d{2})\s+(.+)$/))
-    .filter((m): m is RegExpMatchArray => !!m && !Number.isNaN(Date.parse(`${m[1]}T00:00:00Z`)))
+    .filter(isMilestone)
+    .map((line) => line.match(MILESTONE) as RegExpMatchArray)
     .map((m) => ({ date: m[1], label: m[2].trim() }));
 }
 
+/** Names the milestone lines that cannot be read, so none disappear silently. */
+export function milestoneError(text: string): string | undefined {
+  const bad = lines(text).filter((line) => !isMilestone(line));
+  if (bad.length === 0) return undefined;
+  const shown = bad.slice(0, 3).map((l) => `"${l.slice(0, 40)}"`).join(", ");
+  return `Write each milestone as a real date then a label, like 2026-10-12 Content ready. Not readable: ${shown}${bad.length > 3 ? ` and ${bad.length - 3} more` : ""}.`;
+}
+
 export function toCampaign(id: string, v: FormValues): Campaign {
+  const budget = t(v.budgetThb);
   const spent = t(v.spentThb);
   return {
     id,
@@ -196,7 +217,7 @@ export function toCampaign(id: string, v: FormValues): Campaign {
     targetAudience: t(v.targetAudience),
     startDate: t(v.startDate),
     endDate: t(v.endDate),
-    budgetThb: Number(t(v.budgetThb) || 0),
+    budgetThb: budget ? Number(budget) : null, // blank stays unknown, never ฿0
     spentThb: spent ? Number(spent) : null,
     status: t(v.status) as CampaignStatus,
     contentStatus: t(v.contentStatus) as ContentProgress,

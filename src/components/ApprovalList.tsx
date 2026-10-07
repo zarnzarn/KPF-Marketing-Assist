@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useAppData } from "@/components/AppDataProvider";
+import { StatusMessage } from "@/components/EntityForm";
 import { Badge, EmptyState, List } from "@/components/ui";
 import { decide } from "@/lib/approvals";
 import { formatDate } from "@/lib/dates";
@@ -10,16 +12,22 @@ import { updateItem } from "@/lib/store/userData";
 /** Pending approval requests with Approve / Reject. Approving only changes the status here. */
 export function ApprovalList() {
   const { data, update } = useAppData();
+  const [message, setMessage] = useState("");
   const list = pendingApprovals(data);
-  if (list.length === 0) return <EmptyState>Nothing is waiting for approval.</EmptyState>;
 
-  const set = (id: string, decision: "Approved" | "Rejected") =>
+  const set = (id: string, title: string, decision: "Approved" | "Rejected") => {
     update((u) => {
       const request = u.approvals.find((a) => a.id === id);
       return request ? updateItem(u, "approvals", id, decide(request, decision)) : u;
     });
+    setMessage(`${decision}: ${title}. Only the status changed; nothing was sent, published or launched.`);
+  };
 
   return (
+    <>
+      {/* Stays on screen after the last item goes, so the decision is always confirmed. */}
+      <StatusMessage text={message} />
+      {list.length === 0 ? <EmptyState>Nothing is waiting for approval.</EmptyState> : (
     <List>
       {list.map((a) => (
         <li key={a.id} className="flex flex-wrap items-start justify-between gap-2 py-3">
@@ -31,15 +39,17 @@ export function ApprovalList() {
             </span>
           </span>
           <span className="flex gap-2">
-            <button type="button" onClick={() => set(a.id, "Approved")} className="rounded-lg bg-forest px-3 py-1.5 text-xs font-semibold text-white hover:bg-sage">
+            <button type="button" onClick={() => set(a.id, a.title, "Approved")} className="rounded-lg bg-forest px-3 py-1.5 text-xs font-semibold text-white hover:bg-sage">
               Approve<span className="sr-only"> {a.title}</span>
             </button>
-            <button type="button" onClick={() => set(a.id, "Rejected")} className="rounded-lg border border-line bg-white px-3 py-1.5 text-xs font-semibold hover:border-clay">
+            <button type="button" onClick={() => set(a.id, a.title, "Rejected")} className="rounded-lg border border-line bg-white px-3 py-1.5 text-xs font-semibold hover:border-clay">
               Reject<span className="sr-only"> {a.title}</span>
             </button>
           </span>
         </li>
       ))}
     </List>
+      )}
+    </>
   );
 }
