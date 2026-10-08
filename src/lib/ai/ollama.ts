@@ -1,7 +1,8 @@
 import "server-only";
 // Ollama cloud (https://ollama.com), free plan model gemma4:cloud by default. Server only: the API key
-// lives in OLLAMA_API_KEY (.env.local or Vercel settings) and never reaches the browser.
+// lives in OLLAMA_API_KEY (.env.local or your host's settings, such as Netlify) and never reaches the browser.
 // The request goes through readOnlyFetch: fixed address, no redirects, time limit, key redacted from errors.
+// The 25-second limit stays inside Netlify's function time limit; a slower answer falls back to the rule-based one.
 import { ChannelError, readOnlyJson } from "../channels/readOnlyFetch";
 import type { FetchLike } from "../channels/readOnlyFetch";
 
@@ -22,7 +23,7 @@ export interface ChatMessage {
 }
 
 /** Sends one conversation and returns the model's text. Throws ChannelError with a plain message on failure. */
-export async function ollamaChat(messages: ChatMessage[], { env = process.env, fetchImpl, timeoutMs = 45_000 }: { env?: Env; fetchImpl?: FetchLike; timeoutMs?: number } = {}): Promise<string> {
+export async function ollamaChat(messages: ChatMessage[], { env = process.env, fetchImpl, timeoutMs = 25_000 }: { env?: Env; fetchImpl?: FetchLike; timeoutMs?: number } = {}): Promise<string> {
   const settings = ollamaSettings(env);
   if (!settings) throw new ChannelError("OLLAMA_API_KEY is not set.", "auth");
   const res = await readOnlyJson<{ message?: { content?: unknown } }>(OLLAMA_CHAT_URL, {

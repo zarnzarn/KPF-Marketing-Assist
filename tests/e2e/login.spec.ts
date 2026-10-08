@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 // These run against a server started in a special mode (see README "Check it"):
 //   E2E_MODE=online: fake Supabase settings, nobody logged in. Every page must send you to /login.
-//   E2E_MODE=setup:  VERCEL=1 without Supabase settings. Every page must show "Setup needed" and no data.
+//   E2E_MODE=setup:  NETLIFY=true (or VERCEL=1) without Supabase settings. Every page must show "Setup needed" and no data.
 const mode = process.env.E2E_MODE ?? "local";
 
 test.describe("online, not logged in", () => {
@@ -32,7 +32,7 @@ test.describe("online, not logged in", () => {
 });
 
 test.describe("on a host without login settings", () => {
-  test.skip(mode !== "setup", "needs a server started with VERCEL=1 and no Supabase settings");
+  test.skip(mode !== "setup", "needs a server started with NETLIFY=true (or VERCEL=1) and no Supabase settings");
 
   for (const route of ["/", "/reports", "/login"]) {
     test(`${route} shows Setup needed and no data`, async ({ page }) => {

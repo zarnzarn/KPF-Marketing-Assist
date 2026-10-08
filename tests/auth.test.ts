@@ -21,7 +21,7 @@ const stubEnv = (env: Record<string, string>) => Object.entries(env).forEach(([k
 beforeEach(() => {
   vi.resetModules();
   Object.values(auth).forEach((f) => f.mockReset());
-  for (const k of ["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY", "NEXT_PUBLIC_SUPABASE_ANON_KEY", "ALLOWED_EMAIL", "VERCEL"]) vi.stubEnv(k, "");
+  for (const k of ["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY", "NEXT_PUBLIC_SUPABASE_ANON_KEY", "ALLOWED_EMAIL", "VERCEL", "NETLIFY", "SITE_ID", "SITE_NAME"]) vi.stubEnv(k, "");
 });
 afterEach(() => vi.unstubAllEnvs());
 
@@ -36,6 +36,12 @@ describe("who is using the app (server check)", () => {
     vi.stubEnv("VERCEL", "1");
     const { getViewer, requireViewer } = await import("@/lib/auth/session");
     await expect(getViewer()).resolves.toBeNull();
+    await expect(requireViewer()).rejects.toThrow("REDIRECT /setup");
+  });
+
+  it("lets nobody in on Netlify without login settings", async () => {
+    stubEnv({ SITE_ID: "synthetic-site-id", SITE_NAME: "synthetic-site" });
+    const { requireViewer } = await import("@/lib/auth/session");
     await expect(requireViewer()).rejects.toThrow("REDIRECT /setup");
   });
 

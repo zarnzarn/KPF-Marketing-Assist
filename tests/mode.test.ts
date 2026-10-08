@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { allowedEmail, isAllowedEmail, isOnline, setupProblem, supabaseSettings } from "@/lib/mode";
+import { allowedEmail, isAllowedEmail, isOnline, onHost, setupProblem, supabaseSettings } from "@/lib/mode";
 import { isPublicPath } from "@/proxy";
 
 // Synthetic settings only.
@@ -33,6 +33,18 @@ describe("mode", () => {
     expect(setupProblem({ VERCEL: "1" })).toBe("supabase");
     expect(setupProblem({ ...ONLINE, ALLOWED_EMAIL: "" })).toBe("allowed-email");
     expect(setupProblem({ ...ONLINE, VERCEL: "1" })).toBeNull();
+    expect(setupProblem({ NETLIFY: "true" })).toBe("supabase");
+    expect(setupProblem({ SITE_ID: "synthetic-site-id", SITE_NAME: "synthetic-site" })).toBe("supabase");
+    expect(setupProblem({ ...ONLINE, SITE_ID: "synthetic-site-id", SITE_NAME: "synthetic-site" })).toBeNull();
+  });
+
+  it("knows when it runs on Netlify or Vercel, and not on your own computer", () => {
+    expect(onHost({})).toBe(false);
+    expect(onHost({ VERCEL: "1" })).toBe(true);
+    expect(onHost({ NETLIFY: "true" })).toBe(true);
+    expect(onHost({ SITE_ID: "synthetic-site-id", SITE_NAME: "synthetic-site" })).toBe(true);
+    expect(onHost({ SITE_ID: "synthetic-site-id" })).toBe(false);
+    expect(onHost({ VERCEL: "0", NETLIFY: "false", SITE_ID: " ", SITE_NAME: "" })).toBe(false);
   });
 
   it("only the login, email-link and setup pages are public", () => {

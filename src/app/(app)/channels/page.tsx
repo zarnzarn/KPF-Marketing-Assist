@@ -28,7 +28,7 @@ export default async function ChannelsPage() {
   const connected = channels.filter((c) => c.status === "connected").length;
   const online = isOnline();
   const ai = ollamaSettings();
-  const where = online ? "in Vercel (Project, Settings, Environment Variables), then redeploy" : "in .env.local on your computer, then restart the app";
+  const where = online ? "in Netlify (Site configuration, Environment variables), then redeploy" : "in .env.local on your computer, then restart the app";
 
   return (
     <>
@@ -96,7 +96,7 @@ export default async function ChannelsPage() {
                     <li key={step}>{step}</li>
                   ))}
                 </ol>
-                <p className="mt-3 text-xs text-muted">{online ? "Settings to add in Vercel (name=value):" : "Lines to add to .env.local:"}</p>
+                <p className="mt-3 text-xs text-muted">{online ? "Settings to add in Netlify (name=value):" : "Lines to add to .env.local:"}</p>
                 {/* Focusable so keyboard users can scroll long lines. */}
                 <pre tabIndex={0} role="region" aria-label={`${c.label} settings for .env.local`} className="mt-1 overflow-x-auto rounded-lg bg-forest-soft p-2 text-xs text-forest">
                   {help.env.join("\n")}

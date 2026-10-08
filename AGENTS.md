@@ -31,8 +31,8 @@ Key areas: free-range chicken, eggs, duck, specialty poultry products, premium f
 ## Development rules
 
 - A real web app with two modes (`src/lib/mode.ts`):
-  - **Online** (Supabase settings present, hosted on Vercel): one allowed login (`ALLOWED_EMAIL`, email link). Entries and uploaded reports are saved in the user's own Supabase project, protected by row-level security. No service-role key is used anywhere.
-  - **Local** (no Supabase settings): entries in the browser (`localStorage`), reports from `REPORTS_DIR`. Used on the user's computer and in tests. On a host (`VERCEL=1`) the app never runs in local mode.
+  - **Online** (Supabase settings present, hosted on Netlify's free plan, or Vercel): one allowed login (`ALLOWED_EMAIL`, email link). Entries and uploaded reports are saved in the user's own Supabase project, protected by row-level security. No service-role key is used anywhere.
+  - **Local** (no Supabase settings): entries in the browser (`localStorage`), reports from `REPORTS_DIR`. Used on the user's computer and in tests. On a host (Netlify or Vercel, see `onHost()`) the app never runs in local mode.
 - **No mock data in the app.** Data comes only from:
   1. **The user's own entries** (tasks, meetings, customers, campaigns, content, issues, approvals, document names).
   2. **The user's monthly marketing report files** (`.docx`): uploaded in the online app, or read from a local folder.
@@ -50,7 +50,7 @@ Key areas: free-range chicken, eggs, duck, specialty poultry products, premium f
 ## Real data rules
 
 - **Report files** are uploaded to the user's private Supabase storage (online) or read at request time from `REPORTS_DIR` (local, default `data/private/reports`; sub-folders allowed). They are never copied into the repository.
-- **Credentials** (channel tokens, keys, service-account JSON, `OLLAMA_API_KEY`) live only in `.env.local`, Vercel environment variables or files outside the repository. They are used only on the server, never sent to the browser, never written to logs or error messages. Only the Supabase URL and publishable key are public by design.
+- **Credentials** (channel tokens, keys, service-account JSON, `OLLAMA_API_KEY`) live only in `.env.local`, the host's environment variables (Netlify or Vercel) or files outside the repository. They are used only on the server, never sent to the browser, never written to logs or error messages. Only the Supabase URL and publishable key are public by design.
 - **Read-only:** all channel HTTP calls go through `src/lib/channels/readOnlyFetch.ts`. It allows GET, plus POST only to endpoints that change nothing: Google sign-in (`oauth2.googleapis.com/token`), GA4 `runReport`, Shopify GraphQL **queries** (bodies containing `mutation` are refused) and the AI Secretary's question to Ollama (`ollama.com/api/chat`). Requests that carry a key never follow redirects. Everything else is blocked before a request is made. Never add code that posts, publishes, sends messages, changes prices or launches anything, and never call `fetch` directly (a test enforces this).
 - Real data must **never be committed or pushed**: `/data/private/`, `/private/`, `.env*` (except `.env.example`), `*.docx`, `*.pem`, `*service-account*.json` and `*-key.json` are git-ignored, and `tests/no-private-data.test.ts` fails if a `.docx`, private path, `.env.local` or token-like secret is tracked.
 - Tests, fixtures and screenshots committed to the repo use synthetic data only (`tests/fixtures/` is fictional and never imported by the app).

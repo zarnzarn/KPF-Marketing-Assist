@@ -26,22 +26,30 @@ You need three free accounts. You create them yourself; nobody else gets your ke
 **2. Ollama (AI answers, optional)**
 1. Sign in at ollama.com, open **Settings, Keys**, and create a key. The free plan includes `gemma4:cloud`.
 
-**3. Vercel (the web address)**
-1. Sign up at vercel.com **with your GitHub account** and import the `kpf-marketing-assist` repository.
-2. Region: **Singapore (sin1)** (Project, Settings, Functions).
-3. In **Project, Settings, Environment Variables** add:
+**3. Netlify (the web address, free plan)**
+1. Sign up at netlify.com **with your GitHub account**. Choose the free plan.
+2. Click **Add new project, Import an existing project, GitHub**, choose `kpf-marketing-assist` and the `main` branch. Netlify reads `netlify.toml` and sets up Next.js by itself.
+3. Before the first deploy (or later in **Project configuration, Environment variables**) add:
    - `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (from step 1.5)
    - `ALLOWED_EMAIL` (your email address, the same as in step 1.3)
    - `OLLAMA_API_KEY` (from step 2, optional)
    - any channel settings from `.env.example` (for GA4 online, paste the key file's contents into `GA4_SERVICE_ACCOUNT_JSON`)
-4. Click **Deploy**. Copy your web address (for example `https://kpf-marketing-assist.vercel.app`).
-5. Back in Supabase, **Authentication, URL Configuration**: set **Site URL** to that address and add `https://YOUR-ADDRESS/auth/callback` under **Redirect URLs**.
-6. Open the address, type your email, and click the link in the email. Then:
+4. Click **Deploy**. Copy your web address (for example `https://kpf-marketing-assist.netlify.app`).
+5. Optional, for speed: if Netlify offers **Functions region** (Project configuration, Build & deploy), choose **Asia Pacific (Singapore)**, the same region as Supabase, and redeploy.
+6. Back in Supabase, **Authentication, URL Configuration**: set **Site URL** to that address and add `https://YOUR-ADDRESS/auth/callback` under **Redirect URLs**.
+7. Open the address, type your email, and click the link in the email. Then:
    - Today page: **Move entries to my account** (if you used the app on this computer before)
    - Reports page: upload your monthly report files
    - Channels page: **Test the AI connection**
 
-Costs to know: Vercel's free plan is for personal, non-commercial use; for a business tool Vercel asks for the Pro plan (about US$20 a month). Supabase's free plan pauses a project after about a week without use (open the app regularly, or upgrade). Ollama's free plan has usage limits.
+After a settings change, open **Deploys** and click **Trigger deploy** so the app picks it up.
+
+Costs (all 0 baht with free plans):
+- **Netlify Free** allows business use. If the month's free credits run out, the site pauses until the next month; nothing is charged.
+- **Supabase Free** pauses a project after about 7 days without use. Your data is kept: open supabase.com and click **Restore**. Using the app on working days keeps it awake.
+- **Ollama Free** has usage limits. An AI answer that takes longer than 25 seconds, or any AI error, falls back to the rule-based answer and says so.
+- Netlify gives the app about 4 KB in total for its settings. The GA4 key file is about 2.3 KB, so with many channel tokens the deploy may refuse; leave out a channel you do not need.
+- Vercel also works (it uses the same settings), but its free plan is for personal, non-commercial use only; for a business it needs Pro (about US$20 a month).
 
 Privacy: entries and reports are stored only in your own Supabase project, behind your login. For AI answers, the question and the related entries, report text and channel numbers are sent to Ollama.
 
@@ -99,7 +107,7 @@ npm run build          # production build
 npm run build && npm start -- -p 3100   # then, in another terminal:
 npm run test:e2e       # responsive layout + keyboard checks in a real browser (local mode)
 # Login checks: start the server with fake Supabase settings, then  E2E_MODE=online npm run test:e2e
-# Setup page:   start the server with VERCEL=1 and no Supabase settings, then  E2E_MODE=setup npm run test:e2e
+# Setup page:   start the server with NETLIFY=true (or VERCEL=1) and no Supabase settings, then  E2E_MODE=setup npm run test:e2e
 ```
 
 ## Where things are

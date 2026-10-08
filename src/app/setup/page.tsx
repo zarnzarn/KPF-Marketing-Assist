@@ -17,7 +17,7 @@ export default function SetupPage() {
     <main id="main" className="flex min-h-screen items-center justify-center px-4 py-10">
       <div className="w-full max-w-lg rounded-3xl border border-line bg-card p-8">
         <h1 className="mb-3 text-3xl font-semibold text-forest">Setup needed</h1>
-        <p className="mb-4 text-muted">The app is online but its login settings are not complete, so it shows no data. Add these environment variables in Vercel (Project, Settings, Environment Variables), then redeploy:</p>
+        <p className="mb-4 text-muted">The app is online but its login settings are not complete, so it shows no data. Add these environment variables in Netlify (Site configuration, Environment variables), then redeploy:</p>
         <ul className="mb-4 list-disc space-y-1 pl-5 font-mono text-sm">
           {missing[problem].map((name) => (
             <li key={name}>{name}</li>

@@ -5,7 +5,7 @@ import { viewerChannels, viewerReports } from "@/lib/data/server";
 
 export const metadata = { title: "AI Secretary · Klong Phai Farm" };
 export const dynamic = "force-dynamic"; // reads the reports on every visit
-export const maxDuration = 60; // an AI answer can take up to about 45 seconds
+export const maxDuration = 60; // an AI answer can take up to about 25 seconds (the Ollama time limit)
 
 export default async function SecretaryPage() {
   const [{ reports }, channels] = await Promise.all([viewerReports(), viewerChannels()]);
