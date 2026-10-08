@@ -1,0 +1,176 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Meetings with agenda, attendees (contact ids) and related records.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "meetings": [
+    {
+      "id": "MTG-001",
+      "title": "Weekly marketing stand-up",
+      "date": "2026-10-07",
+      "start": "09:30",
+      "end": "10:00",
+      "location": "Head office meeting room (MOCK)",
+      "attendees": [
+        "CON-001",
+        "CON-006",
+        "CON-005"
+      ],
+      "agenda": [
+        "Protein Week results so far (CMP-001)",
+        "Bone broth launch approval (TSK-007)",
+        "Expo booth (EVT-001)"
+      ],
+      "notes": "",
+      "related": {
+        "campaignIds": [
+          "CMP-001",
+          "CMP-003"
+        ]
+      },
+      "mock": true
+    },
+    {
+      "id": "MTG-002",
+      "title": "Breast fillet supply for Protein Week (with production)",
+      "date": "2026-10-08",
+      "start": "10:30",
+      "end": "11:15",
+      "location": "Online (MOCK)",
+      "attendees": [
+        "CON-001",
+        "CON-003",
+        "CON-002"
+      ],
+      "agenda": [
+        "Stock runs out around 9-10 Oct (inventory PRD-002)",
+        "Option: move 19 Oct slaughter slot to 10 Oct (+600 packs)",
+        "Option: pause ads, keep LINE OA only",
+        "Hotel and retail allocations"
+      ],
+      "notes": "",
+      "previousDiscussion": "On 30 Sep production warned the promo could exceed capacity (EML-001).",
+      "related": {
+        "productId": "PRD-002",
+        "campaignId": "CMP-001",
+        "taskId": "TSK-001",
+        "emailId": "EML-002"
+      },
+      "mock": true
+    },
+    {
+      "id": "MTG-003",
+      "title": "Lantern Hotel win-back call",
+      "date": "2026-10-09",
+      "start": "14:00",
+      "end": "14:30",
+      "location": "Phone (MOCK)",
+      "attendees": [
+        "CON-002",
+        "CON-101"
+      ],
+      "agenda": [
+        "Q4 hotel prices (DOC-002)",
+        "December banquet needs: whole duck and native chicken",
+        "Why orders stopped after July"
+      ],
+      "notes": "",
+      "related": {
+        "customerId": "CUS-101",
+        "taskId": "TSK-002"
+      },
+      "mock": true
+    },
+    {
+      "id": "MTG-004",
+      "title": "Quality review with Siam Fresh Gourmet",
+      "date": "2026-10-09",
+      "start": "10:00",
+      "end": "11:00",
+      "location": "Siam Fresh Gourmet head office (MOCK)",
+      "attendees": [
+        "CON-001",
+        "CON-004",
+        "CON-131"
+      ],
+      "agenda": [
+        "Cracked eggs since the new carton (CPL-003)",
+        "Credit for damaged packs",
+        "Plan to win back egg volume"
+      ],
+      "notes": "",
+      "related": {
+        "customerId": "CUS-131",
+        "complaintId": "CPL-003",
+        "productId": "PRD-004"
+      },
+      "mock": true
+    },
+    {
+      "id": "MTG-005",
+      "title": "New Year gift box planning",
+      "date": "2026-10-13",
+      "start": "15:00",
+      "end": "16:00",
+      "location": "Head office (MOCK)",
+      "attendees": [
+        "CON-001",
+        "CON-002",
+        "CON-003",
+        "CON-007"
+      ],
+      "agenda": [
+        "Gift box packaging delay (PO-2026-0415)",
+        "Corporate pre-orders vs capacity",
+        "Early-bird price approval (TSK-009)"
+      ],
+      "notes": "",
+      "related": {
+        "productId": "PRD-015",
+        "campaignId": "CMP-004"
+      },
+      "mock": true
+    },
+    {
+      "id": "MTG-006",
+      "title": "September marketing review",
+      "date": "2026-10-02",
+      "start": "13:00",
+      "end": "14:30",
+      "location": "Head office (MOCK)",
+      "attendees": [
+        "CON-001",
+        "CON-006",
+        "CON-002",
+        "CON-007"
+      ],
+      "agenda": [
+        "September sales by channel",
+        "Declining products: organic eggs, smoked breast, salted eggs",
+        "Q4 campaign plan"
+      ],
+      "notes": "Agreed to launch Protein Week on 1 Oct and to review organic egg pricing. Smoked breast to be bundled with bone broth (idea).",
+      "actionItems": [
+        {
+          "text": "Pricing review for organic eggs",
+          "owner": "CON-001",
+          "due": "2026-10-12",
+          "taskId": "TSK-011"
+        },
+        {
+          "text": "Bundle idea for smoked breast",
+          "owner": "CON-006",
+          "due": "2026-10-14"
+        }
+      ],
+      "related": {
+        "documentId": "DOC-001"
+      },
+      "mock": true
+    }
+  ]
+}

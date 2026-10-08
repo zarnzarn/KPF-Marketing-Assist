@@ -1,0 +1,312 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Calendar items: meetings, deadlines, follow-ups, events, campaign milestones and supply dates.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "items": [
+    {
+      "id": "CAL-TSK-002",
+      "date": "2026-09-25",
+      "type": "Follow-up",
+      "title": "Follow up Chao Phraya Lantern Hotel: no orders since 28 Jul",
+      "refId": "TSK-002",
+      "overdue": true,
+      "mock": true
+    },
+    {
+      "id": "CAL-MTG-006",
+      "date": "2026-10-02",
+      "start": "13:00",
+      "end": "14:30",
+      "type": "Meeting",
+      "title": "September marketing review",
+      "refId": "MTG-006",
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-005",
+      "date": "2026-10-03",
+      "type": "Task deadline",
+      "title": "Prepare Q4 hotel price list",
+      "refId": "TSK-005",
+      "overdue": true,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-006",
+      "date": "2026-10-03",
+      "type": "Follow-up",
+      "title": "Follow up Ember & Rice Grill proposal",
+      "refId": "TSK-006",
+      "overdue": true,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-010",
+      "date": "2026-10-06",
+      "type": "Follow-up",
+      "title": "Answer cracked-egg complaint from Siam Fresh Gourmet",
+      "refId": "TSK-010",
+      "overdue": true,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-012",
+      "date": "2026-10-06",
+      "type": "Approval deadline",
+      "title": "Decide on Eastern Seaboard wings price request",
+      "refId": "TSK-012",
+      "overdue": true,
+      "mock": true
+    },
+    {
+      "id": "CAL-MTG-001",
+      "date": "2026-10-07",
+      "start": "09:30",
+      "end": "10:00",
+      "type": "Meeting",
+      "title": "Weekly marketing stand-up",
+      "refId": "MTG-001",
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-003",
+      "date": "2026-10-07",
+      "type": "Follow-up",
+      "title": "Reply to Baan Krua Siam about duck breast out of stock",
+      "refId": "TSK-003",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-MTG-002",
+      "date": "2026-10-08",
+      "start": "10:30",
+      "end": "11:15",
+      "type": "Meeting",
+      "title": "Breast fillet supply for Protein Week (with production)",
+      "refId": "MTG-002",
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-001",
+      "date": "2026-10-08",
+      "type": "Task deadline",
+      "title": "Coordinate with production: breast fillet stock will run out before the 12 Oct batch",
+      "refId": "TSK-001",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-004",
+      "date": "2026-10-08",
+      "type": "Approval deadline",
+      "title": "Approve LINE OA broadcast: Protein Week second wave",
+      "refId": "TSK-004",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-MTG-003",
+      "date": "2026-10-09",
+      "start": "14:00",
+      "end": "14:30",
+      "type": "Meeting",
+      "title": "Lantern Hotel win-back call",
+      "refId": "MTG-003",
+      "mock": true
+    },
+    {
+      "id": "CAL-MTG-004",
+      "date": "2026-10-09",
+      "start": "10:00",
+      "end": "11:00",
+      "type": "Meeting",
+      "title": "Quality review with Siam Fresh Gourmet",
+      "refId": "MTG-004",
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-019",
+      "date": "2026-10-09",
+      "type": "Task deadline",
+      "title": "Check website delivery delays (two late Bangkok orders)",
+      "refId": "TSK-019",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-007",
+      "date": "2026-10-10",
+      "type": "Approval deadline",
+      "title": "Approve bone broth launch price and launch posts",
+      "refId": "TSK-007",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-014",
+      "date": "2026-10-10",
+      "type": "Follow-up",
+      "title": "Confirm November volumes with Hua Hin Seabreeze Resort",
+      "refId": "TSK-014",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-017",
+      "date": "2026-10-11",
+      "type": "Approval deadline",
+      "title": "Approve press release: farm-to-table dinner",
+      "refId": "TSK-017",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-011",
+      "date": "2026-10-12",
+      "type": "Task deadline",
+      "title": "Pricing review: organic-feed eggs losing to cheaper brand",
+      "refId": "TSK-011",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-018",
+      "date": "2026-10-12",
+      "type": "Task deadline",
+      "title": "Use or discount liquid yolk expiring 18 Oct",
+      "refId": "TSK-018",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-PRD-002-BATCH",
+      "date": "2026-10-12",
+      "type": "Supply",
+      "title": "Breast fillet batch: 900 packs",
+      "refId": "PRD-002",
+      "mock": true
+    },
+    {
+      "id": "CAL-MTG-005",
+      "date": "2026-10-13",
+      "start": "15:00",
+      "end": "16:00",
+      "type": "Meeting",
+      "title": "New Year gift box planning",
+      "refId": "MTG-005",
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-009",
+      "date": "2026-10-13",
+      "type": "Approval deadline",
+      "title": "Approve corporate gift box early-bird price",
+      "refId": "TSK-009",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-016",
+      "date": "2026-10-14",
+      "type": "Follow-up",
+      "title": "Send bone broth samples to cooking studio",
+      "refId": "TSK-016",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-008",
+      "date": "2026-10-15",
+      "type": "Task deadline",
+      "title": "Book booth design and samples for Bangkok Gourmet Expo",
+      "refId": "TSK-008",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-CMP-001-END",
+      "date": "2026-10-15",
+      "type": "Campaign milestone",
+      "title": "Protein Week ends",
+      "refId": "CMP-001",
+      "mock": true
+    },
+    {
+      "id": "CAL-PO-0409",
+      "date": "2026-10-15",
+      "type": "Supply",
+      "title": "Duck breast delivery expected (PO-2026-0409)",
+      "refId": "PO-2026-0409",
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-015",
+      "date": "2026-10-18",
+      "type": "Task deadline",
+      "title": "Move slow duck eggs: idea for a salted-egg recipe post",
+      "refId": "TSK-015",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-EVT-004",
+      "date": "2026-10-18",
+      "start": "18:30",
+      "end": "22:00",
+      "type": "Event",
+      "title": "Farm-to-table dinner with Chef's Table (MOCK)",
+      "refId": "EVT-004",
+      "mock": true
+    },
+    {
+      "id": "CAL-TSK-020",
+      "date": "2026-10-20",
+      "type": "Task deadline",
+      "title": "Plan New Year gift box campaign with stock limits",
+      "refId": "TSK-020",
+      "overdue": false,
+      "mock": true
+    },
+    {
+      "id": "CAL-CMP-003-START",
+      "date": "2026-10-20",
+      "type": "Campaign milestone",
+      "title": "Bone broth launch campaign starts",
+      "refId": "CMP-003",
+      "mock": true
+    },
+    {
+      "id": "CAL-EVT-003",
+      "date": "2026-10-21",
+      "start": "15:00",
+      "end": "17:00",
+      "type": "Event",
+      "title": "Christmas duck menu tasting at Sukhumvit Garden Residence (MOCK)",
+      "refId": "EVT-003",
+      "mock": true
+    },
+    {
+      "id": "CAL-EVT-001",
+      "date": "2026-10-25",
+      "endDate": "2026-10-27",
+      "type": "Event",
+      "title": "Bangkok Gourmet Expo booth (MOCK)",
+      "refId": "EVT-001",
+      "mock": true
+    },
+    {
+      "id": "CAL-PO-0415",
+      "date": "2026-10-30",
+      "type": "Supply",
+      "title": "Gift box packaging delivery (delayed from 10 Oct)",
+      "refId": "PO-2026-0415",
+      "mock": true
+    }
+  ]
+}

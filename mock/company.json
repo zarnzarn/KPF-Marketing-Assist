@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Company profile of the fictional farm used for demos.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "company": {
+    "legalName": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "brandName": "Rai Thong Farm (MOCK)",
+    "brandNameThai": "ไร่ทองฟาร์ม (ข้อมูลสมมติ)",
+    "founded": 2012,
+    "headquarters": "99/9 Moo 4, Tambon Example, Amphoe Sam Phran, Nakhon Pathom 73110 (MOCK address)",
+    "website": "https://www.raithongfarm.example",
+    "lineOa": "@raithongfarm-mock",
+    "facebook": "facebook.com/raithongfarm.mock",
+    "instagram": "@raithongfarm.mock",
+    "employees": 86,
+    "farms": [
+      {
+        "id": "FARM-01",
+        "name": "Sam Phran free-range chicken farm (MOCK)",
+        "province": "Nakhon Pathom",
+        "capacity": "about 14,000 birds per cycle"
+      },
+      {
+        "id": "FARM-02",
+        "name": "Kanchanaburi layer farm (MOCK)",
+        "province": "Kanchanaburi",
+        "capacity": "about 22,000 laying hens"
+      },
+      {
+        "id": "FARM-03",
+        "name": "Partner duck farm: Suphan Duck Cooperative (MOCK)",
+        "province": "Suphan Buri",
+        "capacity": "contract supply, about 1,200 ducks per month"
+      }
+    ],
+    "coldStore": "Sam Phran cold store and packing house (MOCK)",
+    "deliveryZones": [
+      "Bangkok and vicinity (own cold-chain trucks, next day)",
+      "Hua Hin and Cha-am (twice a week)",
+      "Eastern Seaboard (via wholesale partner)"
+    ],
+    "salesChannels": {
+      "B2C": [
+        "Website shop",
+        "LINE OA shop"
+      ],
+      "Retail": [
+        "Premium supermarkets",
+        "Gourmet grocery",
+        "Organic markets"
+      ],
+      "B2B": [
+        "Hotels",
+        "Restaurants",
+        "Chefs and cooking studios",
+        "Wholesale",
+        "Corporate catering and gifts"
+      ]
+    },
+    "team": {
+      "marketingDirector": "CON-001",
+      "salesManagerB2B": "CON-002",
+      "productionManager": "CON-003",
+      "qaManager": "CON-004",
+      "customerService": "CON-005",
+      "contentLead": "CON-006",
+      "financeManager": "CON-007"
+    },
+    "positioning": "Premium free-range poultry and eggs raised slowly on open farms in western Thailand (MOCK).",
+    "fiscalYear": "January to December"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Monthly marketing channel performance. October = 1-6 Oct only.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "website": [
+    {
+      "month": "2026-07",
+      "sessions": 48200,
+      "orders": 1050,
+      "conversionRatePct": 2.2,
+      "revenueThb": 1116770,
+      "topLandingPage": "/shop/eggs"
+    },
+    {
+      "month": "2026-08",
+      "sessions": 50100,
+      "orders": 1090,
+      "conversionRatePct": 2.2,
+      "revenueThb": 1149265,
+      "topLandingPage": "/shop/eggs"
+    },
+    {
+      "month": "2026-09",
+      "sessions": 51800,
+      "orders": 1140,
+      "conversionRatePct": 2.2,
+      "revenueThb": 1182928,
+      "topLandingPage": "/recipes/chicken-breast"
+    },
+    {
+      "month": "2026-10",
+      "partial": "1-6 Oct",
+      "sessions": 14900,
+      "orders": 462,
+      "conversionRatePct": 3.1,
+      "revenueThb": 273302,
+      "topLandingPage": "/promo/protein-week"
+    }
+  ],
+  "lineOa": [
+    {
+      "month": "2026-07",
+      "friends": 18400,
+      "blocked": 410,
+      "broadcasts": 4,
+      "avgOpenRatePct": 52,
+      "avgClickRatePct": 7.8
+    },
+    {
+      "month": "2026-08",
+      "friends": 19100,
+      "blocked": 430,
+      "broadcasts": 5,
+      "avgOpenRatePct": 50,
+      "avgClickRatePct": 7.2
+    },
+    {
+      "month": "2026-09",
+      "friends": 19900,
+      "blocked": 520,
+      "broadcasts": 6,
+      "avgOpenRatePct": 47,
+      "avgClickRatePct": 6.9,
+      "note": "More blocks after 6 broadcasts in one month."
+    },
+    {
+      "month": "2026-10",
+      "partial": "1-6 Oct",
+      "friends": 20300,
+      "blocked": 95,
+      "broadcasts": 2,
+      "avgOpenRatePct": 55,
+      "avgClickRatePct": 11.4,
+      "note": "Protein Week broadcast performed well."
+    }
+  ],
+  "social": [
+    {
+      "month": "2026-07",
+      "facebookFollowers": 41200,
+      "facebookEngagementRatePct": 2.1,
+      "instagramFollowers": 15800,
+      "instagramEngagementRatePct": 3.4,
+      "topPost": "Morning egg collection reel"
+    },
+    {
+      "month": "2026-08",
+      "facebookFollowers": 41600,
+      "facebookEngagementRatePct": 2,
+      "instagramFollowers": 16300,
+      "instagramEngagementRatePct": 3.6,
+      "topPost": "Herb sausage launch carousel"
+    },
+    {
+      "month": "2026-09",
+      "facebookFollowers": 42000,
+      "facebookEngagementRatePct": 1.8,
+      "instagramFollowers": 16900,
+      "instagramEngagementRatePct": 3.9,
+      "topPost": "Bone broth 'slow simmer' video"
+    },
+    {
+      "month": "2026-10",
+      "partial": "1-6 Oct",
+      "facebookFollowers": 42150,
+      "facebookEngagementRatePct": 2.6,
+      "instagramFollowers": 17100,
+      "instagramEngagementRatePct": 4.2,
+      "topPost": "Protein Week recipe carousel"
+    }
+  ],
+  "pr": [
+    {
+      "date": "2026-08-20",
+      "outlet": "Krua Living Magazine (MOCK)",
+      "type": "Feature",
+      "topic": "Slow-raised chickens in Nakhon Pathom",
+      "reach": "about 80,000 readers (MOCK)"
+    },
+    {
+      "date": "2026-09-18",
+      "outlet": "Bangkok Food Weekly online (MOCK)",
+      "type": "News",
+      "topic": "Bone broth launch",
+      "reach": "about 35,000 page views (MOCK)"
+    },
+    {
+      "date": "2026-10-06",
+      "outlet": "Krua Living Magazine (MOCK)",
+      "type": "Request",
+      "topic": "Farm-to-table dinner feature for November issue (EML-009)",
+      "reach": "pending"
+    }
+  ],
+  "insights": [
+    "Website conversion rose from 2.2% to 3.1% during Protein Week (CMP-001).",
+    "LINE OA blocks rose in September after six broadcasts; keep to four or five a month.",
+    "Organic-feed eggs fell on every channel for three months (PRD-005).",
+    "Herb sausage (PRD-011) grows mainly through LINE OA."
+  ]
+}

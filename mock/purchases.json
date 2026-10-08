@@ -1,0 +1,98 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Purchase orders to suppliers.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "purchases": [
+    {
+      "id": "PO-2026-0409",
+      "supplier": "Suphan Duck Cooperative (MOCK)",
+      "supplierContact": "CON-201",
+      "item": "Duck breast, 180 packs",
+      "productId": "PRD-009",
+      "orderedAt": "2026-09-15",
+      "expectedAt": "2026-10-15",
+      "originalExpectedAt": "2026-10-02",
+      "amountThb": 29700,
+      "status": "Delayed",
+      "note": "Delay caused the duck breast stock-out.",
+      "mock": true
+    },
+    {
+      "id": "PO-2026-0412",
+      "supplier": "Suphan Duck Cooperative (MOCK)",
+      "supplierContact": "CON-201",
+      "item": "Whole ducks for November, 1,000 birds (cut to 700)",
+      "productId": "PRD-008",
+      "orderedAt": "2026-09-20",
+      "expectedAt": "2026-11-01",
+      "amountThb": 196000,
+      "status": "Reduced by supplier",
+      "note": "Only 70% of volume confirmed.",
+      "mock": true
+    },
+    {
+      "id": "PO-2026-0415",
+      "supplier": "Bangkok Box & Print (MOCK)",
+      "supplierContact": "CON-202",
+      "item": "Festive egg gift boxes, 1,500 pcs",
+      "productId": "PRD-015",
+      "orderedAt": "2026-09-12",
+      "expectedAt": "2026-10-30",
+      "originalExpectedAt": "2026-10-10",
+      "amountThb": 57000,
+      "status": "Delayed",
+      "mock": true
+    },
+    {
+      "id": "PO-2026-0418",
+      "supplier": "Bangkok Box & Print (MOCK)",
+      "supplierContact": "CON-202",
+      "item": "Egg cartons 10 pcs, reinforced version, 20,000 pcs",
+      "productId": "PRD-004",
+      "orderedAt": "2026-10-06",
+      "expectedAt": "2026-10-20",
+      "amountThb": 80000,
+      "status": "Waiting for approval",
+      "note": "QA proposes going back to the thicker carton (CPL-003).",
+      "mock": true
+    },
+    {
+      "id": "PO-2026-0420",
+      "supplier": "Western Kitchen Foods (MOCK)",
+      "supplierContact": "CON-203",
+      "item": "Bone broth co-packing, 1,200 pouches",
+      "productId": "PRD-010",
+      "orderedAt": "2026-10-01",
+      "expectedAt": "2026-10-28",
+      "amountThb": 45600,
+      "status": "Confirmed",
+      "mock": true
+    },
+    {
+      "id": "PO-2026-0421",
+      "supplier": "Thai Feed Mill (MOCK)",
+      "item": "Layer feed, 40 tonnes",
+      "orderedAt": "2026-10-02",
+      "expectedAt": "2026-10-09",
+      "amountThb": 580000,
+      "status": "Confirmed",
+      "mock": true
+    },
+    {
+      "id": "PO-2026-0422",
+      "supplier": "Organic Grain Co-op (MOCK)",
+      "item": "Certified organic layer feed, 12 tonnes",
+      "orderedAt": "2026-09-25",
+      "expectedAt": "2026-10-08",
+      "amountThb": 285600,
+      "status": "Confirmed",
+      "note": "Feed cost up 9% vs Q2, one reason for the organic egg price gap.",
+      "mock": true
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Product catalogue. Prices are in pricing.json; stock in inventory.json.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "products": [
+    {
+      "id": "PRD-001",
+      "name": "Free-Range Whole Chicken 1.6 kg (MOCK)",
+      "nameThai": "ไก่ฟรีเรนจ์ทั้งตัว 1.6 กก.",
+      "category": "Free-range chicken",
+      "unit": "per bird",
+      "launchDate": "2014-03-01",
+      "status": "Active",
+      "tags": [
+        "top-seller"
+      ],
+      "notes": "Best-selling product across all channels.",
+      "websitePriceThb": 389,
+      "mock": true
+    },
+    {
+      "id": "PRD-002",
+      "name": "Free-Range Chicken Breast Fillet 500 g (MOCK)",
+      "nameThai": "อกไก่ฟรีเรนจ์ 500 ก.",
+      "category": "Free-range chicken",
+      "unit": "per 500 g pack",
+      "launchDate": "2015-06-01",
+      "status": "Active",
+      "tags": [
+        "top-seller",
+        "campaign",
+        "low-stock"
+      ],
+      "notes": "Promoted in Protein Week (CMP-001). Stock is low.",
+      "websitePriceThb": 219,
+      "mock": true
+    },
+    {
+      "id": "PRD-003",
+      "name": "Free-Range Boneless Thigh 500 g (MOCK)",
+      "nameThai": "สะโพกไก่ไม่มีกระดูก 500 ก.",
+      "category": "Free-range chicken",
+      "unit": "per 500 g pack",
+      "launchDate": "2015-06-01",
+      "status": "Active",
+      "tags": [],
+      "notes": "Steady seller.",
+      "websitePriceThb": 189,
+      "mock": true
+    },
+    {
+      "id": "PRD-004",
+      "name": "Free-Range Eggs 10 pcs (size 1) (MOCK)",
+      "nameThai": "ไข่ไก่ฟรีเรนจ์ 10 ฟอง (เบอร์ 1)",
+      "category": "Eggs",
+      "unit": "per 10-egg carton",
+      "launchDate": "2013-01-15",
+      "status": "Active",
+      "tags": [
+        "top-seller",
+        "packaging-issue"
+      ],
+      "notes": "Cracked-egg complaints from one retail partner after the carton change (CPL-003).",
+      "websitePriceThb": 119,
+      "mock": true
+    },
+    {
+      "id": "PRD-005",
+      "name": "Organic-Feed Eggs 10 pcs (MOCK)",
+      "nameThai": "ไข่ไก่อาหารออร์แกนิก 10 ฟอง",
+      "category": "Eggs",
+      "unit": "per 10-egg carton",
+      "launchDate": "2019-04-01",
+      "status": "Active",
+      "tags": [
+        "declining",
+        "needs-promotion"
+      ],
+      "notes": "Sales falling for three months; price gap to competitors widened (pricing review TSK-011).",
+      "websitePriceThb": 169,
+      "mock": true
+    },
+    {
+      "id": "PRD-006",
+      "name": "Duck Eggs 6 pcs (MOCK)",
+      "nameThai": "ไข่เป็ด 6 ฟอง",
+      "category": "Eggs",
+      "unit": "per 6-egg pack",
+      "launchDate": "2017-02-01",
+      "status": "Active",
+      "tags": [
+        "slow-moving"
+      ],
+      "notes": "Slow-moving; stock building up.",
+      "websitePriceThb": 85,
+      "mock": true
+    },
+    {
+      "id": "PRD-007",
+      "name": "Salted Duck Eggs 4 pcs (MOCK)",
+      "nameThai": "ไข่เค็ม 4 ฟอง",
+      "category": "Eggs",
+      "unit": "per 4-egg pack",
+      "launchDate": "2017-02-01",
+      "status": "Active",
+      "tags": [
+        "declining"
+      ],
+      "notes": "Declining since July.",
+      "websitePriceThb": 79,
+      "mock": true
+    },
+    {
+      "id": "PRD-008",
+      "name": "Whole Cherry Valley Duck 2.4 kg (MOCK)",
+      "nameThai": "เป็ดเชอร์รี่วัลเลย์ทั้งตัว 2.4 กก.",
+      "category": "Duck",
+      "unit": "per bird",
+      "launchDate": "2018-09-01",
+      "status": "Active",
+      "tags": [
+        "upcoming-availability-issue"
+      ],
+      "notes": "Partner duck farm cut November supply by 30% (PO-2026-0412 delayed).",
+      "websitePriceThb": 590,
+      "mock": true
+    },
+    {
+      "id": "PRD-009",
+      "name": "Duck Breast 2 pcs (about 600 g) (MOCK)",
+      "nameThai": "อกเป็ด 2 ชิ้น (ประมาณ 600 ก.)",
+      "category": "Duck",
+      "unit": "per 2-piece pack",
+      "launchDate": "2018-09-01",
+      "status": "Active",
+      "tags": [
+        "out-of-stock"
+      ],
+      "notes": "Out of stock since 30 Sep; next lot expected 15 Oct (PO-2026-0409).",
+      "websitePriceThb": 399,
+      "mock": true
+    },
+    {
+      "id": "PRD-010",
+      "name": "Chicken Bone Broth 500 ml (frozen) (MOCK)",
+      "nameThai": "น้ำซุปกระดูกไก่ 500 มล. (แช่แข็ง)",
+      "category": "Ready-to-cook",
+      "unit": "per 500 ml pouch",
+      "launchDate": "2026-09-15",
+      "status": "Launching",
+      "tags": [
+        "new",
+        "needs-promotion"
+      ],
+      "notes": "New product launched 15 Sep. Below launch target; launch content waiting for approval.",
+      "websitePriceThb": 149,
+      "mock": true
+    },
+    {
+      "id": "PRD-011",
+      "name": "Herb Chicken Sausage 300 g (frozen) (MOCK)",
+      "nameThai": "ไส้กรอกไก่สมุนไพร 300 ก. (แช่แข็ง)",
+      "category": "Ready-to-cook",
+      "unit": "per 300 g pack",
+      "launchDate": "2026-08-01",
+      "status": "Active",
+      "tags": [
+        "new"
+      ],
+      "notes": "New in August; growing on LINE OA.",
+      "websitePriceThb": 159,
+      "mock": true
+    },
+    {
+      "id": "PRD-012",
+      "name": "Native Thai Chicken (Gai Baan) whole 1.2 kg (MOCK)",
+      "nameThai": "ไก่บ้านทั้งตัว 1.2 กก.",
+      "category": "Free-range chicken",
+      "unit": "per bird",
+      "launchDate": "2016-01-10",
+      "status": "Active",
+      "tags": [
+        "top-seller-b2b"
+      ],
+      "notes": "Strong with hotels and chefs.",
+      "websitePriceThb": 349,
+      "mock": true
+    },
+    {
+      "id": "PRD-013",
+      "name": "Chicken Wings 1 kg (food-service) (MOCK)",
+      "nameThai": "ปีกไก่ 1 กก. (ฟู้ดเซอร์วิส)",
+      "category": "Food-service",
+      "unit": "per 1 kg bag",
+      "launchDate": "2020-05-01",
+      "status": "Active",
+      "tags": [],
+      "notes": "Mainly restaurants and wholesale.",
+      "websitePriceThb": 189,
+      "mock": true
+    },
+    {
+      "id": "PRD-014",
+      "name": "Liquid Egg Yolk 1 kg (food-service) (MOCK)",
+      "nameThai": "ไข่แดงเหลว 1 กก. (ฟู้ดเซอร์วิส)",
+      "category": "Food-service",
+      "unit": "per 1 kg pouch",
+      "launchDate": "2021-03-01",
+      "status": "Active",
+      "tags": [
+        "slow-moving"
+      ],
+      "notes": "B2B only. Slow-moving; short shelf life (21 days).",
+      "websitePriceThb": null,
+      "mock": true
+    },
+    {
+      "id": "PRD-015",
+      "name": "Egg Gift Box 30 pcs (festive) (MOCK)",
+      "nameThai": "กล่องของขวัญไข่ 30 ฟอง (เทศกาล)",
+      "category": "Gift",
+      "unit": "per gift box",
+      "launchDate": "2023-11-15",
+      "status": "Seasonal",
+      "tags": [
+        "seasonal",
+        "upcoming-availability-issue"
+      ],
+      "notes": "For New Year gifts. Gift box packaging order delayed (PO-2026-0415); corporate pre-orders already in.",
+      "websitePriceThb": 590,
+      "mock": true
+    },
+    {
+      "id": "PRD-016",
+      "name": "Smoked Chicken Breast 200 g (MOCK)",
+      "nameThai": "อกไก่รมควัน 200 ก.",
+      "category": "Ready-to-eat",
+      "unit": "per 200 g pack",
+      "launchDate": "2022-07-01",
+      "status": "Active",
+      "tags": [
+        "declining",
+        "needs-promotion"
+      ],
+      "notes": "Declining; needs a new reason to buy.",
+      "websitePriceThb": 129,
+      "mock": true
+    }
+  ]
+}

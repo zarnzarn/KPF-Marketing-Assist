@@ -1,0 +1,332 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Stock on 7 Oct 2026. dailyAvgSales blends September and 1-6 Oct; daysOfCover = available / dailyAvgSales.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "inventory": [
+    {
+      "productId": "PRD-001",
+      "name": "Free-Range Whole Chicken 1.6 kg (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 1450,
+      "reserved": 220,
+      "available": 1230,
+      "shortfall": 0,
+      "reorderPoint": 600,
+      "dailyAvgSales": 49.5,
+      "daysOfCover": 24.8,
+      "status": "In stock",
+      "nextBatch": {
+        "date": "2026-10-09",
+        "qty": 1800,
+        "source": "FARM-01 processing"
+      },
+      "notes": "Healthy.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-002",
+      "name": "Free-Range Chicken Breast Fillet 500 g (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 260,
+      "reserved": 80,
+      "available": 180,
+      "shortfall": 0,
+      "reorderPoint": 400,
+      "dailyAvgSales": 93.4,
+      "daysOfCover": 1.9,
+      "status": "Low stock",
+      "nextBatch": {
+        "date": "2026-10-12",
+        "qty": 900,
+        "source": "FARM-01 processing"
+      },
+      "notes": "Protein Week (CMP-001) demand is about 2.0x the September pace. At the current pace the stock runs out around 9-10 Oct, before the next batch on 12 Oct. Production can add 600 packs only if the 19 Oct slaughter slot moves earlier (see email EML-002, meeting MTG-002).",
+      "mock": true
+    },
+    {
+      "productId": "PRD-003",
+      "name": "Free-Range Boneless Thigh 500 g (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 980,
+      "reserved": 120,
+      "available": 860,
+      "shortfall": 0,
+      "reorderPoint": 400,
+      "dailyAvgSales": 47.1,
+      "daysOfCover": 18.3,
+      "status": "In stock",
+      "nextBatch": {
+        "date": "2026-10-09",
+        "qty": 900,
+        "source": "FARM-01 processing"
+      },
+      "notes": "Healthy.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-004",
+      "name": "Free-Range Eggs 10 pcs (size 1) (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 6200,
+      "reserved": 900,
+      "available": 5300,
+      "shortfall": 0,
+      "reorderPoint": 2500,
+      "dailyAvgSales": 176.9,
+      "daysOfCover": 30,
+      "status": "In stock",
+      "nextBatch": {
+        "date": "2026-10-08",
+        "qty": 7000,
+        "source": "FARM-02 daily collection"
+      },
+      "notes": "Healthy volume. New lighter carton since 1 Sep linked to cracked eggs at CUS-131 (CPL-003).",
+      "mock": true
+    },
+    {
+      "productId": "PRD-005",
+      "name": "Organic-Feed Eggs 10 pcs (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 2100,
+      "reserved": 60,
+      "available": 2040,
+      "shortfall": 0,
+      "reorderPoint": 800,
+      "dailyAvgSales": 36.4,
+      "daysOfCover": 56,
+      "status": "Slow-moving",
+      "nextBatch": {
+        "date": "2026-10-08",
+        "qty": 1200,
+        "source": "FARM-02 organic flock"
+      },
+      "notes": "Slow sell-through; eggs older than 14 days rising. Risk of waste.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-006",
+      "name": "Duck Eggs 6 pcs (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 1150,
+      "reserved": 0,
+      "available": 1150,
+      "shortfall": 0,
+      "reorderPoint": 300,
+      "dailyAvgSales": 10.5,
+      "daysOfCover": 109.5,
+      "status": "Slow-moving",
+      "nextBatch": {
+        "date": "2026-10-14",
+        "qty": 600,
+        "source": "FARM-03 partner"
+      },
+      "notes": "About 70 days of cover. Slow-moving.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-007",
+      "name": "Salted Duck Eggs 4 pcs (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 640,
+      "reserved": 30,
+      "available": 610,
+      "shortfall": 0,
+      "reorderPoint": 200,
+      "dailyAvgSales": 12.1,
+      "daysOfCover": 50.4,
+      "status": "In stock",
+      "nextBatch": {
+        "date": "2026-10-20",
+        "qty": 400,
+        "source": "FARM-03 partner (salting 21 days)"
+      },
+      "notes": "Declining demand.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-008",
+      "name": "Whole Cherry Valley Duck 2.4 kg (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 210,
+      "reserved": 40,
+      "available": 170,
+      "shortfall": 0,
+      "reorderPoint": 120,
+      "dailyAvgSales": 9.2,
+      "daysOfCover": 18.5,
+      "status": "Upcoming shortage",
+      "nextBatch": {
+        "date": "2026-10-16",
+        "qty": 260,
+        "source": "FARM-03 partner duck farm"
+      },
+      "notes": "November supply cut by 30% by the partner farm (PO-2026-0412). Hotels' December banquet season at risk. Upcoming availability issue.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-009",
+      "name": "Duck Breast 2 pcs (about 600 g) (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 0,
+      "reserved": 0,
+      "available": 0,
+      "shortfall": 0,
+      "reorderPoint": 80,
+      "dailyAvgSales": 5.4,
+      "daysOfCover": 0,
+      "status": "Out of stock",
+      "nextBatch": {
+        "date": "2026-10-15",
+        "qty": 180,
+        "source": "FARM-03 partner duck farm (PO-2026-0409, delayed from 2 Oct)"
+      },
+      "notes": "Out of stock since 30 Sep. Restaurants affected (CUS-111, CUS-121).",
+      "mock": true
+    },
+    {
+      "productId": "PRD-010",
+      "name": "Chicken Bone Broth 500 ml (frozen) (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 1900,
+      "reserved": 40,
+      "available": 1860,
+      "shortfall": 0,
+      "reorderPoint": 300,
+      "dailyAvgSales": 7.8,
+      "daysOfCover": 238.5,
+      "status": "In stock",
+      "nextBatch": {
+        "date": "2026-10-28",
+        "qty": 1200,
+        "source": "Co-packer: Western Kitchen Foods (MOCK)"
+      },
+      "notes": "Plenty of stock; sales below launch plan (plan: 1,500 pouches in the first month).",
+      "mock": true
+    },
+    {
+      "productId": "PRD-011",
+      "name": "Herb Chicken Sausage 300 g (frozen) (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 520,
+      "reserved": 60,
+      "available": 460,
+      "shortfall": 0,
+      "reorderPoint": 250,
+      "dailyAvgSales": 19.1,
+      "daysOfCover": 24.1,
+      "status": "In stock",
+      "nextBatch": {
+        "date": "2026-10-10",
+        "qty": 700,
+        "source": "Co-packer: Western Kitchen Foods (MOCK)"
+      },
+      "notes": "Growing on LINE OA.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-012",
+      "name": "Native Thai Chicken (Gai Baan) whole 1.2 kg (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 380,
+      "reserved": 60,
+      "available": 320,
+      "shortfall": 0,
+      "reorderPoint": 150,
+      "dailyAvgSales": 13.3,
+      "daysOfCover": 24.1,
+      "status": "In stock",
+      "nextBatch": {
+        "date": "2026-10-13",
+        "qty": 400,
+        "source": "FARM-01 native flock"
+      },
+      "notes": "Healthy.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-013",
+      "name": "Chicken Wings 1 kg (food-service) (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 1650,
+      "reserved": 300,
+      "available": 1350,
+      "shortfall": 0,
+      "reorderPoint": 600,
+      "dailyAvgSales": 38.4,
+      "daysOfCover": 35.2,
+      "status": "In stock",
+      "nextBatch": {
+        "date": "2026-10-09",
+        "qty": 1200,
+        "source": "FARM-01 processing"
+      },
+      "notes": "Healthy; wholesale demand rising.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-014",
+      "name": "Liquid Egg Yolk 1 kg (food-service) (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 210,
+      "reserved": 10,
+      "available": 200,
+      "shortfall": 0,
+      "reorderPoint": 60,
+      "dailyAvgSales": 0.8,
+      "daysOfCover": 250,
+      "status": "Slow-moving",
+      "nextBatch": {
+        "date": "2026-10-21",
+        "qty": 120,
+        "source": "FARM-02 egg breaking line"
+      },
+      "notes": "Slow-moving. 21-day shelf life: 90 pouches expire on 18 Oct.",
+      "mock": true
+    },
+    {
+      "productId": "PRD-015",
+      "name": "Egg Gift Box 30 pcs (festive) (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 140,
+      "reserved": 320,
+      "available": 0,
+      "shortfall": 180,
+      "reorderPoint": 200,
+      "dailyAvgSales": 1,
+      "daysOfCover": 0,
+      "status": "Upcoming shortage",
+      "nextBatch": {
+        "date": "2026-11-20",
+        "qty": 1500,
+        "source": "Packing house; needs gift boxes from PO-2026-0415"
+      },
+      "notes": "Corporate pre-order of 320 boxes (CUS-152) already exceeds stock. Gift box packaging order delayed. Upcoming availability issue for the New Year campaign (CMP-004).",
+      "mock": true
+    },
+    {
+      "productId": "PRD-016",
+      "name": "Smoked Chicken Breast 200 g (MOCK)",
+      "location": "Sam Phran cold store (MOCK)",
+      "onHand": 1300,
+      "reserved": 30,
+      "available": 1270,
+      "shortfall": 0,
+      "reorderPoint": 300,
+      "dailyAvgSales": 16,
+      "daysOfCover": 79.4,
+      "status": "Slow-moving",
+      "nextBatch": {
+        "date": "2026-10-15",
+        "qty": 500,
+        "source": "Co-packer: Western Kitchen Foods (MOCK)"
+      },
+      "notes": "Sales falling; about 60 days of cover. Best-before 45 days.",
+      "mock": true
+    }
+  ]
+}

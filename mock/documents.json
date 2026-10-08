@@ -1,0 +1,141 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Document list (names and summaries only; no files).",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "documents": [
+    {
+      "id": "DOC-001",
+      "name": "September 2026 Marketing Report (MOCK).docx",
+      "kind": "Word",
+      "date": "2026-10-05",
+      "owner": "CON-001",
+      "summary": "September sales by channel, campaign results, declining products, Q4 plan.",
+      "related": {
+        "meetingId": "MTG-006"
+      },
+      "mock": true
+    },
+    {
+      "id": "DOC-002",
+      "name": "Q4 2026 Hotel Price List (MOCK, draft).xlsx",
+      "kind": "Spreadsheet",
+      "date": "2026-10-01",
+      "owner": "CON-002",
+      "status": "Draft",
+      "summary": "Hotel prices for Oct-Dec; whole duck volume note for December.",
+      "related": {
+        "taskId": "TSK-005",
+        "customerIds": [
+          "CUS-101",
+          "CUS-102",
+          "CUS-103"
+        ]
+      },
+      "mock": true
+    },
+    {
+      "id": "DOC-003",
+      "name": "Protein Week campaign brief (MOCK).pdf",
+      "kind": "PDF",
+      "date": "2026-09-20",
+      "owner": "CON-006",
+      "summary": "Objective, audience, offer, budget, creative plan.",
+      "related": {
+        "campaignId": "CMP-001"
+      },
+      "mock": true
+    },
+    {
+      "id": "DOC-004",
+      "name": "Bone broth product spec sheet (MOCK).pdf",
+      "kind": "PDF",
+      "date": "2026-09-10",
+      "owner": "CON-004",
+      "summary": "Ingredients, storage, shelf life 12 months frozen, allergens: none declared (MOCK).",
+      "related": {
+        "productId": "PRD-010"
+      },
+      "mock": true
+    },
+    {
+      "id": "DOC-005",
+      "name": "Egg carton test results (MOCK).pdf",
+      "kind": "PDF",
+      "date": "2026-10-08",
+      "owner": "CON-004",
+      "status": "Expected",
+      "summary": "Drop and stack test of the new vs reinforced carton.",
+      "related": {
+        "complaintId": "CPL-003"
+      },
+      "mock": true
+    },
+    {
+      "id": "DOC-006",
+      "name": "Press kit 2026 (MOCK).pptx",
+      "kind": "Slides",
+      "date": "2026-08-15",
+      "owner": "CON-006",
+      "summary": "Farm story, photos, approved product facts.",
+      "related": {
+        "campaignId": "CMP-006"
+      },
+      "mock": true
+    },
+    {
+      "id": "DOC-007",
+      "name": "Ember & Rice Grill proposal (MOCK).pdf",
+      "kind": "PDF",
+      "date": "2026-09-26",
+      "owner": "CON-002",
+      "summary": "Restaurant prices for wings, thigh, native chicken; trial order offer.",
+      "related": {
+        "customerId": "CUS-112"
+      },
+      "mock": true
+    },
+    {
+      "id": "DOC-008",
+      "name": "Nong Lek supply agreement draft (MOCK).docx",
+      "kind": "Word",
+      "date": "2026-10-04",
+      "owner": "CON-002",
+      "status": "Draft",
+      "summary": "12-month supply for wings and thigh with volume tiers.",
+      "related": {
+        "customerId": "CUS-113"
+      },
+      "mock": true
+    },
+    {
+      "id": "DOC-009",
+      "name": "Bangkok Gourmet Expo exhibitor manual (MOCK).pdf",
+      "kind": "PDF",
+      "date": "2026-09-01",
+      "owner": "CON-006",
+      "summary": "Booth rules, sampling rules, deadlines.",
+      "related": {
+        "eventId": "EVT-001"
+      },
+      "mock": true
+    },
+    {
+      "id": "DOC-010",
+      "name": "Organic egg competitor price check (MOCK).xlsx",
+      "kind": "Spreadsheet",
+      "date": "2026-10-03",
+      "owner": "CON-001",
+      "summary": "Shelf prices of 4 organic egg brands in 6 stores (MOCK).",
+      "related": {
+        "productId": "PRD-005",
+        "taskId": "TSK-011"
+      },
+      "mock": true
+    }
+  ]
+}

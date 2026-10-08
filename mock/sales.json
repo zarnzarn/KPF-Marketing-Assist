@@ -1,0 +1,7885 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Sales July to 6 October 2026. 'monthly' is by month, channel and product (October = 1-6 Oct). B2B and retail rows are the sum of 'orders'; website and LINE OA rows are B2C totals.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information.",
+    "period": {
+      "from": "2026-07-01",
+      "to": "2026-10-06"
+    }
+  },
+  "highlights": [
+    "Total revenue: July 2,640,332, August 2,584,601, September 2,590,597 baht; 1-6 Oct 593,762 baht (MOCK).",
+    "Breast fillet (PRD-002) October pace is +95.1% vs September because of Protein Week (CMP-001); stock is low (inventory).",
+    "Hotel channel July to September: -31.7%. Chao Phraya Lantern Hotel (CUS-101) has not ordered since 2026-07-28.",
+    "Retail channel September vs August: -19% (cracked-egg issue at CUS-131, organic eggs down at CUS-132).",
+    "Wholesale September vs August: +1% (Pathum Fresh up, Eastern Seaboard down).",
+    "Organic-feed eggs (PRD-005) units September vs August: -20.2%. Smoked breast (PRD-016): -21.8%. Salted duck eggs (PRD-007): -20.3%.",
+    "New products: herb sausage (PRD-011) September vs August +59%; bone broth (PRD-010) October pace 265 pouches per 30 days vs a 1,500 target."
+  ],
+  "totalsByMonthThb": {
+    "2026-07": 2640332,
+    "2026-08": 2584601,
+    "2026-09": 2590597,
+    "2026-10 (1-6 Oct)": 593762
+  },
+  "byChannel": [
+    {
+      "channel": "Website",
+      "revenueThb": {
+        "2026-07": 1116770,
+        "2026-08": 1149265,
+        "2026-09": 1182928,
+        "2026-10 (1-6 Oct)": 273302
+      },
+      "changeSepVsAugPct": 2.9
+    },
+    {
+      "channel": "LINE OA",
+      "revenueThb": {
+        "2026-07": 631840,
+        "2026-08": 651860,
+        "2026-09": 679802,
+        "2026-10 (1-6 Oct)": 157936
+      },
+      "changeSepVsAugPct": 4.3
+    },
+    {
+      "channel": "Retail",
+      "revenueThb": {
+        "2026-07": 406296,
+        "2026-08": 367154,
+        "2026-09": 297365,
+        "2026-10 (1-6 Oct)": 56929
+      },
+      "changeSepVsAugPct": -19
+    },
+    {
+      "channel": "Restaurant",
+      "revenueThb": {
+        "2026-07": 124008,
+        "2026-08": 119828,
+        "2026-09": 121767,
+        "2026-10 (1-6 Oct)": 22266
+      },
+      "changeSepVsAugPct": 1.6
+    },
+    {
+      "channel": "Hotel",
+      "revenueThb": {
+        "2026-07": 118965,
+        "2026-08": 79991,
+        "2026-09": 81215,
+        "2026-10 (1-6 Oct)": 24386
+      },
+      "changeSepVsAugPct": 1.5
+    },
+    {
+      "channel": "Wholesale",
+      "revenueThb": {
+        "2026-07": 209413,
+        "2026-08": 182511,
+        "2026-09": 184400,
+        "2026-10 (1-6 Oct)": 51207
+      },
+      "changeSepVsAugPct": 1
+    },
+    {
+      "channel": "Corporate",
+      "revenueThb": {
+        "2026-07": 33040,
+        "2026-08": 33992,
+        "2026-09": 43120,
+        "2026-10 (1-6 Oct)": 7736
+      },
+      "changeSepVsAugPct": 26.9
+    }
+  ],
+  "byProduct": [
+    {
+      "productId": "PRD-001",
+      "name": "Free-Range Whole Chicken 1.6 kg (MOCK)",
+      "units": {
+        "2026-07": 1455,
+        "2026-08": 1452,
+        "2026-09": 1412,
+        "2026-10 (1-6 Oct)": 312
+      },
+      "revenueThb": {
+        "2026-07": 523440,
+        "2026-08": 524910,
+        "2026-09": 515525,
+        "2026-10 (1-6 Oct)": 113797
+      },
+      "unitsChangeSepVsAugPct": -2.8,
+      "octoberPaceUnitsPer30Days": 1560,
+      "octoberPaceVsSepPct": 10.5
+    },
+    {
+      "productId": "PRD-002",
+      "name": "Free-Range Chicken Breast Fillet 500 g (MOCK)",
+      "units": {
+        "2026-07": 1915,
+        "2026-08": 1918,
+        "2026-09": 1899,
+        "2026-10 (1-6 Oct)": 741
+      },
+      "revenueThb": {
+        "2026-07": 385690,
+        "2026-08": 389420,
+        "2026-09": 389490,
+        "2026-10 (1-6 Oct)": 138060
+      },
+      "unitsChangeSepVsAugPct": -1,
+      "octoberPaceUnitsPer30Days": 3705,
+      "octoberPaceVsSepPct": 95.1
+    },
+    {
+      "productId": "PRD-003",
+      "name": "Free-Range Boneless Thigh 500 g (MOCK)",
+      "units": {
+        "2026-07": 1276,
+        "2026-08": 1283,
+        "2026-09": 1323,
+        "2026-10 (1-6 Oct)": 300
+      },
+      "revenueThb": {
+        "2026-07": 212028,
+        "2026-08": 213280,
+        "2026-09": 218578,
+        "2026-10 (1-6 Oct)": 48910
+      },
+      "unitsChangeSepVsAugPct": 3.1,
+      "octoberPaceUnitsPer30Days": 1500,
+      "octoberPaceVsSepPct": 13.4
+    },
+    {
+      "productId": "PRD-004",
+      "name": "Free-Range Eggs 10 pcs (size 1) (MOCK)",
+      "units": {
+        "2026-07": 5454,
+        "2026-08": 5100,
+        "2026-09": 5076,
+        "2026-10 (1-6 Oct)": 1107
+      },
+      "revenueThb": {
+        "2026-07": 541970,
+        "2026-08": 514536,
+        "2026-09": 514090,
+        "2026-10 (1-6 Oct)": 111138
+      },
+      "unitsChangeSepVsAugPct": -0.5,
+      "octoberPaceUnitsPer30Days": 5535,
+      "octoberPaceVsSepPct": 9
+    },
+    {
+      "productId": "PRD-005",
+      "name": "Organic-Feed Eggs 10 pcs (MOCK)",
+      "units": {
+        "2026-07": 1598,
+        "2026-08": 1380,
+        "2026-09": 1101,
+        "2026-10 (1-6 Oct)": 217
+      },
+      "revenueThb": {
+        "2026-07": 244680,
+        "2026-08": 211660,
+        "2026-09": 171320,
+        "2026-10 (1-6 Oct)": 32998
+      },
+      "unitsChangeSepVsAugPct": -20.2,
+      "octoberPaceUnitsPer30Days": 1085,
+      "octoberPaceVsSepPct": -1.5
+    },
+    {
+      "productId": "PRD-006",
+      "name": "Duck Eggs 6 pcs (MOCK)",
+      "units": {
+        "2026-07": 390,
+        "2026-08": 358,
+        "2026-09": 317,
+        "2026-10 (1-6 Oct)": 62
+      },
+      "revenueThb": {
+        "2026-07": 29370,
+        "2026-08": 27109,
+        "2026-09": 24326,
+        "2026-10 (1-6 Oct)": 4595
+      },
+      "unitsChangeSepVsAugPct": -11.5,
+      "octoberPaceUnitsPer30Days": 310,
+      "octoberPaceVsSepPct": -2.2
+    },
+    {
+      "productId": "PRD-007",
+      "name": "Salted Duck Eggs 4 pcs (MOCK)",
+      "units": {
+        "2026-07": 585,
+        "2026-08": 493,
+        "2026-09": 393,
+        "2026-10 (1-6 Oct)": 66
+      },
+      "revenueThb": {
+        "2026-07": 41535,
+        "2026-08": 35275,
+        "2026-09": 28575,
+        "2026-10 (1-6 Oct)": 4782
+      },
+      "unitsChangeSepVsAugPct": -20.3,
+      "octoberPaceUnitsPer30Days": 330,
+      "octoberPaceVsSepPct": -16
+    },
+    {
+      "productId": "PRD-008",
+      "name": "Whole Cherry Valley Duck 2.4 kg (MOCK)",
+      "units": {
+        "2026-07": 293,
+        "2026-08": 252,
+        "2026-09": 279,
+        "2026-10 (1-6 Oct)": 54
+      },
+      "revenueThb": {
+        "2026-07": 161890,
+        "2026-08": 144720,
+        "2026-09": 159990,
+        "2026-10 (1-6 Oct)": 31640
+      },
+      "unitsChangeSepVsAugPct": 10.7,
+      "octoberPaceUnitsPer30Days": 270,
+      "octoberPaceVsSepPct": -3.2
+    },
+    {
+      "productId": "PRD-009",
+      "name": "Duck Breast 2 pcs (about 600 g) (MOCK)",
+      "units": {
+        "2026-07": 344,
+        "2026-08": 349,
+        "2026-09": 326,
+        "2026-10 (1-6 Oct)": 0
+      },
+      "revenueThb": {
+        "2026-07": 129360,
+        "2026-08": 132195,
+        "2026-09": 123270,
+        "2026-10 (1-6 Oct)": 0
+      },
+      "unitsChangeSepVsAugPct": -6.6,
+      "octoberPaceUnitsPer30Days": 0,
+      "octoberPaceVsSepPct": -100
+    },
+    {
+      "productId": "PRD-010",
+      "name": "Chicken Bone Broth 500 ml (frozen) (MOCK)",
+      "units": {
+        "2026-07": 0,
+        "2026-08": 0,
+        "2026-09": 203,
+        "2026-10 (1-6 Oct)": 53
+      },
+      "revenueThb": {
+        "2026-07": 0,
+        "2026-08": 0,
+        "2026-09": 29675,
+        "2026-10 (1-6 Oct)": 7589
+      },
+      "unitsChangeSepVsAugPct": null,
+      "octoberPaceUnitsPer30Days": 265,
+      "octoberPaceVsSepPct": 30.5
+    },
+    {
+      "productId": "PRD-011",
+      "name": "Herb Chicken Sausage 300 g (frozen) (MOCK)",
+      "units": {
+        "2026-07": 0,
+        "2026-08": 312,
+        "2026-09": 496,
+        "2026-10 (1-6 Oct)": 130
+      },
+      "revenueThb": {
+        "2026-07": 0,
+        "2026-08": 47164,
+        "2026-09": 76232,
+        "2026-10 (1-6 Oct)": 19824
+      },
+      "unitsChangeSepVsAugPct": 59,
+      "octoberPaceUnitsPer30Days": 650,
+      "octoberPaceVsSepPct": 31
+    },
+    {
+      "productId": "PRD-012",
+      "name": "Native Thai Chicken (Gai Baan) whole 1.2 kg (MOCK)",
+      "units": {
+        "2026-07": 423,
+        "2026-08": 385,
+        "2026-09": 397,
+        "2026-10 (1-6 Oct)": 80
+      },
+      "revenueThb": {
+        "2026-07": 140865,
+        "2026-08": 130637,
+        "2026-09": 134623,
+        "2026-10 (1-6 Oct)": 27106
+      },
+      "unitsChangeSepVsAugPct": 3.1,
+      "octoberPaceUnitsPer30Days": 400,
+      "octoberPaceVsSepPct": 0.8
+    },
+    {
+      "productId": "PRD-013",
+      "name": "Chicken Wings 1 kg (food-service) (MOCK)",
+      "units": {
+        "2026-07": 1001,
+        "2026-08": 955,
+        "2026-09": 955,
+        "2026-10 (1-6 Oct)": 270
+      },
+      "revenueThb": {
+        "2026-07": 135635,
+        "2026-08": 130633,
+        "2026-09": 130427,
+        "2026-10 (1-6 Oct)": 36184
+      },
+      "unitsChangeSepVsAugPct": 0,
+      "octoberPaceUnitsPer30Days": 1350,
+      "octoberPaceVsSepPct": 41.4
+    },
+    {
+      "productId": "PRD-014",
+      "name": "Liquid Egg Yolk 1 kg (food-service) (MOCK)",
+      "units": {
+        "2026-07": 25,
+        "2026-08": 22,
+        "2026-09": 24,
+        "2026-10 (1-6 Oct)": 5
+      },
+      "revenueThb": {
+        "2026-07": 5625,
+        "2026-08": 4950,
+        "2026-09": 5400,
+        "2026-10 (1-6 Oct)": 1125
+      },
+      "unitsChangeSepVsAugPct": 9.1,
+      "octoberPaceUnitsPer30Days": 25,
+      "octoberPaceVsSepPct": 4.2
+    },
+    {
+      "productId": "PRD-015",
+      "name": "Egg Gift Box 30 pcs (festive) (MOCK)",
+      "units": {
+        "2026-07": 0,
+        "2026-08": 0,
+        "2026-09": 12,
+        "2026-10 (1-6 Oct)": 9
+      },
+      "revenueThb": {
+        "2026-07": 0,
+        "2026-08": 0,
+        "2026-09": 7080,
+        "2026-10 (1-6 Oct)": 5310
+      },
+      "unitsChangeSepVsAugPct": null,
+      "octoberPaceUnitsPer30Days": 45,
+      "octoberPaceVsSepPct": 275
+    },
+    {
+      "productId": "PRD-016",
+      "name": "Smoked Chicken Breast 200 g (MOCK)",
+      "units": {
+        "2026-07": 742,
+        "2026-08": 656,
+        "2026-09": 513,
+        "2026-10 (1-6 Oct)": 89
+      },
+      "revenueThb": {
+        "2026-07": 88244,
+        "2026-08": 78112,
+        "2026-09": 61996,
+        "2026-10 (1-6 Oct)": 10704
+      },
+      "unitsChangeSepVsAugPct": -21.8,
+      "octoberPaceUnitsPer30Days": 445,
+      "octoberPaceVsSepPct": -13.3
+    }
+  ],
+  "monthly": [
+    {
+      "month": "2026-07",
+      "channel": "Corporate",
+      "productId": "PRD-003",
+      "units": 140,
+      "revenueThb": 19040,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Corporate",
+      "productId": "PRD-004",
+      "units": 175,
+      "revenueThb": 14000,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Hotel",
+      "productId": "PRD-001",
+      "units": 51,
+      "revenueThb": 15555,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Hotel",
+      "productId": "PRD-002",
+      "units": 57,
+      "revenueThb": 9690,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Hotel",
+      "productId": "PRD-004",
+      "units": 495,
+      "revenueThb": 42570,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Hotel",
+      "productId": "PRD-008",
+      "units": 50,
+      "revenueThb": 23250,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Hotel",
+      "productId": "PRD-012",
+      "units": 81,
+      "revenueThb": 22275,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Hotel",
+      "productId": "PRD-014",
+      "units": 25,
+      "revenueThb": 5625,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-001",
+      "units": 380,
+      "revenueThb": 147820,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-002",
+      "units": 450,
+      "revenueThb": 98550,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-003",
+      "units": 260,
+      "revenueThb": 49140,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-004",
+      "units": 980,
+      "revenueThb": 116620,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-005",
+      "units": 380,
+      "revenueThb": 64220,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-006",
+      "units": 90,
+      "revenueThb": 7650,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-007",
+      "units": 150,
+      "revenueThb": 11850,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-008",
+      "units": 60,
+      "revenueThb": 35400,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-009",
+      "units": 70,
+      "revenueThb": 27930,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-012",
+      "units": 120,
+      "revenueThb": 41880,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-013",
+      "units": 40,
+      "revenueThb": 7560,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "LINE OA",
+      "productId": "PRD-016",
+      "units": 180,
+      "revenueThb": 23220,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Restaurant",
+      "productId": "PRD-001",
+      "units": 14,
+      "revenueThb": 4410,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Restaurant",
+      "productId": "PRD-002",
+      "units": 85,
+      "revenueThb": 14875,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Restaurant",
+      "productId": "PRD-003",
+      "units": 128,
+      "revenueThb": 19200,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Restaurant",
+      "productId": "PRD-004",
+      "units": 26,
+      "revenueThb": 2288,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Restaurant",
+      "productId": "PRD-008",
+      "units": 43,
+      "revenueThb": 20640,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Restaurant",
+      "productId": "PRD-009",
+      "units": 94,
+      "revenueThb": 29610,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Restaurant",
+      "productId": "PRD-012",
+      "units": 12,
+      "revenueThb": 3420,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Restaurant",
+      "productId": "PRD-013",
+      "units": 219,
+      "revenueThb": 29565,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Retail",
+      "productId": "PRD-001",
+      "units": 291,
+      "revenueThb": 87300,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Retail",
+      "productId": "PRD-002",
+      "units": 503,
+      "revenueThb": 82995,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Retail",
+      "productId": "PRD-003",
+      "units": 110,
+      "revenueThb": 15620,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Retail",
+      "productId": "PRD-004",
+      "units": 1438,
+      "revenueThb": 120792,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Retail",
+      "productId": "PRD-005",
+      "units": 518,
+      "revenueThb": 62160,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Retail",
+      "productId": "PRD-006",
+      "units": 140,
+      "revenueThb": 8120,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Retail",
+      "productId": "PRD-007",
+      "units": 195,
+      "revenueThb": 10725,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Retail",
+      "productId": "PRD-016",
+      "units": 202,
+      "revenueThb": 18584,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-001",
+      "units": 610,
+      "revenueThb": 237290,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-002",
+      "units": 820,
+      "revenueThb": 179580,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-003",
+      "units": 420,
+      "revenueThb": 79380,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-004",
+      "units": 1500,
+      "revenueThb": 178500,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-005",
+      "units": 700,
+      "revenueThb": 118300,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-006",
+      "units": 160,
+      "revenueThb": 13600,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-007",
+      "units": 240,
+      "revenueThb": 18960,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-008",
+      "units": 140,
+      "revenueThb": 82600,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-009",
+      "units": 180,
+      "revenueThb": 71820,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-012",
+      "units": 210,
+      "revenueThb": 73290,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-013",
+      "units": 90,
+      "revenueThb": 17010,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Website",
+      "productId": "PRD-016",
+      "units": 360,
+      "revenueThb": 46440,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Wholesale",
+      "productId": "PRD-001",
+      "units": 109,
+      "revenueThb": 31065,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Wholesale",
+      "productId": "PRD-003",
+      "units": 218,
+      "revenueThb": 29648,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Wholesale",
+      "productId": "PRD-004",
+      "units": 840,
+      "revenueThb": 67200,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "channel": "Wholesale",
+      "productId": "PRD-013",
+      "units": 652,
+      "revenueThb": 81500,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Corporate",
+      "productId": "PRD-003",
+      "units": 147,
+      "revenueThb": 19992,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Corporate",
+      "productId": "PRD-004",
+      "units": 175,
+      "revenueThb": 14000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Hotel",
+      "productId": "PRD-001",
+      "units": 65,
+      "revenueThb": 19825,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Hotel",
+      "productId": "PRD-002",
+      "units": 80,
+      "revenueThb": 13600,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Hotel",
+      "productId": "PRD-004",
+      "units": 356,
+      "revenueThb": 30616,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Hotel",
+      "productId": "PRD-012",
+      "units": 40,
+      "revenueThb": 11000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Hotel",
+      "productId": "PRD-014",
+      "units": 22,
+      "revenueThb": 4950,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-001",
+      "units": 390,
+      "revenueThb": 151710,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-002",
+      "units": 470,
+      "revenueThb": 102930,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-003",
+      "units": 250,
+      "revenueThb": 47250,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-004",
+      "units": 1000,
+      "revenueThb": 119000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-005",
+      "units": 330,
+      "revenueThb": 55770,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-006",
+      "units": 85,
+      "revenueThb": 7225,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-007",
+      "units": 130,
+      "revenueThb": 10270,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-008",
+      "units": 66,
+      "revenueThb": 38940,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-009",
+      "units": 75,
+      "revenueThb": 29925,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-011",
+      "units": 120,
+      "revenueThb": 19080,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-012",
+      "units": 118,
+      "revenueThb": 41182,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-013",
+      "units": 42,
+      "revenueThb": 7938,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "LINE OA",
+      "productId": "PRD-016",
+      "units": 160,
+      "revenueThb": 20640,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Restaurant",
+      "productId": "PRD-001",
+      "units": 8,
+      "revenueThb": 2520,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Restaurant",
+      "productId": "PRD-002",
+      "units": 73,
+      "revenueThb": 12775,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Restaurant",
+      "productId": "PRD-003",
+      "units": 149,
+      "revenueThb": 22350,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Restaurant",
+      "productId": "PRD-004",
+      "units": 16,
+      "revenueThb": 1408,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Restaurant",
+      "productId": "PRD-008",
+      "units": 36,
+      "revenueThb": 17280,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Restaurant",
+      "productId": "PRD-009",
+      "units": 84,
+      "revenueThb": 26460,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Restaurant",
+      "productId": "PRD-012",
+      "units": 12,
+      "revenueThb": 3420,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Restaurant",
+      "productId": "PRD-013",
+      "units": 249,
+      "revenueThb": 33615,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Retail",
+      "productId": "PRD-001",
+      "units": 266,
+      "revenueThb": 79800,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Retail",
+      "productId": "PRD-002",
+      "units": 435,
+      "revenueThb": 71775,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Retail",
+      "productId": "PRD-003",
+      "units": 111,
+      "revenueThb": 15762,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Retail",
+      "productId": "PRD-004",
+      "units": 1303,
+      "revenueThb": 109452,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Retail",
+      "productId": "PRD-005",
+      "units": 440,
+      "revenueThb": 52800,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Retail",
+      "productId": "PRD-006",
+      "units": 123,
+      "revenueThb": 7134,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Retail",
+      "productId": "PRD-007",
+      "units": 153,
+      "revenueThb": 8415,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Retail",
+      "productId": "PRD-011",
+      "units": 52,
+      "revenueThb": 5824,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Retail",
+      "productId": "PRD-016",
+      "units": 176,
+      "revenueThb": 16192,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-001",
+      "units": 625,
+      "revenueThb": 243125,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-002",
+      "units": 860,
+      "revenueThb": 188340,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-003",
+      "units": 430,
+      "revenueThb": 81270,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-004",
+      "units": 1540,
+      "revenueThb": 183260,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-005",
+      "units": 610,
+      "revenueThb": 103090,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-006",
+      "units": 150,
+      "revenueThb": 12750,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-007",
+      "units": 210,
+      "revenueThb": 16590,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-008",
+      "units": 150,
+      "revenueThb": 88500,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-009",
+      "units": 190,
+      "revenueThb": 75810,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-011",
+      "units": 140,
+      "revenueThb": 22260,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-012",
+      "units": 215,
+      "revenueThb": 75035,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-013",
+      "units": 95,
+      "revenueThb": 17955,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Website",
+      "productId": "PRD-016",
+      "units": 320,
+      "revenueThb": 41280,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Wholesale",
+      "productId": "PRD-001",
+      "units": 98,
+      "revenueThb": 27930,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Wholesale",
+      "productId": "PRD-003",
+      "units": 196,
+      "revenueThb": 26656,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Wholesale",
+      "productId": "PRD-004",
+      "units": 710,
+      "revenueThb": 56800,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "channel": "Wholesale",
+      "productId": "PRD-013",
+      "units": 569,
+      "revenueThb": 71125,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Corporate",
+      "productId": "PRD-003",
+      "units": 180,
+      "revenueThb": 24480,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Corporate",
+      "productId": "PRD-004",
+      "units": 233,
+      "revenueThb": 18640,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Hotel",
+      "productId": "PRD-001",
+      "units": 68,
+      "revenueThb": 20740,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Hotel",
+      "productId": "PRD-002",
+      "units": 73,
+      "revenueThb": 12410,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Hotel",
+      "productId": "PRD-004",
+      "units": 365,
+      "revenueThb": 31390,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Hotel",
+      "productId": "PRD-012",
+      "units": 41,
+      "revenueThb": 11275,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Hotel",
+      "productId": "PRD-014",
+      "units": 24,
+      "revenueThb": 5400,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-001",
+      "units": 400,
+      "revenueThb": 155600,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-002",
+      "units": 490,
+      "revenueThb": 107310,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-003",
+      "units": 255,
+      "revenueThb": 48195,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-004",
+      "units": 1020,
+      "revenueThb": 121380,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-005",
+      "units": 280,
+      "revenueThb": 47320,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-006",
+      "units": 80,
+      "revenueThb": 6800,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-007",
+      "units": 110,
+      "revenueThb": 8690,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-008",
+      "units": 72,
+      "revenueThb": 42480,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-009",
+      "units": 70,
+      "revenueThb": 27930,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-010",
+      "units": 70,
+      "revenueThb": 10430,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-011",
+      "units": 230,
+      "revenueThb": 36570,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-012",
+      "units": 122,
+      "revenueThb": 42578,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-013",
+      "units": 41,
+      "revenueThb": 7749,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "LINE OA",
+      "productId": "PRD-016",
+      "units": 130,
+      "revenueThb": 16770,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Restaurant",
+      "productId": "PRD-001",
+      "units": 7,
+      "revenueThb": 2205,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Restaurant",
+      "productId": "PRD-002",
+      "units": 73,
+      "revenueThb": 12775,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Restaurant",
+      "productId": "PRD-003",
+      "units": 144,
+      "revenueThb": 21600,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Restaurant",
+      "productId": "PRD-004",
+      "units": 14,
+      "revenueThb": 1232,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Restaurant",
+      "productId": "PRD-008",
+      "units": 42,
+      "revenueThb": 20160,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Restaurant",
+      "productId": "PRD-009",
+      "units": 81,
+      "revenueThb": 25515,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Restaurant",
+      "productId": "PRD-012",
+      "units": 14,
+      "revenueThb": 3990,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Restaurant",
+      "productId": "PRD-013",
+      "units": 254,
+      "revenueThb": 34290,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-001",
+      "units": 225,
+      "revenueThb": 67500,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-002",
+      "units": 363,
+      "revenueThb": 59895,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-003",
+      "units": 99,
+      "revenueThb": 14058,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-004",
+      "units": 1077,
+      "revenueThb": 90468,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-005",
+      "units": 301,
+      "revenueThb": 36120,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-006",
+      "units": 97,
+      "revenueThb": 5626,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-007",
+      "units": 103,
+      "revenueThb": 5665,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-010",
+      "units": 13,
+      "revenueThb": 1365,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-011",
+      "units": 56,
+      "revenueThb": 6272,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Retail",
+      "productId": "PRD-016",
+      "units": 113,
+      "revenueThb": 10396,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-001",
+      "units": 640,
+      "revenueThb": 248960,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-002",
+      "units": 900,
+      "revenueThb": 197100,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-003",
+      "units": 425,
+      "revenueThb": 80325,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-004",
+      "units": 1580,
+      "revenueThb": 188020,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-005",
+      "units": 520,
+      "revenueThb": 87880,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-006",
+      "units": 140,
+      "revenueThb": 11900,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-007",
+      "units": 180,
+      "revenueThb": 14220,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-008",
+      "units": 165,
+      "revenueThb": 97350,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-009",
+      "units": 175,
+      "revenueThb": 69825,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-010",
+      "units": 120,
+      "revenueThb": 17880,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-011",
+      "units": 210,
+      "revenueThb": 33390,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-012",
+      "units": 220,
+      "revenueThb": 76780,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-013",
+      "units": 92,
+      "revenueThb": 17388,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-015",
+      "units": 12,
+      "revenueThb": 7080,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Website",
+      "productId": "PRD-016",
+      "units": 270,
+      "revenueThb": 34830,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Wholesale",
+      "productId": "PRD-001",
+      "units": 72,
+      "revenueThb": 20520,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Wholesale",
+      "productId": "PRD-003",
+      "units": 220,
+      "revenueThb": 29920,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Wholesale",
+      "productId": "PRD-004",
+      "units": 787,
+      "revenueThb": 62960,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "channel": "Wholesale",
+      "productId": "PRD-013",
+      "units": 568,
+      "revenueThb": 71000,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Corporate",
+      "productId": "PRD-003",
+      "units": 31,
+      "revenueThb": 4216,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Corporate",
+      "productId": "PRD-004",
+      "units": 44,
+      "revenueThb": 3520,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Hotel",
+      "productId": "PRD-001",
+      "units": 20,
+      "revenueThb": 6100,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Hotel",
+      "productId": "PRD-002",
+      "units": 27,
+      "revenueThb": 4590,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Hotel",
+      "productId": "PRD-004",
+      "units": 111,
+      "revenueThb": 9546,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Hotel",
+      "productId": "PRD-012",
+      "units": 11,
+      "revenueThb": 3025,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Hotel",
+      "productId": "PRD-014",
+      "units": 5,
+      "revenueThb": 1125,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-001",
+      "units": 88,
+      "revenueThb": 34232,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-002",
+      "units": 230,
+      "revenueThb": 43470,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-003",
+      "units": 52,
+      "revenueThb": 9828,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-004",
+      "units": 210,
+      "revenueThb": 24990,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-005",
+      "units": 50,
+      "revenueThb": 8450,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-006",
+      "units": 13,
+      "revenueThb": 1105,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-007",
+      "units": 18,
+      "revenueThb": 1422,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-008",
+      "units": 16,
+      "revenueThb": 9440,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-010",
+      "units": 16,
+      "revenueThb": 2384,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-011",
+      "units": 60,
+      "revenueThb": 9540,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-012",
+      "units": 25,
+      "revenueThb": 8725,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-013",
+      "units": 8,
+      "revenueThb": 1512,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "LINE OA",
+      "productId": "PRD-016",
+      "units": 22,
+      "revenueThb": 2838,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Restaurant",
+      "productId": "PRD-001",
+      "units": 7,
+      "revenueThb": 2205,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Restaurant",
+      "productId": "PRD-002",
+      "units": 6,
+      "revenueThb": 1050,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Restaurant",
+      "productId": "PRD-003",
+      "units": 44,
+      "revenueThb": 6600,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Restaurant",
+      "productId": "PRD-004",
+      "units": 12,
+      "revenueThb": 1056,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Restaurant",
+      "productId": "PRD-008",
+      "units": 2,
+      "revenueThb": 960,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Restaurant",
+      "productId": "PRD-013",
+      "units": 77,
+      "revenueThb": 10395,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-001",
+      "units": 37,
+      "revenueThb": 11100,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-002",
+      "units": 58,
+      "revenueThb": 9570,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-003",
+      "units": 30,
+      "revenueThb": 4260,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-004",
+      "units": 189,
+      "revenueThb": 15876,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-005",
+      "units": 75,
+      "revenueThb": 9000,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-006",
+      "units": 25,
+      "revenueThb": 1450,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-007",
+      "units": 18,
+      "revenueThb": 990,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-010",
+      "units": 7,
+      "revenueThb": 735,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-011",
+      "units": 18,
+      "revenueThb": 2016,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Retail",
+      "productId": "PRD-016",
+      "units": 21,
+      "revenueThb": 1932,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-001",
+      "units": 140,
+      "revenueThb": 54460,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-002",
+      "units": 420,
+      "revenueThb": 79380,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-003",
+      "units": 86,
+      "revenueThb": 16254,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-004",
+      "units": 330,
+      "revenueThb": 39270,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-005",
+      "units": 92,
+      "revenueThb": 15548,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-006",
+      "units": 24,
+      "revenueThb": 2040,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-007",
+      "units": 30,
+      "revenueThb": 2370,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-008",
+      "units": 36,
+      "revenueThb": 21240,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-010",
+      "units": 30,
+      "revenueThb": 4470,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-011",
+      "units": 52,
+      "revenueThb": 8268,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-012",
+      "units": 44,
+      "revenueThb": 15356,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-013",
+      "units": 18,
+      "revenueThb": 3402,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-015",
+      "units": 9,
+      "revenueThb": 5310,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Website",
+      "productId": "PRD-016",
+      "units": 46,
+      "revenueThb": 5934,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Wholesale",
+      "productId": "PRD-001",
+      "units": 20,
+      "revenueThb": 5700,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Wholesale",
+      "productId": "PRD-003",
+      "units": 57,
+      "revenueThb": 7752,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Wholesale",
+      "productId": "PRD-004",
+      "units": 211,
+      "revenueThb": 16880,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "channel": "Wholesale",
+      "productId": "PRD-013",
+      "units": 167,
+      "revenueThb": 20875,
+      "mock": true
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-0001",
+      "customerId": "CUS-101",
+      "channel": "Hotel",
+      "date": "2026-07-08",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 17,
+          "unitPriceThb": 465,
+          "lineTotalThb": 7905
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 57,
+          "unitPriceThb": 86,
+          "lineTotalThb": 4902
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 13,
+          "unitPriceThb": 275,
+          "lineTotalThb": 3575
+        }
+      ],
+      "totalThb": 16382,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0002",
+      "customerId": "CUS-101",
+      "channel": "Hotel",
+      "date": "2026-07-18",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 17,
+          "unitPriceThb": 465,
+          "lineTotalThb": 7905
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 50,
+          "unitPriceThb": 86,
+          "lineTotalThb": 4300
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 12,
+          "unitPriceThb": 275,
+          "lineTotalThb": 3300
+        }
+      ],
+      "totalThb": 15505,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0003",
+      "customerId": "CUS-101",
+      "channel": "Hotel",
+      "date": "2026-07-28",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 16,
+          "unitPriceThb": 465,
+          "lineTotalThb": 7440
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 59,
+          "unitPriceThb": 86,
+          "lineTotalThb": 5074
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 11,
+          "unitPriceThb": 275,
+          "lineTotalThb": 3025
+        }
+      ],
+      "totalThb": 15539,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0004",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-07-03",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 9,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2475
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 32,
+          "unitPriceThb": 86,
+          "lineTotalThb": 2752
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 5,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1125
+        }
+      ],
+      "totalThb": 6352,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0005",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-07-10",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 8,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2200
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 36,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3096
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 6,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1350
+        }
+      ],
+      "totalThb": 6646,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0006",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-07-17",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 10,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2750
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 31,
+          "unitPriceThb": 86,
+          "lineTotalThb": 2666
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 4,
+          "unitPriceThb": 225,
+          "lineTotalThb": 900
+        }
+      ],
+      "totalThb": 6316,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0007",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-07-24",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 9,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2475
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 33,
+          "unitPriceThb": 86,
+          "lineTotalThb": 2838
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 6,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1350
+        }
+      ],
+      "totalThb": 6663,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0008",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-07-31",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 9,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2475
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 30,
+          "unitPriceThb": 86,
+          "lineTotalThb": 2580
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 4,
+          "unitPriceThb": 225,
+          "lineTotalThb": 900
+        }
+      ],
+      "totalThb": 5955,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0009",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-08-07",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 10,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2750
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 35,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3010
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 6,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1350
+        }
+      ],
+      "totalThb": 7110,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0010",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-08-14",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 10,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2750
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 40,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3440
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 6,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1350
+        }
+      ],
+      "totalThb": 7540,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0011",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-08-21",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 10,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2750
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 34,
+          "unitPriceThb": 86,
+          "lineTotalThb": 2924
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 6,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1350
+        }
+      ],
+      "totalThb": 7024,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0012",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-08-28",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 10,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2750
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 34,
+          "unitPriceThb": 86,
+          "lineTotalThb": 2924
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 4,
+          "unitPriceThb": 225,
+          "lineTotalThb": 900
+        }
+      ],
+      "totalThb": 6574,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0013",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-09-04",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 10,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2750
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 41,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3526
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 6,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1350
+        }
+      ],
+      "totalThb": 7626,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0014",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-09-11",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 11,
+          "unitPriceThb": 275,
+          "lineTotalThb": 3025
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 38,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3268
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 5,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1125
+        }
+      ],
+      "totalThb": 7418,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0015",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-09-18",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 10,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2750
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 39,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3354
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 8,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1800
+        }
+      ],
+      "totalThb": 7904,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0016",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-09-25",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 10,
+          "unitPriceThb": 275,
+          "lineTotalThb": 2750
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 39,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3354
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 5,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1125
+        }
+      ],
+      "totalThb": 7229,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0017",
+      "customerId": "CUS-102",
+      "channel": "Hotel",
+      "date": "2026-10-02",
+      "lines": [
+        {
+          "productId": "PRD-012",
+          "qty": 11,
+          "unitPriceThb": 275,
+          "lineTotalThb": 3025
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 47,
+          "unitPriceThb": 86,
+          "lineTotalThb": 4042
+        },
+        {
+          "productId": "PRD-014",
+          "qty": 5,
+          "unitPriceThb": 225,
+          "lineTotalThb": 1125
+        }
+      ],
+      "totalThb": 8192,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0018",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-07-06",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 12,
+          "unitPriceThb": 305,
+          "lineTotalThb": 3660
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 38,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3268
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 14,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2380
+        }
+      ],
+      "totalThb": 9308,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0019",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-07-13",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 14,
+          "unitPriceThb": 305,
+          "lineTotalThb": 4270
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 42,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3612
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 14,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2380
+        }
+      ],
+      "totalThb": 10262,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0020",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-07-20",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 14,
+          "unitPriceThb": 305,
+          "lineTotalThb": 4270
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 45,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3870
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 15,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2550
+        }
+      ],
+      "totalThb": 10690,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0021",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-07-27",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 11,
+          "unitPriceThb": 305,
+          "lineTotalThb": 3355
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 42,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3612
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 14,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2380
+        }
+      ],
+      "totalThb": 9347,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0022",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-08-03",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 14,
+          "unitPriceThb": 305,
+          "lineTotalThb": 4270
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 44,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3784
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 17,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2890
+        }
+      ],
+      "totalThb": 10944,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0023",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-08-10",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 13,
+          "unitPriceThb": 305,
+          "lineTotalThb": 3965
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 41,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3526
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 15,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2550
+        }
+      ],
+      "totalThb": 10041,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0024",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-08-17",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 13,
+          "unitPriceThb": 305,
+          "lineTotalThb": 3965
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 42,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3612
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 16,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2720
+        }
+      ],
+      "totalThb": 10297,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0025",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-08-24",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 12,
+          "unitPriceThb": 305,
+          "lineTotalThb": 3660
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 41,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3526
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 16,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2720
+        }
+      ],
+      "totalThb": 9906,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0026",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-08-31",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 13,
+          "unitPriceThb": 305,
+          "lineTotalThb": 3965
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 45,
+          "unitPriceThb": 86,
+          "lineTotalThb": 3870
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 16,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2720
+        }
+      ],
+      "totalThb": 10555,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0027",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-09-07",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 18,
+          "unitPriceThb": 305,
+          "lineTotalThb": 5490
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 54,
+          "unitPriceThb": 86,
+          "lineTotalThb": 4644
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 18,
+          "unitPriceThb": 170,
+          "lineTotalThb": 3060
+        }
+      ],
+      "totalThb": 13194,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0028",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-09-14",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 17,
+          "unitPriceThb": 305,
+          "lineTotalThb": 5185
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 51,
+          "unitPriceThb": 86,
+          "lineTotalThb": 4386
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 20,
+          "unitPriceThb": 170,
+          "lineTotalThb": 3400
+        }
+      ],
+      "totalThb": 12971,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0029",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-09-21",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 18,
+          "unitPriceThb": 305,
+          "lineTotalThb": 5490
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 53,
+          "unitPriceThb": 86,
+          "lineTotalThb": 4558
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 17,
+          "unitPriceThb": 170,
+          "lineTotalThb": 2890
+        }
+      ],
+      "totalThb": 12938,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0030",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-09-28",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 15,
+          "unitPriceThb": 305,
+          "lineTotalThb": 4575
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 50,
+          "unitPriceThb": 86,
+          "lineTotalThb": 4300
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 18,
+          "unitPriceThb": 170,
+          "lineTotalThb": 3060
+        }
+      ],
+      "totalThb": 11935,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0031",
+      "customerId": "CUS-103",
+      "channel": "Hotel",
+      "date": "2026-10-05",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 20,
+          "unitPriceThb": 305,
+          "lineTotalThb": 6100
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 64,
+          "unitPriceThb": 86,
+          "lineTotalThb": 5504
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 27,
+          "unitPriceThb": 170,
+          "lineTotalThb": 4590
+        }
+      ],
+      "totalThb": 16194,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0032",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-07-01",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 11,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3465
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 10,
+          "unitPriceThb": 175,
+          "lineTotalThb": 1750
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 7615,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0033",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-07-06",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 13,
+          "unitPriceThb": 315,
+          "lineTotalThb": 4095
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 13,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2275
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 4,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1920
+        }
+      ],
+      "totalThb": 8290,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0034",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-07-11",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 12,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3780
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 14,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2450
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 8630,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0035",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-07-16",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 12,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3780
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 11,
+          "unitPriceThb": 175,
+          "lineTotalThb": 1925
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 3,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1440
+        }
+      ],
+      "totalThb": 7145,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0036",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-07-21",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 11,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3465
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 13,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2275
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 8140,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0037",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-07-26",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 11,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3465
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 13,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2275
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 8140,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0038",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-07-31",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 14,
+          "unitPriceThb": 315,
+          "lineTotalThb": 4410
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 11,
+          "unitPriceThb": 175,
+          "lineTotalThb": 1925
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 8735,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0039",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-08-05",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 10,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3150
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 12,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2100
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 7650,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0040",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-08-10",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 13,
+          "unitPriceThb": 315,
+          "lineTotalThb": 4095
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 11,
+          "unitPriceThb": 175,
+          "lineTotalThb": 1925
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 4,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1920
+        }
+      ],
+      "totalThb": 7940,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0041",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-08-15",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 12,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3780
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 11,
+          "unitPriceThb": 175,
+          "lineTotalThb": 1925
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 8105,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0042",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-08-20",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 14,
+          "unitPriceThb": 315,
+          "lineTotalThb": 4410
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 13,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2275
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 4,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1920
+        }
+      ],
+      "totalThb": 8605,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0043",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-08-25",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 13,
+          "unitPriceThb": 315,
+          "lineTotalThb": 4095
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 13,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2275
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 4,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1920
+        }
+      ],
+      "totalThb": 8290,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0044",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-08-30",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 11,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3465
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 13,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2275
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 8140,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0045",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-09-04",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 12,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3780
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 12,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2100
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 3,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1440
+        }
+      ],
+      "totalThb": 7320,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0046",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-09-09",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 12,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3780
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 13,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2275
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 4,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1920
+        }
+      ],
+      "totalThb": 7975,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0047",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-09-14",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 13,
+          "unitPriceThb": 315,
+          "lineTotalThb": 4095
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 13,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2275
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 8770,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0048",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-09-19",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 12,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3780
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 11,
+          "unitPriceThb": 175,
+          "lineTotalThb": 1925
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 4,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1920
+        }
+      ],
+      "totalThb": 7625,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0049",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-09-24",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 11,
+          "unitPriceThb": 315,
+          "lineTotalThb": 3465
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 12,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2100
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 4,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1920
+        }
+      ],
+      "totalThb": 7485,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0050",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-09-29",
+      "lines": [
+        {
+          "productId": "PRD-009",
+          "qty": 13,
+          "unitPriceThb": 315,
+          "lineTotalThb": 4095
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 12,
+          "unitPriceThb": 175,
+          "lineTotalThb": 2100
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 4,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1920
+        }
+      ],
+      "totalThb": 8115,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0051",
+      "customerId": "CUS-111",
+      "channel": "Restaurant",
+      "date": "2026-10-04",
+      "lines": [
+        {
+          "productId": "PRD-002",
+          "qty": 6,
+          "unitPriceThb": 175,
+          "lineTotalThb": 1050
+        },
+        {
+          "productId": "PRD-008",
+          "qty": 2,
+          "unitPriceThb": 480,
+          "lineTotalThb": 960
+        }
+      ],
+      "totalThb": 2010,
+      "status": "Delivered without duck breast (out of stock)",
+      "mock": true
+    },
+    {
+      "id": "ORD-0052",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-07-02",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 28,
+          "unitPriceThb": 135,
+          "lineTotalThb": 3780
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 18,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2700
+        }
+      ],
+      "totalThb": 6480,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0053",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-07-06",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 26,
+          "unitPriceThb": 135,
+          "lineTotalThb": 3510
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2250
+        }
+      ],
+      "totalThb": 5760,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0054",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-07-10",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 26,
+          "unitPriceThb": 135,
+          "lineTotalThb": 3510
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 14,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2100
+        }
+      ],
+      "totalThb": 5610,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0055",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-07-14",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 27,
+          "unitPriceThb": 135,
+          "lineTotalThb": 3645
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 16,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 6045,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0056",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-07-18",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 29,
+          "unitPriceThb": 135,
+          "lineTotalThb": 3915
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2250
+        }
+      ],
+      "totalThb": 6165,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0057",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-07-22",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 25,
+          "unitPriceThb": 135,
+          "lineTotalThb": 3375
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2250
+        }
+      ],
+      "totalThb": 5625,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0058",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-07-26",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 30,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4050
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 18,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2700
+        }
+      ],
+      "totalThb": 6750,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0059",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-07-30",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 28,
+          "unitPriceThb": 135,
+          "lineTotalThb": 3780
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 17,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2550
+        }
+      ],
+      "totalThb": 6330,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0060",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-08-03",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 30,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4050
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 17,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2550
+        }
+      ],
+      "totalThb": 6600,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0061",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-08-07",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 33,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4455
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 21,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3150
+        }
+      ],
+      "totalThb": 7605,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0062",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-08-11",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 31,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4185
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 16,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2400
+        }
+      ],
+      "totalThb": 6585,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0063",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-08-15",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 32,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4320
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 20,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3000
+        }
+      ],
+      "totalThb": 7320,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0064",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-08-19",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 32,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4320
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 20,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3000
+        }
+      ],
+      "totalThb": 7320,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0065",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-08-23",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 29,
+          "unitPriceThb": 135,
+          "lineTotalThb": 3915
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 17,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2550
+        }
+      ],
+      "totalThb": 6465,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0066",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-08-27",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 30,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4050
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 18,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2700
+        }
+      ],
+      "totalThb": 6750,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0067",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-08-31",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 32,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4320
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 20,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3000
+        }
+      ],
+      "totalThb": 7320,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0068",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-09-04",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 33,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4455
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 21,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3150
+        }
+      ],
+      "totalThb": 7605,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0069",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-09-08",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 39,
+          "unitPriceThb": 135,
+          "lineTotalThb": 5265
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 18,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2700
+        }
+      ],
+      "totalThb": 7965,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0070",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-09-12",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 35,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4725
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 22,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3300
+        }
+      ],
+      "totalThb": 8025,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0071",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-09-16",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 38,
+          "unitPriceThb": 135,
+          "lineTotalThb": 5130
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 20,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3000
+        }
+      ],
+      "totalThb": 8130,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0072",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-09-20",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 38,
+          "unitPriceThb": 135,
+          "lineTotalThb": 5130
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 18,
+          "unitPriceThb": 150,
+          "lineTotalThb": 2700
+        }
+      ],
+      "totalThb": 7830,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0073",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-09-24",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 38,
+          "unitPriceThb": 135,
+          "lineTotalThb": 5130
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 23,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3450
+        }
+      ],
+      "totalThb": 8580,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0074",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-09-28",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 33,
+          "unitPriceThb": 135,
+          "lineTotalThb": 4455
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 22,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3300
+        }
+      ],
+      "totalThb": 7755,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0075",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-10-02",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 39,
+          "unitPriceThb": 135,
+          "lineTotalThb": 5265
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 22,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3300
+        }
+      ],
+      "totalThb": 8565,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0076",
+      "customerId": "CUS-113",
+      "channel": "Restaurant",
+      "date": "2026-10-06",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 38,
+          "unitPriceThb": 135,
+          "lineTotalThb": 5130
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 22,
+          "unitPriceThb": 150,
+          "lineTotalThb": 3300
+        }
+      ],
+      "totalThb": 8430,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0077",
+      "customerId": "CUS-121",
+      "channel": "Restaurant",
+      "date": "2026-07-08",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 6,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2880
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 6,
+          "unitPriceThb": 285,
+          "lineTotalThb": 1710
+        },
+        {
+          "productId": "PRD-009",
+          "qty": 5,
+          "unitPriceThb": 315,
+          "lineTotalThb": 1575
+        }
+      ],
+      "totalThb": 6165,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0078",
+      "customerId": "CUS-121",
+      "channel": "Restaurant",
+      "date": "2026-07-22",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 6,
+          "unitPriceThb": 285,
+          "lineTotalThb": 1710
+        },
+        {
+          "productId": "PRD-009",
+          "qty": 5,
+          "unitPriceThb": 315,
+          "lineTotalThb": 1575
+        }
+      ],
+      "totalThb": 5685,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0079",
+      "customerId": "CUS-121",
+      "channel": "Restaurant",
+      "date": "2026-08-05",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 5,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2400
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 6,
+          "unitPriceThb": 285,
+          "lineTotalThb": 1710
+        },
+        {
+          "productId": "PRD-009",
+          "qty": 6,
+          "unitPriceThb": 315,
+          "lineTotalThb": 1890
+        }
+      ],
+      "totalThb": 6000,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0080",
+      "customerId": "CUS-121",
+      "channel": "Restaurant",
+      "date": "2026-08-19",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 4,
+          "unitPriceThb": 480,
+          "lineTotalThb": 1920
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 6,
+          "unitPriceThb": 285,
+          "lineTotalThb": 1710
+        },
+        {
+          "productId": "PRD-009",
+          "qty": 5,
+          "unitPriceThb": 315,
+          "lineTotalThb": 1575
+        }
+      ],
+      "totalThb": 5205,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0081",
+      "customerId": "CUS-121",
+      "channel": "Restaurant",
+      "date": "2026-09-02",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 6,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2880
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 5,
+          "unitPriceThb": 285,
+          "lineTotalThb": 1425
+        },
+        {
+          "productId": "PRD-009",
+          "qty": 4,
+          "unitPriceThb": 315,
+          "lineTotalThb": 1260
+        }
+      ],
+      "totalThb": 5565,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0082",
+      "customerId": "CUS-121",
+      "channel": "Restaurant",
+      "date": "2026-09-16",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 6,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2880
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 5,
+          "unitPriceThb": 285,
+          "lineTotalThb": 1425
+        },
+        {
+          "productId": "PRD-009",
+          "qty": 4,
+          "unitPriceThb": 315,
+          "lineTotalThb": 1260
+        }
+      ],
+      "totalThb": 5565,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0083",
+      "customerId": "CUS-121",
+      "channel": "Restaurant",
+      "date": "2026-09-30",
+      "lines": [
+        {
+          "productId": "PRD-008",
+          "qty": 6,
+          "unitPriceThb": 480,
+          "lineTotalThb": 2880
+        },
+        {
+          "productId": "PRD-012",
+          "qty": 4,
+          "unitPriceThb": 285,
+          "lineTotalThb": 1140
+        }
+      ],
+      "totalThb": 4020,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0084",
+      "customerId": "CUS-122",
+      "channel": "Restaurant",
+      "date": "2026-07-10",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 8,
+          "unitPriceThb": 315,
+          "lineTotalThb": 2520
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 12,
+          "unitPriceThb": 88,
+          "lineTotalThb": 1056
+        }
+      ],
+      "totalThb": 3576,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0085",
+      "customerId": "CUS-122",
+      "channel": "Restaurant",
+      "date": "2026-07-31",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 6,
+          "unitPriceThb": 315,
+          "lineTotalThb": 1890
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 14,
+          "unitPriceThb": 88,
+          "lineTotalThb": 1232
+        }
+      ],
+      "totalThb": 3122,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0086",
+      "customerId": "CUS-122",
+      "channel": "Restaurant",
+      "date": "2026-08-21",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 8,
+          "unitPriceThb": 315,
+          "lineTotalThb": 2520
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 16,
+          "unitPriceThb": 88,
+          "lineTotalThb": 1408
+        }
+      ],
+      "totalThb": 3928,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0087",
+      "customerId": "CUS-122",
+      "channel": "Restaurant",
+      "date": "2026-09-11",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 7,
+          "unitPriceThb": 315,
+          "lineTotalThb": 2205
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 14,
+          "unitPriceThb": 88,
+          "lineTotalThb": 1232
+        }
+      ],
+      "totalThb": 3437,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0088",
+      "customerId": "CUS-122",
+      "channel": "Restaurant",
+      "date": "2026-10-02",
+      "lines": [
+        {
+          "productId": "PRD-001",
+          "qty": 7,
+          "unitPriceThb": 315,
+          "lineTotalThb": 2205
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 12,
+          "unitPriceThb": 88,
+          "lineTotalThb": 1056
+        }
+      ],
+      "totalThb": 3261,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0089",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-01",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 120,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10080
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 47,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7755
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 27,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8100
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 19,
+          "unitPriceThb": 55,
+          "lineTotalThb": 1045
+        }
+      ],
+      "totalThb": 28176,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0090",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-04",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 137,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11508
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 48,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7920
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 25,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7500
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 15,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1380
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 19,
+          "unitPriceThb": 55,
+          "lineTotalThb": 1045
+        }
+      ],
+      "totalThb": 29353,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0091",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-07",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 135,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11340
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 41,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6765
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 27,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8100
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 16,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1472
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 17,
+          "unitPriceThb": 55,
+          "lineTotalThb": 935
+        }
+      ],
+      "totalThb": 28612,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0092",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-10",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 130,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10920
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 48,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7920
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 26,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7800
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 15,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1380
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 15,
+          "unitPriceThb": 55,
+          "lineTotalThb": 825
+        }
+      ],
+      "totalThb": 28845,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0093",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-13",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 121,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10164
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 49,
+          "unitPriceThb": 165,
+          "lineTotalThb": 8085
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 25,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7500
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 12,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1104
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 16,
+          "unitPriceThb": 55,
+          "lineTotalThb": 880
+        }
+      ],
+      "totalThb": 27733,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0094",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-16",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 138,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11592
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 50,
+          "unitPriceThb": 165,
+          "lineTotalThb": 8250
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 29,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8700
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 18,
+          "unitPriceThb": 55,
+          "lineTotalThb": 990
+        }
+      ],
+      "totalThb": 30728,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0095",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-19",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 133,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11172
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 43,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7095
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 26,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7800
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 14,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1288
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 16,
+          "unitPriceThb": 55,
+          "lineTotalThb": 880
+        }
+      ],
+      "totalThb": 28235,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0096",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-22",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 128,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10752
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 42,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6930
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 25,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7500
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 14,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1288
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 20,
+          "unitPriceThb": 55,
+          "lineTotalThb": 1100
+        }
+      ],
+      "totalThb": 27570,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0097",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-25",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 121,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10164
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 44,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7260
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 27,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8100
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 14,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1288
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 18,
+          "unitPriceThb": 55,
+          "lineTotalThb": 990
+        }
+      ],
+      "totalThb": 27802,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0098",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-28",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 138,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11592
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 48,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7920
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 28,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8400
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 16,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1472
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 19,
+          "unitPriceThb": 55,
+          "lineTotalThb": 1045
+        }
+      ],
+      "totalThb": 30429,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0099",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-07-31",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 137,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11508
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 43,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7095
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 26,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7800
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 18,
+          "unitPriceThb": 55,
+          "lineTotalThb": 990
+        }
+      ],
+      "totalThb": 28589,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0100",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-03",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 128,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10752
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 42,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6930
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 25,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7500
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 11,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1012
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 14,
+          "unitPriceThb": 55,
+          "lineTotalThb": 770
+        }
+      ],
+      "totalThb": 26964,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0101",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-06",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 131,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11004
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 42,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6930
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 29,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8700
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 12,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1104
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 17,
+          "unitPriceThb": 55,
+          "lineTotalThb": 935
+        }
+      ],
+      "totalThb": 28673,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0102",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-09",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 124,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10416
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 44,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7260
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 25,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7500
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 11,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1012
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 16,
+          "unitPriceThb": 55,
+          "lineTotalThb": 880
+        }
+      ],
+      "totalThb": 27068,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0103",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-12",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 136,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11424
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 47,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7755
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 27,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8100
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 15,
+          "unitPriceThb": 55,
+          "lineTotalThb": 825
+        }
+      ],
+      "totalThb": 29300,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0104",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-15",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 127,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10668
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 43,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7095
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 28,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8400
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 13,
+          "unitPriceThb": 55,
+          "lineTotalThb": 715
+        }
+      ],
+      "totalThb": 28074,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0105",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-18",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 123,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10332
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 41,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6765
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 26,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7800
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 15,
+          "unitPriceThb": 55,
+          "lineTotalThb": 825
+        }
+      ],
+      "totalThb": 26918,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0106",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-21",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 128,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10752
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 43,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7095
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 26,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7800
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 16,
+          "unitPriceThb": 55,
+          "lineTotalThb": 880
+        }
+      ],
+      "totalThb": 27723,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0107",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-24",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 129,
+          "unitPriceThb": 84,
+          "lineTotalThb": 10836
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 43,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7095
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 27,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8100
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 14,
+          "unitPriceThb": 55,
+          "lineTotalThb": 770
+        }
+      ],
+      "totalThb": 27997,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0108",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-27",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 138,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11592
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 45,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7425
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 26,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7800
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 17,
+          "unitPriceThb": 55,
+          "lineTotalThb": 935
+        }
+      ],
+      "totalThb": 28948,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0109",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-08-30",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 139,
+          "unitPriceThb": 84,
+          "lineTotalThb": 11676
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 45,
+          "unitPriceThb": 165,
+          "lineTotalThb": 7425
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 27,
+          "unitPriceThb": 300,
+          "lineTotalThb": 8100
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 13,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1196
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 16,
+          "unitPriceThb": 55,
+          "lineTotalThb": 880
+        }
+      ],
+      "totalThb": 29277,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0110",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-02",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 103,
+          "unitPriceThb": 84,
+          "lineTotalThb": 8652
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 39,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6435
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 25,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7500
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 7,
+          "unitPriceThb": 92,
+          "lineTotalThb": 644
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 9,
+          "unitPriceThb": 55,
+          "lineTotalThb": 495
+        }
+      ],
+      "totalThb": 23726,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0111",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-05",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 112,
+          "unitPriceThb": 84,
+          "lineTotalThb": 9408
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 36,
+          "unitPriceThb": 165,
+          "lineTotalThb": 5940
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 21,
+          "unitPriceThb": 300,
+          "lineTotalThb": 6300
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 8,
+          "unitPriceThb": 92,
+          "lineTotalThb": 736
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 10,
+          "unitPriceThb": 55,
+          "lineTotalThb": 550
+        }
+      ],
+      "totalThb": 22934,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0112",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-08",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 104,
+          "unitPriceThb": 84,
+          "lineTotalThb": 8736
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 37,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6105
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 24,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7200
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 8,
+          "unitPriceThb": 92,
+          "lineTotalThb": 736
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 12,
+          "unitPriceThb": 55,
+          "lineTotalThb": 660
+        }
+      ],
+      "totalThb": 23437,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0113",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-11",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 113,
+          "unitPriceThb": 84,
+          "lineTotalThb": 9492
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 33,
+          "unitPriceThb": 165,
+          "lineTotalThb": 5445
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 21,
+          "unitPriceThb": 300,
+          "lineTotalThb": 6300
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 7,
+          "unitPriceThb": 92,
+          "lineTotalThb": 644
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 10,
+          "unitPriceThb": 55,
+          "lineTotalThb": 550
+        }
+      ],
+      "totalThb": 22431,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0114",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-14",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 103,
+          "unitPriceThb": 84,
+          "lineTotalThb": 8652
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 34,
+          "unitPriceThb": 165,
+          "lineTotalThb": 5610
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 22,
+          "unitPriceThb": 300,
+          "lineTotalThb": 6600
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 9,
+          "unitPriceThb": 92,
+          "lineTotalThb": 828
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 10,
+          "unitPriceThb": 55,
+          "lineTotalThb": 550
+        }
+      ],
+      "totalThb": 22240,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0115",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-17",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 105,
+          "unitPriceThb": 84,
+          "lineTotalThb": 8820
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 38,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6270
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 21,
+          "unitPriceThb": 300,
+          "lineTotalThb": 6300
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 7,
+          "unitPriceThb": 92,
+          "lineTotalThb": 644
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 11,
+          "unitPriceThb": 55,
+          "lineTotalThb": 605
+        }
+      ],
+      "totalThb": 22639,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0116",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-20",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 107,
+          "unitPriceThb": 84,
+          "lineTotalThb": 8988
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 39,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6435
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 24,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7200
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 7,
+          "unitPriceThb": 92,
+          "lineTotalThb": 644
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 11,
+          "unitPriceThb": 55,
+          "lineTotalThb": 605
+        }
+      ],
+      "totalThb": 23872,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0117",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-23",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 111,
+          "unitPriceThb": 84,
+          "lineTotalThb": 9324
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 34,
+          "unitPriceThb": 165,
+          "lineTotalThb": 5610
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 24,
+          "unitPriceThb": 300,
+          "lineTotalThb": 7200
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 8,
+          "unitPriceThb": 92,
+          "lineTotalThb": 736
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 10,
+          "unitPriceThb": 55,
+          "lineTotalThb": 550
+        }
+      ],
+      "totalThb": 23420,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0118",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-26",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 114,
+          "unitPriceThb": 84,
+          "lineTotalThb": 9576
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 37,
+          "unitPriceThb": 165,
+          "lineTotalThb": 6105
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 22,
+          "unitPriceThb": 300,
+          "lineTotalThb": 6600
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 7,
+          "unitPriceThb": 92,
+          "lineTotalThb": 644
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 10,
+          "unitPriceThb": 55,
+          "lineTotalThb": 550
+        }
+      ],
+      "totalThb": 23475,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0119",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-09-29",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 105,
+          "unitPriceThb": 84,
+          "lineTotalThb": 8820
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 36,
+          "unitPriceThb": 165,
+          "lineTotalThb": 5940
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 21,
+          "unitPriceThb": 300,
+          "lineTotalThb": 6300
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 8,
+          "unitPriceThb": 92,
+          "lineTotalThb": 736
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 10,
+          "unitPriceThb": 55,
+          "lineTotalThb": 550
+        }
+      ],
+      "totalThb": 22346,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0120",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-10-02",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 97,
+          "unitPriceThb": 84,
+          "lineTotalThb": 8148
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 29,
+          "unitPriceThb": 165,
+          "lineTotalThb": 4785
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 18,
+          "unitPriceThb": 300,
+          "lineTotalThb": 5400
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 7,
+          "unitPriceThb": 92,
+          "lineTotalThb": 644
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 10,
+          "unitPriceThb": 55,
+          "lineTotalThb": 550
+        }
+      ],
+      "totalThb": 19527,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0121",
+      "customerId": "CUS-131",
+      "channel": "Retail",
+      "date": "2026-10-05",
+      "lines": [
+        {
+          "productId": "PRD-004",
+          "qty": 92,
+          "unitPriceThb": 84,
+          "lineTotalThb": 7728
+        },
+        {
+          "productId": "PRD-002",
+          "qty": 29,
+          "unitPriceThb": 165,
+          "lineTotalThb": 4785
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 19,
+          "unitPriceThb": 300,
+          "lineTotalThb": 5700
+        },
+        {
+          "productId": "PRD-016",
+          "qty": 6,
+          "unitPriceThb": 92,
+          "lineTotalThb": 552
+        },
+        {
+          "productId": "PRD-007",
+          "qty": 8,
+          "unitPriceThb": 55,
+          "lineTotalThb": 440
+        }
+      ],
+      "totalThb": 19205,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0122",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-07-01",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 63,
+          "unitPriceThb": 120,
+          "lineTotalThb": 7560
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 19,
+          "unitPriceThb": 58,
+          "lineTotalThb": 1102
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 13,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1846
+        }
+      ],
+      "totalThb": 10508,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0123",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-07-05",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 60,
+          "unitPriceThb": 120,
+          "lineTotalThb": 7200
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 17,
+          "unitPriceThb": 58,
+          "lineTotalThb": 986
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2130
+        }
+      ],
+      "totalThb": 10316,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0124",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-07-09",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 70,
+          "unitPriceThb": 120,
+          "lineTotalThb": 8400
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 19,
+          "unitPriceThb": 58,
+          "lineTotalThb": 1102
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 12,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1704
+        }
+      ],
+      "totalThb": 11206,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0125",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-07-13",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 67,
+          "unitPriceThb": 120,
+          "lineTotalThb": 8040
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 15,
+          "unitPriceThb": 58,
+          "lineTotalThb": 870
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 14,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1988
+        }
+      ],
+      "totalThb": 10898,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0126",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-07-17",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 66,
+          "unitPriceThb": 120,
+          "lineTotalThb": 7920
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 16,
+          "unitPriceThb": 58,
+          "lineTotalThb": 928
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 13,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1846
+        }
+      ],
+      "totalThb": 10694,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0127",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-07-21",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 68,
+          "unitPriceThb": 120,
+          "lineTotalThb": 8160
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 16,
+          "unitPriceThb": 58,
+          "lineTotalThb": 928
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2130
+        }
+      ],
+      "totalThb": 11218,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0128",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-07-25",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 63,
+          "unitPriceThb": 120,
+          "lineTotalThb": 7560
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 19,
+          "unitPriceThb": 58,
+          "lineTotalThb": 1102
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 14,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1988
+        }
+      ],
+      "totalThb": 10650,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0129",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-07-29",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 61,
+          "unitPriceThb": 120,
+          "lineTotalThb": 7320
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 19,
+          "unitPriceThb": 58,
+          "lineTotalThb": 1102
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 14,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1988
+        }
+      ],
+      "totalThb": 10410,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0130",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-08-02",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 52,
+          "unitPriceThb": 120,
+          "lineTotalThb": 6240
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 15,
+          "unitPriceThb": 58,
+          "lineTotalThb": 870
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2130
+        }
+      ],
+      "totalThb": 9240,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0131",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-08-06",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 57,
+          "unitPriceThb": 120,
+          "lineTotalThb": 6840
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 14,
+          "unitPriceThb": 58,
+          "lineTotalThb": 812
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2130
+        }
+      ],
+      "totalThb": 9782,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0132",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-08-10",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 54,
+          "unitPriceThb": 120,
+          "lineTotalThb": 6480
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 17,
+          "unitPriceThb": 58,
+          "lineTotalThb": 986
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 12,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1704
+        }
+      ],
+      "totalThb": 9170,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0133",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-08-14",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 54,
+          "unitPriceThb": 120,
+          "lineTotalThb": 6480
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 14,
+          "unitPriceThb": 58,
+          "lineTotalThb": 812
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 13,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1846
+        }
+      ],
+      "totalThb": 9138,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0134",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-08-18",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 57,
+          "unitPriceThb": 120,
+          "lineTotalThb": 6840
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 14,
+          "unitPriceThb": 58,
+          "lineTotalThb": 812
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 16,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2272
+        }
+      ],
+      "totalThb": 9924,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0135",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-08-22",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 55,
+          "unitPriceThb": 120,
+          "lineTotalThb": 6600
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 15,
+          "unitPriceThb": 58,
+          "lineTotalThb": 870
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 13,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1846
+        }
+      ],
+      "totalThb": 9316,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0136",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-08-26",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 57,
+          "unitPriceThb": 120,
+          "lineTotalThb": 6840
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 17,
+          "unitPriceThb": 58,
+          "lineTotalThb": 986
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 14,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1988
+        }
+      ],
+      "totalThb": 9814,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0137",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-08-30",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 54,
+          "unitPriceThb": 120,
+          "lineTotalThb": 6480
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 17,
+          "unitPriceThb": 58,
+          "lineTotalThb": 986
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 13,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1846
+        }
+      ],
+      "totalThb": 9312,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0138",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-09-03",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 41,
+          "unitPriceThb": 120,
+          "lineTotalThb": 4920
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 14,
+          "unitPriceThb": 58,
+          "lineTotalThb": 812
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 16,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2272
+        }
+      ],
+      "totalThb": 8004,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0139",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-09-07",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 44,
+          "unitPriceThb": 120,
+          "lineTotalThb": 5280
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 13,
+          "unitPriceThb": 58,
+          "lineTotalThb": 754
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 13,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1846
+        }
+      ],
+      "totalThb": 7880,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0140",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-09-11",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 42,
+          "unitPriceThb": 120,
+          "lineTotalThb": 5040
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 13,
+          "unitPriceThb": 58,
+          "lineTotalThb": 754
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 12,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1704
+        }
+      ],
+      "totalThb": 7498,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0141",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-09-15",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 46,
+          "unitPriceThb": 120,
+          "lineTotalThb": 5520
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 15,
+          "unitPriceThb": 58,
+          "lineTotalThb": 870
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2130
+        }
+      ],
+      "totalThb": 8520,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0142",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-09-19",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 41,
+          "unitPriceThb": 120,
+          "lineTotalThb": 4920
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 13,
+          "unitPriceThb": 58,
+          "lineTotalThb": 754
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 14,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1988
+        }
+      ],
+      "totalThb": 7662,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0143",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-09-23",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 41,
+          "unitPriceThb": 120,
+          "lineTotalThb": 4920
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 13,
+          "unitPriceThb": 58,
+          "lineTotalThb": 754
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2130
+        }
+      ],
+      "totalThb": 7804,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0144",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-09-27",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 46,
+          "unitPriceThb": 120,
+          "lineTotalThb": 5520
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 16,
+          "unitPriceThb": 58,
+          "lineTotalThb": 928
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 14,
+          "unitPriceThb": 142,
+          "lineTotalThb": 1988
+        }
+      ],
+      "totalThb": 8436,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0145",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-10-01",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 38,
+          "unitPriceThb": 120,
+          "lineTotalThb": 4560
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 12,
+          "unitPriceThb": 58,
+          "lineTotalThb": 696
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2130
+        }
+      ],
+      "totalThb": 7386,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0146",
+      "customerId": "CUS-132",
+      "channel": "Retail",
+      "date": "2026-10-05",
+      "lines": [
+        {
+          "productId": "PRD-005",
+          "qty": 37,
+          "unitPriceThb": 120,
+          "lineTotalThb": 4440
+        },
+        {
+          "productId": "PRD-006",
+          "qty": 13,
+          "unitPriceThb": 58,
+          "lineTotalThb": 754
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 15,
+          "unitPriceThb": 142,
+          "lineTotalThb": 2130
+        }
+      ],
+      "totalThb": 7324,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0147",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-07-04",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 12,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1104
+        }
+      ],
+      "totalThb": 1104,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0148",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-07-11",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 11,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1012
+        }
+      ],
+      "totalThb": 1012,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0149",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-07-18",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 12,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1104
+        }
+      ],
+      "totalThb": 1104,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0150",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-07-25",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 12,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1104
+        }
+      ],
+      "totalThb": 1104,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0151",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-08-01",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 10,
+          "unitPriceThb": 92,
+          "lineTotalThb": 920
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 9,
+          "unitPriceThb": 112,
+          "lineTotalThb": 1008
+        }
+      ],
+      "totalThb": 1928,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0152",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-08-08",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 10,
+          "unitPriceThb": 92,
+          "lineTotalThb": 920
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 10,
+          "unitPriceThb": 112,
+          "lineTotalThb": 1120
+        }
+      ],
+      "totalThb": 2040,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0153",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-08-15",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 11,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1012
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 12,
+          "unitPriceThb": 112,
+          "lineTotalThb": 1344
+        }
+      ],
+      "totalThb": 2356,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0154",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-08-22",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 10,
+          "unitPriceThb": 92,
+          "lineTotalThb": 920
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 10,
+          "unitPriceThb": 112,
+          "lineTotalThb": 1120
+        }
+      ],
+      "totalThb": 2040,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0155",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-08-29",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 10,
+          "unitPriceThb": 92,
+          "lineTotalThb": 920
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 11,
+          "unitPriceThb": 112,
+          "lineTotalThb": 1232
+        }
+      ],
+      "totalThb": 2152,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0156",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-09-05",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 8,
+          "unitPriceThb": 92,
+          "lineTotalThb": 736
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 17,
+          "unitPriceThb": 112,
+          "lineTotalThb": 1904
+        }
+      ],
+      "totalThb": 2640,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0157",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-09-12",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 8,
+          "unitPriceThb": 92,
+          "lineTotalThb": 736
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 13,
+          "unitPriceThb": 112,
+          "lineTotalThb": 1456
+        }
+      ],
+      "totalThb": 2192,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0158",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-09-19",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 11,
+          "unitPriceThb": 92,
+          "lineTotalThb": 1012
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 15,
+          "unitPriceThb": 112,
+          "lineTotalThb": 1680
+        },
+        {
+          "productId": "PRD-010",
+          "qty": 6,
+          "unitPriceThb": 105,
+          "lineTotalThb": 630
+        }
+      ],
+      "totalThb": 3322,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0159",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-09-26",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 10,
+          "unitPriceThb": 92,
+          "lineTotalThb": 920
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 11,
+          "unitPriceThb": 112,
+          "lineTotalThb": 1232
+        },
+        {
+          "productId": "PRD-010",
+          "qty": 7,
+          "unitPriceThb": 105,
+          "lineTotalThb": 735
+        }
+      ],
+      "totalThb": 2887,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0160",
+      "customerId": "CUS-133",
+      "channel": "Retail",
+      "date": "2026-10-03",
+      "lines": [
+        {
+          "productId": "PRD-016",
+          "qty": 8,
+          "unitPriceThb": 92,
+          "lineTotalThb": 736
+        },
+        {
+          "productId": "PRD-011",
+          "qty": 18,
+          "unitPriceThb": 112,
+          "lineTotalThb": 2016
+        },
+        {
+          "productId": "PRD-010",
+          "qty": 7,
+          "unitPriceThb": 105,
+          "lineTotalThb": 735
+        }
+      ],
+      "totalThb": 3487,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0161",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-07-03",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 89,
+          "unitPriceThb": 125,
+          "lineTotalThb": 11125
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 161,
+          "unitPriceThb": 80,
+          "lineTotalThb": 12880
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 42,
+          "unitPriceThb": 136,
+          "lineTotalThb": 5712
+        }
+      ],
+      "totalThb": 29717,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0162",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-07-10",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 98,
+          "unitPriceThb": 125,
+          "lineTotalThb": 12250
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 155,
+          "unitPriceThb": 80,
+          "lineTotalThb": 12400
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 44,
+          "unitPriceThb": 136,
+          "lineTotalThb": 5984
+        }
+      ],
+      "totalThb": 30634,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0163",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-07-17",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 84,
+          "unitPriceThb": 125,
+          "lineTotalThb": 10500
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 174,
+          "unitPriceThb": 80,
+          "lineTotalThb": 13920
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 44,
+          "unitPriceThb": 136,
+          "lineTotalThb": 5984
+        }
+      ],
+      "totalThb": 30404,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0164",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-07-24",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 82,
+          "unitPriceThb": 125,
+          "lineTotalThb": 10250
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 173,
+          "unitPriceThb": 80,
+          "lineTotalThb": 13840
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 45,
+          "unitPriceThb": 136,
+          "lineTotalThb": 6120
+        }
+      ],
+      "totalThb": 30210,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0165",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-07-31",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 98,
+          "unitPriceThb": 125,
+          "lineTotalThb": 12250
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 177,
+          "unitPriceThb": 80,
+          "lineTotalThb": 14160
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 43,
+          "unitPriceThb": 136,
+          "lineTotalThb": 5848
+        }
+      ],
+      "totalThb": 32258,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0166",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-08-07",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 99,
+          "unitPriceThb": 125,
+          "lineTotalThb": 12375
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 190,
+          "unitPriceThb": 80,
+          "lineTotalThb": 15200
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 45,
+          "unitPriceThb": 136,
+          "lineTotalThb": 6120
+        }
+      ],
+      "totalThb": 33695,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0167",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-08-14",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 89,
+          "unitPriceThb": 125,
+          "lineTotalThb": 11125
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 167,
+          "unitPriceThb": 80,
+          "lineTotalThb": 13360
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 53,
+          "unitPriceThb": 136,
+          "lineTotalThb": 7208
+        }
+      ],
+      "totalThb": 31693,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0168",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-08-21",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 102,
+          "unitPriceThb": 125,
+          "lineTotalThb": 12750
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 167,
+          "unitPriceThb": 80,
+          "lineTotalThb": 13360
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 51,
+          "unitPriceThb": 136,
+          "lineTotalThb": 6936
+        }
+      ],
+      "totalThb": 33046,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0169",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-08-28",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 105,
+          "unitPriceThb": 125,
+          "lineTotalThb": 13125
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 186,
+          "unitPriceThb": 80,
+          "lineTotalThb": 14880
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 47,
+          "unitPriceThb": 136,
+          "lineTotalThb": 6392
+        }
+      ],
+      "totalThb": 34397,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0170",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-09-04",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 108,
+          "unitPriceThb": 125,
+          "lineTotalThb": 13500
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 211,
+          "unitPriceThb": 80,
+          "lineTotalThb": 16880
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 50,
+          "unitPriceThb": 136,
+          "lineTotalThb": 6800
+        }
+      ],
+      "totalThb": 37180,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0171",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-09-11",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 106,
+          "unitPriceThb": 125,
+          "lineTotalThb": 13250
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 181,
+          "unitPriceThb": 80,
+          "lineTotalThb": 14480
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 59,
+          "unitPriceThb": 136,
+          "lineTotalThb": 8024
+        }
+      ],
+      "totalThb": 35754,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0172",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-09-18",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 103,
+          "unitPriceThb": 125,
+          "lineTotalThb": 12875
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 181,
+          "unitPriceThb": 80,
+          "lineTotalThb": 14480
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 59,
+          "unitPriceThb": 136,
+          "lineTotalThb": 8024
+        }
+      ],
+      "totalThb": 35379,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0173",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-09-25",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 114,
+          "unitPriceThb": 125,
+          "lineTotalThb": 14250
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 214,
+          "unitPriceThb": 80,
+          "lineTotalThb": 17120
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 52,
+          "unitPriceThb": 136,
+          "lineTotalThb": 7072
+        }
+      ],
+      "totalThb": 38442,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0174",
+      "customerId": "CUS-141",
+      "channel": "Wholesale",
+      "date": "2026-10-02",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 125,
+          "unitPriceThb": 125,
+          "lineTotalThb": 15625
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 211,
+          "unitPriceThb": 80,
+          "lineTotalThb": 16880
+        },
+        {
+          "productId": "PRD-003",
+          "qty": 57,
+          "unitPriceThb": 136,
+          "lineTotalThb": 7752
+        }
+      ],
+      "totalThb": 40257,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0175",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-07-05",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 70,
+          "unitPriceThb": 125,
+          "lineTotalThb": 8750
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 32,
+          "unitPriceThb": 285,
+          "lineTotalThb": 9120
+        }
+      ],
+      "totalThb": 17870,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0176",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-07-15",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 67,
+          "unitPriceThb": 125,
+          "lineTotalThb": 8375
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 38,
+          "unitPriceThb": 285,
+          "lineTotalThb": 10830
+        }
+      ],
+      "totalThb": 19205,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0177",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-07-25",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 64,
+          "unitPriceThb": 125,
+          "lineTotalThb": 8000
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 39,
+          "unitPriceThb": 285,
+          "lineTotalThb": 11115
+        }
+      ],
+      "totalThb": 19115,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0178",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-08-04",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 60,
+          "unitPriceThb": 125,
+          "lineTotalThb": 7500
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 31,
+          "unitPriceThb": 285,
+          "lineTotalThb": 8835
+        }
+      ],
+      "totalThb": 16335,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0179",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-08-14",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 56,
+          "unitPriceThb": 125,
+          "lineTotalThb": 7000
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 34,
+          "unitPriceThb": 285,
+          "lineTotalThb": 9690
+        }
+      ],
+      "totalThb": 16690,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0180",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-08-24",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 58,
+          "unitPriceThb": 125,
+          "lineTotalThb": 7250
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 33,
+          "unitPriceThb": 285,
+          "lineTotalThb": 9405
+        }
+      ],
+      "totalThb": 16655,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0181",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-09-03",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 48,
+          "unitPriceThb": 125,
+          "lineTotalThb": 6000
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 25,
+          "unitPriceThb": 285,
+          "lineTotalThb": 7125
+        }
+      ],
+      "totalThb": 13125,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0182",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-09-13",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 46,
+          "unitPriceThb": 125,
+          "lineTotalThb": 5750
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 25,
+          "unitPriceThb": 285,
+          "lineTotalThb": 7125
+        }
+      ],
+      "totalThb": 12875,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0183",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-09-23",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 43,
+          "unitPriceThb": 125,
+          "lineTotalThb": 5375
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 22,
+          "unitPriceThb": 285,
+          "lineTotalThb": 6270
+        }
+      ],
+      "totalThb": 11645,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0184",
+      "customerId": "CUS-142",
+      "channel": "Wholesale",
+      "date": "2026-10-03",
+      "lines": [
+        {
+          "productId": "PRD-013",
+          "qty": 42,
+          "unitPriceThb": 125,
+          "lineTotalThb": 5250
+        },
+        {
+          "productId": "PRD-001",
+          "qty": 20,
+          "unitPriceThb": 285,
+          "lineTotalThb": 5700
+        }
+      ],
+      "totalThb": 10950,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0185",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-07-07",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 35,
+          "unitPriceThb": 136,
+          "lineTotalThb": 4760
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 43,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3440
+        }
+      ],
+      "totalThb": 8200,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0186",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-07-14",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 35,
+          "unitPriceThb": 136,
+          "lineTotalThb": 4760
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 43,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3440
+        }
+      ],
+      "totalThb": 8200,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0187",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-07-21",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 32,
+          "unitPriceThb": 136,
+          "lineTotalThb": 4352
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 46,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3680
+        }
+      ],
+      "totalThb": 8032,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0188",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-07-28",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 38,
+          "unitPriceThb": 136,
+          "lineTotalThb": 5168
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 43,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3440
+        }
+      ],
+      "totalThb": 8608,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0189",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-08-04",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 40,
+          "unitPriceThb": 136,
+          "lineTotalThb": 5440
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 41,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3280
+        }
+      ],
+      "totalThb": 8720,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0190",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-08-11",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 39,
+          "unitPriceThb": 136,
+          "lineTotalThb": 5304
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 48,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3840
+        }
+      ],
+      "totalThb": 9144,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0191",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-08-18",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 34,
+          "unitPriceThb": 136,
+          "lineTotalThb": 4624
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 45,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3600
+        }
+      ],
+      "totalThb": 8224,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0192",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-08-25",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 34,
+          "unitPriceThb": 136,
+          "lineTotalThb": 4624
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 41,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3280
+        }
+      ],
+      "totalThb": 7904,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0193",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-09-01",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 31,
+          "unitPriceThb": 136,
+          "lineTotalThb": 4216
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 49,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3920
+        }
+      ],
+      "totalThb": 8136,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0194",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-09-08",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 40,
+          "unitPriceThb": 136,
+          "lineTotalThb": 5440
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 47,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3760
+        }
+      ],
+      "totalThb": 9200,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0195",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-09-15",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 40,
+          "unitPriceThb": 136,
+          "lineTotalThb": 5440
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 46,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3680
+        }
+      ],
+      "totalThb": 9120,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0196",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-09-22",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 35,
+          "unitPriceThb": 136,
+          "lineTotalThb": 4760
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 44,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3520
+        }
+      ],
+      "totalThb": 8280,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0197",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-09-29",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 34,
+          "unitPriceThb": 136,
+          "lineTotalThb": 4624
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 47,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3760
+        }
+      ],
+      "totalThb": 8384,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0198",
+      "customerId": "CUS-151",
+      "channel": "Corporate",
+      "date": "2026-10-06",
+      "lines": [
+        {
+          "productId": "PRD-003",
+          "qty": 31,
+          "unitPriceThb": 136,
+          "lineTotalThb": 4216
+        },
+        {
+          "productId": "PRD-004",
+          "qty": 44,
+          "unitPriceThb": 80,
+          "lineTotalThb": 3520
+        }
+      ],
+      "totalThb": 7736,
+      "status": "Delivered",
+      "mock": true
+    },
+    {
+      "id": "ORD-0199",
+      "customerId": "CUS-152",
+      "channel": "Corporate",
+      "date": "2026-09-29",
+      "lines": [
+        {
+          "productId": "PRD-015",
+          "qty": 320,
+          "unitPriceThb": 470,
+          "lineTotalThb": 150400
+        }
+      ],
+      "totalThb": 150400,
+      "status": "Pre-order, delivery 15 Dec",
+      "deliveryDate": "2026-12-15",
+      "mock": true
+    }
+  ]
+}

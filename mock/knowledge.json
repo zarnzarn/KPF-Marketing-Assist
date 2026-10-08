@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Background knowledge the AI secretary may use: policies, product facts and business rules of the fictional company.",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "articles": [
+    {
+      "id": "KB-001",
+      "topic": "Approval rules",
+      "text": "The Marketing Director must approve before anything is published, sent to customers, repriced, launched, or committed commercially. Approving in the app only records the decision (MOCK policy).",
+      "mock": true
+    },
+    {
+      "id": "KB-002",
+      "topic": "Brand voice",
+      "text": "Write like the people who raise the animals: honest, warm, calm. No em or en dashes. Describe farming practice, never health outcomes. No bare 'hormone-free' claims (MOCK guide).",
+      "mock": true
+    },
+    {
+      "id": "KB-003",
+      "topic": "Delivery",
+      "text": "Bangkok and vicinity: next day by own cold-chain trucks, order by 14:00. Hua Hin: Tuesday and Friday, 06:00 truck. Eastern Seaboard: via Pathum Fresh Wholesale (MOCK).",
+      "mock": true
+    },
+    {
+      "id": "KB-004",
+      "topic": "Stock and promotion rule",
+      "text": "Do not start or extend a promotion when available stock covers fewer than 7 days at the expected promo pace; agree with production first (MOCK rule).",
+      "mock": true
+    },
+    {
+      "id": "KB-005",
+      "topic": "Shelf life",
+      "text": "Fresh chicken 7 days chilled; eggs 30 days; liquid yolk 21 days chilled; bone broth 12 months frozen; smoked breast 45 days chilled (MOCK figures).",
+      "mock": true
+    },
+    {
+      "id": "KB-006",
+      "topic": "Price lists",
+      "text": "Price lists: website (consumers), retail (to retail partners), restaurant, hotel, b2b (wholesale and corporate). Discounts beyond 10% off a list price need approval (MOCK rule).",
+      "mock": true
+    },
+    {
+      "id": "KB-007",
+      "topic": "Duck supply",
+      "text": "All duck products come from the partner Suphan Duck Cooperative (MOCK). Lead time 2-3 weeks; volumes can change with weather.",
+      "mock": true
+    },
+    {
+      "id": "KB-008",
+      "topic": "Key account follow-up rule",
+      "text": "A B2B account with no order for 30 days, or an unanswered customer email older than 2 working days, needs a follow-up task (MOCK rule).",
+      "mock": true
+    },
+    {
+      "id": "KB-009",
+      "topic": "Complaint handling",
+      "text": "Reply within 1 working day, resolve within 5. High-severity complaints from key accounts go to the Marketing Director (MOCK policy).",
+      "mock": true
+    }
+  ]
+}

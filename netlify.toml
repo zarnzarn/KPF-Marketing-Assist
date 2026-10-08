@@ -1,0 +1,8 @@
+# Netlify (free plan) builds the app from GitHub. Netlify adds its Next.js adapter by itself.
+# No secrets here: add settings in Netlify, Site configuration, Environment variables.
+[build]
+  command = "pnpm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"

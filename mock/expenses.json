@@ -1,0 +1,153 @@
+{
+  "_meta": {
+    "dataLabel": "MOCK DATA",
+    "company": "Rai Thong Heritage Farm Co., Ltd. (MOCK)",
+    "asOf": "2026-10-07",
+    "currency": "THB",
+    "description": "Monthly expenses by category (selected categories).",
+    "warning": "MOCK DATA: fictional company, people, customers and numbers. Not real business information."
+  },
+  "expenses": [
+    {
+      "month": "2026-07",
+      "category": "Marketing: digital ads",
+      "amountThb": 95000,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "category": "Marketing: content production",
+      "amountThb": 42000,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "category": "Marketing: LINE OA messaging",
+      "amountThb": 18000,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "category": "Marketing: PR and events",
+      "amountThb": 25000,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "category": "Logistics: cold-chain delivery",
+      "amountThb": 310000,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "category": "Packaging",
+      "amountThb": 148000,
+      "mock": true
+    },
+    {
+      "month": "2026-07",
+      "category": "Feed",
+      "amountThb": 1820000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "category": "Marketing: digital ads",
+      "amountThb": 98000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "category": "Marketing: content production",
+      "amountThb": 45000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "category": "Marketing: LINE OA messaging",
+      "amountThb": 18000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "category": "Marketing: PR and events",
+      "amountThb": 15000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "category": "Logistics: cold-chain delivery",
+      "amountThb": 318000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "category": "Packaging",
+      "amountThb": 150000,
+      "mock": true
+    },
+    {
+      "month": "2026-08",
+      "category": "Feed",
+      "amountThb": 1850000,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "category": "Marketing: digital ads",
+      "amountThb": 110000,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "category": "Marketing: content production",
+      "amountThb": 60000,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "category": "Marketing: LINE OA messaging",
+      "amountThb": 22000,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "category": "Marketing: PR and events",
+      "amountThb": 40000,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "category": "Logistics: cold-chain delivery",
+      "amountThb": 326000,
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "category": "Packaging",
+      "amountThb": 139000,
+      "note": "Lighter egg carton from September (cheaper, see CPL-003).",
+      "mock": true
+    },
+    {
+      "month": "2026-09",
+      "category": "Feed",
+      "amountThb": 1910000,
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "category": "Marketing: digital ads",
+      "amountThb": 48000,
+      "note": "Month to date (1-6 Oct), mostly Protein Week (CMP-001).",
+      "mock": true
+    },
+    {
+      "month": "2026-10",
+      "category": "Marketing: content production",
+      "amountThb": 18000,
+      "note": "Month to date.",
+      "mock": true
+    }
+  ]
+}
